@@ -81,10 +81,16 @@ Requirements: Node.js **24.x LTS** (see `.nvmrc`, `package.json` `engines`) and 
 node --version          # must print v24.x
 npm ci                  # install exactly what package-lock.json pins
 npm run dev             # http://localhost:3000
-npm run lint
+npm run format          # Prettier: rewrite code/config files
+npm run format:check    # Prettier: check only (CI)
+npm run lint            # ESLint (eslint-config-next)
 npm run typecheck       # generates Next.js route types, then tsc --noEmit
+npm run test            # Vitest, single run (tests/unit/**/*.test.ts)
 npm run build && npm start
+npm run check           # format:check + lint + typecheck + test + build
 ```
+
+Prettier skips Markdown, `docs/` and `.stitch/` so supplied documentation is never reformatted. CI (`.github/workflows/ci.yml`) runs the same checks on pushes to `main` and on pull requests, with read-only permissions and no secrets.
 
 No environment variables are needed for the current scaffold. When features need them, copy `.env.example` to `.env.local` and fill values locally; never commit real credentials.
 
