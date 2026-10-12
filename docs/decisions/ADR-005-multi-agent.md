@@ -20,3 +20,6 @@ Evidence: `docs/implementation/STACK_VALIDATION.md` §2 (S7), §3 and §4. Statu
 - Model selection happens in roadmap R3.9 by benchmarking Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5 on the same reviewed fixtures (agreement, false-pass/false-fail, latency, cost).
 - Terms relevant to child data: API inputs/outputs are not used for training by default and are deleted within 30 days by default; Anthropic's Usage Policy requires AI disclosure for products serving minors and recommends further safeguards.
 - Hard cost ceiling: a dedicated Console workspace with a monthly spend limit, plus app-level call budgets and a WAF rate limit.
+
+## Provider decision update (2026-10-13)
+The participant selected Google Gemini (`D-008` in `docs/20_DECISION_LOG.md`) instead of the Claude recommendation above, after being shown that Google's Gemini API and Vertex AI terms prohibit use in services likely to be accessed by people under 18. The provider-neutral interface remains mandatory so that the provider can be replaced without touching domain logic.
