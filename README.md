@@ -4,7 +4,7 @@
 **Product:** AI-powered learning and coding platform.  
 **Competition context:** M-ONE Telkomsel Coding Competition, Category Umum.  
 **Blueprint prepared:** 12 October 2026.  
-**Status:** Product/engineering documentation only; this package contains no application source implementation.
+**Status:** Product/engineering documentation plus an initial application scaffold (no product features implemented yet).
 
 ## What is in this archive?
 
@@ -70,5 +70,22 @@ This package contains a starter `DESIGN.md` to guide initial exploration, not a 
 - Learning scores are computed deterministically from validated rubric criteria.
 - Community, voice, and multiplayer require privacy, authorization, reporting, and child-safety controls.
 - Do not fabricate prompts, tests, verification, deployment status, or competition evidence.
+
+## Development setup
+
+The application lives in `src/` (Next.js App Router, TypeScript, Tailwind CSS). It was scaffolded with the official `create-next-app@16.4.0`; nothing was copied from another project.
+
+Requirements: Node.js **24.x LTS** (see `.nvmrc`, `package.json` `engines`) and npm 11 (`packageManager` field). Next.js 16 and Tailwind CSS 4 target Chrome/Edge 111+, Firefox 128+ and Safari 16.4+.
+
+```bash
+node --version          # must print v24.x
+npm ci                  # install exactly what package-lock.json pins
+npm run dev             # http://localhost:3000
+npm run lint
+npm run typecheck       # generates Next.js route types, then tsc --noEmit
+npm run build && npm start
+```
+
+No environment variables are needed for the current scaffold. When features need them, copy `.env.example` to `.env.local` and fill values locally; never commit real credentials.
 
 See `docs/00_DOCUMENT_MAP.md` for the full document index.

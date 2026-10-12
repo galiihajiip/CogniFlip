@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Design tokens are added from the approved Stitch design (.stitch/DESIGN.md). */
+body {
+  font-family: system-ui, sans-serif;
+}
