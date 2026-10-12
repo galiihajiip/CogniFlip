@@ -1,14 +1,17 @@
 # File Inventory
 
-Documentation/configuration blueprint only; no app source code and no ready-to-paste development prompts.
+Documentation/configuration only so far; no application source code yet. The blueprint package contains no ready-to-paste development prompts.
 
 | Path | Purpose |
 |---|---|
 | `.env.example` | Placeholder only. Never commit real credentials. |
-| `.gitignore` | node_modules/ |
+| `.gitignore` | Excludes secrets, local data, caches, build output, test artifacts and editor state. |
 | `AGENTS.md` | Repository Agent Contract |
 | `CLAUDE.md` | CogniFlip — Persistent Agent Working Rules |
 | `README.md` | CogniFlip — Project Blueprint |
+| `.stitch/README.md` | Google Stitch handoff area: rules for design artifacts |
+| `.stitch/DESIGN.md` | Starter DESIGN.md tokens/rationale; to be finalized after Stitch approval |
+| `.stitch/references/`, `.stitch/exports/` | Empty until real approved Stitch references/exports exist (`.gitkeep` only) |
 | `docs/00_DOCUMENT_MAP.md` | Document Map and Reading Order |
 | `docs/01_PRODUCT_REQUIREMENTS.md` | Product Requirements Document — CogniFlip |
 | `docs/02_PRODUCT_SCOPE.md` | Product Scope and Feature Catalogue |
@@ -31,6 +34,8 @@ Documentation/configuration blueprint only; no app source code and no ready-to-p
 | `docs/19_OBSERVABILITY_AND_ERRORS.md` | Observability, Errors, and Recovery |
 | `docs/20_DECISION_LOG.md` | Project Decision Log |
 | `docs/21_SUBMISSION_CHECKLIST.md` | Final Release and M-ONE Submission Checklist |
+| `docs/22_STITCH_DESIGN_HANDOFF.md` | Google Stitch design workflow, screen inventory, route mapping and visual QA |
+| `docs/FILE_INVENTORY.md` | This inventory |
 | `docs/REFERENCES.md` | Reference Sources |
 | `docs/decisions/ADR-001-stack.md` | ADR-001 — Proposed Web Stack |
 | `docs/decisions/ADR-002-assessment.md` | ADR-002 — Evidence-Based Assessment and Deterministic Scoring |
@@ -40,6 +45,7 @@ Documentation/configuration blueprint only; no app source code and no ready-to-p
 | `docs/decisions/ADR-006-language-support.md` | ADR-006 — Universal Code Intake and Capability-Declared Tools |
 | `docs/vibe-coding/curated-prompt-journal-template.md` | Curated Prompt Journal — Blank Template |
 | `docs/vibe-coding/raw-log-register.md` | Raw Prompt Log Register — Blank |
+| `docs/implementation/WORKING_RULES_CHECKLIST.md` | Governance/compliance register checked against the repository (added 2026-10-12) |
+| `docs/implementation/REQUIREMENT_TRACEABILITY.md` | Feature → requirement/roadmap/test/evidence matrix; target vs. eligibility vs. implemented (added 2026-10-12) |
+| `docs/implementation/STACK_VALIDATION.md` | Stack evidence from official docs and recommendations awaiting approval (added 2026-10-12) |
 
-- `22_STITCH_DESIGN_HANDOFF.md` — Google Stitch design workflow, approved screen inventory, route mapping, and visual QA.
-- `.stitch/DESIGN.md` — initial DESIGN.md-format tokens/rationale to be finalized after the Stitch design is approved.

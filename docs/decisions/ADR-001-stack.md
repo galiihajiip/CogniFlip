@@ -14,3 +14,14 @@ Benefits: typed contracts, one primary web codebase, managed auth/data/realtime 
 
 ## Validation before acceptance
 Check current stable versions, quotas/pricing, data/region terms, route/job duration, realtime authorization, deployment compatibility, editor accessibility/mobile behavior and judge access. Record the actual accepted decision in the decision log.
+
+## Evidence and recommendation (2026-10-12)
+Evidence: `docs/implementation/STACK_VALIDATION.md` (official docs and npm registry, checked 2026-10-12). Status stays **proposed** until the participant approves and the decision is recorded in `docs/20_DECISION_LOG.md`.
+
+Recommended amendments to the proposed decision:
+- Runtime: Node.js 24 LTS locally and on Vercel (installed v26 is a non-LTS line; Vercel offers only 24.x/22.x).
+- Framework: Next.js 16.x App Router + React 19.3 + Tailwind CSS 4.3 + Zod 4, scaffolded with official `create-next-app`.
+- Editor: CodeMirror 6 instead of Monaco. Monaco's README states it is not supported in mobile browsers, which conflicts with the child/mobile requirement in `docs/02` §F.
+- Data/auth/realtime: Supabase remains the candidate but is deferred until accounts/history start; the core guest lesson needs no database.
+- Hosting: Vercel Hobby for the competition build, with one WAF rate-limit rule; commercial-use classification of a competition entry is not verified.
+- Tests: Vitest 5, Playwright 1.64, `@axe-core/playwright`.
