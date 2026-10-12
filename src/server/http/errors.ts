@@ -1,27 +1,15 @@
 import "server-only";
 
-/** Stable error codes from docs/07_API_CONTRACTS.md §9. */
-export const ERROR_CODES = [
-  "VALIDATION_ERROR",
-  "UNAUTHENTICATED",
-  "FORBIDDEN",
-  "NOT_FOUND",
-  "CONFLICT",
-  "RATE_LIMITED",
-  "PROVIDER_UNAVAILABLE",
-  "PROVIDER_TIMEOUT",
-  "INVALID_MODEL_OUTPUT",
-  "ASSESSMENT_INSUFFICIENT_EVIDENCE",
-  "UNSUPPORTED_TOOLCHAIN",
-  "EXECUTION_REJECTED",
-  "EXECUTION_TIMEOUT",
-  "ROOM_EXPIRED",
-  "ROOM_VERSION_CONFLICT",
-  "CONTENT_RESTRICTED",
-  "INTERNAL_ERROR",
-] as const;
+import {
+  ERROR_CODES,
+  type ErrorCode,
+  type ErrorEnvelope,
+  type SafeDetails,
+} from "@/shared/api/errors";
 
-export type ErrorCode = (typeof ERROR_CODES)[number];
+// Codes, details and the envelope shape are defined once in src/shared/api.
+export { ERROR_CODES };
+export type { ErrorCode, ErrorEnvelope, SafeDetails };
 
 interface ErrorDefinition {
   status: number;
@@ -123,9 +111,6 @@ export const ERROR_DEFINITIONS: Record<ErrorCode, ErrorDefinition> = {
   },
 };
 
-/** Safe, client-visible detail values only (field names, integration names). */
-export type SafeDetails = Record<string, string | number | boolean | string[]>;
-
 export class AppError extends Error {
   readonly code: ErrorCode;
   readonly details?: SafeDetails;
@@ -143,14 +128,4 @@ export class AppError extends Error {
     this.code = code;
     this.details = options.details;
   }
-}
-
-export interface ErrorEnvelope {
-  error: {
-    code: ErrorCode;
-    message: string;
-    retryable: boolean;
-    correlationId: string;
-    details?: SafeDetails;
-  };
 }

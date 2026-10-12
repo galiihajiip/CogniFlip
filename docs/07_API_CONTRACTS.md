@@ -39,3 +39,27 @@ Read current period/ranking using public opt-in summary. XP/achievement events a
 `VALIDATION_ERROR`, `UNAUTHENTICATED`, `FORBIDDEN`, `NOT_FOUND`, `CONFLICT`, `RATE_LIMITED`, `PROVIDER_UNAVAILABLE`, `PROVIDER_TIMEOUT`, `INVALID_MODEL_OUTPUT`, `ASSESSMENT_INSUFFICIENT_EVIDENCE`, `UNSUPPORTED_TOOLCHAIN`, `EXECUTION_REJECTED`, `EXECUTION_TIMEOUT`, `ROOM_EXPIRED`, `ROOM_VERSION_CONFLICT`, `CONTENT_RESTRICTED`, `INTERNAL_ERROR`.
 
 Map errors to user-friendly Indonesian. Do not expose raw provider messages. Retry only safe operations; use idempotency for writes.
+
+## 10. Implemented contracts (2026-10-13)
+This section describes only what exists in code. Everything above remains the target design. The runtime schemas are the source of truth; this table summarizes them.
+
+| Contract | Schema (source of truth) | Notes |
+|---|---|---|
+| Error envelope | `errorEnvelopeSchema` in `src/shared/api/errors.ts` | `{ error: { code, message, retryable, correlationId, details? } }`, strict. `code` is one of the 17 codes in §9. The `x-correlation-id` header carries the same ID. |
+| Error details | `safeDetailsSchema` | Allowlisted keys only: `integration`, `field`, `fields[]` (max 20 `{ path, issue }`), `retryAfterSeconds`. Anything else is dropped before sending. |
+| Validation failure | `VALIDATION_ERROR` + `details.fields` | `issue` ∈ `required`, `invalid_type`, `too_short`, `too_long`, `too_small`, `too_large`, `invalid_format`, `invalid_value`, `unknown_field`, `invalid`. Paths are dot-separated; `(body)` means the whole body. Input values are never echoed. |
+| Request bodies | `readJsonBody` + `parseInput` in `src/server/http/request.ts` | `application/json` only; 16 KiB default limit enforced while streaming; invalid JSON or UTF-8 → `VALIDATION_ERROR`. Request schemas use `z.strictObject` so unknown fields (e.g. a client-sent `score` or `role`) are rejected. |
+| Identifiers | `uuidSchema` / `sessionIdSchema`, `slugSchema` in `src/shared/schemas/primitives.ts` | Database IDs are UUIDs; content IDs are lower-kebab slugs ≤ 64 chars. |
+| Timestamps | `timestampSchema` | ISO 8601 UTC with `Z` (no offsets). |
+| Free text | `boundedText({ max })`, `TEXT_LIMITS` | NFC-normalized, trimmed, no control characters (tab/newline allowed), length-bounded. Learner explanation limit: 2,000. |
+| Pagination | `paginationQuerySchema`, `pageSchema(item)` in `src/shared/schemas/pagination.ts` | Opaque `cursor`, `limit` 1–50 (default 20); responses `{ items, nextCursor: string \| null }`. Not used by any endpoint yet. |
+| Success responses | `contractResponse(schema, body, …)` in `src/server/http/respond.ts` | Body is validated against its strict response schema before sending; a mismatch is `INTERNAL_ERROR`, so internal fields cannot leak. |
+
+### Endpoints that exist
+
+| Method and path | Response schema | Behavior |
+|---|---|---|
+| `GET /api/status` | `statusResponseSchema` (`src/shared/api/status.ts`) | Per-integration `{ available: true }` or `{ available: false, reason: not_configured \| not_implemented \| unreachable }`. Database is checked live. No configuration values. |
+| `GET /api/health/database` | `databaseHealthResponseSchema` | `200 { status: "ok", latencyMs }` or `503 { status: "unavailable", reason: not_configured \| unreachable }`. |
+
+No learning, assessment, code, voice, realtime, community, profile or leaderboard endpoints exist yet. They are added with their features, each with a request schema, a response schema and tests.

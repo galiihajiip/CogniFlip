@@ -1,7 +1,8 @@
 import { getServerEnv } from "@/server/config/env";
 import { checkDatabase } from "@/server/db/health";
 import { getAllIntegrationStatuses } from "@/server/integrations/status";
-import { jsonResponse, withErrorHandling } from "@/server/http/respond";
+import { contractResponse, withErrorHandling } from "@/server/http/respond";
+import { statusResponseSchema } from "@/shared/api/status";
 
 // Evaluate at request time so the response reflects the runtime environment.
 export const dynamic = "force-dynamic";
@@ -20,7 +21,8 @@ export const GET = withErrorHandling(async (_request, correlationId) => {
       integrations.database = { available: false, reason: health.reason };
     }
   }
-  return jsonResponse(
+  return contractResponse(
+    statusResponseSchema,
     { status: "ok", integrations, correlationId },
     correlationId,
   );

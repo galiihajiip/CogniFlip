@@ -1,5 +1,6 @@
 import "server-only";
 import { z } from "zod";
+import type { IntegrationName } from "@/shared/api/status";
 
 /**
  * Server-side environment configuration.
@@ -32,9 +33,9 @@ export const INTEGRATION_GROUPS = {
     "CODE_RUNNER_API_KEY",
   ],
   errorReporting: ["ERROR_REPORTING_DSN"],
-} as const;
+} as const satisfies Record<IntegrationName, readonly string[]>;
 
-export type IntegrationName = keyof typeof INTEGRATION_GROUPS;
+export type { IntegrationName };
 
 const httpUrl = z.url({ protocol: /^https?$/ });
 const postgresUrl = z.url({ protocol: /^postgres(ql)?$/ });

@@ -1,4 +1,6 @@
 import "server-only";
+import type { z } from "zod";
+import { safeDetailsSchema } from "@/shared/api/errors";
 import {
   AppError,
   ERROR_DEFINITIONS,
@@ -44,12 +46,19 @@ export function errorResponse(error: unknown, correlationId: string): Response {
       ? error
       : new AppError("INTERNAL_ERROR", "Unhandled error", { cause: error });
   const definition = ERROR_DEFINITIONS[appError.code];
+  // Details are allowlisted; anything outside the shared contract is dropped.
+  const parsedDetails = safeDetailsSchema.safeParse(appError.details);
+  const details =
+    appError.details !== undefined && parsedDetails.success
+      ? parsedDetails.data
+      : undefined;
 
   logServerEvent(definition.status >= 500 ? "error" : "warn", "api_error", {
     correlationId,
     code: appError.code,
     internalMessage: appError.message,
     cause: appError.cause,
+    droppedUnsafeDetails: appError.details !== undefined && !details,
   });
 
   const body: ErrorEnvelope = {
@@ -58,10 +67,32 @@ export function errorResponse(error: unknown, correlationId: string): Response {
       message: definition.message,
       retryable: definition.retryable,
       correlationId,
-      ...(appError.details ? { details: appError.details } : {}),
+      ...(details ? { details } : {}),
     },
   };
   return jsonResponse(body, correlationId, definition.status);
+}
+
+/**
+ * Sends a success body only after checking it against its response contract.
+ * Strict contracts reject unexpected fields, so internal data cannot leak by
+ * accident; a mismatch is a server bug and becomes INTERNAL_ERROR.
+ */
+export function contractResponse<S extends z.ZodType>(
+  schema: S,
+  body: z.input<S>,
+  correlationId: string,
+  status = 200,
+): Response {
+  const result = schema.safeParse(body);
+  if (!result.success) {
+    throw new AppError(
+      "INTERNAL_ERROR",
+      "Response did not match its contract",
+      { cause: result.error },
+    );
+  }
+  return jsonResponse(result.data, correlationId, status);
 }
 
 type Handler = (
