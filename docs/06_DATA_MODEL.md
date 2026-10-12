@@ -17,6 +17,9 @@ This is the logical model, not final SQL. Verify relationships, indices, RLS/aut
 - `rubric_criteria`: rubric ID, criterion key, label, weight, allowed scoring levels, evidence expectations, misconception tags. Published weights must sum to declared total.
 - `lesson_examples` and `misconception_catalog`: reviewed content with provenance/source and review status.
 
+### Implementation refinement (2026-10-13, BLOCK 11)
+Lesson and rubric *content* lives in the repository as reviewed, typed modules (`src/server/learning/`), validated by zod at load and in tests, rather than in database tables. Reason: content changes go through Git review, and the published versions are locked by content hash in `src/server/learning/content/lessons.lock.json` (published or archived versions can never change or disappear). Database rows that refer to content (sessions, attempts, assessments) store `lesson_id`, `lesson_version` and `lesson_content_hash` (and the rubric id/version), so historical attempts always resolve to the exact archived content. Status values: `draft`, `published` (at most one per lesson), `archived`.
+
 ## 3. Learning history
 
 - `learning_sessions`: owner (nullable only for explicitly ephemeral guest sessions), lesson/version, status, start/completion, privacy mode.

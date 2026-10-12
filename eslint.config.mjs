@@ -11,6 +11,19 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   {
+    rules: {
+      // Leading underscore marks an intentionally unused binding.
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
+        },
+      ],
+    },
+  },
+  {
     // Shared schemas run on client and server: no server, framework or UI code.
     files: ["src/shared/**"],
     rules: restrict([

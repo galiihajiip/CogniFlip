@@ -15,6 +15,7 @@ Use `PASS`, `FAIL`, or `NOT VERIFIED` with evidence/test IDs. A rendered page al
 - [ ] Published lessons have objective, concept card, example, rubric version, accepted evidence and misconception catalogue.
 - [ ] Learner can start/complete/resume as designed.
 - [ ] Locked prerequisites have clear explanation.
+- [ ] Catalog validation (BLOCK 11, automated): unique `id@version`; at most one published version per lesson; published lessons are reviewed; prerequisites and rubric references exist; no prerequisite cycles; learning paths list lessons after their prerequisites; locked (published/archived) versions cannot be edited or removed; archived versions stay resolvable.
 
 ## Reverse Tutor/scoring
 - [ ] Submission uses authoritative lesson/rubric version.

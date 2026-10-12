@@ -26,7 +26,6 @@ export const LOCALES = ["id-ID"] as const;
 export const localeSchema = z.enum(LOCALES);
 
 // Control characters except tab (\t), line feed (\n) and carriage return (\r).
-// eslint-disable-next-line no-control-regex
 const CONTROL_CHARACTERS = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/;
 
 /**
