@@ -3,6 +3,7 @@ import { REDACTED, redact, redactString } from "@/server/log/redact";
 
 // Assembled at runtime so repository secret scans do not flag test fixtures.
 const anthropicLike = "sk-" + "ant-" + "a1B2c3D4e5F6g7H8i9";
+const googleLike = "AI" + "za" + "SyA1b2C3d4E5f6G7h8I9j0K1l2M3n4O5p6Q";
 const jwtLike = [
   "eyJ" + "hbGciOiJIUzI1NiJ9",
   "eyJzdWIiOiIxMjM0NSJ9",
@@ -20,12 +21,13 @@ describe("redactString", () => {
 
   it.each([
     ["an Anthropic-style key", `key=${anthropicLike}`],
+    ["a Google API key", `key=${googleLike}`],
     ["a bearer token", "Authorization: Bearer abc.def-123"],
     ["a JWT", `token ${jwtLike}`],
   ])("removes %s by pattern", (_label, input) => {
     const output = redactString(input);
     expect(output).toContain(REDACTED);
-    expect(output).not.toMatch(/a1B2c3D4|abc\.def-123|c2lnbmF0dXJl/);
+    expect(output).not.toMatch(/a1B2c3D4|abc\.def-123|c2lnbmF0dXJl|SyA1b2C3/);
   });
 
   it("removes the password from a connection string but keeps the host", () => {

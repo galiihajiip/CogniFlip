@@ -49,7 +49,10 @@ const schema = z.object({
     .default("development"),
   APP_BASE_URL: httpUrl.optional(),
 
-  LLM_PROVIDER: z.enum(["anthropic"]).optional(),
+  // Providers with an implemented adapter (D-008: Gemini).
+  LLM_PROVIDER: z.enum(["gemini"]).optional(),
+  /** Deterministic mock AI for local development and tests; refused in production. */
+  AI_MOCK_MODE: z.enum(["true", "false"]).optional(),
   LLM_API_KEY: nonEmpty.optional(),
   LLM_MODEL: z
     .string()
@@ -186,6 +189,12 @@ export function parseServerEnv(source: EnvSource): ServerEnv {
       variable: "DATABASE_URL",
       problem:
         "must set sslmode=require, verify-ca or verify-full in production",
+    });
+  }
+  if (isProduction && input.AI_MOCK_MODE === "true") {
+    problems.push({
+      variable: "AI_MOCK_MODE",
+      problem: "must not be enabled in production",
     });
   }
   if (isProduction && input.CODE_RUNNER_BASE_URL?.startsWith("http://")) {

@@ -9,7 +9,7 @@ import { GET } from "@/app/api/status/route";
 
 const FAKE_KEY = ["fake", "llm", "key", "0123456789"].join("-");
 const aiConfigured = {
-  LLM_PROVIDER: "anthropic",
+  LLM_PROVIDER: "gemini",
   LLM_API_KEY: FAKE_KEY,
   LLM_MODEL: "example-model-1",
 };

@@ -106,7 +106,7 @@ describe("parseServerEnv", () => {
 
   it("marks an integration configured only when its whole group is set", () => {
     const env = parseServerEnv({
-      LLM_PROVIDER: "anthropic",
+      LLM_PROVIDER: "gemini",
       LLM_API_KEY: FAKE_KEY,
       LLM_MODEL: "example-model-1",
     });

@@ -8,6 +8,8 @@ const SENSITIVE_KEY =
 const SENSITIVE_PATTERNS: Array<[RegExp, string]> = [
   [/sk-ant-[A-Za-z0-9_-]{8,}/g, REDACTED],
   [/\bsk-[A-Za-z0-9_-]{16,}/g, REDACTED],
+  // Google API keys (Gemini), e.g. AIza...
+  [/\bAIza[0-9A-Za-z_-]{30,}/g, REDACTED],
   [/\bBearer\s+[A-Za-z0-9._~+/=-]+/gi, `Bearer ${REDACTED}`],
   [/\beyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]*/g, REDACTED],
   // Credentials inside connection strings: scheme://user:password@host
