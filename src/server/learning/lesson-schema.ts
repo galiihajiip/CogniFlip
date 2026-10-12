@@ -135,6 +135,8 @@ export type LessonVersion = z.infer<typeof lessonVersionSchema>;
 
 export const learningPathSchema = z.strictObject({
   id: slugSchema,
+  /** A draft path may list draft lessons; a published path only published ones. */
+  status: z.enum(["draft", "published"]),
   title: text(80),
   locale: localeSchema,
   /** Ordered lesson ids; the learner sees them in this order. */

@@ -110,6 +110,7 @@ describe("buildCatalog", () => {
         paths: [
           {
             id: "dasar",
+            status: "published",
             title: "Dasar",
             locale: "id-ID",
             lessons: ["contoh-urutan", "contoh-ulang"],
@@ -167,6 +168,7 @@ describe("buildCatalog", () => {
             paths: [
               {
                 id: "dasar",
+                status: "published",
                 title: "Dasar",
                 locale: "id-ID",
                 lessons: ["contoh-ulang", "contoh-urutan"],

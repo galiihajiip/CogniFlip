@@ -44,6 +44,7 @@ export interface LessonCatalog {
   getVersion(id: string, version: number): LessonVersion | undefined;
   contentHash(lesson: LessonVersion): string;
   publishedLessons(): LessonVersion[];
+  /** Published paths only; drafts are never shown to learners. */
   paths(): LearningPath[];
 }
 
@@ -190,10 +191,16 @@ export function buildCatalog(input: CatalogInput): LessonCatalog {
     path.lessons.forEach((id, position) => {
       if (seen.has(id)) problems.push(`path ${path.id} lists ${id} twice`);
       seen.add(id);
-      const lesson = published.get(id);
+      const lesson =
+        published.get(id) ??
+        (path.status === "draft"
+          ? [...versions.values()].find((l) => l.id === id)
+          : undefined);
       if (!lesson) {
         problems.push(
-          `path ${path.id} lists ${id}, which has no published version`,
+          path.status === "draft"
+            ? `path ${path.id} lists unknown lesson ${id}`
+            : `path ${path.id} lists ${id}, which has no published version`,
         );
         return;
       }
@@ -213,7 +220,7 @@ export function buildCatalog(input: CatalogInput): LessonCatalog {
     getVersion: (id, version) => versions.get(versionKey(id, version)),
     contentHash: (lesson) => hashLesson(lesson),
     publishedLessons: () => [...published.values()],
-    paths: () => [...paths],
+    paths: () => paths.filter((p) => p.status === "published"),
   };
 }
 
