@@ -58,9 +58,9 @@ What actually exists today. Everything else in this document is the target strat
 | Formatting | Prettier 3.9.10 | `npm run format:check` (code/config only; Markdown, `docs/`, `.stitch/` excluded) | Configured |
 | Lint | ESLint 9.39.5 + `eslint-config-next` 16.4.0 | `npm run lint` | Configured |
 | Types | TypeScript 5.9.3 | `npm run typecheck` (`next typegen` then `tsc --noEmit`) | Configured |
-| Unit | Vitest 5.0.3 | `tests/unit/**/*.test.ts`, `npm run test` | One toolchain smoke test only; no product tests yet |
+| Unit | Vitest 5.0.3 | `tests/unit/**/*.test.ts`, `npm run test` | 38 tests: toolchain smoke, environment validation, error envelope, log redaction, integration status, `/api/status`. No product-feature tests yet |
 | Build | Next.js 16.4.0 | `npm run build` | Configured |
 | CI | GitHub Actions | `.github/workflows/ci.yml` runs all of the above | Not yet run: no GitHub remote exists |
 | Integration, E2E, accessibility, AI benchmark, security | — | — | Not started |
 
-Each gate was shown to fail on bad input (failing test, unformatted file, lint violation, type error) before being trusted.
+Each gate was shown to fail on bad input (failing test, unformatted file, lint violation, type error) before being trusted. The redaction and integration-group tests were also shown to fail when those safeguards were removed (temporary mutation).

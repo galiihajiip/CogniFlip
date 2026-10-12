@@ -92,6 +92,15 @@ npm run check           # format:check + lint + typecheck + test + build
 
 Prettier skips Markdown, `docs/` and `.stitch/` so supplied documentation is never reformatted. CI (`.github/workflows/ci.yml`) runs the same checks on pushes to `main` and on pull requests, with read-only permissions and no secrets.
 
-No environment variables are needed for the current scaffold. When features need them, copy `.env.example` to `.env.local` and fill values locally; never commit real credentials.
+### Configuration
+
+Copy `.env.example` to `.env.local` and fill values locally; never commit real credentials.
+
+- Development needs no variables. Production requires `APP_BASE_URL`.
+- Each integration (AI, database, speech-to-text, text-to-speech, code runner, error reporting) is all-or-nothing: set every variable in its group or none.
+- Validation runs once at server start (`src/instrumentation.ts`). Invalid configuration stops startup with a list of variable names and problems, never their values.
+- Only `NEXT_PUBLIC_*` variables reach the browser (`src/config/public-env.ts`); secrets are read only in `src/server/config/env.ts`.
+- `GET /api/status` reports each integration as available or unavailable with a reason (`not_configured`, `not_implemented`). Configuration alone never makes a feature available: no adapter is implemented yet, so every integration is currently unavailable.
+- API errors use one envelope: `{ "error": { "code", "message", "retryable", "correlationId", "details?" } }`, with an `x-correlation-id` header. Diagnostics go to the server log only, after redaction.
 
 See `docs/00_DOCUMENT_MAP.md` for the full document index.

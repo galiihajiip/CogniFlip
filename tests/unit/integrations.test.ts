@@ -1,0 +1,86 @@
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { parseServerEnv } from "@/server/config/env";
+import {
+  IMPLEMENTED_INTEGRATIONS,
+  getAllIntegrationStatuses,
+  getIntegrationStatus,
+} from "@/server/integrations/status";
+import { GET } from "@/app/api/status/route";
+
+const FAKE_KEY = ["fake", "llm", "key", "0123456789"].join("-");
+const aiConfigured = {
+  LLM_PROVIDER: "anthropic",
+  LLM_API_KEY: FAKE_KEY,
+  LLM_MODEL: "example-model-1",
+};
+
+afterEach(() => vi.unstubAllEnvs());
+
+describe("integration status", () => {
+  it("reports an unconfigured integration as unavailable", () => {
+    expect(getIntegrationStatus(parseServerEnv({}), "ai")).toEqual({
+      available: false,
+      reason: "not_configured",
+    });
+  });
+
+  it("does not treat configuration alone as availability", () => {
+    expect(getIntegrationStatus(parseServerEnv(aiConfigured), "ai")).toEqual({
+      available: false,
+      reason: "not_implemented",
+    });
+  });
+
+  it("reports available only when configured and implemented", () => {
+    const implemented = { ...IMPLEMENTED_INTEGRATIONS, ai: true };
+    expect(
+      getIntegrationStatus(parseServerEnv(aiConfigured), "ai", implemented),
+    ).toEqual({
+      available: true,
+    });
+  });
+
+  it("has no adapter marked implemented yet", () => {
+    expect(
+      Object.values(IMPLEMENTED_INTEGRATIONS).every((v) => v === false),
+    ).toBe(true);
+    const statuses = getAllIntegrationStatuses(parseServerEnv({}));
+    expect(Object.values(statuses).every((s) => !s.available)).toBe(true);
+  });
+});
+
+describe("GET /api/status", () => {
+  it("returns availability without exposing configuration values", async () => {
+    for (const [name, value] of Object.entries(aiConfigured))
+      vi.stubEnv(name, value);
+
+    const response = await GET(new Request("http://test/api/status"));
+    const text = await response.text();
+    const body = JSON.parse(text);
+
+    expect(response.status).toBe(200);
+    expect(body.integrations.ai).toEqual({
+      available: false,
+      reason: "not_implemented",
+    });
+    expect(body.integrations.database).toEqual({
+      available: false,
+      reason: "not_configured",
+    });
+    expect(text).not.toContain(FAKE_KEY);
+    expect(text).not.toContain("example-model-1");
+    expect(text).not.toContain("LLM_");
+  });
+
+  it("returns the safe error envelope when configuration is invalid", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.stubEnv("AI_TIMEOUT_SECONDS", "abc");
+
+    const response = await GET(new Request("http://test/api/status"));
+    const body = await response.json();
+
+    expect(response.status).toBe(500);
+    expect(body.error.code).toBe("INTERNAL_ERROR");
+    expect(JSON.stringify(body)).not.toContain("AI_TIMEOUT_SECONDS");
+  });
+});
