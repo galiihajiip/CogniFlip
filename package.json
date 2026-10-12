@@ -11,10 +11,18 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build"
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build",
+    "db:up": "docker compose up -d --wait postgres",
+    "db:down": "docker compose down",
+    "db:reset-local": "docker compose down --volumes",
+    "db:migrate": "node --env-file-if-exists=.env.local scripts/db.mts migrate",
+    "db:status": "node --env-file-if-exists=.env.local scripts/db.mts status",
+    "db:new": "node scripts/db.mts new",
+    "test:integration": "vitest run --config vitest.integration.config.mts"
   },
   "dependencies": {
     "next": "16.4.0",
+    "pg": "8.23.1",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "server-only": "0.0.1",
@@ -23,6 +31,7 @@
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^24.19.2",
+    "@types/pg": "8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

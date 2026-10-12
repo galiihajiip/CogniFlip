@@ -88,6 +88,9 @@ npm run typecheck       # generates Next.js route types, then tsc --noEmit
 npm run test            # Vitest, single run (tests/unit/**/*.test.ts)
 npm run build && npm start
 npm run check           # format:check + lint + typecheck + test + build
+npm run db:up           # local PostgreSQL 18.6 in Docker (see db/README.md)
+npm run db:migrate      # apply pending SQL migrations (db:status, db:new -- <name>)
+npm run test:integration  # real-database tests; needs TEST_DATABASE_URL
 ```
 
 Prettier skips Markdown, `docs/` and `.stitch/` so supplied documentation is never reformatted. CI (`.github/workflows/ci.yml`) runs the same checks on pushes to `main` and on pull requests, with read-only permissions and no secrets.
@@ -97,10 +100,11 @@ Prettier skips Markdown, `docs/` and `.stitch/` so supplied documentation is nev
 Copy `.env.example` to `.env.local` and fill values locally; never commit real credentials.
 
 - Development needs no variables. Production requires `APP_BASE_URL`.
+- Database (D-006): plain PostgreSQL via `DATABASE_URL`, server-only. Migration policy, local Docker setup, rollback/recovery and health checks are in `db/README.md`. Without `DATABASE_URL` the database reports `not_configured`; database-backed features must return `PROVIDER_UNAVAILABLE` rather than pretend to save.
 - Each integration (AI, database, speech-to-text, text-to-speech, code runner, error reporting) is all-or-nothing: set every variable in its group or none.
 - Validation runs once at server start (`src/instrumentation.ts`). Invalid configuration stops startup with a list of variable names and problems, never their values.
 - Only `NEXT_PUBLIC_*` variables reach the browser (`src/config/public-env.ts`); secrets are read only in `src/server/config/env.ts`.
-- `GET /api/status` reports each integration as available or unavailable with a reason (`not_configured`, `not_implemented`). Configuration alone never makes a feature available: no adapter is implemented yet, so every integration is currently unavailable.
+- `GET /api/status` reports each integration as available or unavailable with a reason (`not_configured`, `not_implemented`, `unreachable`). Configuration alone never makes a feature available. Only the database adapter exists so far, and it is checked live (`GET /api/health/database`); every other integration is unavailable.
 - API errors use one envelope: `{ "error": { "code", "message", "retryable", "correlationId", "details?" } }`, with an `x-correlation-id` header. Diagnostics go to the server log only, after redaction.
 
 See `docs/00_DOCUMENT_MAP.md` for the full document index.

@@ -58,9 +58,10 @@ What actually exists today. Everything else in this document is the target strat
 | Formatting | Prettier 3.9.10 | `npm run format:check` (code/config only; Markdown, `docs/`, `.stitch/` excluded) | Configured |
 | Lint | ESLint 9.39.5 + `eslint-config-next` 16.4.0 | `npm run lint` | Configured |
 | Types | TypeScript 5.9.3 | `npm run typecheck` (`next typegen` then `tsc --noEmit`) | Configured |
-| Unit | Vitest 5.0.3 | `tests/unit/**/*.test.ts`, `npm run test` | 38 tests: toolchain smoke, environment validation, error envelope, log redaction, integration status, `/api/status`. No product-feature tests yet |
+| Unit | Vitest 5.0.3 | `tests/unit/**/*.test.ts`, `npm run test` | 57 tests: toolchain smoke, environment validation, error envelope, log redaction, integration status, `/api/status`, migration loading/ordering/naming, database configuration and TLS rule, database health (not configured / unreachable). No product-feature tests yet |
+| Integration | Vitest 5.0.3 + PostgreSQL 18.6 | `tests/integration/**/*.integration.test.ts`, `npm run test:integration` (needs `TEST_DATABASE_URL`) | 9 tests against a throwaway database: ordered idempotent migrate, failure rollback, migration/bookkeeping atomicity, edited and out-of-order refusal, advisory-lock serialization, committed migrations apply, live health check |
 | Build | Next.js 16.4.0 | `npm run build` | Configured |
-| CI | GitHub Actions | `.github/workflows/ci.yml` runs all of the above | Not yet run: no GitHub remote exists |
-| Integration, E2E, accessibility, AI benchmark, security | — | — | Not started |
+| CI | GitHub Actions | `.github/workflows/ci.yml`: `checks` job (format, lint, types, unit, build) and `database-integration` job (PostgreSQL 18.6 service; integration tests, `db:migrate`, `db:status`) | Not yet run: no GitHub remote exists |
+| E2E, accessibility, AI benchmark, security | — | — | Not started |
 
-Each gate was shown to fail on bad input (failing test, unformatted file, lint violation, type error) before being trusted. The redaction and integration-group tests were also shown to fail when those safeguards were removed (temporary mutation).
+Each gate was shown to fail on bad input (failing test, unformatted file, lint violation, type error) before being trusted. The redaction and integration-group tests, the migration advisory lock and the migration/bookkeeping transaction were also shown to fail when those safeguards were removed (temporary mutation).

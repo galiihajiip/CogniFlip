@@ -40,10 +40,15 @@ describe("integration status", () => {
     });
   });
 
-  it("has no adapter marked implemented yet", () => {
-    expect(
-      Object.values(IMPLEMENTED_INTEGRATIONS).every((v) => v === false),
-    ).toBe(true);
+  it("marks only the database adapter as implemented so far", () => {
+    expect(IMPLEMENTED_INTEGRATIONS).toEqual({
+      ai: false,
+      database: true,
+      speechToText: false,
+      textToSpeech: false,
+      codeRunner: false,
+      errorReporting: false,
+    });
     const statuses = getAllIntegrationStatuses(parseServerEnv({}));
     expect(Object.values(statuses).every((s) => !s.available)).toBe(true);
   });

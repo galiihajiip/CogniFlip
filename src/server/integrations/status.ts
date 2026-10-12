@@ -13,7 +13,7 @@ import {
  */
 export const IMPLEMENTED_INTEGRATIONS: Record<IntegrationName, boolean> = {
   ai: false,
-  database: false,
+  database: true,
   speechToText: false,
   textToSpeech: false,
   codeRunner: false,
@@ -22,7 +22,10 @@ export const IMPLEMENTED_INTEGRATIONS: Record<IntegrationName, boolean> = {
 
 export type IntegrationStatus =
   | { available: true }
-  | { available: false; reason: "not_configured" | "not_implemented" };
+  | {
+      available: false;
+      reason: "not_configured" | "not_implemented" | "unreachable";
+    };
 
 export function getIntegrationStatus(
   env: ServerEnv,

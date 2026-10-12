@@ -30,5 +30,14 @@ Append decisions chronologically. Record actual options, rationale, impact, stat
 - Status: accepted
 - Decision: accept arbitrary code as text for generic AI review and report actual parser/linter/compiler/runtime/framework capabilities using a registry. Do not claim universal tool verification without real tools/tests.
 
+## D-006 — Database: plain PostgreSQL, verified locally in Docker
+- Date: 2026-10-13
+- Status: accepted
+- Approver: participant (answered in the Claude Code session on 2026-10-13 WIB, BLOCK 08)
+- Options considered: (1) server-only boundary with the database deferred; (2) Supabase (Postgres + Auth + Realtime) as proposed in ADR-001; (3) provider-neutral PostgreSQL with SQL migrations, verified against a throwaway local Postgres in Docker.
+- Decision: option 3. Use the `pg` driver from server-only code and forward-only SQL migrations run by a small project script. Develop and test against a local Docker Postgres (`postgres:18.6-alpine`) with synthetic data only.
+- Rationale: verifiable now without external accounts or credentials; works with any managed Postgres host later.
+- Consequences: Supabase Auth/Realtime are not part of this decision. Authentication, authorization (RLS or server checks) and realtime need separate decisions before F11/F12/F16. The production database host is still to be chosen.
+
 ## Pending decisions
-Record after actual review: runtime LLM/provider/model and terms; auth/database/realtime provider; runner/isolation model; STT/TTS provider and retention; community/profile visibility defaults after safety review; exact dependency versions and hosting setup.
+Record after actual review: runtime LLM/provider/model and terms; auth and realtime provider; production Postgres host; runner/isolation model; STT/TTS provider and retention; community/profile visibility defaults after safety review; exact dependency versions and hosting setup.

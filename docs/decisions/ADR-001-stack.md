@@ -25,3 +25,6 @@ Recommended amendments to the proposed decision:
 - Data/auth/realtime: Supabase remains the candidate but is deferred until accounts/history start; the core guest lesson needs no database.
 - Hosting: Vercel Hobby for the competition build, with one WAF rate-limit rule; commercial-use classification of a competition entry is not verified.
 - Tests: Vitest 5, Playwright 1.64, `@axe-core/playwright`.
+
+## Database amendment (2026-10-13)
+Accepted by the participant as `D-006` in `docs/20_DECISION_LOG.md`: provider-neutral PostgreSQL through the `pg` driver in server-only code, with forward-only SQL migrations (`db/migrations/`, policy in `db/README.md`). Local development and integration tests use a throwaway Docker Postgres. This supersedes the Supabase database proposal above; auth and realtime remain open decisions.

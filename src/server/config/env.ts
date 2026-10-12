@@ -13,7 +13,6 @@ export type EnvSource = Record<string, string | undefined>;
 /** Variables whose values are credentials and must never leave the server. */
 export const SECRET_VARIABLES = [
   "LLM_API_KEY",
-  "SUPABASE_SERVICE_ROLE_KEY",
   "DATABASE_URL",
   "STT_API_KEY",
   "TTS_API_KEY",
@@ -24,11 +23,7 @@ export const SECRET_VARIABLES = [
 /** Integrations are all-or-nothing: a partially configured group is an error. */
 export const INTEGRATION_GROUPS = {
   ai: ["LLM_PROVIDER", "LLM_API_KEY", "LLM_MODEL"],
-  database: [
-    "NEXT_PUBLIC_SUPABASE_URL",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY",
-    "SUPABASE_SERVICE_ROLE_KEY",
-  ],
+  database: ["DATABASE_URL"],
   speechToText: ["STT_PROVIDER", "STT_API_KEY"],
   textToSpeech: ["TTS_PROVIDER", "TTS_API_KEY"],
   codeRunner: [
@@ -60,10 +55,10 @@ const schema = z.object({
     .regex(/^[a-z0-9][a-z0-9.-]*$/)
     .optional(),
 
-  NEXT_PUBLIC_SUPABASE_URL: httpUrl.optional(),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: nonEmpty.optional(),
-  SUPABASE_SERVICE_ROLE_KEY: nonEmpty.optional(),
   DATABASE_URL: postgresUrl.optional(),
+  DATABASE_POOL_MAX: limit(5, 20),
+  DATABASE_CONNECT_TIMEOUT_MS: limit(5_000, 30_000),
+  DATABASE_STATEMENT_TIMEOUT_MS: limit(5_000, 60_000),
 
   STT_PROVIDER: nonEmpty.optional(),
   STT_API_KEY: nonEmpty.optional(),
@@ -134,6 +129,20 @@ function describeIssue(issue: z.core.$ZodIssue): string {
   }
 }
 
+const LOOPBACK_HOSTS = new Set(["localhost", "127.0.0.1", "[::1]"]);
+
+/** TLS is required in production unless the database is on the same host. */
+function hasRequiredTls(databaseUrl: string): boolean {
+  try {
+    const url = new URL(databaseUrl);
+    if (LOOPBACK_HOSTS.has(url.hostname)) return true;
+    const mode = url.searchParams.get("sslmode");
+    return mode === "require" || mode === "verify-ca" || mode === "verify-full";
+  } catch {
+    return false; // malformed URLs are reported by the schema
+  }
+}
+
 export function parseServerEnv(source: EnvSource): ServerEnv {
   const input = normalize(source);
   const problems: EnvProblem[] = [];
@@ -165,6 +174,17 @@ export function parseServerEnv(source: EnvSource): ServerEnv {
     problems.push({
       variable: "APP_BASE_URL",
       problem: "is required in production",
+    });
+  }
+  if (
+    isProduction &&
+    input.DATABASE_URL &&
+    !hasRequiredTls(input.DATABASE_URL)
+  ) {
+    problems.push({
+      variable: "DATABASE_URL",
+      problem:
+        "must set sslmode=require, verify-ca or verify-full in production",
     });
   }
   if (isProduction && input.CODE_RUNNER_BASE_URL?.startsWith("http://")) {
