@@ -43,7 +43,7 @@ describe("lesson content", () => {
         expect(lesson.status).toBe("draft");
     }
     for (const rubric of RUBRICS) {
-      if (String(rubric.review.status) !== "reviewed")
+      if (rubric.review.status !== "reviewed")
         expect(rubric.status).toBe("draft");
     }
     expect(getLessonCatalog().paths()).toEqual(

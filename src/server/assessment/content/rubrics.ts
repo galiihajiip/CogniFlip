@@ -1,4 +1,5 @@
 import "server-only";
+import type { RubricInput } from "@/server/assessment/rubric-schema";
 
 /**
  * Rubric content for the first lessons (D-007: 100 points; levels
@@ -16,7 +17,7 @@ const AI_DRAFT_REVIEW = {
     "Weights and level descriptions need participant review before the rubric is published.",
 } as const;
 
-export const RUBRICS = [
+export const RUBRICS: RubricInput[] = [
   {
     id: "urutan-instruksi",
     version: 1,
@@ -257,4 +258,4 @@ export const RUBRICS = [
     ],
     review: AI_DRAFT_REVIEW,
   },
-] as const;
+];

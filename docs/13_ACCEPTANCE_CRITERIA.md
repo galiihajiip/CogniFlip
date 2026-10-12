@@ -28,6 +28,13 @@ Use `PASS`, `FAIL`, or `NOT VERIFIED` with evidence/test IDs. A rendered page al
 - [ ] Learner can revise and reassess.
 - [ ] Persistent result tracks rubric/scoring version.
 
+### Implemented scoring behavior (BLOCK 13, automated: `tests/unit/scoring.test.ts`)
+- Rubric schema: `totalPoints` is 100; criterion weights are whole numbers ≥ 1 and must sum to 100; criterion keys unique; a rubric cannot be `published` unless `review.status` is `reviewed`.
+- Rule `scoring-v1`: earned = weight × {belum_terlihat 0, sebagian ½, tepat 1}; `total` is exact (to 0.5); `displayTotal` is rounded half up. The score records rubric id/version and scoring version, plus a per-criterion breakdown. The score kind is `learning_understanding`, kept separate from any code-quality rating.
+- Outcomes: `assessed` (the only one with a score), `needs_clarification`, `invalid_assessment`, `provider_error`. The last three carry no score field.
+- `invalid_assessment` when any criterion is missing, unknown, rated twice, has an invalid level, or is rated `sebagian`/`tepat` without an evidence excerpt (missing evidence is never credited).
+- Same ratings always give the same score, independent of rating order.
+
 ## Mini IDE/universal code input
 - [ ] Editor loads lazily and works in target browsers.
 - [ ] Code is editable, copyable and reviewable.
