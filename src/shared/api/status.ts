@@ -12,7 +12,11 @@ export const INTEGRATION_NAMES = [
 export type IntegrationName = (typeof INTEGRATION_NAMES)[number];
 
 export const integrationStatusSchema = z.discriminatedUnion("available", [
-  z.strictObject({ available: z.literal(true) }),
+  z.strictObject({
+    available: z.literal(true),
+    /** Present only for the labelled development mock; never in production. */
+    mode: z.literal("mock").optional(),
+  }),
   z.strictObject({
     available: z.literal(false),
     reason: z.enum(["not_configured", "not_implemented", "unreachable"]),

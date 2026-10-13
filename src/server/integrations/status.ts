@@ -14,7 +14,7 @@ export type { IntegrationStatus };
  * never makes a feature available.
  */
 export const IMPLEMENTED_INTEGRATIONS: Record<IntegrationName, boolean> = {
-  ai: false,
+  ai: true,
   database: true,
   speechToText: false,
   textToSpeech: false,
@@ -27,6 +27,13 @@ export function getIntegrationStatus(
   name: IntegrationName,
   implemented: Record<IntegrationName, boolean> = IMPLEMENTED_INTEGRATIONS,
 ): IntegrationStatus {
+  // The labelled dev mock counts as available, but is reported as mock.
+  if (
+    name === "ai" &&
+    env.AI_MOCK_MODE === "true" &&
+    env.NODE_ENV !== "production"
+  )
+    return { available: true, mode: "mock" };
   if (!isIntegrationConfigured(env, name))
     return { available: false, reason: "not_configured" };
   if (!implemented[name])

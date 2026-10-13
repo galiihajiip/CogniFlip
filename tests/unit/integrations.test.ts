@@ -25,9 +25,18 @@ describe("integration status", () => {
   });
 
   it("does not treat configuration alone as availability", () => {
-    expect(getIntegrationStatus(parseServerEnv(aiConfigured), "ai")).toEqual({
-      available: false,
-      reason: "not_implemented",
+    const notImplemented = { ...IMPLEMENTED_INTEGRATIONS, ai: false };
+    expect(
+      getIntegrationStatus(parseServerEnv(aiConfigured), "ai", notImplemented),
+    ).toEqual({ available: false, reason: "not_implemented" });
+  });
+
+  it("reports the development mock as mock, and never in production", () => {
+    expect(
+      getIntegrationStatus(parseServerEnv({ AI_MOCK_MODE: "true" }), "ai"),
+    ).toEqual({
+      available: true,
+      mode: "mock",
     });
   });
 
@@ -40,9 +49,9 @@ describe("integration status", () => {
     });
   });
 
-  it("marks only the database adapter as implemented so far", () => {
+  it("marks the AI and database adapters as implemented", () => {
     expect(IMPLEMENTED_INTEGRATIONS).toEqual({
-      ai: false,
+      ai: true,
       database: true,
       speechToText: false,
       textToSpeech: false,
@@ -64,10 +73,7 @@ describe("GET /api/status", () => {
     const body = JSON.parse(text);
 
     expect(response.status).toBe(200);
-    expect(body.integrations.ai).toEqual({
-      available: false,
-      reason: "not_implemented",
-    });
+    expect(body.integrations.ai).toEqual({ available: true });
     expect(body.integrations.database).toEqual({
       available: false,
       reason: "not_configured",
