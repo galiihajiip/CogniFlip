@@ -58,6 +58,11 @@ export interface Attempt {
 
 export interface TutorSession {
   id: string;
+  /**
+   * SHA-256 of the owner's credential (guest cookie key or, later, user id).
+   * Only the owner may read or change the session.
+   */
+  ownerKeyHash: string;
   /** Content captured when the session starts; never changes afterwards. */
   lesson: { id: string; version: number; contentHash: string };
   rubric: { id: string; version: number };

@@ -95,19 +95,27 @@ export function contractResponse<S extends z.ZodType>(
   return jsonResponse(result.data, correlationId, status);
 }
 
-type Handler = (
+type Handler<Ctx> = (
   request: Request,
   correlationId: string,
+  context: Ctx,
 ) => Promise<Response> | Response;
 
 /** Wraps a route handler so every failure returns the safe envelope. */
-export function withErrorHandling(handler: Handler) {
-  return async (request: Request): Promise<Response> => {
+export function withErrorHandling<Ctx = unknown>(handler: Handler<Ctx>) {
+  // Static routes are called without a context argument.
+  return async (request: Request, context?: Ctx): Promise<Response> => {
     const correlationId = getCorrelationId(request);
     try {
-      return await handler(request, correlationId);
+      return await handler(request, correlationId, context as Ctx);
     } catch (error) {
       return errorResponse(error, correlationId);
     }
   };
+}
+
+/** Adds a Set-Cookie header to a response (e.g. a new guest identity). */
+export function withCookie(response: Response, setCookie?: string): Response {
+  if (setCookie) response.headers.append("set-cookie", setCookie);
+  return response;
 }

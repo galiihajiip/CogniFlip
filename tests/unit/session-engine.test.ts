@@ -88,7 +88,7 @@ function setup(script: EvaluationResult[], maxAiCalls = 10) {
 }
 
 async function ready(engine: TutorSessionEngine) {
-  let s = await engine.start(lesson, rubric, hashLesson(lesson));
+  let s = await engine.start(lesson, rubric, hashLesson(lesson), "owner-hash");
   s = await engine.viewConcept(s.id, s.version);
   return engine.beginExplanation(s.id, s.version);
 }
@@ -121,7 +121,12 @@ describe("normal flow", () => {
       assessed(["tepat", "sebagian", "belum_terlihat"]),
       assessed(["tepat", "tepat", "tepat"]),
     ]);
-    let s = await engine.start(lesson, rubric, hashLesson(lesson));
+    let s = await engine.start(
+      lesson,
+      rubric,
+      hashLesson(lesson),
+      "owner-hash",
+    );
     expect(s).toMatchObject({
       state: "lesson_chosen",
       lesson: {
@@ -293,7 +298,12 @@ describe("invalid transitions and input", () => {
     [
       "submit before viewing the concept",
       async (e: TutorSessionEngine) => {
-        const s = await e.start(lesson, rubric, hashLesson(lesson));
+        const s = await e.start(
+          lesson,
+          rubric,
+          hashLesson(lesson),
+          "owner-hash",
+        );
         return submit(e, s, "x", "key-early-001");
       },
     ],
@@ -352,7 +362,7 @@ describe("invalid transitions and input", () => {
   it("refuses a rubric that does not belong to the lesson version", async () => {
     const { engine } = setup([]);
     const other = getRubric("perulangan", 1)!;
-    expect(await code(engine.start(lesson, other, "hash"))).toBe(
+    expect(await code(engine.start(lesson, other, "hash", "owner-hash"))).toBe(
       "INTERNAL_ERROR",
     );
   });
@@ -397,8 +407,7 @@ describe("engine + real gateway + labelled dev mock", () => {
     const quiet = (fn: () => Promise<unknown>) => fn();
     const engine = new TutorSessionEngine({
       store: new InMemorySessionStore(),
-      evaluate: (input) =>
-        evaluateExplanation(deps, { ...input, rateLimitKey: "t" }),
+      evaluate: (input) => evaluateExplanation(deps, input),
       resolve: () => ({ lesson, rubric }),
       maxAiCalls: 6,
     });

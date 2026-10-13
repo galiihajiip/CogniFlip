@@ -53,6 +53,8 @@ const schema = z.object({
   LLM_PROVIDER: z.enum(["gemini"]).optional(),
   /** Deterministic mock AI for local development and tests; refused in production. */
   AI_MOCK_MODE: z.enum(["true", "false"]).optional(),
+  /** Show unreviewed draft lessons for local testing; refused in production. */
+  ALLOW_DRAFT_CONTENT: z.enum(["true", "false"]).optional(),
   LLM_API_KEY: nonEmpty.optional(),
   LLM_MODEL: z
     .string()
@@ -189,6 +191,12 @@ export function parseServerEnv(source: EnvSource): ServerEnv {
       variable: "DATABASE_URL",
       problem:
         "must set sslmode=require, verify-ca or verify-full in production",
+    });
+  }
+  if (isProduction && input.ALLOW_DRAFT_CONTENT === "true") {
+    problems.push({
+      variable: "ALLOW_DRAFT_CONTENT",
+      problem: "must not be enabled in production",
     });
   }
   if (isProduction && input.AI_MOCK_MODE === "true") {

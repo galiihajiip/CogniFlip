@@ -30,6 +30,8 @@ export interface EngineDeps {
     lesson: LessonVersion;
     rubric: Rubric;
     answer: string;
+    /** Per-owner key for the AI rate limiter (a hash, never raw identity). */
+    rateLimitKey: string;
   }) => Promise<EvaluationResult>;
   /** Resolves the exact lesson and rubric versions captured by the session. */
   resolve: (
@@ -72,6 +74,7 @@ export class TutorSessionEngine {
     lesson: LessonVersion,
     rubric: Rubric,
     contentHash: string,
+    ownerKeyHash: string,
   ): Promise<TutorSession> {
     if (
       lesson.rubric.rubricId !== rubric.id ||
@@ -84,6 +87,7 @@ export class TutorSessionEngine {
     const at = this.now().toISOString();
     const session: TutorSession = {
       id: this.newId(),
+      ownerKeyHash,
       lesson: { id: lesson.id, version: lesson.version, contentHash },
       rubric: { id: rubric.id, version: rubric.version },
       state: "lesson_chosen",
@@ -222,6 +226,7 @@ export class TutorSessionEngine {
       lesson: content.lesson,
       rubric: content.rubric,
       answer: evaluatedText,
+      rateLimitKey: session.ownerKeyHash,
     });
     return this.applyEvaluation(session, attempt.number, evaluation);
   }

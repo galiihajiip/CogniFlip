@@ -62,4 +62,12 @@ This section describes only what exists in code. Everything above remains the ta
 | `GET /api/status` | `statusResponseSchema` (`src/shared/api/status.ts`) | Per-integration `{ available: true }` or `{ available: false, reason: not_configured \| not_implemented \| unreachable }`. Database is checked live. No configuration values. |
 | `GET /api/health/database` | `databaseHealthResponseSchema` | `200 { status: "ok", latencyMs }` or `503 { status: "unavailable", reason: not_configured \| unreachable }`. |
 
-No learning, assessment, code, voice, realtime, community, profile or leaderboard endpoints exist yet. They are added with their features, each with a request schema, a response schema and tests.
+| `GET /api/lessons` | `lessonListResponseSchema` (`src/shared/api/learning.ts`) | Published lessons; unreviewed drafts only with `ALLOW_DRAFT_CONTENT=true` outside production (flagged `draft: true`). |
+| `GET /api/lessons/:id` | `lessonDetailResponseSchema` | Concept, analogy, example and task. Never the reference answer, accepted evidence, misconceptions, hints or review notes. Invalid slug → 400, unavailable → 404. |
+| `POST /api/sessions` | `createSessionRequestSchema` → `sessionResponseSchema` (201) | Starts a tutor session pinned to the lesson version/content hash/rubric version; sets the httpOnly `cf_guest` cookie (only its SHA-256 is stored). Same-origin only; 20 creations/min per IP per instance. |
+| `GET /api/sessions/:id` | `sessionResponseSchema` | Owner only (guest cookie); anyone else gets 404. |
+| `POST /api/sessions/:id/actions` | `sessionActionRequestSchema` → `sessionResponseSchema` | `view_concept`, `begin`, `revise`, `complete` with `expectedVersion`; `submit` with `answer` and `idempotencyKey`. Owner only; same-origin only; stale version → 409; repeated key returns the stored result. |
+
+Session view: state, attempts (answer + outcome: `evaluating` / `assessed` with display total, criteria labels and levels, one hint / `needs_clarification` with one question / `error` with code and retry flag), attempts left, `mockMode`, rubric-level comparison, and the reference explanation only after completion. Evaluator rationales, misconception ids, model and prompt names are never returned. Sessions currently live in server memory (lost on restart, not shared across instances) until BLOCK 29.
+
+No code, voice, realtime, community, profile or leaderboard endpoints exist yet. No screens use these endpoints yet (UI waits for Stitch, D-009).
