@@ -2,6 +2,7 @@ import "server-only";
 import { getRubric } from "@/server/assessment/content";
 import { BENCHMARK_ITEMS } from "@/server/assessment/benchmark/dataset";
 import { MockAiProvider } from "@/server/ai/mock-provider";
+import { DEBUG_MISSIONS } from "@/server/missions/content";
 import type { StructuredRequest } from "@/server/ai/provider";
 
 /**
@@ -16,6 +17,11 @@ export function createDevMockProvider(): MockAiProvider {
   return new MockAiProvider((request: StructuredRequest) => {
     if (request.purpose === "code_review")
       return mockCodeReview(request.untrustedInput);
+    if (request.purpose.startsWith("debug_diagnose:"))
+      return mockDiagnosis(
+        request.purpose.split(":")[1],
+        request.untrustedInput,
+      );
     const lessonId = request.purpose.split(":")[1] ?? "";
     const rubric = getRubric(lessonId, 1);
     const answer = request.untrustedInput;
@@ -83,4 +89,21 @@ function mockCodeReview(code: string) {
           },
         ];
   return { kind: "text" as const, text: JSON.stringify({ findings }) };
+}
+
+/** Correct only when the text contains an accepted description verbatim. */
+function mockDiagnosis(missionId: string, text: string) {
+  const mission = DEBUG_MISSIONS.find((m) => m.id === missionId);
+  const norm = (v: string) => v.toLowerCase().replace(/\s+/g, " ").trim();
+  const match = mission?.answerKey.acceptedDescriptions.find((d) =>
+    norm(text).includes(norm(d)),
+  );
+  return {
+    kind: "text" as const,
+    text: JSON.stringify({
+      verdict: match ? "correct" : "unclear",
+      evidence: match ?? null,
+      feedback: "[Mode uji] Ini umpan balik contoh dari mock.",
+    }),
+  };
 }

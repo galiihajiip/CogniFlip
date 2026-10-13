@@ -15,6 +15,7 @@ No LLM generates labels at runtime; these are static files.
 | `src/server/assessment/content/rubrics.ts` | 3 rubrics, 100 points each, 3 criteria each, level descriptions and learner feedback |
 | `src/server/assessment/benchmark/answers.ts` | 7 answers per lesson (concise, detailed, partial, misconception, ambiguous, off-topic, prompt-injection) with proposed ratings and a written rationale for each |
 | `src/server/learning/content/paths.ts` | Path order: urutan → perulangan → percabangan |
+| `src/server/missions/content.ts` | 4 Predict and 3 Debug Robot missions (Python 3): wording, hints, Indonesian explanations, accepted descriptions. Outputs and bugs are already verified with CPython (`MISSIONS.md`); the pedagogy is not reviewed |
 
 ### Checklist per lesson
 - [ ] Indonesian is natural and readable for grades 4–6; no advanced syntax assumed.

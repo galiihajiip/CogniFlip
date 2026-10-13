@@ -5,6 +5,7 @@ import {
   XP_RULES,
   XP_RULE_VERSION,
   eligibleAwards,
+  type MissionSuccess,
   type SessionScores,
 } from "@/server/rewards/rules";
 
@@ -39,19 +40,41 @@ export class RewardService {
     }));
   }
 
+  private async missionSuccesses(userId: string): Promise<MissionSuccess[]> {
+    const { rows } = await this.pool.query<{
+      id: string;
+      mission_id: string;
+      kind: "predict" | "diagnose";
+    }>(
+      `select distinct on (mission_id, kind) id, mission_id, kind
+         from mission_attempts
+        where owner_user_id = $1 and outcome = 'correct' and kind in ('predict', 'diagnose')
+        order by mission_id, kind, created_at`,
+      [userId],
+    );
+    return rows.map((r) => ({
+      missionId: r.mission_id,
+      kind: r.kind,
+      attemptId: r.id,
+    }));
+  }
+
   async sync(userId: string): Promise<void> {
     const { xp, achievements } = eligibleAwards(
       await this.sessionScores(userId),
+      await this.missionSuccesses(userId),
     );
     for (const a of xp)
       await this.pool.query(
-        `insert into xp_events (user_id, event_type, source_session, delta, rule_version, idempotency_key)
-         values ($1, $2, $3, $4, $5, $6)
+        `insert into xp_events (user_id, event_type, source_session, source_mission_attempt,
+           delta, rule_version, idempotency_key)
+         values ($1, $2, $3, $4, $5, $6, $7)
          on conflict (user_id, idempotency_key) do nothing`,
         [
           userId,
           a.type,
-          a.sessionId,
+          a.source.kind === "session" ? a.source.id : null,
+          a.source.kind === "mission_attempt" ? a.source.id : null,
           a.delta,
           XP_RULE_VERSION,
           a.idempotencyKey,

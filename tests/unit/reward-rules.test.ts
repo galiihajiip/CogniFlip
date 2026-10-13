@@ -7,7 +7,11 @@ const s = (sessionId: string, lessonId: string, assessedScores: number[]) => ({
   assessedScores,
 });
 
-describe("xp-rules-v1", () => {
+describe("xp rules", () => {
+  it("is version v2 (v1 plus mission events)", () => {
+    expect(XP_RULE_VERSION).toBe("xp-rules-v2");
+  });
+
   it("awards nothing without an assessed attempt (errors/clarifications earn no XP)", () => {
     expect(eligibleAwards([s("a", "urutan", [])])).toEqual({
       xp: [],
@@ -29,9 +33,7 @@ describe("xp-rules-v1", () => {
     ]);
     // Regression: keys must not contain the rule version (a version bump
     // would otherwise re-award every past event).
-    expect(xp.some((a) => a.idempotencyKey.includes(XP_RULE_VERSION))).toBe(
-      false,
-    );
+    expect(xp.some((a) => a.idempotencyKey.includes("xp-rules"))).toBe(false);
     expect(achievements.sort()).toEqual([
       "penjelas-pertama",
       "perbaikan-hebat",
@@ -62,5 +64,22 @@ describe("xp-rules-v1", () => {
     expect(
       eligibleAwards([...sessions, s("d", "percabangan", [10])]).achievements,
     ).toContain("tiga-pelajaran");
+  });
+
+  it("awards mission XP once per mission from the first correct attempt", () => {
+    const { xp } = eligibleAwards(
+      [],
+      [
+        { missionId: "m1", kind: "predict", attemptId: "a1" },
+        { missionId: "m1", kind: "predict", attemptId: "a2" },
+        { missionId: "m2", kind: "diagnose", attemptId: "a3" },
+      ],
+    );
+    expect(
+      xp.map((a) => [a.type, a.delta, a.source.id, a.idempotencyKey]),
+    ).toEqual([
+      ["prediction_correct", 5, "a1", "prediction_correct:m1"],
+      ["bug_diagnosed", 10, "a3", "bug_diagnosed:m2"],
+    ]);
   });
 });

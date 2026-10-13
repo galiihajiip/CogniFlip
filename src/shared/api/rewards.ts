@@ -9,6 +9,8 @@ export const rewardsResponseSchema = z.strictObject({
         "explanation_assessed",
         "strong_explanation",
         "improved_after_revision",
+        "prediction_correct",
+        "bug_diagnosed",
       ]),
       delta: z.number().int(),
       description: z.string(),

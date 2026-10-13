@@ -9,7 +9,8 @@ import "server-only";
  * Changing a rule means a new version; existing ledger rows keep their
  * rule_version and are never rewritten.
  */
-export const XP_RULE_VERSION = "xp-rules-v1";
+/** v2 = v1 + mission events (prediction_correct, bug_diagnosed). */
+export const XP_RULE_VERSION = "xp-rules-v2";
 
 export const XP_RULES = {
   explanation_assessed: {
@@ -23,6 +24,14 @@ export const XP_RULES = {
   improved_after_revision: {
     delta: 5,
     description: "Skor naik setelah kamu memperbaiki penjelasan.",
+  },
+  prediction_correct: {
+    delta: 5,
+    description: "Tebakan hasil program benar (sekali per misi).",
+  },
+  bug_diagnosed: {
+    delta: 10,
+    description: "Kamu menemukan penyebab bug (sekali per misi).",
   },
 } as const;
 export type XpEventType = keyof typeof XP_RULES;
@@ -50,20 +59,30 @@ export interface SessionScores {
   assessedScores: number[];
 }
 
+/** First correct attempt of a mission kind (from mission_attempts). */
+export interface MissionSuccess {
+  missionId: string;
+  kind: "predict" | "diagnose";
+  attemptId: string;
+}
+
 export interface XpAward {
   type: XpEventType;
-  sessionId: string;
+  source: { kind: "session" | "mission_attempt"; id: string };
   delta: number;
   idempotencyKey: string;
 }
 
 /** Deterministic: the same sessions always yield the same awards. */
-export function eligibleAwards(sessions: readonly SessionScores[]) {
+export function eligibleAwards(
+  sessions: readonly SessionScores[],
+  missions: readonly MissionSuccess[] = [],
+) {
   const xp: XpAward[] = [];
   const award = (type: XpEventType, sessionId: string) =>
     xp.push({
       type,
-      sessionId,
+      source: { kind: "session", id: sessionId },
       delta: XP_RULES[type].delta,
       // Identifies the event, not the rule version: re-deriving with a newer
       // rule version must never award the same event twice.
@@ -77,6 +96,21 @@ export function eligibleAwards(sessions: readonly SessionScores[]) {
       award("strong_explanation", s.sessionId);
     if (s.assessedScores.at(-1)! > s.assessedScores[0])
       award("improved_after_revision", s.sessionId);
+  }
+
+  // Missions: once per mission and kind, from the first correct attempt.
+  const seenMission = new Set<string>();
+  for (const m of missions) {
+    const type = m.kind === "predict" ? "prediction_correct" : "bug_diagnosed";
+    const key = `${type}:${m.missionId}`;
+    if (seenMission.has(key)) continue;
+    seenMission.add(key);
+    xp.push({
+      type,
+      source: { kind: "mission_attempt", id: m.attemptId },
+      delta: XP_RULES[type].delta,
+      idempotencyKey: key,
+    });
   }
 
   const achievements = new Set<AchievementKey>();
