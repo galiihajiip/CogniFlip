@@ -65,7 +65,9 @@ export function eligibleAwards(sessions: readonly SessionScores[]) {
       type,
       sessionId,
       delta: XP_RULES[type].delta,
-      idempotencyKey: `${XP_RULE_VERSION}:${type}:${sessionId}`,
+      // Identifies the event, not the rule version: re-deriving with a newer
+      // rule version must never award the same event twice.
+      idempotencyKey: `${type}:${sessionId}`,
     });
 
   for (const s of sessions) {
