@@ -23,3 +23,18 @@ Status (2026-10-13): **no adapters exist.** Every language is `AI_REVIEW_ONLY` a
 - Mark a capability available because "it works on my machine".
 - Install dependencies from user-controlled manifests without strict isolation, pinned versions, a network policy and quotas.
 - Present AI output as a compiler, linter or test result.
+
+## Conformance suite (BLOCK 39)
+`runConformance(adapter, programs)` in `src/server/code/conformance.ts` runs 8 checks. **All must pass** against the real isolated runner:
+1. declares phases and a tool version;
+2. known-good program completes with the expected output;
+3. syntax error is a failure, never success;
+4. runtime error is a failure in the run phase;
+5. infinite loop ends as `timed_out` within the limit;
+6. output is capped and flagged as truncated;
+7. cancellation ends as `cancelled`;
+8. a host-environment canary secret is not visible to the program.
+
+Each language supplies its own `ConformancePrograms`. The report's tool version becomes the registry's `smokeTest.toolVersion`.
+
+The suite itself is verified in `tests/unit/conformance.test.ts` with two **simulators** (canned results, nothing executed): the compliant one passes, and the broken one fails exactly the 5 checks it violates. No real adapter has run the suite yet, so the support matrix stays `AI_REVIEW_ONLY` for every language.
