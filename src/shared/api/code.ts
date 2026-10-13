@@ -167,3 +167,10 @@ export const codeReviewResponseSchema = z.strictObject({
   mockMode: z.boolean(),
   correlationId: z.string(),
 });
+
+/** POST /api/code/run */
+export const codeRunRequestSchema = z.strictObject({
+  language: z.string().trim().min(1).max(40),
+  code: z.string().min(1).max(CODE_LIMITS.maxBytes),
+  stdin: z.string().max(1_000).optional(),
+});
