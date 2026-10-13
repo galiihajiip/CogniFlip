@@ -5,6 +5,6 @@ import { metadata } from "@/app/layout";
 // It checks the setup only, not product behavior.
 describe("test setup", () => {
   it("imports the root layout through the @/ alias", () => {
-    expect(metadata.title).toBe("CogniFlip");
+    expect(metadata.title).toMatchObject({ default: "CogniFlip" });
   });
 });
