@@ -281,3 +281,30 @@ describe("missions API", () => {
     ).toBe(400);
   });
 });
+
+describe("mission attempt rate limit", () => {
+  it("rejects more than 30 attempts per learner per minute", async () => {
+    vi.stubEnv("ALLOW_DRAFT_CONTENT", "true");
+    const cookie = `cf_guest=${"R".repeat(43)}`;
+    const send = (n: number) =>
+      attempt(
+        new Request(
+          "http://localhost:3000/api/missions/tebak-urutan-pagi/attempts",
+          {
+            method: "POST",
+            headers: { "content-type": "application/json", cookie },
+            body: JSON.stringify({
+              type: "reflect",
+              answer: "catatan",
+              idempotencyKey: `limit-key-${String(n).padStart(4, "0")}`,
+            }),
+          },
+        ),
+        { params: Promise.resolve({ id: "tebak-urutan-pagi" }) },
+      );
+    const statuses: number[] = [];
+    for (let i = 0; i < 31; i++) statuses.push((await send(i)).status);
+    expect(statuses.slice(0, 30).every((s) => s === 200)).toBe(true);
+    expect(statuses[30]).toBe(429);
+  });
+});

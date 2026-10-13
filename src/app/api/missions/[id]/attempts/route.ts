@@ -1,3 +1,4 @@
+import { FixedWindowLimiter } from "@/server/ai/rate-limit";
 import { getServerEnv } from "@/server/config/env";
 import { AppError } from "@/server/http/errors";
 import { assertSameOrigin } from "@/server/http/guest";
@@ -20,6 +21,9 @@ import { slugSchema } from "@/shared/schemas/primitives";
 export const dynamic = "force-dynamic";
 type Ctx = { params: Promise<{ id: string }> };
 
+// Bounds storage growth: 30 mission attempts per learner per minute (per instance).
+const attemptLimiter = new FixedWindowLimiter(30, 60_000);
+
 /**
  * POST /api/missions/:id/attempts { type: predict|reflect|diagnose, answer, idempotencyKey }
  * Each attempt is stored separately. Predictions are compared with the
@@ -36,6 +40,11 @@ export const POST = withErrorHandling<Ctx>(
       await readJsonBody(request),
     );
     const owner = await requesterForCreate(request, env);
+    const limit = attemptLimiter.check(owner.keyHash);
+    if (!limit.allowed)
+      throw new AppError("RATE_LIMITED", "too many mission attempts", {
+        details: { retryAfterSeconds: limit.retryAfterSeconds },
+      });
     const service = getMissionService(env);
 
     let result;
