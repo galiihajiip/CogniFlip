@@ -39,3 +39,12 @@ Request bodies are strict, so a client-sent `role` is rejected. Roles are set on
 - **Rate limits are per instance**; the hosting firewall is the outer limit.
 - **Guardian consent and age requirements** for real child accounts have **not been reviewed** (ADR-004 follow-up, `docs/10`). Treat accounts as a competition demo until that review happens.
 - **There is no UI** for registration or login yet (D-009).
+
+## Profile and privacy (BLOCK 28)
+- Migration `20261013001900_create_profiles`: `avatar_key` (6 presets only), `leaderboard_opt_in` (**default false**), `preferences` (JSON, strict schema: `reducedMotion`, `textSize`). No free-text personal fields.
+- `GET/PATCH /api/profile`: own profile only. The user is taken from the server session; `handle`, `role` and ids cannot be changed. Unknown fields → 400.
+- `GET /api/profiles/:handle`: `{ handle, avatarKey }` only, and only if the learner opted in. Otherwise 404, so whether the account exists isn't revealed.
+- `GET /api/account/export`: own stored data as a JSON download (no hashes).
+- `DELETE /api/account { password, confirm: "HAPUS" }`: deletes the user. Login sessions and profile cascade; learning history will cascade too once it exists (BLOCK 29). The cookie is cleared.
+- Verified: `tests/integration/profile.integration.test.ts` (5 tests, two real accounts on PostgreSQL) covers defaults, own-only editing, forbidden fields, sign-in required, opt-in public allowlist, export without secrets, and deletion with cascade.
+- Not verified: keyboard and mobile UX (no UI yet, D-009).
