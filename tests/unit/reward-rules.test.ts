@@ -22,9 +22,16 @@ describe("xp-rules-v1", () => {
       ["strong_explanation", 5],
       ["improved_after_revision", 5],
     ]);
-    expect(
-      xp.every((a) => a.idempotencyKey.startsWith(`${XP_RULE_VERSION}:`)),
-    ).toBe(true);
+    expect(xp.map((a) => a.idempotencyKey)).toEqual([
+      "explanation_assessed:a",
+      "strong_explanation:a",
+      "improved_after_revision:a",
+    ]);
+    // Regression: keys must not contain the rule version (a version bump
+    // would otherwise re-award every past event).
+    expect(xp.some((a) => a.idempotencyKey.includes(XP_RULE_VERSION))).toBe(
+      false,
+    );
     expect(achievements.sort()).toEqual([
       "penjelas-pertama",
       "perbaikan-hebat",
