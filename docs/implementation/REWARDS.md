@@ -34,3 +34,16 @@
   - unauthenticated reads return 401.
 
 **Not verified:** reward screens (no UI, D-009).
+
+## Leaderboard (BLOCK 32)
+- `GET /api/leaderboard?period=weekly|all&limit=1-50&offset=`: computed live from `xp_events`. Only learners with `leaderboard_opt_in = true` (default false) appear, each as `{ rank, handle, avatarKey, xp }` and nothing else.
+- **Weekly period** starts Monday 00:00 WIB (Asia/Jakarta, i.e. Sunday 17:00 UTC); `periodStart` is returned. **Ties** share a rank (dense rank) and are listed by handle. The rules text is included in every response.
+- `me`: the signed-in learner's own rank and XP if they opted in, `{ optedIn: false }` if not, `null` when signed out.
+- **Opting out** removes the learner from rankings immediately. Their XP and history remain private.
+- **No fabricated participants:** production never seeds users. Integration tests create their own synthetic accounts in a throwaway database.
+- **Verified:** `tests/integration/leaderboard.integration.test.ts` (4 tests) covers:
+  - opt-in filter and allowlisted fields;
+  - shared rank for ties, weekly vs all-time, pagination;
+  - opt-out;
+  - the exact Monday 00:00 WIB boundary (one minute before is excluded, one minute after is included);
+  - invalid queries.
