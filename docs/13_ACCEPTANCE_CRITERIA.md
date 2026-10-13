@@ -35,6 +35,15 @@ Use `PASS`, `FAIL`, or `NOT VERIFIED` with evidence/test IDs. A rendered page al
 - `invalid_assessment` when any criterion is missing, unknown, rated twice, has an invalid level, or is rated `sebagian`/`tepat` without an evidence excerpt (missing evidence is never credited).
 - Same ratings always give the same score, independent of rating order.
 
+### Implemented session engine behavior (BLOCK 18, automated: `tests/unit/session-engine.test.ts`)
+- States: lesson_chosen → concept_viewed → awaiting_explanation → evaluating → needs_clarification | assessed | recoverable_error; assessed → awaiting_revision → reassessing → assessed; assessed/awaiting_revision → completed. Any other transition is `CONFLICT`.
+- The session pins lesson id, version, content hash and rubric version at start; evaluation always uses those.
+- Each submission is a separate attempt (initial, clarification, revision); earlier answers are never overwritten.
+- Duplicate submit: the same idempotency key returns the stored result without re-evaluating (or `CONFLICT` while in progress); a stale `expectedVersion` is `CONFLICT`.
+- At most 1 clarification per answer cycle (a clarification reply is judged together with the answer it clarifies). A second "unclear" result asks for a revision instead of looping. After 3 counted attempts without an assessment, the session completes without a score.
+- Provider failure → `recoverable_error` with the error code and no score; it does not use up one of the learner's attempts; retry is allowed until the per-session AI call budget (`AI_MAX_CALLS_PER_SESSION`) is reached (`RATE_LIMITED`).
+- The learner view excludes rationales, misconception ids, model and prompt names; it flags mock mode; the full reference explanation appears only after completion; the attempt comparison reports rubric-level changes only.
+
 ## Mini IDE/universal code input
 - [ ] Editor loads lazily and works in target browsers.
 - [ ] Code is editable, copyable and reviewable.
