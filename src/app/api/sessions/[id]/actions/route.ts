@@ -1,4 +1,5 @@
 import { getServerEnv } from "@/server/config/env";
+import { syncRewardsQuietly } from "@/server/rewards";
 import { assertSameOrigin } from "@/server/http/guest";
 import { parseInput, readJsonBody } from "@/server/http/request";
 import { contractResponse, withErrorHandling } from "@/server/http/respond";
@@ -47,6 +48,9 @@ export const POST = withErrorHandling<Ctx>(
             : action.type === "revise"
               ? await engine.startRevision(id, action.expectedVersion)
               : await engine.complete(id, action.expectedVersion);
+
+    // Rewards come only from the server's own stored results (BLOCK 31).
+    await syncRewardsQuietly(env, session.ownerUserId);
 
     const { lesson, rubric } = resolveSessionContent(session);
     return contractResponse(
