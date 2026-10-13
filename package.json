@@ -19,7 +19,8 @@
     "db:status": "node --env-file-if-exists=.env.local scripts/db.mts status",
     "db:new": "node scripts/db.mts new",
     "test:integration": "vitest run --config vitest.integration.config.mts",
-    "benchmark": "node --env-file-if-exists=.env.local node_modules/vitest/vitest.mjs run --config vitest.benchmark.config.mts"
+    "benchmark": "node --env-file-if-exists=.env.local node_modules/vitest/vitest.mjs run --config vitest.benchmark.config.mts",
+    "smoke": "node scripts/smoke.mts"
   },
   "dependencies": {
     "@google/genai": "2.25.0",
