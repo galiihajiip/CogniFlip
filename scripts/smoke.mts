@@ -45,6 +45,26 @@ const checks: Check[] = [
     },
   },
   {
+    // Guards against a stale build cache serving CSS without the Stitch tokens.
+    name: "stylesheet contains the design tokens",
+    run: async () => {
+      const html = await (await get("/")).text();
+      const hrefs = [...html.matchAll(/href="([^"]+\.css)"/g)].map(
+        (m) => m[1]!,
+      );
+      let found = false;
+      for (const href of hrefs) {
+        const css = await (await get(href)).text();
+        if (
+          css.includes("--color-primary-container") &&
+          css.includes(".btn-primary")
+        )
+          found = true;
+      }
+      return expect(found, `${hrefs.length} stylesheet(s) checked`);
+    },
+  },
+  {
     name: "robots.txt disallows /api/",
     run: async () =>
       expect(

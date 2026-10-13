@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CogniFlip - Laboratorium Koding Anak</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"surface":"#faf8ff","surface-bright":"#faf8ff","secondary-fixed-dim":"#ffb95f","on-secondary-fixed-variant":"#653e00","secondary-container":"#fea619","on-primary-fixed-variant":"#372abf","surface-container-high":"#e2e7ff","surface-container":"#eaedff","on-tertiary-fixed-variant":"#004e5c","on-surface":"#131b2e","on-primary-container":"#c1beff","surface-container-highest":"#dae2fd","on-primary-fixed":"#100069","background":"#faf8ff","on-tertiary":"#ffffff","surface-dim":"#d2d9f4","inverse-surface":"#283044","on-error-container":"#93000a","surface-variant":"#dae2fd","on-secondary-fixed":"#2a1700","inverse-on-surface":"#eef0ff","on-tertiary-fixed":"#001f26","on-secondary-container":"#684000","surface-container-lowest":"#ffffff","tertiary-fixed-dim":"#4cd7f6","primary-fixed-dim":"#c3c0ff","inverse-primary":"#c3c0ff","tertiary-container":"#005a6a","on-secondary":"#ffffff","surface-tint":"#5148d7","on-background":"#131b2e","outline-variant":"#c7c4d7","error":"#ba1a1a","surface-container-low":"#f2f3ff","primary":"#2a14b4","primary-fixed":"#e3dfff","secondary":"#855300","on-tertiary-container":"#4ad5f4","on-primary":"#ffffff","on-error":"#ffffff","primary-container":"#4338ca","on-surface-variant":"#464554","secondary-fixed":"#ffddb8","tertiary":"#00414d","error-container":"#ffdad6","outline":"#777586","tertiary-fixed":"#acedff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-mobile":"1rem","margin":"2rem","space-lg":"1.5rem","space-md":"1rem","space-sm":"0.5rem","gutter":"1.5rem","space-xl":"2.5rem","space-xs":"0.25rem","margin-mobile":"1rem"},"fontFamily":{"headline-lg-mobile":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"],"label-code-lg":["JetBrains Mono"],"display-hero":["Plus Jakarta Sans"],"label-ui":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-code-sm":["JetBrains Mono"],"headline-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"]},"fontSize":{"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"0em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"800"}],"label-code-lg":["16px",{"lineHeight":"24px","fontWeight":"500"}],"display-hero":["44px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-ui":["13px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"700"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"label-code-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.005em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"500"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm group" data-path="beranda" href="#"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary shadow-[0_4px_0_0_#2a14b4]"><span class="material-symbols-outlined text-[22px]">smart_toy</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">CogniFlip</span><span class="font-label-ui text-[10px] uppercase tracking-wider text-secondary font-bold -mt-1">Kids Code Lab</span></div></a><nav class="hidden xl:flex items-center gap-space-xs p-1 bg-surface-container-low rounded-xl" data-active-classes="bg-surface-container-high text-primary font-bold shadow-sm"><a class="px-3 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="beranda" href="#">Beranda</a><a class="px-3 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="belajar" href="#">Belajar</a><a class="px-3 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="mini-ide" href="#">Mini IDE</a><a class="px-3 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="lab-kode" href="#">Lab Kode</a><a class="px-3 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="misi-debug" href="#">Misi Debug</a><a class="px-3 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="komunitas" href="#">Komunitas</a></nav></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed shadow-[0_2px_0_0_#fea619]"><span class="material-symbols-outlined text-secondary text-[20px]">bolt</span><span class="font-label-ui text-label-ui">270 XP</span></div><a class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-ui text-label-ui shadow-[0_4px_0_0_#2a14b4] hover:translate-y-0.5 hover:shadow-[0_2px_0_0_#2a14b4] active:translate-y-1 active:shadow-none transition-all" data-path="belajar" href="#">Mulai Belajar</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
+<!-- Outer Content Container -->
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-6 flex flex-col gap-8">
+<!-- 1. Breadcrumb & User Stats Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-surface-container-low p-4 sm:p-5 rounded-2xl shadow-sm">
+<!-- Breadcrumb -->
+<nav class="flex items-center flex-wrap gap-2 text-on-surface-variant font-label-ui text-label-ui">
+<a class="hover:text-primary transition-colors" href="#">Beranda</a>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Belajar</a>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="text-on-surface-variant">Alur Logika &amp; Kondisi</span>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="text-on-surface-variant">Misi 06</span>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-primary font-bold">ST-09: Prediksi Ganda</span>
+</nav>
+<!-- User Stats Badge -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">military_tech</span>
+<span class="font-label-ui text-label-ui text-on-surface">Level 6 Koder Cilik</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-secondary-container/20 text-on-secondary-container font-label-ui text-label-ui font-bold">
+<span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+<span>Target: +150 XP</span>
+</div>
+</div>
+</div>
+<!-- 2. Kurikulum 3 Tahap Stepper (Tactile Learning Roadmap) -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm flex flex-col gap-5">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">route</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Peta Alur Pembelajaran Misi 06</h2>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui text-on-surface-variant">Progres Keseluruhan:</span>
+<span class="font-label-code-lg text-label-code-lg text-primary font-bold">55%</span>
+</div>
+</div>
+<!-- Segmented Steps Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+<!-- Tahap 1: Selesai -->
+<div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-surface-container-low transition-all">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container flex items-center justify-center text-on-tertiary shadow-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-ui text-[11px] text-tertiary uppercase font-bold tracking-wider">Tahap 1 • Selesai</span>
+<span class="font-label-code-sm text-[11px] text-tertiary font-bold">(94/100)</span>
+</div>
+<p class="font-headline-sm text-[14px] text-on-surface truncate font-semibold">Teach Robot: AND &amp; OR</p>
+<span class="font-label-ui text-[11px] text-on-surface-variant">Lolos Feynman (+100 XP)</span>
+</div>
+</div>
+<!-- Tahap 2: Aktif -->
+<div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-primary/10 shadow-[0_4px_0_0_#2a14b4] translate-y-[-2px] transition-all">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center flex-shrink-0 shadow-md">
+<span class="material-symbols-outlined text-[22px]">psychology</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-ui text-[11px] text-primary uppercase font-bold tracking-wider">Tahap 2 • Sedang Berjalan</span>
+<p class="font-headline-sm text-[14px] text-primary truncate font-bold">Prediksi &amp; Simulasi Sensor</p>
+<span class="font-label-ui text-[11px] text-on-primary-fixed-variant font-medium">+150 XP Uji Tebak Sensor</span>
+</div>
+</div>
+<!-- Tahap 3: Terkunci -->
+<div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-surface-container-low opacity-70">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-outline flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-ui text-[11px] text-outline uppercase font-bold tracking-wider">Tahap 3 • Terkunci</span>
+<p class="font-headline-sm text-[14px] text-on-surface truncate font-semibold">Mini-IDE Cuaca Ekstrem</p>
+<span class="font-label-ui text-[11px] text-on-surface-variant">+150 XP Navigasi Python</span>
+</div>
+</div>
+</div>
+<!-- Linear Micro Progress Bar -->
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-2 rounded-full w-[55%] transition-all duration-500"></div>
+</div>
+</div>
+<!-- 3. Hero Title & Pedagogical Frame -->
+<div class="flex flex-col gap-3">
+<div class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-surface-container text-primary font-label-ui text-[12px] font-bold">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        Tahap 2 • Eksplorasi Bebas Risiko • Pembuktian Model Mental
+      </div>
+<h1 class="font-display-hero text-display-hero text-on-surface tracking-tight">
+        Uji Nalar: Tebak Aksi Robot di Terowongan Cuaca Ekstrem! ⛈️🔦🤖
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-4xl">
+        Sebelum menulis kode Python di Mini-IDE, latih intuisimu! Bantu FlipBot menentukan apakah lampu kabut dan wiper harus menyala berdasarkan kombinasi sensor cuaca.
+      </p>
+</div>
+<!-- 4. Interactive 2-Column Split Workspace -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN (Studio Prediksi - 7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Active Scenario Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex flex-col gap-5">
+<!-- Scenario Header -->
+<div class="flex items-center justify-between pb-4 bg-surface-container-low -mx-6 -mt-6 p-6 rounded-t-2xl">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded-lg bg-primary text-on-primary font-label-ui text-label-ui font-bold">
+                Kasus 1 / 3
+              </span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+                Skenario Uji: Hujan Deras TANPA Kabut
+              </h3>
+</div>
+<span class="material-symbols-outlined text-secondary-container text-[24px]">thermostat</span>
+</div>
+<!-- Sensor Snapshot Badges -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="flex items-center gap-3 p-3.5 rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[28px]">water_drop</span>
+<div class="flex flex-col">
+<span class="font-label-ui text-[11px] text-on-surface-variant uppercase font-bold">Sensor 1 (Hujan)</span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-bold">sensor_hujan = True</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant">Air hujan terdeteksi deras di kaca</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3.5 rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-outline text-[28px]">foggy</span>
+<div class="flex flex-col">
+<span class="font-label-ui text-[11px] text-on-surface-variant uppercase font-bold">Sensor 2 (Kabut)</span>
+<span class="font-label-code-sm text-label-code-sm text-error font-bold">sensor_kabut = False</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant">Jarak pandang terowongan masih jelas</span>
+</div>
+</div>
+</div>
+<!-- Logic Rules Being Evaluated -->
+<div class="flex flex-col gap-2.5 p-4 rounded-xl bg-surface-container-low">
+<span class="font-label-ui text-label-ui uppercase tracking-wider text-on-surface font-bold">
+              Aturan Logika yang Sedang Diuji:
+            </span>
+<div class="flex flex-col gap-2 font-label-code-sm text-label-code-sm">
+<div class="p-2.5 rounded-lg bg-surface-container-lowest text-on-surface flex items-start gap-2">
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold text-xs uppercase">Mode A (AND)</span>
+<div>
+<code><span class="text-primary font-bold">if</span> sensor_hujan <span class="text-primary font-bold">and</span> sensor_kabut:</code>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-0.5">Menyalakan "Lampu Badai Sorot Penuh &amp; Wiper Maksimal"</p>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-lowest text-on-surface flex items-start gap-2">
+<span class="px-2 py-0.5 rounded bg-secondary-fixed text-secondary font-bold text-xs uppercase">Mode B (OR)</span>
+<div>
+<code><span class="text-primary font-bold">if</span> sensor_hujan <span class="text-primary font-bold">or</span> sensor_kabut:</code>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-0.5">Menyalakan "Lampu Siaga Waspada"</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Question Prompt -->
+<div class="flex flex-col gap-1.5 pt-2">
+<span class="font-label-ui text-label-ui text-secondary font-bold uppercase tracking-wider">Pertanyaan Prediksimu:</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+              Menurutmu, apa respon FlipBot untuk aturan AND <span class="font-label-code-sm text-primary">sensor_hujan and sensor_kabut</span> saat hujan=True tapi kabut=False?
+            </h4>
+</div>
+<!-- Interactive Option Cards -->
+<div class="flex flex-col gap-3" id="prediction-options">
+<!-- Option 1: Selected / Correct Mindset -->
+<label class="group relative flex items-start gap-3.5 p-4 rounded-2xl bg-primary/10 cursor-pointer shadow-sm hover:bg-primary/15 transition-all">
+<input checked="" class="mt-1 w-5 h-5 accent-primary cursor-pointer" name="prediction" type="radio" value="opt1"/>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui text-primary font-bold">Opsi 1 (Tebakan Terpilih)</span>
+<span class="px-2 py-0.5 rounded-full bg-primary text-on-primary font-label-ui text-[11px] font-bold">Dipilih</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">
+                  Aksi TIDAK AKTIF (False)! Karena gerbang AND butuh dua-duanya bernilai True. Kalau cuma hujan tanpa kabut, syarat ganda belum terpenuhi.
+                </p>
+</div>
+</label>
+<!-- Option 2 -->
+<label class="group relative flex items-start gap-3.5 p-4 rounded-2xl bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all">
+<input class="mt-1 w-5 h-5 accent-primary cursor-pointer" name="prediction" type="radio" value="opt2"/>
+<div class="flex flex-col gap-1">
+<span class="font-label-ui text-label-ui text-on-surface-variant font-bold">Opsi 2</span>
+<p class="font-body-md text-body-md text-on-surface">
+                  Aksi AKTIF (True)! Karena hujannya deras banget, jadi otomatis robot menyalakan sorot penuh tanpa peduli kabut.
+                </p>
+</div>
+</label>
+<!-- Option 3 -->
+<label class="group relative flex items-start gap-3.5 p-4 rounded-2xl bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all">
+<input class="mt-1 w-5 h-5 accent-primary cursor-pointer" name="prediction" type="radio" value="opt3"/>
+<div class="flex flex-col gap-1">
+<span class="font-label-ui text-label-ui text-on-surface-variant font-bold">Opsi 3</span>
+<p class="font-body-md text-body-md text-on-surface">
+                  Robot berhenti mendadak karena sensornya bertabrakan dan bingung menentukan keputusan.
+                </p>
+</div>
+</label>
+</div>
+<!-- Tactile Mental Model Box (Feynman / Vault Analogy) -->
+<div class="flex items-start gap-3 p-4 rounded-xl bg-secondary-fixed text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[24px] text-secondary flex-shrink-0">vpn_key</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-ui text-label-ui uppercase tracking-wider text-secondary font-bold">Analogi Kunci Brankas:</span>
+<p class="font-body-sm text-body-sm text-on-secondary-fixed">
+                Bayangkan brankas bank canggih: Butuh <strong>2 anak kunci</strong> diputar serentak! Jika baru 1 kunci (hujan saja), pintu brankas tetap terkunci rapat.
+              </p>
+</div>
+</div>
+<!-- Action Triggers -->
+<div class="flex flex-col sm:flex-row items-center gap-3 pt-2">
+<button class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-primary-container text-on-primary font-headline-sm text-[16px] font-bold shadow-[0_4px_0_0_#2a14b4] hover:translate-y-0.5 hover:shadow-[0_2px_0_0_#2a14b4] active:translate-y-1 active:shadow-none transition-all" id="run-simulation-btn">
+<span class="material-symbols-outlined text-[22px]">rocket_launch</span>
+              Jalankan Simulasi &amp; Verifikasi (+50 XP)
+            </button>
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-4 rounded-xl bg-secondary-fixed text-secondary font-label-ui text-label-ui font-bold hover:bg-secondary-fixed-dim transition-all">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+              Petunjuk Kognitif
+            </button>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN (Simulator Terowongan Real-Time - 5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Graphic Simulator Panel -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex flex-col gap-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sensors</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Simulasi Fisik Robot</h3>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-ui text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>
+              Live Sandbox
+            </span>
+</div>
+<!-- Visual Canvas: Terowongan & FlipBot -->
+<div class="relative w-full h-64 rounded-xl overflow-hidden bg-inverse-surface flex items-center justify-center p-4">
+<!-- Simulated Mountain Tunnel & Rain Backdrop -->
+<div class="absolute inset-0 bg-gradient-to-b from-inverse-surface via-surface-container-highest/10 to-inverse-surface"></div>
+<!-- Rain Line Artifacts (CSS SVG Overlay) -->
+<svg class="absolute inset-0 w-full h-full opacity-40 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="30" id="rain-pattern" patterntransform="rotate(20)" patternunits="userSpaceOnUse" width="30">
+<line stroke="#4cd7f6" stroke-dasharray="8 6" stroke-width="1.5" x1="0" x2="0" y1="0" y2="15"></line>
+</pattern>
+</defs>
+<rect fill="url(#rain-pattern)" height="100%" width="100%"></rect>
+</svg>
+<!-- Tunnel Arch Graphics -->
+<div class="absolute inset-x-8 bottom-0 top-6 rounded-t-full bg-black/40 flex items-center justify-center">
+<div class="w-3/4 h-full rounded-t-full bg-black/60 flex items-end justify-center pb-6">
+<!-- Road Track Lines -->
+<div class="w-12 h-1 bg-surface-container-high/40 rounded-full mb-2"></div>
+</div>
+</div>
+<!-- FlipBot Companion Sprite in Front of Tunnel -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-on-primary shadow-xl transition-transform duration-300" id="robot-avatar">
+<span class="material-symbols-outlined text-[36px]">smart_toy</span>
+</div>
+<div class="px-3 py-1 rounded-full bg-black/70 backdrop-blur-sm text-inverse-on-surface font-label-code-sm text-[11px]">
+                FlipBot Posisi: KM 04.2
+              </div>
+</div>
+<!-- Light Beam / Fog status indicator -->
+<div class="absolute bottom-6 inset-x-12 h-16 bg-gradient-to-t from-transparent via-transparent to-transparent pointer-events-none transition-all duration-500" id="light-beam-overlay"></div>
+</div>
+<!-- FlipBot Sensor HUD -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Sensor Hujan Live Badge -->
+<div class="flex items-center gap-2.5 p-3 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[20px] text-tertiary">rainy</span>
+<div class="flex flex-col">
+<span class="text-[11px] opacity-80 uppercase">Hujan</span>
+<span class="font-bold">AKTIF (True)</span>
+</div>
+</div>
+<!-- Sensor Kabut Live Badge -->
+<div class="flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-high text-on-surface-variant font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[20px] text-outline">blur_off</span>
+<div class="flex flex-col">
+<span class="text-[11px] opacity-80 uppercase">Kabut</span>
+<span class="font-bold">NONAKTIF (False)</span>
+</div>
+</div>
+</div>
+<!-- Realtime Logic Circuit Visualization -->
+<div class="flex flex-col gap-2 p-4 rounded-xl bg-surface-container-low">
+<span class="font-label-ui text-[12px] uppercase font-bold text-on-surface tracking-wider">
+              Monitor Sirkuit Gerbang Logika:
+            </span>
+<div class="grid grid-cols-1 gap-2 font-label-code-sm text-label-code-sm">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span>Gerbang AND (1 AND 0)</span>
+</div>
+<span class="font-bold text-error bg-error-container/40 px-2 py-0.5 rounded">0 (FALSE)</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span>Gerbang OR (1 OR 0)</span>
+</div>
+<span class="font-bold text-secondary bg-secondary-fixed px-2 py-0.5 rounded">1 (TRUE)</span>
+</div>
+</div>
+</div>
+<!-- Status Bar Text -->
+<div class="flex items-center gap-2.5 p-3 rounded-xl bg-surface-container text-on-surface font-body-sm text-body-sm" id="simulation-status">
+<span class="material-symbols-outlined text-primary text-[20px]">info</span>
+<span>Menunggu kamu menekan tombol <strong>'Jalankan Simulasi'</strong> untuk membuktikan tebakan!</span>
+</div>
+<!-- FlipBot Conversational Speech Bubble -->
+<div class="relative flex items-start gap-3 p-4 rounded-2xl bg-surface-container-lowest shadow-md">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui text-primary font-bold">FlipBot Pendamping</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-ui text-[10px]">Tutor AI</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                "Bip-bop! Aku siap menguji energiku di mulut terowongan! Begitu kamu klik tombol jalankan, aku akan mengetes sirkuit dan melihat apakah logikamu berhasil!"
+              </p>
+</div>
+</div>
+<!-- Checklist Misi Mini -->
+<div class="flex flex-col gap-2 pt-1">
+<span class="font-label-ui text-label-ui uppercase tracking-wider text-on-surface-variant font-bold">
+              Target 3 Skenario Prediksi:
+            </span>
+<div class="flex flex-col gap-1.5 font-body-sm text-[13px]">
+<div class="flex items-center justify-between p-2 rounded-lg bg-primary-fixed/40 text-primary font-semibold">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">radio_button_checked</span>
+<span>1. Hujan True, Kabut False (Uji AND)</span>
+</div>
+<span class="text-xs uppercase font-bold">Sedang Aktif</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low text-outline">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>2. Hujan False, Kabut True (Uji OR)</span>
+</div>
+<span class="text-xs">Terkunci</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low text-outline">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>3. Hujan True, Kabut True (Uji Kombinasi Penuh)</span>
+</div>
+<span class="text-xs">Terkunci</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. Pedagogical Bottom Insight & Navigation Footer -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex flex-col gap-6">
+<!-- Cognitive Science Note (Predict-Observe-Explain) -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-5 rounded-2xl bg-surface-container-low">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-2xl bg-primary-container text-on-primary flex items-center justify-center flex-shrink-0 shadow-md">
+<span class="material-symbols-outlined text-[26px]">school</span>
+</div>
+<div class="flex flex-col gap-1 max-w-3xl">
+<span class="font-label-ui text-label-ui text-primary uppercase font-bold tracking-wider">
+              Wawasan Sains Kognitif: Metode POE (Predict-Observe-Explain)
+            </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Mengapa memprediksi sebelum menjalankan simulasi sangat penting? Riset pendidikan sains membuktikan bahwa membuat hipotesis mandiri merangsang otak membangun model mental sebab-akibat yang permanen, bukan sekadar menebak acak (*trial-and-error*).
+            </p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1 flex-shrink-0">
+<span class="font-label-ui text-label-ui text-on-surface-variant">Akurasi Prediksi</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">100% Siap</span>
+</div>
+</div>
+<!-- Navigation Stepper Buttons -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-surface-container text-on-surface font-label-ui text-label-ui hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+          Kembali ke Hasil Evaluasi (ST-07)
+        </a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-ui text-label-ui font-bold shadow-[0_4px_0_0_#2a14b4] hover:translate-y-0.5 hover:shadow-[0_2px_0_0_#2a14b4] active:translate-y-1 active:shadow-none transition-all" href="#">
+          Lanjut ke Verifikasi Simulasi (ST-09A)
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Interactive Simulation Script -->
+<script>
+    (function() {
+      const runBtn = document.getElementById('run-simulation-btn');
+      const robotAvatar = document.getElementById('robot-avatar');
+      const statusPanel = document.getElementById('simulation-status');
+      const lightBeam = document.getElementById('light-beam-overlay');
+
+      if (!runBtn || !robotAvatar || !statusPanel) return;
+
+      runBtn.addEventListener('click', function() {
+        // Micro animation on trigger
+        robotAvatar.classList.add('scale-110');
+        statusPanel.className = 'flex items-center gap-2.5 p-3 rounded-xl bg-tertiary-container text-on-tertiary font-body-sm text-body-sm transition-all';
+        statusPanel.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">refresh</span><span>Memverifikasi kondisi sensor AND... Robot memeriksa parameter!</span>';
+
+        setTimeout(function() {
+          robotAvatar.classList.remove('scale-110');
+          // Highlight result: AND rule evaluates to False, so main storm lamp does NOT activate
+          statusPanel.className = 'flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-highest text-primary font-body-sm text-body-sm transition-all';
+          statusPanel.innerHTML = '<span class="material-symbols-outlined text-[20px] text-primary">verified</span><span><strong>Tebakanmu BENAR SEKALI!</strong> Karena kabut=False, aturan AND gagal (False). Lampu sorot penuh tetap MATI. (+50 XP didapat!)</span>';
+          
+          // Subtle amber pulse on robot to represent standby lamp
+          if (lightBeam) {
+            lightBeam.className = 'absolute bottom-6 inset-x-12 h-16 bg-gradient-to-t from-secondary/30 via-transparent to-transparent pointer-events-none transition-all duration-500';
+          }
+        }, 900);
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-low mt-space-xl"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-space-lg mb-space-lg"><div class="md:col-span-2 flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary"><span class="material-symbols-outlined text-[18px]">smart_toy</span></div><span class="font-headline-sm text-headline-sm text-primary">CogniFlip Lab</span></div><p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">Ruang eksperimen koding dan komputasi anak Indonesia dengan FlipBot. Belajar logika algoritma, visual block, dan Python melalui cara bermain yang seru, aman, dan tanpa rasa takut salah.</p><div class="flex items-center gap-space-sm mt-space-xs"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-highest font-label-ui text-[11px] text-on-surface"><span class="w-2 h-2 rounded-full bg-secondary-container"></span>FlipBot AI Aktif</span><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-highest font-label-ui text-[11px] text-on-surface"><span class="material-symbols-outlined text-[14px] text-primary">verified</span>Standar Edukasi Aman</span></div></div><div class="flex flex-col gap-space-xs"><span class="font-label-ui text-label-ui uppercase tracking-wider text-on-surface">Laboratorium</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="belajar" href="#">Kurikulum Modul</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="mini-ide" href="#">Kompiler Mini IDE</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="lab-kode" href="#">Sandbox Blok Kreatif</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="misi-debug" href="#">Tantangan Debugging</a></div><div class="flex flex-col gap-space-xs"><span class="font-label-ui text-label-ui uppercase tracking-wider text-on-surface">Bantuan &amp; Panduan</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="komunitas" href="#">Panduan Orang Tua &amp; Guru</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="komunitas" href="#">Forum Teman Koding</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="komunitas" href="#">Pusat Bantuan FlipBot</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="komunitas" href="#">Etika Digital &amp; Privasi</a></div></div><div class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm font-body-sm text-body-sm text-on-surface-variant"><p>© 2025 CogniFlip. Laboratorium Komputasi Anak Indonesia. Hak cipta dilindungi.</p><p class="font-label-code-sm text-label-code-sm text-primary">#AyoCobaKodingSeru</p></div></div></footer></body></html>

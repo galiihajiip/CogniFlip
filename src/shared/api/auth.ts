@@ -12,6 +12,7 @@ const RESERVED = new Set([
   "mod",
   "cogniflip",
   "robi",
+  "flipbot",
   "guru",
   "system",
   "support",

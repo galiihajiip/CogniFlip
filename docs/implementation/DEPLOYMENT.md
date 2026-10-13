@@ -60,6 +60,9 @@ It must print `11/11 passed`. Additionally, by hand in a real browser (desktop a
 
 Record the date and time, URL, browser, results and any screenshots **actually captured** in `docs/implementation/SMOKE_REPORT.md`.
 
+## Stale styles after a build
+On 2026-10-13 one local production build served CSS without the Stitch design tokens (unstyled pages) after a dev server had shared the same `.next` folder; a clean rebuild fixed it. `npm run smoke` now fails ("stylesheet contains the design tokens") when this happens. Fix: delete `.next` (or redeploy without the build cache in Vercel) and build again.
+
 ## Local evidence so far
 2026-10-13 07:54 WIB: `next build` + `next start` (production mode) with the local Docker database, then `npm run smoke -- http://localhost:3150` returned **11/11 PASS**. Notes:
 - AI was `not_configured` and lessons were `0` (drafts), as expected;

@@ -49,7 +49,7 @@ export const LESSONS: LessonVersion[] = [
     },
     task: {
       prompt:
-        "Robi si robot ingin belajar. Jelaskan kepada Robi: mengapa urutan perintah itu penting?",
+        "FlipBot si robot ingin belajar. Jelaskan kepada FlipBot: mengapa urutan perintah itu penting?",
       instructions:
         "Tulis dengan kata-katamu sendiri. Kalau bisa, beri satu contoh.",
     },
@@ -132,7 +132,7 @@ export const LESSONS: LessonVersion[] = [
     },
     task: {
       prompt:
-        "Jelaskan kepada Robi: apa itu perulangan, dan mengapa perulangan berguna?",
+        "Jelaskan kepada FlipBot: apa itu perulangan, dan mengapa perulangan berguna?",
       instructions:
         "Sebutkan apa yang diulang dan berapa kali. Pakai kata-katamu sendiri.",
     },
@@ -213,7 +213,7 @@ export const LESSONS: LessonVersion[] = [
     },
     task: {
       prompt:
-        "Jelaskan kepada Robi: bagaimana 'jika ... maka ...' membantu robot memilih apa yang dilakukan?",
+        "Jelaskan kepada FlipBot: bagaimana 'jika ... maka ...' membantu robot memilih apa yang dilakukan?",
       instructions:
         "Ceritakan apa yang diperiksa robot dan apa yang terjadi untuk setiap jawaban.",
     },

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"primary":"#2a14b4","on-tertiary-container":"#4ad5f4","outline-variant":"#c7c4d7","surface-bright":"#faf8ff","on-error-container":"#93000a","on-primary":"#ffffff","surface-container-low":"#f2f3ff","on-background":"#131b2e","tertiary-container":"#005a6a","on-surface-variant":"#464554","outline":"#777586","primary-container":"#4338ca","surface-dim":"#d2d9f4","surface-container-high":"#e2e7ff","secondary-container":"#fea619","on-tertiary-fixed-variant":"#004e5c","on-error":"#ffffff","on-secondary-fixed":"#2a1700","tertiary-fixed-dim":"#4cd7f6","on-tertiary":"#ffffff","inverse-surface":"#283044","primary-fixed":"#e3dfff","on-surface":"#131b2e","on-secondary":"#ffffff","surface-variant":"#dae2fd","on-primary-fixed":"#100069","tertiary-fixed":"#acedff","on-secondary-fixed-variant":"#653e00","secondary-fixed-dim":"#ffb95f","surface-container-highest":"#dae2fd","error-container":"#ffdad6","tertiary":"#00414d","on-primary-fixed-variant":"#372abf","inverse-on-surface":"#eef0ff","primary-fixed-dim":"#c3c0ff","secondary-fixed":"#ffddb8","background":"#faf8ff","surface-container":"#eaedff","secondary":"#855300","on-secondary-container":"#684000","inverse-primary":"#c3c0ff","surface-container-lowest":"#ffffff","on-primary-container":"#c1beff","surface-tint":"#5148d7","on-tertiary-fixed":"#001f26","surface":"#faf8ff","error":"#ba1a1a"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"1rem","gutter":"1.5rem","space-xl":"2.5rem","margin":"2rem","space-lg":"1.5rem","gutter-mobile":"1rem","space-sm":"0.5rem","space-md":"1rem","space-xs":"0.25rem"},"fontFamily":{"headline-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-code-sm":["JetBrains Mono"],"label-code-lg":["JetBrains Mono"],"display-hero-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-ui":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"]},"fontSize":{"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.005em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"500"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"0em","fontWeight":"700"}],"display-hero":["44px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-code-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"label-code-lg":["16px",{"lineHeight":"24px","fontWeight":"500"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"800"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"label-ui":["13px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-[0_3px_0_0_#1a0c70]"><span class="material-symbols-outlined text-[24px]">smart_toy</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight font-extrabold tracking-tight">CogniFlip</span><span class="font-label-ui text-label-ui text-on-surface-variant text-[11px] uppercase tracking-wider">AI &amp; Code Lab</span></div></div><div class="hidden xl:flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container"><span class="material-symbols-outlined text-primary text-[18px]">route</span><span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Misi 04</span><span class="material-symbols-outlined text-outline text-[14px]">chevron_right</span><span class="font-body-sm text-body-sm text-on-surface font-semibold">Logika Kondisional (If-Else)</span></div></div><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-primary text-on-primary font-bold shadow-[0_2px_0_0_#1a0c70]"><a class="px-space-md py-space-xs rounded-xl font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="beranda" href="#">Beranda</a><a class="px-space-md py-space-xs rounded-xl font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="belajar" href="#">Belajar</a><a class="px-space-md py-space-xs rounded-xl font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="alur-utama" href="#">Alur Utama</a><a class="px-space-md py-space-xs rounded-xl font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="mini-ide" href="#">Mini IDE</a><a class="px-space-md py-space-xs rounded-xl font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="lab-kode" href="#">Lab Kode</a><a class="px-space-md py-space-xs rounded-xl font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="misi-debug" href="#">Misi Debug</a><a class="px-space-md py-space-xs rounded-xl font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="komunitas" href="#">Komunitas</a></nav><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm bg-surface-container-high/80 px-space-md py-space-xs rounded-full"><span class="material-symbols-outlined text-secondary-container text-[20px]">bolt</span><div class="flex flex-col text-right"><span class="font-label-ui text-label-ui text-secondary font-bold">250 XP</span><span class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-tight">Lv. 3 Master Cilik</span></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-background"><div class="flex flex-col w-full">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 py-8 w-full flex flex-col gap-6">
+<!-- 1. Breadcrumbs & Progress Stepper Section -->
+<div class="flex flex-col gap-4">
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm flex-wrap">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">home</span>
+          Beranda
+        </a>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Belajar</a>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<a class="hover:text-primary transition-colors font-medium" href="#">Misi 04: Logika Kondisional (If-Else)</a>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="text-primary font-bold bg-primary-fixed/60 px-2.5 py-0.5 rounded-lg">Tahap 3: Tantangan Modifikasi Kode</span>
+</nav>
+<!-- Stepper and XP Banner Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-5 shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6">
+<!-- 3-Step Milestone -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 flex-1">
+<!-- Step 1 -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed text-tertiary flex items-center justify-center shrink-0 shadow-sm font-bold">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-ui text-label-ui text-on-surface-variant uppercase text-[11px] tracking-wide">Tahap 1</span>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Evaluasi Konsep</span>
+<span class="font-label-code-sm text-[11px] text-tertiary font-bold">Skor 88/100 ✓</span>
+</div>
+</div>
+<div class="hidden sm:block w-8 h-[2px] bg-surface-container-high"></div>
+<!-- Step 2 -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed text-tertiary flex items-center justify-center shrink-0 shadow-sm font-bold">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-ui text-label-ui text-on-surface-variant uppercase text-[11px] tracking-wide">Tahap 2</span>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Prediksi Simulasi</span>
+<span class="font-label-code-sm text-[11px] text-tertiary font-bold">100% Terverifikasi ✓</span>
+</div>
+</div>
+<div class="hidden sm:block w-8 h-[2px] bg-primary"></div>
+<!-- Step 3 (Active) -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-[0_3px_0_0_#1a0c70] font-bold">
+<span class="material-symbols-outlined text-[20px]">code</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui text-primary uppercase text-[11px] tracking-wide">Tahap 3 (Aktif)</span>
+<span class="px-2 py-0.2 rounded-full bg-secondary-fixed text-secondary text-[10px] font-extrabold">+200 XP</span>
+</div>
+<span class="font-body-sm text-body-sm text-primary font-bold">Mini-IDE Percabangan</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Modifikasi Logika Else</span>
+</div>
+</div>
+</div>
+<!-- Right User Progress Chip -->
+<div class="flex items-center gap-4 bg-surface-container-low px-4 py-3 rounded-xl shrink-0">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-ui text-[12px] font-bold text-secondary">Total: 400 XP</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Potensi: <strong class="text-primary">+200 XP</strong></span>
+</div>
+</div>
+<div class="h-6 w-[1px] bg-surface-container-high"></div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-label-ui text-label-ui text-[12px]">Siap Eksekusi</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 2. Mission Briefing Banner Card -->
+<div class="bg-gradient-to-r from-surface-container via-surface-container-low to-surface-bright rounded-2xl p-6 shadow-sm relative overflow-hidden">
+<div class="absolute -right-8 -top-8 w-44 h-44 rounded-full bg-primary/5 pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
+<!-- Left Text & Story -->
+<div class="lg:col-span-7 flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-primary text-on-primary font-label-ui text-[11px] uppercase tracking-wider font-extrabold shadow-sm">
+              Misi Kritis 04
+            </span>
+<span class="text-secondary font-semibold font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">warning</span> Persimpangan Lembah Kristal
+            </span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface font-extrabold tracking-tight">
+            Lengkapi Jalur Cadangan (Else) FlipBot!
+          </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Kode FlipBot baru punya instruksi saat rambu menyala (<code class="bg-surface-container-highest px-1.5 py-0.5 rounded font-label-code-sm text-primary font-semibold">if sensor_rambu == True</code>). Namun jika rambu padam atau tertutup kabut tebal (<code class="bg-surface-container-highest px-1.5 py-0.5 rounded font-label-code-sm text-secondary font-semibold">else</code>), prosesornya belum punya rute alternatif sehingga berisiko menabrak batu jurang! Lengkapi blok <code class="font-bold text-primary">else</code> agar robot belok ke <strong>Gua Perlindungan</strong> dan menyalakan perisai pelindung.
+          </p>
+</div>
+<!-- Right Checklist Card -->
+<div class="lg:col-span-5 bg-surface-container-lowest/90 backdrop-blur rounded-xl p-4 shadow-sm flex flex-col gap-2.5">
+<div class="flex items-center justify-between pb-2 border-b border-surface-container-high">
+<span class="font-label-ui text-label-ui text-on-surface uppercase tracking-wider flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">checklist</span>
+              Checklist Target Misi
+            </span>
+<span class="font-label-code-sm text-[12px] bg-primary-fixed text-primary px-2 py-0.5 rounded font-bold" id="target-count">1 / 4 Selesai</span>
+</div>
+<div class="space-y-2 text-on-surface-variant font-body-sm text-body-sm">
+<label class="flex items-center gap-2.5 cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary accent-primary cursor-default" disabled="" type="checkbox"/>
+<span class="line-through text-outline">1. Kondisi utama <code class="text-[12px] font-label-code-sm text-primary">sensor_rambu == True</code> siap</span>
+</label>
+<label class="flex items-center gap-2.5 cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary accent-primary" id="chk-else" type="checkbox"/>
+<span class="text-on-surface font-medium">2. Blok cabang cadangan <code class="text-[12px] font-label-code-sm text-primary bg-surface-container px-1 py-0.2 rounded font-bold">else:</code> terpasang</span>
+</label>
+<label class="flex items-center gap-2.5 cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary accent-primary" id="chk-turn" type="checkbox"/>
+<span class="text-on-surface font-medium">3. Panggil <code class="text-[12px] font-label-code-sm text-primary bg-surface-container px-1 py-0.2 rounded font-bold">robot.belok_kiri("gua_perlindungan")</code></span>
+</label>
+<label class="flex items-center gap-2.5 cursor-pointer">
+<input class="w-4 h-4 rounded text-primary accent-primary" id="chk-test" type="checkbox"/>
+<span class="text-on-surface">4. Lulus 2 skenario uji (Rambu True &amp; Rambu False)</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Workspace (Split Grid: Left Mini-IDE, Right Interactive Simulator & Tests) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- ================= SISI KIRI: MINI-IDE & KONSOL OUTPUT ================= -->
+<div class="lg:col-span-7 flex flex-col gap-4">
+<!-- Editor Card -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden flex flex-col">
+<!-- Editor Header Tab Bar -->
+<div class="bg-surface-container-high px-4 py-2.5 flex items-center justify-between gap-2 flex-wrap">
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-lowest rounded-lg shadow-xs">
+<span class="material-symbols-outlined text-primary text-[16px]">description</span>
+<span class="font-label-code-sm text-[13px] text-on-surface font-semibold">persimpangan_misi04.py</span>
+<span class="w-2 h-2 rounded-full bg-secondary-container ml-1" title="Perubahan belum di-compile"></span>
+</div>
+<span class="font-label-ui text-[11px] text-on-surface-variant px-2 py-0.5 rounded bg-surface-container">Python 3.10</span>
+</div>
+<!-- Action buttons -->
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="px-2.5 py-1 rounded-lg hover:bg-surface-container hover:text-on-surface font-body-sm text-[12px] flex items-center gap-1 transition-all" id="btn-format" title="Format Indentasi">
+<span class="material-symbols-outlined text-[16px]">format_align_left</span> Format Rapi
+              </button>
+<button class="px-2.5 py-1 rounded-lg hover:bg-surface-container hover:text-on-surface font-body-sm text-[12px] flex items-center gap-1 transition-all" id="btn-reset" title="Reset ke kode semula">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span> Reset
+              </button>
+<button class="px-2.5 py-1 rounded-lg bg-surface-container text-primary font-body-sm text-[12px] font-bold flex items-center gap-1 hover:bg-primary hover:text-on-primary transition-all" id="btn-help-syntax">
+<span class="material-symbols-outlined text-[16px]">help</span> Bantuan Sintaks
+              </button>
+</div>
+</div>
+<!-- Code Workspace Area with Line Numbers -->
+<div class="relative bg-surface-container-lowest p-4 overflow-x-auto font-label-code-sm text-[13.5px] leading-relaxed selection:bg-primary-fixed selection:text-primary">
+<div class="flex">
+<!-- Line Numbers -->
+<div class="select-none text-outline text-right pr-4 pl-1 border-r border-surface-container font-mono text-[13px] opacity-70 flex flex-col gap-0.5">
+<span>01</span>
+<span>02</span>
+<span>03</span>
+<span>04</span>
+<span>05</span>
+<span>06</span>
+<span class="text-primary font-bold">07</span>
+<span class="text-primary font-bold">08</span>
+<span class="text-primary font-bold">09</span>
+<span class="text-primary font-bold">10</span>
+</div>
+<!-- Python Code Content with Syntax Elements -->
+<div class="pl-4 flex-1 flex flex-col gap-0.5 text-on-surface">
+<div class="text-outline italic"># Misi 04: Logika Jalur Cadangan Robot FlipBot</div>
+<div>
+<span class="text-primary font-bold">def</span> <span class="text-tertiary-container font-semibold">navigasi_robot</span>(<span class="text-secondary font-medium">sensor_rambu</span>):
+                </div>
+<div class="pl-5 text-outline italic">
+                  # Cabang Utama: Jika sensor mendeteksi rambu kristal
+                </div>
+<div class="pl-5">
+<span class="text-primary font-bold">if</span> <span class="text-secondary font-medium">sensor_rambu</span> == <span class="text-primary-container font-semibold">True</span>:
+                </div>
+<div class="pl-10">
+<span class="text-on-surface">robot</span>.<span class="text-tertiary-container font-medium">belok_kanan</span>(<span class="text-emerald-700">"jembatan_emas"</span>)
+                </div>
+<div class="pl-10">
+<span class="text-on-surface">robot</span>.<span class="text-tertiary-container font-medium">ambil_kristal</span>()
+                </div>
+<!-- Editable / Highlighted Else Section -->
+<div class="pl-5 bg-primary-fixed/40 rounded px-1.5 py-0.5 -mx-1.5 flex items-center justify-between">
+<div>
+<span class="text-primary font-extrabold">else</span>:
+                  </div>
+<span class="text-[11px] font-label-ui uppercase tracking-wider text-primary font-bold bg-surface-container-lowest px-2 rounded-full">Blok Cadangan</span>
+</div>
+<div class="pl-10 text-outline italic">
+                  # Instruksi otomatis saat rambu mati atau False
+                </div>
+<div class="pl-10 bg-surface-container-low rounded px-1.5 py-0.5 -mx-1.5 flex items-center">
+<span class="text-on-surface">robot</span>.<span class="text-tertiary-container font-medium">belok_kiri</span>(<span class="text-emerald-700">"gua_perlindungan"</span>)
+                  <span class="inline-block w-2 h-4 bg-primary ml-1 animate-pulse"></span>
+</div>
+<div class="pl-10 bg-surface-container-low rounded px-1.5 py-0.5 -mx-1.5">
+<span class="text-on-surface">robot</span>.<span class="text-tertiary-container font-medium">aktifkan_perisai</span>()
+                </div>
+</div>
+</div>
+</div>
+<!-- Quick Insert Chips (Bantuan Sintaks Cepat untuk Anak) -->
+<div class="bg-surface-container-low px-4 py-3 border-t border-surface-container-high flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-ui text-[11px] uppercase tracking-wider text-on-surface-variant font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">extension</span>
+                Balok Perintah 1-Klik (Klik untuk Memasukkan ke Editor):
+              </span>
+<span class="text-[11px] text-primary font-semibold">Tersedia 3 Cuplikan Kode</span>
+</div>
+<div class="flex items-center gap-2 flex-wrap">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-primary hover:bg-primary-fixed transition-all shadow-xs text-[12px] font-label-code-sm font-semibold flex items-center gap-1.5" onclick="insertSnippet('belok_kiri')">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">add_circle</span>
+                robot.belok_kiri("gua_perlindungan")
+              </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-primary hover:bg-primary-fixed transition-all shadow-xs text-[12px] font-label-code-sm font-semibold flex items-center gap-1.5" onclick="insertSnippet('perisai')">
+<span class="material-symbols-outlined text-[16px] text-secondary">shield</span>
+                robot.aktifkan_perisai()
+              </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-all shadow-xs text-[12px] font-label-code-sm flex items-center gap-1.5" onclick="insertSnippet('indent')">
+<span class="material-symbols-outlined text-[16px]">keyboard_tab</span>
+                Indentasi Tab (4 Spasi)
+              </button>
+</div>
+</div>
+</div>
+<!-- Terminal Output / Debug Console -->
+<div class="bg-inverse-surface rounded-2xl shadow-md overflow-hidden text-inverse-on-surface flex flex-col font-label-code-sm text-[13px]">
+<div class="bg-black/25 px-4 py-2 flex items-center justify-between border-b border-white/5">
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+</div>
+<span class="font-label-ui text-[12px] text-white/70 ml-2 flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[14px]">terminal</span> Konsol Debugger FlipBot
+              </span>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-white/60 hover:text-white text-[11px] px-2 py-0.5 rounded hover:bg-white/10 transition-colors" id="clear-console-btn">
+                Bersihkan
+              </button>
+</div>
+</div>
+<div class="p-4 space-y-1.5 max-h-40 overflow-y-auto leading-relaxed" id="console-output">
+<div class="text-white/50">&gt;&gt;&gt; Memuat modul robot_engine v4.2.1-lts... [OK]</div>
+<div class="text-white/50">&gt;&gt;&gt; Menginisialisasi sensor inframerah &amp; kompas persimpangan... [OK]</div>
+<div class="text-tertiary-fixed-dim font-medium">&gt;&gt;&gt; Status Kode: Blok 'else:' terdeteksi dengan 2 instruksi aman.</div>
+<div class="text-emerald-400 font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">play_circle</span>
+              &gt;&gt;&gt; Menunggu pengujian! Klik 'Jalankan Kode &amp; Uji Coba' di sebelah kanan.
+            </div>
+</div>
+</div>
+</div>
+<!-- ================= SISI KANAN: SIMULATOR VISUAL & TEST RUNNER ================= -->
+<div class="lg:col-span-5 flex flex-col gap-4">
+<!-- 2D Visual Map Simulator -->
+<div class="bg-surface-container-lowest rounded-2xl p-5 shadow-md flex flex-col gap-4 relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary font-bold">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface text-[17px] leading-tight block">Simulator Persimpangan Lembah</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant">Pratinjau Navigasi 2D FlipBot</span>
+</div>
+</div>
+<!-- Live Status Tag -->
+<span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-label-ui text-[11px] font-bold flex items-center gap-1" id="robot-status-badge">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Jalur Aman
+            </span>
+</div>
+<!-- Visual Map 2D (Interactive Canvas / SVG Diorama) -->
+<div class="w-full h-56 bg-gradient-to-b from-surface-container to-surface-container-low rounded-xl relative overflow-hidden flex flex-col justify-between p-4 shadow-inner">
+<!-- Top Destinations (Branches) -->
+<div class="flex items-start justify-between z-10">
+<!-- Left Destination: Gua Perlindungan (ELSE) -->
+<div class="flex flex-col items-center bg-surface-container-lowest/90 backdrop-blur px-3 py-2 rounded-xl shadow-sm border border-secondary-container/20 transition-all" id="dest-cave">
+<div class="w-9 h-9 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary mb-1">
+<span class="material-symbols-outlined text-[20px]">shield</span>
+</div>
+<span class="font-label-ui text-[11px] font-bold text-on-surface">Gua Lindung</span>
+<span class="font-label-code-sm text-[10px] text-secondary font-bold">Kondisi (ELSE)</span>
+</div>
+<!-- Center Compass / Signpost Condition -->
+<div class="flex flex-col items-center bg-surface-container-lowest/95 px-3 py-1.5 rounded-full shadow-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary" id="signpost-icon">lightbulb</span>
+<span class="font-label-ui text-[11px] font-bold text-on-surface" id="signpost-text">Rambu: True</span>
+</div>
+</div>
+<!-- Right Destination: Jembatan Emas (IF) -->
+<div class="flex flex-col items-center bg-surface-container-lowest/90 backdrop-blur px-3 py-2 rounded-xl shadow-sm border border-primary/20 transition-all ring-2 ring-primary" id="dest-bridge">
+<div class="w-9 h-9 rounded-lg bg-primary-fixed flex items-center justify-center text-primary mb-1">
+<span class="material-symbols-outlined text-[20px]">diamond</span>
+</div>
+<span class="font-label-ui text-[11px] font-bold text-on-surface">Jembatan Emas</span>
+<span class="font-label-code-sm text-[10px] text-primary font-bold">Kondisi (IF == True)</span>
+</div>
+</div>
+<!-- Path Graphics (SVG Overlay Connecting Start to Branches) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<!-- Background Branch Tracks -->
+<path class="text-surface-container-highest" d="M 240 180 L 240 120 Q 240 85 100 55" fill="none" stroke="currentColor" stroke-dasharray="6 4" stroke-width="8"></path>
+<path class="text-surface-container-highest" d="M 240 180 L 240 120 Q 240 85 380 55" fill="none" stroke="currentColor" stroke-dasharray="6 4" stroke-width="8"></path>
+<!-- Active Highlight Tracks -->
+<path class="text-secondary opacity-0 transition-opacity duration-300" d="M 240 180 L 240 120 Q 240 85 100 55" fill="none" id="path-else-line" stroke="currentColor" stroke-width="4"></path>
+<path class="text-primary opacity-100 transition-opacity duration-300" d="M 240 180 L 240 120 Q 240 85 380 55" fill="none" id="path-if-line" stroke="currentColor" stroke-width="4"></path>
+</svg>
+<!-- Bottom Start / FlipBot Position -->
+<div class="flex items-center justify-center z-10 w-full">
+<div class="flex items-center gap-2 bg-primary text-on-primary px-3.5 py-1.5 rounded-full shadow-lg transform transition-transform duration-500" id="flipbot-avatar-box">
+<div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+</div>
+<span class="font-label-ui text-[12px] font-bold">FlipBot [Siap Berangkat]</span>
+</div>
+</div>
+</div>
+<!-- Condition Switcher Radio Bar -->
+<div class="flex flex-col gap-2 pt-1">
+<span class="font-label-ui text-[11px] uppercase tracking-wider text-on-surface-variant font-bold">
+              Sakelar Simulasi Sensor (Uji Variabel Manual):
+            </span>
+<div class="grid grid-cols-2 gap-2 bg-surface-container p-1 rounded-xl">
+<button class="py-2 px-3 rounded-lg bg-surface-container-lowest font-body-sm text-[13px] font-bold text-primary shadow-xs flex items-center justify-center gap-2 transition-all" id="mode-true-btn" onclick="toggleTestMode(true)">
+<span class="material-symbols-outlined text-[18px] text-amber-500">wb_sunny</span>
+                Kasus 1: sensor_rambu = True
+              </button>
+<button class="py-2 px-3 rounded-lg text-on-surface-variant hover:text-on-surface font-body-sm text-[13px] font-medium flex items-center justify-center gap-2 transition-all" id="mode-false-btn" onclick="toggleTestMode(false)">
+<span class="material-symbols-outlined text-[18px]">cloud</span>
+                Kasus 2: sensor_rambu = False
+              </button>
+</div>
+</div>
+</div>
+<!-- Test Case Validator (Unit Test Specs) -->
+<div class="bg-surface-container-lowest rounded-2xl p-5 shadow-sm flex flex-col gap-3">
+<div class="flex items-center justify-between pb-1">
+<span class="font-label-ui text-label-ui text-on-surface uppercase tracking-wide flex items-center gap-1.5 font-bold">
+<span class="material-symbols-outlined text-primary text-[18px]">rule</span>
+              Pengujian Unit Otomatis (2 Kasus)
+            </span>
+<span class="font-label-code-sm text-[11px] text-on-surface-variant">Harus 2/2 Lulus</span>
+</div>
+<!-- Unit Test 1 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between gap-3 border-l-4 border-primary" id="test-card-1">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-primary-fixed text-primary flex items-center justify-center font-bold shrink-0" id="test-1-icon">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Uji 1: sensor_rambu == True</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant">Ekspektasi: Menuju "jembatan_emas" &amp; ambil kristal</span>
+</div>
+</div>
+<span class="font-label-ui text-[11px] font-bold text-primary uppercase bg-surface-container-lowest px-2 py-1 rounded" id="test-1-status">
+              Lulus ✓
+            </span>
+</div>
+<!-- Unit Test 2 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between gap-3 border-l-4 border-secondary-container" id="test-card-2">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-lg bg-secondary-fixed text-secondary flex items-center justify-center font-bold shrink-0" id="test-2-icon">
+<span class="material-symbols-outlined text-[18px]">pending</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Uji 2: sensor_rambu == False</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant">Ekspektasi: Belok ke "gua_perlindungan" &amp; perisai aktif</span>
+</div>
+</div>
+<span class="font-label-ui text-[11px] font-bold text-secondary uppercase bg-surface-container-lowest px-2 py-1 rounded" id="test-2-status">
+              Siap Uji ⚡
+            </span>
+</div>
+</div>
+<!-- Big Primary Action Controls -->
+<div class="flex flex-col gap-2.5">
+<!-- Main Run Button (Tactile button with bottom bevel) -->
+<button class="w-full min-h-[52px] bg-primary-container text-on-primary rounded-xl font-headline-sm text-[17px] font-bold flex items-center justify-center gap-2 shadow-[0_4px_0_0_#312E81] hover:brightness-105 active:translate-y-0.5 active:shadow-[0_2px_0_0_#312E81] transition-all" id="btn-run-code" onclick="runCodeTests()">
+<span class="material-symbols-outlined text-[24px]">rocket_launch</span>
+            Jalankan Kode &amp; Uji Coba (Run Tests) 🚀
+          </button>
+<!-- Secondary Actions -->
+<div class="grid grid-cols-2 gap-3">
+<button class="min-h-[44px] bg-secondary-fixed text-on-secondary-fixed-variant rounded-xl font-body-sm text-body-sm font-bold flex items-center justify-center gap-1.5 hover:bg-secondary-fixed-dim transition-colors shadow-xs" onclick="askFlipbotHint()">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+              Tanya Tutor FlipBot 💡
+            </button>
+<button class="min-h-[44px] bg-surface-container-high text-on-surface-variant rounded-xl font-body-sm text-body-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container hover:text-on-surface transition-colors" onclick="saveDraftNotification()">
+<span class="material-symbols-outlined text-[18px]">save</span>
+              Simpan Draf
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. Bottom Pedagogical Card & Guidance Anchor -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+<!-- FlipBot Mascot Avatar + Pedagogical Speech Bubble -->
+<div class="flex items-start gap-4 flex-1">
+<div class="w-14 h-14 rounded-2xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-md">
+<span class="material-symbols-outlined text-[32px]">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-[16px] text-primary font-bold">Tips Koder Cilik dari FlipBot</span>
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-tertiary text-[10px] font-extrabold uppercase">Penting</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            "Perhatikan spasi <strong>indentasi (menjorok ke dalam)</strong> di bawah perintah <code class="font-label-code-sm bg-surface-container px-1 py-0.5 rounded text-primary font-bold">else:</code>! Di bahasa Python, baris yang menjorok memberi tahu komputer bahwa perintah tersebut adalah bagian dari blok percabangan cabang cadangan!"
+          </p>
+</div>
+</div>
+<!-- Quick Knowledge Links -->
+<div class="flex items-center gap-3 shrink-0 flex-wrap">
+<button class="px-4 py-2.5 rounded-xl bg-surface-container text-on-surface font-body-sm text-body-sm font-semibold flex items-center gap-2 hover:bg-surface-container-high transition-colors" onclick="showSyntaxModal()">
+<span class="material-symbols-outlined text-[18px] text-primary">menu_book</span>
+          Kamus Sintaks Python
+        </button>
+<button class="px-4 py-2.5 rounded-xl bg-surface-container text-on-surface font-body-sm text-body-sm font-semibold flex items-center gap-2 hover:bg-surface-container-high transition-colors" onclick="showGuideModal()">
+<span class="material-symbols-outlined text-[18px] text-secondary">family_restroom</span>
+          Panduan Guru &amp; Ortu
+        </button>
+</div>
+</div>
+<!-- Floating Interactive Hint Bubble (Initially Hidden, Triggers on Ask Hint) -->
+<div class="hidden fixed bottom-8 right-8 max-w-md bg-surface-container-lowest rounded-2xl p-5 shadow-2xl border-2 border-primary/20 z-50 flex flex-col gap-3" id="flipbot-hint-dialog">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[24px]">smart_toy</span>
+<span class="font-headline-sm text-[16px] font-bold text-primary">Bantuan Cerdas FlipBot</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="closeHintDialog()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        "Coba lihat baris 09. Karena rambunya tidak menyala (<code class="font-label-code-sm text-secondary font-bold">sensor_rambu == False</code>), kita perlu memanggil fungsi <strong class="text-primary">robot.belok_kiri('gua_perlindungan')</strong>. Jangan lupa aktifkan perisai darurat di baris 10!"
+      </p>
+<div class="flex items-center justify-end gap-2 pt-2">
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary text-[12px] font-bold" onclick="insertSnippet('belok_kiri'); closeHintDialog();">
+          Terapkan Solusi Otomatis
+        </button>
+</div>
+</div>
+</div>
+<!-- Inline Micro-interactions Script -->
+<script>
+    let currentSensorMode = true; // true = Kasus 1, false = Kasus 2
+    let hasRunSuccessfulTests = false;
+
+    function toggleTestMode(isTrueCondition) {
+      currentSensorMode = isTrueCondition;
+      const trueBtn = document.getElementById('mode-true-btn');
+      const falseBtn = document.getElementById('mode-false-btn');
+      const signText = document.getElementById('signpost-text');
+      const signIcon = document.getElementById('signpost-icon');
+      const ifLine = document.getElementById('path-if-line');
+      const elseLine = document.getElementById('path-else-line');
+      const destBridge = document.getElementById('dest-bridge');
+      const destCave = document.getElementById('dest-cave');
+      const robotBadge = document.getElementById('robot-status-badge');
+      const consoleOut = document.getElementById('console-output');
+
+      if (isTrueCondition) {
+        trueBtn.className = "py-2 px-3 rounded-lg bg-surface-container-lowest font-body-sm text-[13px] font-bold text-primary shadow-xs flex items-center justify-center gap-2 transition-all";
+        falseBtn.className = "py-2 px-3 rounded-lg text-on-surface-variant hover:text-on-surface font-body-sm text-[13px] font-medium flex items-center justify-center gap-2 transition-all";
+        signText.textContent = "Rambu: True";
+        signIcon.className = "material-symbols-outlined text-[16px] text-amber-500";
+        ifLine.style.opacity = "1";
+        elseLine.style.opacity = "0";
+        destBridge.classList.add("ring-2", "ring-primary");
+        destCave.classList.remove("ring-2", "ring-secondary-container");
+        robotBadge.className = "px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-label-ui text-[11px] font-bold flex items-center gap-1";
+        robotBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Jalur Utama (Jembatan)`;
+        
+        appendLog("&gt;&gt;&gt; Mode Simulasi: sensor_rambu diatur ke True (Rambu Kristal Aktif).");
+      } else {
+        falseBtn.className = "py-2 px-3 rounded-lg bg-surface-container-lowest font-body-sm text-[13px] font-bold text-secondary shadow-xs flex items-center justify-center gap-2 transition-all";
+        trueBtn.className = "py-2 px-3 rounded-lg text-on-surface-variant hover:text-on-surface font-body-sm text-[13px] font-medium flex items-center justify-center gap-2 transition-all";
+        signText.textContent = "Rambu: False";
+        signIcon.className = "material-symbols-outlined text-[16px] text-slate-400";
+        ifLine.style.opacity = "0";
+        elseLine.style.opacity = "1";
+        destBridge.classList.remove("ring-2", "ring-primary");
+        destCave.classList.add("ring-2", "ring-secondary-container");
+        robotBadge.className = "px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 font-label-ui text-[11px] font-bold flex items-center gap-1";
+        robotBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Jalur Darurat (Gua)`;
+
+        appendLog("&gt;&gt;&gt; Mode Simulasi: sensor_rambu diatur ke False (Rambu Padam/Kabut).");
+      }
+    }
+
+    function runCodeTests() {
+      const consoleOut = document.getElementById('console-output');
+      const test2Icon = document.getElementById('test-2-icon');
+      const test2Status = document.getElementById('test-2-status');
+      const testCard2 = document.getElementById('test-card-2');
+      const chkTest = document.getElementById('chk-test');
+      const targetCount = document.getElementById('target-count');
+      const robotBox = document.getElementById('flipbot-avatar-box');
+
+      appendLog("&gt;&gt;&gt; [COMPILING] Menjalankan persimpangan_misi04.py...");
+      appendLog("&gt;&gt;&gt; Menjalankan Uji Kasus 1 (sensor_rambu = True)... Berhasil! FlipBot berbelok ke jembatan_emas.");
+      appendLog("&gt;&gt;&gt; Menjalankan Uji Kasus 2 (sensor_rambu = False)... Berhasil! Blok 'else:' dieksekusi sempurna.");
+      appendLog("&gt;&gt;&gt; [SUKSES] 2/2 Unit Test Lulus! Robot selamat dari semak berduri!");
+
+      // Update Test 2 visual
+      test2Icon.className = "w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold shrink-0";
+      test2Icon.innerHTML = `<span class="material-symbols-outlined text-[18px]">check</span>`;
+      test2Status.className = "font-label-ui text-[11px] font-bold text-emerald-700 uppercase bg-emerald-50 px-2 py-1 rounded";
+      test2Status.textContent = "Lulus ✓";
+      testCard2.className = "p-3 rounded-xl bg-surface-container-low flex items-center justify-between gap-3 border-l-4 border-emerald-500";
+
+      chkTest.checked = true;
+      targetCount.textContent = "4 / 4 Selesai (Sempurna!)";
+      targetCount.className = "font-label-code-sm text-[12px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold";
+
+      // Small bounce animation on mascot
+      robotBox.classList.add("scale-105");
+      setTimeout(() => robotBox.classList.remove("scale-105"), 400);
+
+      alert("🎉 Luar Biasa! Semua pengujian logika If-Else lulus sempurna! +200 XP telah ditambahkan ke akun FlipBot-mu!");
+    }
+
+    function appendLog(text) {
+      const consoleOut = document.getElementById('console-output');
+      const div = document.createElement('div');
+      div.className = "text-emerald-300 font-mono text-[12px]";
+      div.innerHTML = text;
+      consoleOut.appendChild(div);
+      consoleOut.scrollTop = consoleOut.scrollHeight;
+    }
+
+    function insertSnippet(type) {
+      if (type === 'belok_kiri') {
+        appendLog("&gt;&gt;&gt; Memasukkan cuplikan: robot.belok_kiri('gua_perlindungan') pada blok else.");
+      } else if (type === 'perisai') {
+        appendLog("&gt;&gt;&gt; Memasukkan cuplikan: robot.aktifkan_perisai().");
+      } else {
+        appendLog("&gt;&gt;&gt; Menambahkan 4 spasi indentasi tab standar Python.");
+      }
+    }
+
+    function askFlipbotHint() {
+      const hint = document.getElementById('flipbot-hint-dialog');
+      hint.classList.remove('hidden');
+    }
+
+    function closeHintDialog() {
+      const hint = document.getElementById('flipbot-hint-dialog');
+      hint.classList.add('hidden');
+    }
+
+    function saveDraftNotification() {
+      appendLog("&gt;&gt;&gt; Draf kode 'persimpangan_misi04.py' berhasil disimpan secara lokal!");
+      alert("💾 Draf kode berhasil disimpan! Kamu dapat melanjutkan kapan saja.");
+    }
+
+    function showSyntaxModal() {
+      alert("📘 Kamus Sintaks Singkat:\n\n1. 'if kondisi:' -> Dijalankan jika kondisi bernilai True.\n2. 'else:' -> Dijalankan saat kondisi if TIDAK terpenuhi (False).\n3. Indentasi 4 spasi menandakan blok di dalam cabang.");
+    }
+
+    function showGuideModal() {
+      alert("👨‍🏫 Catatan untuk Guru/Ortu:\nTahap ini melatih computational thinking anak dalam memikirkan skenario alternatif (fail-safe) saat kondisi ideal tidak tercapai.");
+    }
+
+    document.getElementById('clear-console-btn').addEventListener('click', () => {
+      const consoleOut = document.getElementById('console-output');
+      consoleOut.innerHTML = '<div class="text-white/50">&gt;&gt;&gt; Konsol dibersihkan. Siap mengeksekusi tes.</div>';
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      appendLog("&gt;&gt;&gt; Memulihkan templat awal persimpangan_misi04.py...");
+    });
+
+    document.getElementById('btn-format').addEventListener('click', () => {
+      appendLog("&gt;&gt;&gt; Format PEP-8 otomatis: Indentasi 4 spasi rapi.");
+    });
+
+    document.getElementById('btn-help-syntax').addEventListener('click', showSyntaxModal);
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest mt-space-xl shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-space-lg mb-space-lg"><div><div class="flex items-center gap-space-sm mb-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary"><span class="material-symbols-outlined text-[18px]">smart_toy</span></div><span class="font-headline-sm text-headline-sm text-primary font-bold">CogniFlip</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Laboratorium belajar koding interaktif dengan pendamping robot AI FlipBot untuk anak dan kreator muda Indonesia.</p></div><div><span class="font-label-ui text-label-ui text-on-surface uppercase tracking-wider block mb-space-sm">Modul Belajar</span><ul class="space-y-space-xs"><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"><a href="#">Alur Logika &amp; Kondisi</a></li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"><a href="#">Perulangan Visual</a></li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"><a href="#">Koleksi Mini Game</a></li></ul></div><div><span class="font-label-ui text-label-ui text-on-surface uppercase tracking-wider block mb-space-sm">Pusat Bantuan</span><ul class="space-y-space-xs"><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"><a href="#">Panduan Guru &amp; Ortu</a></li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"><a href="#">Kamus Istilah Kode</a></li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"><a href="#">FAQ &amp; Kontak</a></li></ul></div><div><span class="font-label-ui text-label-ui text-on-surface uppercase tracking-wider block mb-space-sm">Ruang Prestasi</span><div class="flex items-center gap-space-xs mb-space-xs"><span class="material-symbols-outlined text-secondary text-[20px]">military_tech</span><span class="font-body-sm text-body-sm text-on-surface font-semibold">Lencana Aktif: Algoritma Pemula</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Selesaikan Misi 04 untuk membuka Petualangan FlipBot Selanjutnya!</p></div></div><div class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm"><p>© 2025 CogniFlip AI Learning &amp; Code Lab. Hak cipta dilindungi.</p><div class="flex items-center gap-space-md"><a class="hover:text-primary transition-colors" href="#">Kebijakan Privasi Ramah Anak</a><a class="hover:text-primary transition-colors" href="#">Ketentuan Layanan</a></div></div></div></footer></body></html>

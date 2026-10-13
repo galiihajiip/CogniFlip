@@ -3,9 +3,9 @@
 ## Purpose and status
 Google Stitch is the primary tool for complete UI/UX design and interactive screen exploration for CogniFlip. This document is a handoff protocol and inventory, not a prompt. The actual visual design must be created and reviewed in Stitch by the participant. Do not fabricate screen links, exported files, screenshots, or approval statuses.
 
-- Design status: `NOT STARTED` until the participant begins in Stitch.
-- Approval status: `NOT APPROVED` until reviewed by the participant.
-- Final tokens: record in `.stitch/DESIGN.md` after the design system is chosen.
+- Design status: `EXPORTED` (2026-10-13; 58 screens, see "Approved Stitch project").
+- Approval status: `APPROVED` by the participant on hand-over (D-011).
+- Final tokens: `.stitch/DESIGN.md` (Warm Learning Lab).
 - Store real approved screen references in `.stitch/references/` and optional exports in `.stitch/exports/`.
 
 ## Source-of-truth policy
@@ -72,23 +72,55 @@ Priority codes identify design and build sequencing, not permission to remove an
 - Complete the mapping table below before declaring a screen's design finalized.
 
 ## Approved Stitch project
-- Project title: `CogniFlip`
-- Project/share URL: `NOT RECORDED`
-- Design system approved: `NO`
-- Key screens approved: `NO`
-- Desktop/mobile reviewed: `NO`
-- Accessibility/contrast review: `NOT VERIFIED`
-- Last reviewed by participant: `NOT RECORDED`
+- Project title: `CogniFlip` (Stitch export "CogniFlip UI/UX Design Playbook", design system "Warm Learning Lab")
+- Project/share URL: `NOT RECORDED` (the participant supplied an export ZIP, not a link)
+- Export received: 2026-10-13, `stitch_cogniflip_ui_ux_design_playbook.zip` (SHA-256 `cb68deaa739af2121d346879cd1bcc7ba70bfd999fb5dadd5f83963456767eef`, 58 screens with `code.html` + `screen.png`, plus `warm_learning_lab/DESIGN.md`). The ZIP itself is not committed.
+- Design system approved: `YES` (D-011: the participant provided the export and asked for it to be implemented)
+- Key screens approved: `YES` (same basis, D-011)
+- Desktop/mobile reviewed: desktop references only. **The export contains no mobile screens**; mobile layouts are responsive adaptations of the desktop designs (see Gaps).
+- Accessibility/contrast review: implementation-level checks only (focus ring, labels, text + icon status, reduced motion, 390 px reflow). A full contrast audit is `NOT VERIFIED`.
+- Last reviewed by participant: 2026-10-13 (export hand-over)
+- Stored in the repo: `.stitch/DESIGN.md` (approved tokens + implementation notes), `.stitch/references/*.webp` (all 58 screenshots, converted from PNG to WebP quality 80 at the original pixel size to keep the repository small), `.stitch/exports/*.html` (unchanged HTML exports; they load the Tailwind CDN and Google-hosted images and are references only).
 
 ## Screen-to-implementation mapping
-Update this table with actual names/URLs and files after each screen is designed and implemented.
+Reference files are in `.stitch/references/<name>.webp` and `.stitch/exports/<name>.html`.
 
-| Screen ID | Stitch screen name/reference | App route | Main interaction | Acceptance criteria | Status |
-|---|---|---|---|---|---|
-| ST-01 | NOT DESIGNED | TBD | Primary CTA starts learning | AC reference TBD | NOT STARTED |
-| ST-06 | NOT DESIGNED | TBD | Submit explanation / receive clarification | AC reference TBD | NOT STARTED |
-| ST-07 | NOT DESIGNED | TBD | Show validated assessment and evidence | AC reference TBD | NOT STARTED |
-| ST-11 | NOT DESIGNED | TBD | Edit code and request analysis | AC reference TBD | NOT STARTED |
+| Stitch screen (reference name) | App route | Data / API | Status |
+|---|---|---|---|
+| `beranda_landing_page` | `/` | `GET` integration status (server) | IMPLEMENTED; browser-checked 1280/390 |
+| `dashboard_siswa_baru` | `/belajar` | lessons (server), `GET /api/progress` | IMPLEMENTED; browser-checked |
+| `st_06_pengenalan_pelajaran_loops` | `/belajar/[lessonId]` | lesson detail (server, learner-safe DTO) | IMPLEMENTED; browser-checked |
+| `st_06a_teach_the_robot_mulai_penjelasan` | `/belajar/[lessonId]/jelaskan` (state `awaiting_explanation`) | `POST /api/sessions`, `POST …/actions` | IMPLEMENTED; E2E in browser |
+| `st_06b_…_percakapan_aktif`, `st_06c_…_state_klarifikasi` | same route, state `needs_clarification` | `submit` | IMPLEMENTED; E2E in browser |
+| `st_06d_…_state_loading` | same route, request in flight / `evaluating` | — | IMPLEMENTED; E2E in browser |
+| `st_07_hasil_evaluasi_pemahaman_75_100` | same route, state `assessed` | `revise`, `complete` | IMPLEMENTED; E2E in browser |
+| `st_07a_state_insufficient_evidence…` | same route, `awaiting_revision` after an unclear answer | `submit` | IMPLEMENTED; E2E in browser |
+| `st_07b_layanan_ai_evaluasi_mengalami_kendala…` | same route, state `recoverable_error` | `submit` (resend) | IMPLEMENTED; checked against a production build with the AI kill switch |
+| `st_08_siklus_revisi_jawaban_compare_attempts` | same route, `awaiting_revision` after a score | `submit` | IMPLEMENTED; E2E in browser |
+| (completion, no Stitch screen) | same route, state `completed` | comparison + reference explanation | ADAPTED from ST-07/ST-09a styles |
+| `st_09_prediksi_output_simulasi_interaktif` | `/misi/[id]` (predict) | `POST /api/missions/[id]/attempts` `predict` | IMPLEMENTED (adapted, see below) |
+| `st_09a_hasil_verifikasi_prediksi_refleksi_simulasi` | same route, after `predict` | `predict`, `reflect` | IMPLEMENTED (adapted) |
+| `st_10b_state_bug_tertabrak_lumpur…` | `/misi/[id]` (debug) | `diagnose` | IMPLEMENTED (adapted) |
+| `st_10_tantangan_modifikasi_kode_live_coding_di_mini_ide` | `/ide` | `POST /api/code/review` | IMPLEMENTED as AI review only |
+| `st_10a_…_selesai` (5 variants) | — | — | NOT USED: they show passing test runs that require code execution, which is disabled |
+| `misi_04`…`misi_08` (teach, respon, hasil, simulation variants) and per-mission `st_09`/`st_09a`/`st_10`/`st_10b` variants | — | — | Used as style references only: the content (if/elif/and/or/not/nested-if missions) does not exist yet |
+| (no Stitch screen) `/misi` hub, `/masuk`, `/daftar`, `/profil`, `/perjalanan`, `/peringkat`, `/petunjuk`, `/panduan`, `/privasi`, 404 | — | auth, profile, history, rewards, leaderboard | ADAPTED from the design system (cards, chips, tactile buttons) |
+
+## Adaptations (intentional differences from the exports)
+Content in the exports that the product cannot truthfully show was changed (guarded by `tests/unit/ui-copy.test.ts`):
+1. Removed "14.200+ penjelajah", "1.420 anak Indonesia…", "Teruji Secara Pedagogis", "dirancang bersama pakar pedagogi", fake accuracy/XP figures and "© 2025" (now 2026).
+2. "Uji Nyata / Real Code Runner", "Python 3.11", the simulator arenas, "Jalankan Simulasi" and automatic test results imply code execution. Execution is disabled (ADR-003), so step 3 became **Cocokkan** (compare with an answer key verified with CPython when the content was written), the Mini IDE "Jalankan" button is shown disabled with the reason, and output is labelled as coming from a reviewed fixture.
+3. Voice ("Rekam Suara") is shown as unavailable (no STT provider). Komunitas is not in the navigation (disabled until its safety gate passes).
+4. A wrong prediction shows FlipBot's hint first; the correct output is revealed only on request (bounded hint before the answer, `CLAUDE.md` §5).
+5. Score widgets show only the deterministic total, per-criterion points and level labels from the API. The exports' "Pemahaman FlipBot 75% (+20%)" meter, per-criterion analysis notes and evidence quotes are not shown because the learner-facing contract does not include them.
+6. The robot illustrations with baked-in text were not used (see `.stitch/DESIGN.md` implementation notes).
+7. Lesson/mission prerequisites are shown as "Disarankan setelah …" instead of locks, because the server does not enforce lesson order.
+8. The mascot name in draft content was changed from "Robi" to "FlipBot" to match the design.
+
+## Gaps (need a design decision before further UI work)
+- No mobile references: mobile layouts are responsive reflows checked at 390 px.
+- No designs for auth, profile/privacy, history, leaderboard, help/guide/privacy pages, the mission hub, completion and 404; these use the design system and should be reviewed by the participant.
+- ST-26 privacy screen and any teacher/parent report screens remain undesigned.
 
 ## Visual QA before implementation is accepted
 - Compare implementation screenshots with the approved Stitch references at agreed viewport sizes.

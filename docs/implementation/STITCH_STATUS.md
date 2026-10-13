@@ -1,5 +1,7 @@
 # Stitch Design Status
 
+> **Update 2026-10-13 (afternoon):** the participant supplied the Stitch export (58 screens + `DESIGN.md`). The gate now **PASSES** (D-011). The current screen-to-route mapping, adaptations and gaps are in `docs/22_STITCH_DESIGN_HANDOFF.md`; the sections below record the earlier state and the proposals made before the export arrived.
+
 - Checked: 2026-10-13 (WIB), by listing the folders. No design has been inspected because none exists in the repository yet.
 - Overall: **design handoff NOT STARTED in the repository.** Visual implementation of product screens is blocked until approved exports arrive (`CLAUDE.md` §8, Gate B).
 
@@ -7,6 +9,7 @@
 | Date (WIB) | Files found | Result |
 |---|---|---|
 | 2026-10-13 ~07:15 | `.stitch/references/.gitkeep`, `.stitch/exports/.gitkeep` only; `.stitch/DESIGN.md` still the unapproved starter | **FAIL: no exports.** Per D-009, BLOCKs 20–26 build no screens. Non-visual parts (lesson and session APIs) continue. |
+| 2026-10-13 ~15:00 | Export ZIP: 58 `screen.png` + `code.html`, `warm_learning_lab/DESIGN.md` | **PASS.** Stored in `.stitch/`; screens implemented (see `docs/22`). Desktop only: no mobile references. |
 
 ## 1. What is in the repository now
 

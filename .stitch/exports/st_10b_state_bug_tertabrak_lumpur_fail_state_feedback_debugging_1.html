@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CogniFlip — AI Learning &amp; Code Lab</title><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"inverse-on-surface":"#eef0ff","on-secondary-fixed-variant":"#653e00","primary-fixed":"#e3dfff","tertiary-fixed":"#acedff","on-surface-variant":"#464554","primary-container":"#4338ca","on-tertiary":"#ffffff","on-surface":"#131b2e","on-error":"#ffffff","outline":"#777586","secondary-fixed":"#ffddb8","surface-container-low":"#f2f3ff","outline-variant":"#c7c4d7","surface-container-lowest":"#ffffff","primary-fixed-dim":"#c3c0ff","surface-container-highest":"#dae2fd","tertiary-fixed-dim":"#4cd7f6","inverse-primary":"#c3c0ff","secondary-fixed-dim":"#ffb95f","on-primary-fixed-variant":"#372abf","surface-bright":"#faf8ff","on-secondary-container":"#684000","surface-variant":"#dae2fd","surface":"#faf8ff","secondary-container":"#fea619","background":"#faf8ff","surface-tint":"#5148d7","tertiary":"#00414d","on-primary-container":"#c1beff","tertiary-container":"#005a6a","on-tertiary-fixed-variant":"#004e5c","on-secondary":"#ffffff","surface-container":"#eaedff","on-secondary-fixed":"#2a1700","surface-container-high":"#e2e7ff","inverse-surface":"#283044","on-primary-fixed":"#100069","on-background":"#131b2e","on-primary":"#ffffff","error":"#ba1a1a","on-tertiary-container":"#4ad5f4","surface-dim":"#d2d9f4","primary":"#2a14b4","on-error-container":"#93000a","secondary":"#855300","on-tertiary-fixed":"#001f26","error-container":"#ffdad6"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-md":"1rem",margin:"2rem","space-xs":"0.25rem","margin-mobile":"1rem","space-xl":"2.5rem","space-lg":"1.5rem",gutter:"1.5rem","gutter-mobile":"1rem","space-sm":"0.5rem"},fontFamily:{"body-lg":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-ui":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-code-sm":["JetBrains Mono"],"body-md":["Plus Jakarta Sans"],"label-code-lg":["JetBrains Mono"],"headline-lg":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"]},fontSize:{"body-lg":["18px",{lineHeight:"28px",fontWeight:"500"}],"display-hero-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"800"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}],"label-ui":["13px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"700"}],"body-sm":["14px",{lineHeight:"20px",fontWeight:"400"}],"label-code-sm":["13px",{lineHeight:"18px",fontWeight:"400"}],"body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-code-lg":["16px",{lineHeight:"24px",fontWeight:"500"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}],"display-hero":["44px",{lineHeight:"52px",letterSpacing:"-0.02em",fontWeight:"800"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"0em",fontWeight:"700"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.005em",fontWeight:"700"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 w-full max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6"><div class="flex items-center gap-8"><div class="flex items-center gap-3 shrink-0"><img alt="CogniFlip Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W5R35l1oL8idhw5T7I_ZljWdnQ3L1FUxryB-Ot9fI4aRmYWchya0NeTy3ECj-uYtmEEAMIBuWqSYFEt5AAESB9k7R3R-DSoP6oLyMp5Kj_Bsnow2d7X6mYdcGMBgXyAEcMfFD6VANYtyRuJ7yPoDEdQVZjVaG6Q4vtn4BsuWlHqyNOeuXSjatkwb9Vwh0IQ_upZF5jeR1A7sM0WsK6PYr1zmLIAkyzozg9SGq34U_zHvMZcMnQE-C0"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-none tracking-tight">CogniFlip</span><span class="font-label-ui text-label-ui text-on-surface-variant font-medium tracking-normal mt-0.5">AI Learning &amp; Code Lab</span></div></div><nav class="hidden xl:flex items-center gap-2" data-active-classes="bg-surface-container text-primary font-headline-sm"><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all inline-flex items-center gap-2" data-path="beranda" href="#">Beranda</a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all inline-flex items-center gap-2" data-path="belajar" href="#"><span>Belajar</span><span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui">Alur Utama</span></a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all inline-flex items-center gap-2" data-path="mini-ide" href="#"><span>Mini IDE</span><span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-code-sm text-label-code-sm">Lab Kode</span></a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="misi-debug" href="#">Misi Debug</a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="komunitas" href="#">Komunitas</a></nav></div><div class="flex items-center gap-4 shrink-0"><div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui shadow-sm"><span class="material-symbols-outlined text-[18px] text-secondary">bolt</span><span>120 XP</span></div><a class="hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-primary-container text-on-primary font-headline-sm text-label-ui shadow-[0_4px_0_0_#312e81] active:translate-y-0.5 active:shadow-[0_2px_0_0_#312e81] transition-all hover:bg-primary" data-path="belajar" href="#">Mulai Belajar</a><div class="flex items-center gap-2 pl-2"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="material-symbols-outlined text-on-surface-variant text-[20px] cursor-pointer hover:text-on-surface">expand_more</span></div></div></div></header><main class="w-full pt-20 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Content Container with strict adherence to Desktop Visual Spacing -->
+<div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-8 space-y-8">
+<!-- SECTION 1: HEADER & STEPPER MISI -->
+<section class="space-y-4">
+<!-- Breadcrumb Bar & Live XP Meter -->
+<div class="flex flex-wrap items-center justify-between gap-4">
+<nav aria-label="Breadcrumb" class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary cursor-pointer transition-colors">Beranda</span>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary cursor-pointer transition-colors">Belajar</span>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="font-label-ui text-label-ui text-on-surface-variant">Misi 04: Logika Kondisional (If-Else)</span>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui">Tahap 3: Uji Coba Mini-IDE</span>
+</nav>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">savings</span>
+<span class="font-label-ui text-label-ui text-on-surface">XP Terkumpul: <strong class="text-primary">400 XP</strong></span>
+</div>
+<div class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-secondary-container text-on-secondary-container shadow-sm animate-pulse">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="font-label-ui text-label-ui font-bold">+200 XP Saat Bug Terselesaikan!</span>
+</div>
+</div>
+</div>
+<!-- Stepper 3 Tahap Alur Misi 04 -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Tahap 1: Evaluasi Konsep -->
+<div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui text-on-surface-variant">Tahap 1</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-code-sm text-label-code-sm font-semibold">88/100</span>
+</div>
+<p class="font-headline-sm text-[15px] leading-snug text-on-surface truncate">Evaluasi Konsep If-Else</p>
+</div>
+</div>
+<!-- Tahap 2: Simulasi Jalur -->
+<div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui text-on-surface-variant">Tahap 2</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-code-sm text-label-code-sm font-semibold">100% Lolos</span>
+</div>
+<p class="font-headline-sm text-[15px] leading-snug text-on-surface truncate">Prediksi &amp; Simulasi Jalur</p>
+</div>
+</div>
+<!-- Tahap 3: Mini-IDE Percabangan (Active / Debug State) -->
+<div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-secondary-fixed text-on-secondary-fixed shadow-md relative overflow-hidden">
+<div class="w-9 h-9 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">build_circle</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui text-on-secondary-fixed font-bold tracking-wide">Tahap 3 • Sedang Diuji</span>
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+</div>
+<p class="font-headline-sm text-[15px] leading-snug text-on-secondary-fixed font-bold truncate">Mini-IDE Percabangan (Perlu Penyesuaian)</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: HERO BANNER GROWTH MINDSET & RAMAH ANAK -->
+<section class="rounded-xl bg-surface-container-low shadow-sm p-6 lg:p-8 relative overflow-hidden">
+<div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-8 relative z-10">
+<!-- Maskot FlipBot Tertimpa Lumpur Kartun Lucu -->
+<div class="relative shrink-0 flex items-center justify-center">
+<div class="w-28 h-28 lg:w-32 lg:h-32 rounded-full bg-surface-container-lowest shadow-md flex items-center justify-center relative overflow-hidden">
+<!-- Ambient Background Splash -->
+<div class="absolute inset-0 bg-secondary-fixed-dim/20"></div>
+<!-- Kartun Robot FlipBot SVG Tactile Mascot -->
+<svg class="w-20 h-20 text-primary relative z-10" fill="none" viewbox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+<!-- Antena dengan Lampu Tanya -->
+<line stroke="currentColor" stroke-linecap="round" stroke-width="4" x1="48" x2="48" y1="20" y2="10"></line>
+<circle cx="48" cy="8" fill="#fea619" r="5"></circle>
+<!-- Kepala Robot -->
+<rect fill="#4338ca" height="40" rx="12" width="48" x="24" y="20"></rect>
+<!-- Kaca Mata / Display -->
+<rect fill="#131b2e" height="20" rx="6" width="36" x="30" y="28"></rect>
+<!-- Mata Berkedip & Tanda Tanya -->
+<ellipse cx="40" cy="38" fill="#4cd7f6" rx="3.5" ry="4"></ellipse>
+<ellipse cx="56" cy="38" fill="#4cd7f6" rx="3.5" ry="4"></ellipse>
+<!-- Cipratan Lumpur Lucu pada Pipi/Roda -->
+<circle cx="62" cy="46" fill="#855300" r="3"></circle>
+<circle cx="66" cy="50" fill="#855300" r="2"></circle>
+<!-- Badan Robot -->
+<rect fill="#5148d7" height="18" rx="8" width="40" x="28" y="64"></rect>
+<rect fill="#ffffff" fill-opacity="0.3" height="6" rx="3" width="24" x="36" y="70"></rect>
+<!-- Roda Robot dengan Lumpur Lembut -->
+<rect fill="#131b2e" height="14" rx="4" width="10" x="18" y="72"></rect>
+<rect fill="#131b2e" height="14" rx="4" width="10" x="68" y="72"></rect>
+<path d="M14 82C18 78 26 84 32 82C36 80 40 86 44 86" stroke="#855300" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="20" cy="84" fill="#855300" r="2.5"></circle>
+<circle cx="74" cy="84" fill="#855300" r="3"></circle>
+</svg>
+<!-- Badge Emosi Mini -->
+<span class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-xs shadow-sm">?</span>
+</div>
+</div>
+<!-- Banner Text & Speech Bubble AI Tutor -->
+<div class="flex-1 space-y-3 text-center lg:text-left">
+<div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+<span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui shadow-sm inline-flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">travel_explore</span>
+              Mode Detektif Bug Aktif
+            </span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-ui text-label-ui">
+              Uji Coba: 1 Lolos • 1 Perlu Diperbaiki
+            </span>
+<span class="px-3 py-1 rounded-full bg-surface-container-lowest text-primary font-label-ui text-label-ui shadow-sm">
+              ✨ Coba Ulang Sepuasnya Tanpa Potongan XP
+            </span>
+</div>
+<div class="space-y-1.5">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">
+              Ups! FlipBot Terperosok ke Lumpur Lembah Kristal! 🛞🟤
+            </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+              Jangan khawatir, koder cilik! Di dunia programmer, situasi ini disebut <strong>Bug</strong>. Roda FlipBot aman kok, hanya butuh petunjuk belokan cadangan saat rambu kristal padam (<code class="font-label-code-sm text-label-code-sm bg-surface-container-highest px-1.5 py-0.5 rounded text-primary">sensor == False</code>). Mari bantu FlipBot keluar dari kubangan!
+            </p>
+</div>
+<!-- FlipBot Speech Card -->
+<div class="inline-flex items-start gap-3 p-3.5 rounded-xl bg-surface-container-lowest shadow-sm max-w-2xl text-left">
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+<strong class="text-primary">FlipBot berbisik:</strong> “Bip-bop! Jalanku licin sekali! Saat rambu menyala (True) aku sukses ke jembatan, tapi saat rambu mati (False), kodeku tidak tahu harus berbelok ke mana!”
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: DUA KOLOM UTAMA (VISUAL SIMULATOR vs CODE IDE & DEBUGGER) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+<!-- ================= KOLOM KIRI (5 Kolom): SIMULATOR & TEST RUNNER ================= -->
+<div class="xl:col-span-5 space-y-6">
+<!-- Peta Interaktif 2D Lembah Kristal -->
+<div class="rounded-xl bg-surface-container-lowest shadow-md p-5 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">map</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Peta Jejak Robot: Lembah Kristal</h2>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui">Insiden Terdeteksi</span>
+</div>
+<!-- Diagram Visual Jalur Percabangan -->
+<div class="relative w-full h-72 rounded-xl bg-surface-container-low overflow-hidden flex flex-col justify-between p-4">
+<!-- Jalur Cabang Atas: Jembatan Emas (True Branch) -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest/90 shadow-sm backdrop-blur-sm">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-surface-container text-primary flex items-center justify-center font-bold text-xs">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<p class="font-label-ui text-label-ui text-on-surface">Cabang IF: Jembatan Emas</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Kondisi <code class="font-label-code-sm text-label-code-sm text-primary">sensor == True</code></p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-code-sm text-xs font-bold">Lolos ✓</span>
+</div>
+<!-- Titik Persimpangan Sensor & Jejak Error -->
+<div class="relative py-2 flex items-center justify-center">
+<!-- Visual SVG Jalur Percabangan -->
+<svg class="w-full h-24" fill="none" viewbox="0 0 360 80" xmlns="http://www.w3.org/2000/svg">
+<!-- Garis Jalur Masuk -->
+<path d="M10 40 H110" stroke="#777586" stroke-dasharray="4 4" stroke-width="3"></path>
+<circle cx="110" cy="40" fill="#4338ca" r="6"></circle>
+<!-- Jalur Naik ke Jembatan Emas -->
+<path d="M110 40 Q150 15 240 15 H350" stroke="#2a14b4" stroke-width="3"></path>
+<!-- Jalur Lurus ke Lumpur (Jalur Insiden) -->
+<path d="M110 40 H250" stroke="#855300" stroke-dasharray="5 5" stroke-width="4"></path>
+<!-- Jalur Seharusnya: Belok Bawah ke Gua -->
+<path d="M110 40 Q150 65 240 65 H350" stroke="#777586" stroke-dasharray="2 4" stroke-width="2"></path>
+</svg>
+<!-- Robot Terjebak Badge di Lumpur -->
+<div class="absolute right-20 top-6 px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed shadow-md flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">warning</span>
+<span class="font-label-ui text-label-ui">FlipBot di Rawa Lumpur!</span>
+</div>
+</div>
+<!-- Jalur Cabang Bawah: Gua Perlindungan (Missing Else Branch) -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container text-on-surface shadow-sm">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs">
+<span class="material-symbols-outlined text-[16px]">navigation</span>
+</div>
+<div>
+<p class="font-label-ui text-label-ui font-bold">Cabang ELSE: Gua Perlindungan</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Saat <code class="font-label-code-sm text-label-code-sm text-secondary">sensor == False</code> (Tujuan Aman)</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-code-sm text-xs font-semibold">Belum Dituju ⚠️</span>
+</div>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">info</span>
+<span><strong>Hasil Rekaman Sensor:</strong> Robot mendeteksi sensor bernilai <code>False</code>, tetapi tidak menemukan instruksi penanganan. Akibatnya robot meluncur lurus keluar jalur aman.</span>
+</div>
+</div>
+<!-- Automated Test Runner Results (Kasus Uji 1 & Kasus Uji 2) -->
+<div class="rounded-xl bg-surface-container-lowest shadow-md p-5 space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">fact_check</span>
+              Hasil Pengujian Otomatis
+            </h3>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">2 Kasus Skenario</span>
+</div>
+<div class="space-y-3">
+<!-- Kasus Uji 1: Lolos -->
+<div class="p-4 rounded-xl bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-ui text-label-ui text-on-surface">Kasus Uji 1: sensor_rambu == True</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-code-sm text-label-code-sm font-bold">LULUS (0.11s)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Robot sukses membaca kondisi dan berbelok ke Jembatan Emas sesuai baris ke-3.
+              </p>
+</div>
+<!-- Kasus Uji 2: Belum Berhasil (Fail / Needs Fix) -->
+<div class="p-4 rounded-xl bg-secondary-fixed text-on-secondary-fixed space-y-2.5 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">error_outline</span>
+<span class="font-label-ui text-label-ui font-bold">Kasus Uji 2: sensor_rambu == False</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-code-sm text-label-code-sm font-bold">BUTUH PERBAIKAN</span>
+</div>
+<!-- Tabel Perbandingan Harapan vs Realita -->
+<div class="space-y-1.5 font-label-code-sm text-label-code-sm">
+<div class="flex items-start justify-between bg-surface-container-lowest/80 p-2 rounded">
+<span class="text-on-surface-variant">Harapan Sistem:</span>
+<span class="font-bold text-primary">robot.belok_kiri("gua_perlindungan")</span>
+</div>
+<div class="flex items-start justify-between bg-surface-container-lowest/80 p-2 rounded">
+<span class="text-on-surface-variant">Kenyataan Eksekusi:</span>
+<span class="font-bold text-secondary">Tidak ada perintah (No else branch)</span>
+</div>
+<div class="flex items-start justify-between bg-surface-container-lowest/80 p-2 rounded">
+<span class="text-on-surface-variant">Status Fisik:</span>
+<span class="font-bold text-on-secondary-fixed">Tergelincir di Lumpur Lembah</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= KOLOM KANAN (7 Kolom): MINI-IDE, CONSOLE & SOKRATIK GUIDE ================= -->
+<div class="xl:col-span-7 space-y-6">
+<!-- Mini-IDE Code Editor Panel -->
+<div class="rounded-xl bg-surface-container-lowest shadow-md overflow-hidden">
+<!-- Editor Header Tab -->
+<div class="bg-surface-container-high px-5 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+<span class="w-3 h-3 rounded-full bg-surface-container-highest"></span>
+<span class="w-3 h-3 rounded-full bg-primary-fixed"></span>
+</div>
+<span class="font-label-code-sm text-label-code-sm font-semibold text-on-surface">misi_04_navigasi.py</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-ui text-label-ui">Python 3.10</span>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Area Kode dengan Penyorotan Error Lembut -->
+<div class="p-5 font-label-code-lg text-label-code-lg text-on-surface bg-surface-container-lowest space-y-1">
+<!-- Line 1 -->
+<div class="flex items-center gap-4">
+<span class="w-6 text-outline select-none text-right font-label-code-sm text-xs">1</span>
+<div><span class="text-primary font-bold">def</span> <span class="text-tertiary-container font-semibold">navigasi_robot</span>(sensor_rambu):</div>
+</div>
+<!-- Line 2 -->
+<div class="flex items-center gap-4">
+<span class="w-6 text-outline select-none text-right font-label-code-sm text-xs">2</span>
+<div class="pl-4"><span class="text-primary font-bold">if</span> sensor_rambu == <span class="text-secondary font-bold">True</span>:</div>
+</div>
+<!-- Line 3 -->
+<div class="flex items-center gap-4 bg-surface-container-low/70 py-0.5 rounded">
+<span class="w-6 text-outline select-none text-right font-label-code-sm text-xs">3</span>
+<div class="pl-8 text-on-surface">robot.<span class="text-primary font-semibold">belok_kanan</span>(<span class="text-tertiary font-medium">"jembatan_emas"</span>)</div>
+</div>
+<!-- Line 4 -->
+<div class="flex items-center gap-4">
+<span class="w-6 text-outline select-none text-right font-label-code-sm text-xs">4</span>
+<div class="pl-8 text-on-surface">robot.<span class="text-primary font-semibold">ambil_kristal</span>()</div>
+</div>
+<!-- Line 5: Missing Else Area (Highlighted in warm friendly tone) -->
+<div class="p-3 my-2 rounded-xl bg-secondary-fixed/50 text-on-secondary-fixed flex flex-col gap-2 relative">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">help</span>
+<span class="font-label-ui text-label-ui font-bold">Area Perbaikan Kode: Di mana jalur cadangan FlipBot?</span>
+</div>
+<p class="font-body-sm text-xs text-on-secondary-fixed leading-relaxed">
+                Ketika <code class="font-label-code-sm text-xs font-bold bg-surface-container-lowest/80 px-1 py-0.5 rounded">sensor_rambu == False</code>, komputer melompati baris 3 &amp; 4. Kamu belum membuat blok <code class="font-label-code-sm text-xs font-bold bg-surface-container-lowest/80 px-1 py-0.5 rounded text-primary">else:</code> untuk berbelok ke tempat aman!
+              </p>
+<!-- Rekomendasi Baris Berkedip Lembut -->
+<div class="font-label-code-sm text-xs text-on-surface-variant/90 pl-4 bg-surface-container-lowest/60 py-1.5 rounded">
+<span class="text-outline"># Solusi yang dinanti FlipBot:</span><br/>
+<span class="text-primary font-bold">else</span>:<br/>
+<span class="pl-4 text-on-surface">robot.belok_kiri(<span class="text-tertiary">"gua_perlindungan"</span>)</span>
+</div>
+</div>
+</div>
+<!-- Debug Terminal Console (Khas Mini-IDE CogniFlip) -->
+<div class="bg-inverse-surface text-inverse-on-surface p-4 font-label-code-sm text-label-code-sm space-y-1.5">
+<div class="flex items-center justify-between pb-2 border-b border-outline/30 text-xs text-outline-variant">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed-dim">terminal</span>
+                Konsol Detektif FlipBot &amp; Debugger
+              </span>
+<span>Status: Siap Ditambal</span>
+</div>
+<div class="text-secondary-fixed-dim font-medium pt-1">
+              &gt;&gt;&gt; LOGIKA_BERCABANG: Menjalankan skenario navigasi...
+            </div>
+<div class="text-inverse-on-surface">
+              &gt;&gt;&gt; Tes 1 (sensor=True): Berhasil belok ke "jembatan_emas" [OK]
+            </div>
+<div class="text-secondary-container">
+              &gt;&gt;&gt; PERINGATAN LOGIKA: Cabang alternatif tidak terdeteksi saat sensor=False!
+            </div>
+<div class="text-on-tertiary-container">
+              &gt;&gt;&gt; Robot bingung tanpa arah dan meluncur lurus ke Rawa Lumpur Lembah.
+            </div>
+</div>
+</div>
+<!-- Kartu Bantuan Sokratik Tutor AI FlipBot ("Petunjuk Detektif Kode 💡") -->
+<div class="rounded-xl bg-surface-container-lowest shadow-md p-6 space-y-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">lightbulb</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Petunjuk Detektif Kode FlipBot 💡</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Panduan berpikir langkah-demi-langkah agar kamu menemukan solusinya sendiri!</p>
+</div>
+</div>
+<!-- Pertanyaan Pemantik Sokratik -->
+<div class="p-4 rounded-xl bg-surface-container-low space-y-2">
+<p class="font-headline-sm text-[16px] text-primary">Pertanyaan Pemantik:</p>
+<p class="font-body-md text-body-md text-on-surface">
+              "Jika kata kunci <strong>if</strong> berarti <em>'jika benar'</em>, kata kunci apa yang kita pakai di Python untuk mengatakan <em>'selain itu / kalau salah'</em>?"
+            </p>
+</div>
+<!-- Solusi 3 Langkah Sederhana -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<div class="p-3.5 rounded-xl bg-surface-container space-y-1">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary font-bold text-xs flex items-center justify-center">1</span>
+<p class="font-headline-sm text-xs text-on-surface">Tulis Blok Baru</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Ketik <code class="font-bold text-primary">else:</code> tepat sejajar lurus di bawah kata <code class="font-bold text-primary">if</code>.</p>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container space-y-1">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary font-bold text-xs flex items-center justify-center">2</span>
+<p class="font-headline-sm text-xs text-on-surface">Beri 4 Spasi (Indent)</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Lompat satu baris baru dan tekan Spasi 4 kali atau tombol Tab agar Python paham.</p>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container space-y-1">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary font-bold text-xs flex items-center justify-center">3</span>
+<p class="font-headline-sm text-xs text-on-surface">Arahkan Belokan</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Ketik perintah penyelamat: <br/><code class="font-label-code-sm text-xs text-tertiary">belok_kiri("gua_perlindungan")</code></p>
+</div>
+</div>
+<!-- Quick Fix Helper Chips (Balok Bantu 1-Klik) -->
+<div class="space-y-2.5 pt-2">
+<p class="font-label-ui text-label-ui text-on-surface-variant uppercase tracking-wider">Balok Bantuan 1-Klik:</p>
+<div class="flex flex-wrap gap-2.5">
+<button class="px-4 py-2 rounded-xl bg-secondary-fixed text-on-secondary-fixed font-headline-sm text-body-sm flex items-center gap-2 hover:bg-secondary-fixed-dim transition-all shadow-sm active:translate-y-0.5">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Sisipkan 'else:' dan Jalur Perlindungan</span>
+</button>
+<button class="px-4 py-2 rounded-xl bg-surface-container text-on-surface font-headline-sm text-body-sm flex items-center gap-2 hover:bg-surface-container-high transition-all shadow-sm active:translate-y-0.5">
+<span class="material-symbols-outlined text-[18px]">format_indent_increase</span>
+<span>Periksa Indentasi Kode</span>
+</button>
+</div>
+</div>
+<!-- Primary CTA Buttons (Modern Tactile Lab Elevation) -->
+<div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+<!-- Run & Test Button (With Tactile Bottom Shadow) -->
+<button class="w-full sm:flex-1 h-14 rounded-full bg-primary-container text-on-primary font-headline-sm text-label-ui shadow-[0_4px_0_0_#312e81] active:translate-y-0.5 active:shadow-[0_2px_0_0_#312e81] transition-all hover:bg-primary flex items-center justify-center gap-2.5 cursor-pointer">
+<span class="material-symbols-outlined text-[22px]">play_arrow</span>
+<span>Perbaiki Kode &amp; Uji Coba Lagi 🛠️</span>
+</button>
+<!-- Secondary Tutor Consultation Button -->
+<button class="w-full sm:w-auto px-6 h-14 rounded-full bg-secondary-fixed text-on-secondary-fixed font-headline-sm text-label-ui shadow-sm hover:bg-secondary-fixed-dim transition-all flex items-center justify-center gap-2 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+<span>Tanya Tutor FlipBot 🤖</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 4: INSPIRATIONAL PROGRAMMER FACT FOOTER -->
+<section class="rounded-xl bg-surface-container p-6 shadow-sm">
+<div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+<div class="w-12 h-12 rounded-full bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">menu_book</span>
+</div>
+<div class="space-y-1">
+<p class="font-headline-sm text-[16px] text-on-surface font-bold">
+            Tahukah Kamu? Asal-Usul Istilah "Bug" 🐞
+          </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-4xl">
+            Kata <em>'Bug'</em> (serangga) pertama kali dipopulerkan oleh <strong>Grace Hopper</strong> pada tahun 1947, ketika seekor ngengat sungguhan terselip di dalam mesin komputer raksasa Harvard Mark II! Jadi, saat kodemu mengalami bug hari ini, kamu sedang meneruskan tradisi detektif para programmer terhebat di dunia!
+          </p>
+</div>
+</div>
+</section>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest mt-16 shadow-[0_-1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-12 flex flex-col md:flex-row items-center justify-between gap-6"><div class="flex items-center gap-3"><img alt="CogniFlip Logo" class="h-6 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W5R35l1oL8idhw5T7I_ZljWdnQ3L1FUxryB-Ot9fI4aRmYWchya0NeTy3ECj-uYtmEEAMIBuWqSYFEt5AAESB9k7R3R-DSoP6oLyMp5Kj_Bsnow2d7X6mYdcGMBgXyAEcMfFD6VANYtyRuJ7yPoDEdQVZjVaG6Q4vtn4BsuWlHqyNOeuXSjatkwb9Vwh0IQ_upZF5jeR1A7sM0WsK6PYr1zmLIAkyzozg9SGq34U_zHvMZcMnQE-C0"/><span class="font-label-ui text-label-ui text-on-surface-variant">© 2025 CogniFlip. Ruang Eksplorasi &amp; Kreasi Kode Anak Bangsa.</span></div><div class="flex items-center gap-6"><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary transition-colors" data-path="bantuan-flipbot" href="#">Petunjuk FlipBot</a><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary transition-colors" data-path="panduan-guru" href="#">Panduan Guru &amp; Orang Tua</a><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary transition-colors" data-path="privasi-anak" href="#">Ruang Aman Anak</a></div></div></footer></body></html>

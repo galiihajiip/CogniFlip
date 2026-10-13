@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CogniFlip — AI Learning &amp; Code Lab</title><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"inverse-on-surface":"#eef0ff","on-secondary-fixed-variant":"#653e00","primary-fixed":"#e3dfff","tertiary-fixed":"#acedff","on-surface-variant":"#464554","primary-container":"#4338ca","on-tertiary":"#ffffff","on-surface":"#131b2e","on-error":"#ffffff","outline":"#777586","secondary-fixed":"#ffddb8","surface-container-low":"#f2f3ff","outline-variant":"#c7c4d7","surface-container-lowest":"#ffffff","primary-fixed-dim":"#c3c0ff","surface-container-highest":"#dae2fd","tertiary-fixed-dim":"#4cd7f6","inverse-primary":"#c3c0ff","secondary-fixed-dim":"#ffb95f","on-primary-fixed-variant":"#372abf","surface-bright":"#faf8ff","on-secondary-container":"#684000","surface-variant":"#dae2fd","surface":"#faf8ff","secondary-container":"#fea619","background":"#faf8ff","surface-tint":"#5148d7","tertiary":"#00414d","on-primary-container":"#c1beff","tertiary-container":"#005a6a","on-tertiary-fixed-variant":"#004e5c","on-secondary":"#ffffff","surface-container":"#eaedff","on-secondary-fixed":"#2a1700","surface-container-high":"#e2e7ff","inverse-surface":"#283044","on-primary-fixed":"#100069","on-background":"#131b2e","on-primary":"#ffffff","error":"#ba1a1a","on-tertiary-container":"#4ad5f4","surface-dim":"#d2d9f4","primary":"#2a14b4","on-error-container":"#93000a","secondary":"#855300","on-tertiary-fixed":"#001f26","error-container":"#ffdad6"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-md":"1rem",margin:"2rem","space-xs":"0.25rem","margin-mobile":"1rem","space-xl":"2.5rem","space-lg":"1.5rem",gutter:"1.5rem","gutter-mobile":"1rem","space-sm":"0.5rem"},fontFamily:{"body-lg":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-ui":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-code-sm":["JetBrains Mono"],"body-md":["Plus Jakarta Sans"],"label-code-lg":["JetBrains Mono"],"headline-lg":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"]},fontSize:{"body-lg":["18px",{lineHeight:"28px",fontWeight:"500"}],"display-hero-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"800"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}],"label-ui":["13px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"700"}],"body-sm":["14px",{lineHeight:"20px",fontWeight:"400"}],"label-code-sm":["13px",{lineHeight:"18px",fontWeight:"400"}],"body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-code-lg":["16px",{lineHeight:"24px",fontWeight:"500"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}],"display-hero":["44px",{lineHeight:"52px",letterSpacing:"-0.02em",fontWeight:"800"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"0em",fontWeight:"700"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.005em",fontWeight:"700"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 w-full max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6"><div class="flex items-center gap-8"><div class="flex items-center gap-3 shrink-0"><img alt="CogniFlip Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W5R35l1oL8idhw5T7I_ZljWdnQ3L1FUxryB-Ot9fI4aRmYWchya0NeTy3ECj-uYtmEEAMIBuWqSYFEt5AAESB9k7R3R-DSoP6oLyMp5Kj_Bsnow2d7X6mYdcGMBgXyAEcMfFD6VANYtyRuJ7yPoDEdQVZjVaG6Q4vtn4BsuWlHqyNOeuXSjatkwb9Vwh0IQ_upZF5jeR1A7sM0WsK6PYr1zmLIAkyzozg9SGq34U_zHvMZcMnQE-C0"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-none tracking-tight">CogniFlip</span><span class="font-label-ui text-label-ui text-on-surface-variant font-medium tracking-normal mt-0.5">AI Learning &amp; Code Lab</span></div></div><nav class="hidden xl:flex items-center gap-2" data-active-classes="bg-surface-container text-primary font-headline-sm"><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all inline-flex items-center gap-2" data-path="beranda" href="#">Beranda</a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all inline-flex items-center gap-2" data-path="belajar" href="#"><span>Belajar</span><span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui">Alur Utama</span></a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all inline-flex items-center gap-2" data-path="mini-ide" href="#"><span>Mini IDE</span><span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-code-sm text-label-code-sm">Lab Kode</span></a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="misi-debug" href="#">Misi Debug</a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="komunitas" href="#">Komunitas</a></nav></div><div class="flex items-center gap-4 shrink-0"><div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui shadow-sm"><span class="material-symbols-outlined text-[18px] text-secondary">bolt</span><span>120 XP</span></div><a class="hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-primary-container text-on-primary font-headline-sm text-label-ui shadow-[0_4px_0_0_#312e81] active:translate-y-0.5 active:shadow-[0_2px_0_0_#312e81] transition-all hover:bg-primary" data-path="belajar" href="#">Mulai Belajar</a><div class="flex items-center gap-2 pl-2"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="material-symbols-outlined text-on-surface-variant text-[20px] cursor-pointer hover:text-on-surface">expand_more</span></div></div></div></header><main class="w-full pt-20 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow Canvas Decor -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-24 right-10 w-96 h-96 bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-1/3 -left-20 w-80 h-80 bg-secondary-fixed/40 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="max-w-7xl mx-auto px-6 lg:px-12 py-8 space-y-8">
+<!-- Top Navigation & Stage Breadcrumb -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-ui text-label-ui transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Kembali ke Misi</span>
+</a>
+<span class="text-outline-variant font-body-sm text-body-sm">/</span>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-ui text-label-ui text-on-surface">Tahap 1: Jelaskan Konsep (Ajari FlipBot)</span>
+</div>
+</div>
+<!-- Attempt Counter & Safe Space Indicator -->
+<div class="flex items-center gap-3">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-primary text-[18px]">history</span>
+<span>Percobaan ke-1 • Tanpa Batas Waktu</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" title="Bantuan Audio / Text-to-Speech">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Main Header Banner & Score Hero Card -->
+<div class="rounded-3xl bg-surface-container-lowest p-6 lg:p-10 shadow-[0_4px_24px_rgba(15,23,42,0.05)] relative overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Left: Friendly Score & Encouraging Mindset Banner -->
+<div class="lg:col-span-7 space-y-4">
+<div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+<span>Hasil Penilaian Pemahaman Berhasil Dianalisis</span>
+</div>
+<h1 class="font-display-hero text-display-hero text-on-surface tracking-tight">
+              Keren, Guru Kecil! <br/>
+<span class="text-primary font-display-hero text-display-hero">FlipBot Makin Pintar!</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+              Penjelasanmu tentang <span class="font-headline-sm text-headline-sm text-on-surface">Perulangan (Loops)</span> sudah berhasil dipelajari oleh robotmu. Mari periksa pemahaman yang tersimpan!
+            </p>
+<!-- Growth Mindset Clarification Callout -->
+<div class="p-4 rounded-2xl bg-surface-container-low flex items-start gap-3.5">
+<span class="material-symbols-outlined text-secondary-container text-[24px] shrink-0 mt-0.5">sentiment_very_satisfied</span>
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+<strong class="font-headline-sm text-label-ui text-on-surface block mb-0.5">Catatan Ramah untuk Kamu:</strong>
+                Nilai ini <span class="text-primary font-headline-sm text-label-ui">merangkum usahamu pada percobaan ini</span>, bukan label kemampuanmu selamanya! Kamu selalu bisa menambah detail dan menaikkan skor ini kapan saja.
+              </p>
+</div>
+</div>
+<!-- Right: Visual Score Gauge & FlipBot Understanding Meter -->
+<div class="lg:col-span-5 flex flex-col items-center lg:items-end">
+<div class="w-full max-w-sm rounded-2xl bg-surface-container p-6 shadow-sm flex flex-col items-center text-center space-y-4">
+<!-- Circular Score Graphic -->
+<div class="relative w-36 h-36 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 120 120">
+<circle class="text-surface-container-highest" cx="60" cy="60" fill="transparent" r="50" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary-container" cx="60" cy="60" fill="transparent" r="50" stroke="currentColor" stroke-dasharray="314.15" stroke-dashoffset="78.53" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display-hero text-display-hero text-primary leading-none">75</span>
+<span class="font-label-ui text-label-ui text-on-surface-variant mt-0.5">dari 100</span>
+</div>
+</div>
+<!-- Robot Meter Delta -->
+<div class="w-full space-y-2 pt-2">
+<div class="flex items-center justify-between text-on-surface">
+<span class="font-headline-sm text-label-ui flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">smart_toy</span>
+                    Pemahaman FlipBot
+                  </span>
+<span class="font-headline-sm text-label-ui text-primary-container">75% <span class="text-secondary font-label-ui text-label-ui">(+20%)</span></span>
+</div>
+<!-- Progress bar -->
+<div class="w-full h-3 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-primary-container rounded-full w-3/4 transition-all duration-1000 ease-out"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">Sebelum evaluasi: 55% pemahaman memori</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FlipBot Interactive Mascot Reaction Box -->
+<div class="rounded-3xl bg-surface-container-low p-6 lg:p-8 flex flex-col md:flex-row items-center gap-6 shadow-sm">
+<!-- Robot Avatar -->
+<div class="relative shrink-0">
+<div class="w-24 h-24 rounded-2xl bg-surface-container-lowest shadow-md flex items-center justify-center relative overflow-hidden">
+<img class="w-20 h-20 object-contain rounded-xl" data-alt="Cute friendly rounded 3D blue robot mascot named FlipBot waving happily with bright expressive digital eyes and soft glowing antenna in a clean tactile learning lab style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzJyQaPRIFoDDdhsanhI28VUIAHAQvEzHZ-n3rv82Wd1w5Rm4H-fw_mJR6cDardlibkSkTsS0A6GphX_bexCu1sKXY48lUnTn-S_KCgcP3N1cPcx6_NJI1WyQkEFBAw6H6b1oFU_phc18c9qwQ9KehorivcxqAhlC37hfZxqOyZWsz60puTO9-4Dc0cRp4ewzdmX3IYBuUOQtrDhj--sPmJjD4zgZYBuXO3J1B-7mZaLq6Y1nwHQ"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px]">celebration</span>
+</div>
+</div>
+<!-- Speech Balloon -->
+<div class="relative flex-1 bg-surface-container-lowest rounded-2xl p-5 shadow-sm space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+              FlipBot Berkata:
+            </span>
+<span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-ui text-label-ui">
+              Paham 3 dari 4 Poin Utama
+            </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+            “Terima kasih banyak, Guru! Pemahamanku melonjak ke <strong>75%</strong>! Sekarang aku tahu kenapa aku harus melompat 5 kali dan tidak boleh terus-menerus tanpa henti. Tapi bantu aku 1 hal kecil lagi yuk biar memoriku makin mantap dan aku tahu kapan sakelar berhentiku aktif!”
+          </p>
+</div>
+</div>
+<!-- Core Pedagogical Feedback Triad: 3 Key Cards -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+<!-- 1. Sudah Kamu Pahami (Green / Cyan Spot On Card) -->
+<div class="rounded-3xl bg-surface-container-lowest p-6 shadow-sm flex flex-col justify-between space-y-4">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+                Sudah Kamu Pahami
+              </span>
+<span class="font-label-ui text-label-ui text-on-surface-variant font-medium">Langkah 1/3</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Paham Manfaat &amp; Jumlah Loop</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Kamu berhasil menjelaskan bahwa perulangan menghemat energi mengetik kode dan menyebutkan sasaran 5 lompatan dengan sangat tepat.
+            </p>
+<!-- Evidence / Direct Quote Card -->
+<div class="rounded-xl bg-surface-container-low p-3.5 space-y-1.5">
+<span class="font-label-ui text-label-ui text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">format_quote</span>
+                Kutipan dari Jawabanmu:
+              </span>
+<p class="font-label-code-sm text-label-code-sm text-on-surface italic bg-surface-container-lowest p-2.5 rounded-lg shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)]">
+                “FlipBot tahu harus berhenti melompat karena kita memasang batas angka '5 kali' di kode perulangannya supaya robot nggak capek ngetik baris berulang-ulang...”
+              </p>
+</div>
+</div>
+<div class="pt-2 flex items-center gap-2 text-tertiary font-headline-sm text-label-ui">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>Konsep Penampung Hitungan: Tepat!</span>
+</div>
+</div>
+<!-- 2. Ayo Perbaiki (Warm Amber Gap Card) -->
+<div class="rounded-3xl bg-surface-container-lowest p-6 shadow-sm flex flex-col justify-between space-y-4">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-secondary">tips_and_updates</span>
+                Ayo Perbaiki
+              </span>
+<span class="font-label-ui text-label-ui text-secondary font-bold">+25 Poin Terbuka</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Mekanisme Cek Berhenti</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Meskipun angka 5 disebut, FlipBot masih bingung: <em>bagaimana cara komputer memeriksa di setiap putaran bahwa angka 5 sudah tercapai?</em>
+</p>
+<div class="rounded-xl bg-secondary-fixed/30 p-3.5 space-y-2">
+<div class="flex items-center gap-1.5 text-on-secondary-fixed font-headline-sm text-label-ui">
+<span class="material-symbols-outlined text-[18px] text-secondary">help_center</span>
+                Bagian yang Masih Samar:
+              </div>
+<p class="font-body-sm text-body-sm text-on-surface leading-snug">
+                Kamu baru menulis: <em>"pas hitungan kelima selesai, robotnya langsung berhenti"</em>. Belum ada penjelasan tentang <strong>kondisi penguji</strong> atau evaluasi kebenaran (True/False) di setiap putaran.
+              </p>
+</div>
+</div>
+<div class="pt-2 flex items-center gap-2 text-secondary font-headline-sm text-label-ui">
+<span class="material-symbols-outlined text-[18px]">emergency_home</span>
+<span>Mencegah Robot Terjebak Loop Abadi!</span>
+</div>
+</div>
+<!-- 3. Coba Pikirkan (Soft Indigo Hint Card) -->
+<div class="rounded-3xl bg-surface-container-lowest p-6 shadow-sm flex flex-col justify-between space-y-4">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-primary">psychology</span>
+                Coba Pikirkan
+              </span>
+<span class="font-label-ui text-label-ui text-on-surface-variant font-medium">Bantuan Cerdas</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Pertanyaan Pemandu</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Bayangkan kamu menjadi wasit lomba lompat tali. Apa yang kamu lakukan setiap kali FlipBot mendarat di tanah?
+            </p>
+<!-- Friendly actionable prompt -->
+<div class="rounded-xl bg-surface-container-high p-4 space-y-2">
+<span class="font-headline-sm text-label-ui text-primary block">Tantangan Kalimat Baru:</span>
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+                “Bagaimana kalau robot menghitung lompatan mulai dari 1 sampai 5? Coba sebutkan kata <strong>'kondisi berhenti'</strong> atau ceritakan bagaimana komputer mengecek setiap putaran sebelum memutuskan untuk melompat lagi!”
+              </p>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded-xl bg-surface-container text-primary font-headline-sm text-label-ui hover:bg-surface-container-high transition-colors text-center inline-flex items-center justify-center gap-2" onclick="document.getElementById('perbaikan-section').scrollIntoView({behavior: 'smooth'})">
+<span>Pakai Petunjuk Ini</span>
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+</button>
+</div>
+</div>
+<!-- Main Two-Column Layout: Rubric Breakdown & Code Sidebar -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Transparent Rubric Breakdown (8 cols) -->
+<div class="lg:col-span-8 space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Transparansi Rubrik Penilaian</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">FlipBot menilai berdasarkan 3 kriteria logika terstruktur.</p>
+</div>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-code-sm text-label-code-sm">
+              Rubrik Terbuka v2.4
+            </span>
+</div>
+<!-- Criteria Cards -->
+<div class="space-y-4">
+<!-- Rubric 1: Full Score -->
+<div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm space-y-3">
+<div class="flex items-start justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-label-ui text-label-ui">1</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Memahami Tujuan Pengulangan (Loop)</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Menjelaskan alasan loop digunakan ketimbang menulis kode identik berkali-kali.</p>
+</div>
+<div class="text-right shrink-0">
+<span class="inline-block px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-headline-sm text-label-ui">
+                    30 / 30 Skor
+                  </span>
+</div>
+</div>
+<div class="pt-2 p-3 rounded-xl bg-surface-container-low space-y-1">
+<span class="font-label-ui text-label-ui text-tertiary block">Catatan Analisis FlipBot:</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                  Sangat jelas! Kamu menggunakan kata kunci "nggak capek ngetik baris berulang-ulang" yang membuktikan kamu paham prinsip otomasi kode.
+                </p>
+</div>
+</div>
+<!-- Rubric 2: Partial Score -->
+<div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm space-y-3">
+<div class="flex items-start justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-ui text-label-ui">2</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Menjelaskan Batas Pengulangan (Kondisi Berhenti)</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Menyebutkan batas hitungan dan bagaimana komputer tahu saatnya berhenti.</p>
+</div>
+<div class="text-right shrink-0">
+<span class="inline-block px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-headline-sm text-label-ui">
+                    25 / 35 Skor
+                  </span>
+</div>
+</div>
+<div class="pt-2 p-3 rounded-xl bg-secondary-fixed/20 space-y-1">
+<span class="font-label-ui text-label-ui text-secondary block">Catatan Analisis FlipBot:</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                  Kamu sudah tepat menyebutkan angka 5 kali. Agar nilaimu penuh (+10 poin), jelaskan bagaimana komputer memeriksa angka hitungan di setiap putaran sebelum berhenti melompat.
+                </p>
+</div>
+</div>
+<!-- Rubric 3: Partial Score -->
+<div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm space-y-3">
+<div class="flex items-start justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center font-label-ui text-label-ui">3</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Mengaitkan Logika dengan Baris Kode Nyata</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Menghubungkan kata-kata penjelasan dengan sintaks instruksi program.</p>
+</div>
+<div class="text-right shrink-0">
+<span class="inline-block px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-headline-sm text-label-ui">
+                    20 / 35 Skor
+                  </span>
+</div>
+</div>
+<div class="pt-2 p-3 rounded-xl bg-surface-container space-y-1">
+<span class="font-label-ui text-label-ui text-primary block">Catatan Analisis FlipBot:</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                  Kaitan dengan perintah `ulang 5 kali` sudah diidentifikasi. Cobalah gunakan analogi "sakelar otomatis" atau "penghitung langkah" untuk menyempurnakan jawabanmu!
+                </p>
+</div>
+</div>
+</div>
+<!-- Bottom Action Flow CTAs (ST-08 Pathway) -->
+<div class="pt-4 rounded-3xl bg-surface-container-lowest p-6 lg:p-8 shadow-sm space-y-6" id="perbaikan-section">
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Siap Meraih Skor 100/100?</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cukup tambahkan 1-2 kalimat tentang cara komputer mengecek batas putaran.</p>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui shrink-0">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+<span>Peluang +25 Poin</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<!-- Primary CTA (Tactile 3D Button) -->
+<a class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-primary-container text-on-primary font-headline-sm text-body-md shadow-[0_4px_0_0_#312e81] active:translate-y-0.5 active:shadow-[0_2px_0_0_#312e81] transition-all hover:bg-primary text-center" href="#">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+<span>Perbaiki Penjelasan Sekarang (+25 Skor)</span>
+</a>
+<!-- Secondary CTA -->
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-surface-container text-on-surface font-headline-sm text-body-md hover:bg-surface-container-high transition-colors text-center" href="#">
+<span>Lanjut ke Uji Prediksi Output</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Right: Code Context, Rewards & Child Safety Note (4 cols) -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Code Reference Box with Highlighted Focus Line -->
+<div class="rounded-3xl bg-surface-container-lowest p-6 shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-label-ui text-label-ui text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">code</span>
+                Kode Percobaan Misi
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">editor_misi.py</span>
+</div>
+<!-- Terminal-like High-Contrast Code Snippet -->
+<div class="rounded-2xl bg-inverse-surface p-4 text-inverse-on-surface font-label-code-sm text-label-code-sm space-y-1 overflow-x-auto shadow-inner">
+<div class="text-outline-variant select-none"># Program Lompat FlipBot</div>
+<div class="flex items-center gap-3">
+<span class="text-outline-variant select-none w-4 text-right">1</span>
+<span class="text-tertiary-fixed-dim">import</span>
+<span>flipbot_lab</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-outline-variant select-none w-4 text-right">2</span>
+<span class="opacity-50"># Titik fokus rubrik kriteria 2 &amp; 3:</span>
+</div>
+<!-- Highlighted Line with Amber Accent -->
+<div class="flex items-center gap-3 bg-secondary-container/20 -mx-4 px-4 py-1.5 rounded-lg border-l-4 border-secondary-container">
+<span class="text-secondary-fixed select-none w-4 text-right">3</span>
+<span class="text-secondary-fixed-dim font-bold">ulang</span>
+<span class="text-tertiary-fixed font-bold">5 kali</span>
+<span>:</span>
+</div>
+<div class="flex items-center gap-3 pl-6">
+<span class="text-outline-variant select-none w-4 text-right">4</span>
+<span class="text-inverse-on-surface">flipbot.</span><span class="text-primary-fixed-dim">lompat</span><span>()</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-outline-variant select-none w-4 text-right">5</span>
+<span class="text-inverse-on-surface">flipbot.</span><span class="text-primary-fixed-dim">senyum</span><span>()</span>
+</div>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">pin</span>
+<span>Baris 3 adalah letak <strong>penghitung putaran</strong>. Robot memeriksa kondisi ini sebelum setiap lompatan di baris 4.</span>
+</div>
+</div>
+<!-- Reward & Gamification Badges Earned Card -->
+<div class="rounded-3xl bg-surface-container-lowest p-6 shadow-sm space-y-4">
+<span class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">military_tech</span>
+              Hadiah Percobaan Ini
+            </span>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 rounded-xl bg-secondary-fixed/40">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[22px]">bolt</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-label-ui text-on-surface">Bonus Eksplorasi</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Poin Pengajar Cilik</p>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary">+35 XP</span>
+</div>
+<!-- Badge Progress -->
+<div class="p-3.5 rounded-xl bg-surface-container-low space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">school</span>
+<span class="font-headline-sm text-label-ui text-on-surface">Lencana: Guru Logika</span>
+</div>
+<span class="font-label-ui text-label-ui text-primary">2 / 3 Misi</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-primary-container rounded-full w-2/3"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">Tinggal 1 penjelasan lagi untuk membuka lencana emas!</p>
+</div>
+</div>
+</div>
+<!-- Child Safety & Transparent Pedagogy Guarantee -->
+<div class="rounded-3xl bg-surface-container p-6 space-y-3">
+<div class="flex items-center gap-2 text-primary font-headline-sm text-label-ui">
+<span class="material-symbols-outlined text-[20px]">security</span>
+<span>Ruang Aman &amp; Adil untuk Anak</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+<strong>Rubrik Terbuka:</strong> Penilaian FlipBot dihasilkan dari kecocokan pemahaman konsep secara transparan, bukan skor rahasia atau algoritma menghukum. Siswa memiliki kesempatan tak terbatas untuk memperbaiki penjelasannya kapan saja.
+            </p>
+<div class="pt-1 flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">lock</span>
+<span>Privasi data penjelasan terlindungi &amp; ramah keluarga.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest mt-16 shadow-[0_-1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-12 flex flex-col md:flex-row items-center justify-between gap-6"><div class="flex items-center gap-3"><img alt="CogniFlip Logo" class="h-6 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W5R35l1oL8idhw5T7I_ZljWdnQ3L1FUxryB-Ot9fI4aRmYWchya0NeTy3ECj-uYtmEEAMIBuWqSYFEt5AAESB9k7R3R-DSoP6oLyMp5Kj_Bsnow2d7X6mYdcGMBgXyAEcMfFD6VANYtyRuJ7yPoDEdQVZjVaG6Q4vtn4BsuWlHqyNOeuXSjatkwb9Vwh0IQ_upZF5jeR1A7sM0WsK6PYr1zmLIAkyzozg9SGq34U_zHvMZcMnQE-C0"/><span class="font-label-ui text-label-ui text-on-surface-variant">© 2025 CogniFlip. Ruang Eksplorasi &amp; Kreasi Kode Anak Bangsa.</span></div><div class="flex items-center gap-6"><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary transition-colors" data-path="bantuan-flipbot" href="#">Petunjuk FlipBot</a><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary transition-colors" data-path="panduan-guru" href="#">Panduan Guru &amp; Orang Tua</a><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary transition-colors" data-path="privasi-anak" href="#">Ruang Aman Anak</a></div></div></footer></body></html>

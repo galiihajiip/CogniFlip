@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { metadata } from "@/app/layout";
+import { siteMetadata as metadata } from "@/app/site-metadata";
 
-// Toolchain smoke test: the "@/" alias resolves and app TSX modules load.
+// Toolchain smoke test: the "@/" alias resolves and app modules load
+// (the layout itself uses next/font, which only runs inside Next.js).
 // It checks the setup only, not product behavior.
 describe("test setup", () => {
-  it("imports the root layout through the @/ alias", () => {
+  it("imports the site metadata through the @/ alias", () => {
     expect(metadata.title).toMatchObject({ default: "CogniFlip" });
   });
 });

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-container": "#c1beff", "tertiary": "#00414d", "surface-container-high": "#e2e7ff", "on-primary-fixed": "#100069", "surface-tint": "#5148d7", "tertiary-container": "#005a6a", "tertiary-fixed": "#acedff", "surface-container": "#eaedff", "primary-container": "#4338ca", "inverse-surface": "#283044", "outline": "#777586", "on-primary-fixed-variant": "#372abf", "secondary": "#855300", "surface-variant": "#dae2fd", "surface-container-highest": "#dae2fd", "secondary-fixed": "#ffddb8", "primary": "#2a14b4", "on-tertiary-fixed": "#001f26", "primary-fixed-dim": "#c3c0ff", "tertiary-fixed-dim": "#4cd7f6", "inverse-primary": "#c3c0ff", "on-tertiary-container": "#4ad5f4", "on-secondary-fixed-variant": "#653e00", "error-container": "#ffdad6", "on-primary": "#ffffff", "on-secondary-container": "#684000", "on-tertiary-fixed-variant": "#004e5c", "error": "#ba1a1a", "on-secondary-fixed": "#2a1700", "on-tertiary": "#ffffff", "secondary-container": "#fea619", "surface-dim": "#d2d9f4", "on-secondary": "#ffffff", "secondary-fixed-dim": "#ffb95f", "on-error-container": "#93000a", "on-background": "#131b2e", "surface-container-low": "#f2f3ff", "surface": "#faf8ff", "inverse-on-surface": "#eef0ff", "surface-container-lowest": "#ffffff", "background": "#faf8ff", "on-error": "#ffffff", "primary-fixed": "#e3dfff", "on-surface": "#131b2e", "on-surface-variant": "#464554", "outline-variant": "#c7c4d7", "surface-bright": "#faf8ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-xl": "2.5rem", "space-xs": "0.25rem", "gutter": "1.5rem", "space-md": "1rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "gutter-mobile": "1rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "label-code-sm": [ "JetBrains Mono" ], "label-code-lg": [ "JetBrains Mono" ], "headline-md": [ "Plus Jakarta Sans" ], "label-ui": [ "Plus Jakarta Sans" ], "body-md": [ "Plus Jakarta Sans" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "body-sm": [ "Plus Jakarta Sans" ], "display-hero": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "display-hero-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "label-code-sm": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "label-code-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "500" } ], "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.005em", "fontWeight": "700" } ], "label-ui": [ "13px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" } ], "body-md": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-lg-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "0em", "fontWeight": "700" } ], "body-sm": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "display-hero": [ "44px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" } ], "body-lg": [ "18px", { "lineHeight": "28px", "fontWeight": "500" } ], "display-hero-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 w-full px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center shadow-[0_3px_0_0_#312e81]"><span class="material-symbols-outlined text-on-primary text-[24px]">smart_toy</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-primary leading-none">CogniFlip</span><span class="font-label-ui text-label-ui text-secondary-container uppercase tracking-wider">Kids Code Lab</span></div></div><div class="hidden xl:flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-low"><span class="material-symbols-outlined text-[16px] text-tertiary-container">terminal</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant font-medium">Misi 08:</span><span class="font-body-sm text-body-sm text-on-surface font-semibold">Nested Conditions (Percabangan Bersarang)</span></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1.5 rounded-2xl bg-surface-container-low" data-active-classes="bg-primary-container text-on-primary font-bold rounded-xl"><a class="px-space-md py-space-xs rounded-xl font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="beranda" href="#">Beranda</a><a class="px-space-md py-space-xs rounded-xl font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="belajar" href="#">Belajar</a><a class="px-space-md py-space-xs rounded-xl font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="misi-08" href="#">Misi 08</a><a class="px-space-md py-space-xs rounded-xl font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="mini-ide" href="#">Mini IDE</a><a class="px-space-md py-space-xs rounded-xl font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="lab-kode" href="#">Lab Kode</a><a class="px-space-md py-space-xs rounded-xl font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="komunitas" href="#">Komunitas</a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-space-xs"><div class="flex items-center gap-1.5 px-space-md py-space-xs rounded-full bg-secondary-fixed text-on-secondary-fixed"><span class="material-symbols-outlined text-[18px] text-secondary">bolt</span><span class="font-label-ui text-label-ui font-bold">820 XP</span></div><div class="flex items-center gap-1.5 px-space-md py-space-xs rounded-full bg-tertiary-fixed text-on-tertiary-fixed"><span class="material-symbols-outlined text-[18px] text-tertiary">military_tech</span><span class="font-label-ui text-label-ui font-bold">Lv. 7 Koder</span></div><div class="flex items-center gap-1.5 px-space-md py-space-xs rounded-full bg-error-container text-on-error-container"><span class="material-symbols-outlined text-[18px] text-error">local_fire_department</span><span class="font-label-ui text-label-ui font-bold">6 Hari</span></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-280px)]"><div class="flex flex-col w-full">
+<!-- TOP CONTEXT BAR: Breadcrumbs & Gamification Stats -->
+<div class="w-full px-margin py-space-sm bg-surface-container-low">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<!-- Breadcrumb trail -->
+<nav aria-label="Jalur Navigasi" class="flex items-center flex-wrap gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="hover:text-primary transition-colors cursor-pointer">Beranda</span>
+<span class="material-symbols-outlined text-outline text-[16px]">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Belajar</span>
+<span class="material-symbols-outlined text-outline text-[16px]">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Alur Logika &amp; Kondisi</span>
+<span class="material-symbols-outlined text-outline text-[16px]">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Misi 08 (Nested If)</span>
+<span class="material-symbols-outlined text-outline text-[16px]">chevron_right</span>
+<span class="font-headline-sm text-on-surface font-semibold">ST-10: Tantangan Mini-IDE</span>
+</nav>
+<!-- Player XP, Level, and Target Badges -->
+<div class="flex items-center flex-wrap gap-space-xs">
+<div class="flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container-highest text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">school</span>
+<span class="font-label-ui text-label-ui">Level 7 Koder Cilik</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-md py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[16px] text-secondary">bolt</span>
+<span class="font-label-ui text-label-ui font-bold">895 XP</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-md py-1 rounded-full bg-primary-container text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">ads_click</span>
+<span class="font-label-ui text-label-ui">+100 XP Live Coding 🎯</span>
+</div>
+<div class="hidden lg:flex items-center gap-1.5 px-space-md py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[16px] text-tertiary">military_tech</span>
+<span class="font-label-ui text-label-ui">Master Arsitek Labirin Laser</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 3-STAGE PROGRESS STEPPER (Constructionist Guided Learning Path) -->
+<section class="w-full px-margin pt-space-lg pb-space-sm bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Stage 1 (Done) -->
+<div class="flex items-center gap-space-md p-space-md rounded-2xl bg-surface-container-lowest shadow-sm">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary text-[24px]">verified</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui uppercase text-tertiary tracking-wide font-bold">Tahap 1</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-tertiary font-label-ui text-[11px] font-bold">Selesai ✓</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Teach the Robot</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Metode Feynman • Skor 96/100</span>
+</div>
+</div>
+<!-- Stage 2 (Done) -->
+<div class="flex items-center gap-space-md p-space-md rounded-2xl bg-surface-container-lowest shadow-sm">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary text-[24px]">task_alt</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui uppercase text-tertiary tracking-wide font-bold">Tahap 2</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-tertiary font-label-ui text-[11px] font-bold">Selesai ✓</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Simulasi POE Labirin Laser</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Prediksi &amp; Eksperimen (3/3 Lolos)</span>
+</div>
+</div>
+<!-- Stage 3 (ACTIVE) -->
+<div class="flex items-center gap-space-md p-space-md rounded-2xl bg-primary-container text-on-primary shadow-md">
+<div class="w-12 h-12 rounded-xl bg-on-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-primary-container text-[24px]">terminal</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-label-ui uppercase text-tertiary-fixed tracking-wide font-bold">Tahap 3 • AKTIF</span>
+<span class="inline-flex w-2.5 h-2.5 rounded-full bg-secondary-container animate-pulse"></span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-primary truncate">Mini-IDE Live Coding</span>
+<span class="font-body-sm text-body-sm text-on-primary-container">Indentasi PEP-8 &amp; Nested If</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CHALLENGE BRIEFING BANNER -->
+<section class="w-full px-margin py-space-md">
+<div class="max-w-7xl mx-auto p-space-lg rounded-2xl bg-surface-container-low shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="space-y-space-xs max-w-3xl">
+<div class="flex items-center flex-wrap gap-space-xs">
+<span class="px-space-sm py-0.5 rounded-lg bg-surface-container-highest text-primary font-label-ui text-label-ui">Tantangan Final Misi 08</span>
+<span class="px-space-sm py-0.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui">Sintaks Python 3.12</span>
+<span class="px-space-sm py-0.5 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed font-label-ui text-label-ui">4 Test Cases Otomatis</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">
+          Kendalikan Prisma Foton dengan Nested If! 💻⚡🎯
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Lengkapi kode percabangan bersarang agar <strong class="text-on-surface">FlipRover</strong> memeriksa sensor laser terlebih dahulu. Jika laser menyala (<code class="font-label-code-sm text-primary bg-surface-container px-1 py-0.5 rounded">True</code>), periksa warna spektrumnya untuk menempatkan prisma foton yang serasi (<code class="font-label-code-sm text-primary bg-surface-container px-1 py-0.5 rounded">Merah</code> vs <code class="font-label-code-sm text-primary bg-surface-container px-1 py-0.5 rounded">Biru</code>)!
+        </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="px-space-md py-space-sm rounded-xl bg-surface-container-highest text-primary hover:bg-surface-container transition-all flex items-center gap-2 font-label-ui text-label-ui cursor-pointer" id="btn-show-pedagogy">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+<span>Konsep Lemari Ganda</span>
+</button>
+<button class="px-space-md py-space-sm rounded-xl bg-surface-container-lowest text-on-surface hover:text-error transition-all shadow-sm flex items-center gap-2 font-label-ui text-label-ui cursor-pointer" id="btn-reset-code">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>Reset Kode</span>
+</button>
+</div>
+</div>
+</section>
+<!-- MAIN WORKSPACE: Mini-IDE Split-Screen Experience -->
+<main class="w-full px-margin pb-space-xl">
+<div class="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: Mini IDE & Visual Block Triggers (7 cols) -->
+<section class="xl:col-span-7 flex flex-col gap-space-md w-full">
+<!-- Editor Card Container -->
+<div class="rounded-2xl overflow-hidden shadow-lg bg-inverse-surface text-inverse-on-surface">
+<!-- Editor Titlebar & Tab Strip -->
+<div class="px-space-md py-space-sm bg-inverse-surface flex items-center justify-between gap-space-md border-b border-surface-variant/10">
+<div class="flex items-center gap-space-xs">
+<div class="flex items-center gap-1.5 px-space-md py-1.5 rounded-t-xl bg-surface-container-lowest/10 text-on-primary">
+<span class="material-symbols-outlined text-secondary-container text-[18px]">data_object</span>
+<span class="font-label-code-sm text-label-code-sm font-semibold tracking-wide">navigasi_laser.py</span>
+<span class="w-2 h-2 rounded-full bg-secondary-container ml-1"></span>
+</div>
+<span class="hidden sm:inline font-label-code-sm text-label-code-sm text-outline-variant">Python 3.12 (PEP 8)</span>
+</div>
+<div class="flex items-center gap-space-xs text-outline-variant">
+<button class="px-space-sm py-1 rounded-lg hover:bg-surface-container-lowest/10 text-tertiary-fixed font-label-code-sm text-label-code-sm flex items-center gap-1" id="btn-toggle-indent" title="Bantuan Panduan Indentasi">
+<span class="material-symbols-outlined text-[16px]">format_indent_increase</span>
+<span class="hidden md:inline">Panduan Indentasi</span>
+</button>
+<div class="h-4 w-px bg-outline-variant/30"></div>
+<span class="font-label-code-sm text-label-code-sm text-tertiary-fixed-dim">UTF-8</span>
+</div>
+</div>
+<!-- Code Workspace with Line Numbers and Indentation Rulers -->
+<div class="relative p-space-md font-label-code-lg text-label-code-lg bg-inverse-surface text-inverse-on-surface overflow-x-auto select-none font-mono">
+<!-- Indent Visualizer Overlays (Soft guidelines) -->
+<div class="absolute inset-0 pointer-events-none pl-[4.5rem]" id="indent-guides">
+<div class="h-full w-px bg-outline/20 absolute left-[5.5rem]"></div>
+<div class="h-full w-px bg-outline/20 absolute left-[9.5rem]"></div>
+</div>
+<!-- Code Lines with Syntax Coloring -->
+<div class="space-y-1 relative z-10 leading-relaxed">
+<div class="flex items-center text-outline-variant">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">1</span>
+<span class="text-outline-variant italic"># Misi 08: Modifikasi Logika Percabangan Bersarang</span>
+</div>
+<div class="flex items-center">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">2</span>
+<span><span class="text-tertiary-fixed font-bold">def</span> <span class="text-secondary-fixed">kendalikan_rover</span>(ada_laser, warna_laser):</span>
+</div>
+<div class="flex items-center text-outline-variant">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">3</span>
+<span class="text-outline-variant italic pl-6"># Level 1 Indentasi (4 Spasi): Deteksi bahaya foton</span>
+</div>
+<div class="flex items-center bg-primary-container/20 py-0.5 rounded-r">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">4</span>
+<span class="pl-6"><span class="text-tertiary-fixed font-bold">if</span> ada_laser == <span class="text-secondary-container font-semibold">True</span>:</span>
+<span class="ml-3 px-1.5 py-0.2 rounded bg-primary-container/40 text-tertiary-fixed text-[11px] font-label-ui">Kondisi Luar</span>
+</div>
+<div class="flex items-center text-outline-variant">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">5</span>
+<span class="text-outline-variant italic pl-12"># Level 2 Indentasi (8 Spasi): Cek spektrum warna</span>
+</div>
+<!-- Editable interactive block 1 -->
+<div class="flex items-center group py-0.5 rounded-r hover:bg-surface-container-highest/10 transition-colors">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">6</span>
+<span class="pl-12">
+<span class="text-tertiary-fixed font-bold">if</span> warna_laser == <span class="text-secondary-fixed-dim">"Merah"</span>:
+                </span>
+<span class="ml-2 text-[10px] text-tertiary-fixed-dim px-1 rounded bg-surface-container-lowest/10">Anak Percabangan</span>
+</div>
+<div class="flex items-center py-0.5">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">7</span>
+<span class="pl-20 text-on-tertiary-container">rover.<span class="text-tertiary-fixed">pasang_prisma</span>(<span class="text-secondary-fixed-dim">"Merah"</span>)</span>
+</div>
+<!-- Editable interactive block 2 -->
+<div class="flex items-center py-0.5">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">8</span>
+<span class="pl-12">
+<span class="text-tertiary-fixed font-bold">elif</span> warna_laser == <span class="text-secondary-fixed-dim">"Biru"</span>:
+                </span>
+</div>
+<div class="flex items-center py-0.5">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">9</span>
+<span class="pl-20 text-on-tertiary-container">rover.<span class="text-tertiary-fixed">pasang_prisma</span>(<span class="text-secondary-fixed-dim">"Biru"</span>)</span>
+</div>
+<div class="flex items-center py-0.5">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">10</span>
+<span class="pl-12"><span class="text-tertiary-fixed font-bold">else</span>:</span>
+</div>
+<div class="flex items-center py-0.5">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">11</span>
+<span class="pl-20 text-error-container">rover.<span class="text-on-error-container">aktifkan_perisai_darurat</span>()</span>
+</div>
+<div class="flex items-center py-0.5">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">12</span>
+<span class="pl-6"><span class="text-tertiary-fixed font-bold">else</span>:</span>
+</div>
+<div class="flex items-center text-outline-variant">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">13</span>
+<span class="text-outline-variant italic pl-12"># Jalan pintas jika lorong steril bebas laser foton</span>
+</div>
+<div class="flex items-center py-0.5 bg-surface-container-highest/10 rounded-r">
+<span class="w-10 text-right pr-4 text-outline select-none font-label-code-sm text-label-code-sm">14</span>
+<span class="pl-12 text-tertiary-fixed-dim font-bold">rover.<span class="text-tertiary-fixed">maju_kencang</span>()</span>
+<span class="ml-2 inline-block w-2 h-4 bg-tertiary-fixed animate-pulse"></span>
+</div>
+</div>
+</div>
+<!-- Indentation Status & PEP 8 Helper Banner -->
+<div class="px-space-md py-space-sm bg-surface-container-lowest/5 flex items-center justify-between text-outline-variant font-label-code-sm text-label-code-sm">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center gap-1 text-tertiary-fixed">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                PEP-8: 4 Spasi per Tingkat Indentasi
+              </span>
+</div>
+<div class="flex items-center gap-space-xs text-xs">
+<span class="text-outline">Ln 14, Col 25</span>
+<span>•</span>
+<span class="text-outline">Spasi: 4 / 8</span>
+</div>
+</div>
+</div>
+<!-- Quick Insertion Palette / Kid-Friendly Code Chips -->
+<div class="p-space-md rounded-2xl bg-surface-container-low shadow-sm space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-ui text-label-ui text-on-surface uppercase tracking-wider flex items-center gap-1.5 font-bold">
+<span class="material-symbols-outlined text-primary text-[18px]">drag_pan</span>
+              Palet Blok Sintaks Cepat (Ketuk untuk Pasang)
+            </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Klik untuk menyalin / menyisipkan logika</span>
+</div>
+<div class="flex flex-wrap gap-space-xs">
+<button class="px-space-md py-space-xs rounded-xl bg-surface-container-lowest text-primary font-label-code-sm text-label-code-sm shadow-sm hover:bg-surface-container-high transition-all flex items-center gap-1.5 active:translate-y-0.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">add_box</span>
+<code>if ada_laser == True:</code>
+</button>
+<button class="px-space-md py-space-xs rounded-xl bg-surface-container-lowest text-primary font-label-code-sm text-label-code-sm shadow-sm hover:bg-surface-container-high transition-all flex items-center gap-1.5 active:translate-y-0.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">add_box</span>
+<code>warna_laser == "Merah"</code>
+</button>
+<button class="px-space-md py-space-xs rounded-xl bg-surface-container-lowest text-primary font-label-code-sm text-label-code-sm shadow-sm hover:bg-surface-container-high transition-all flex items-center gap-1.5 active:translate-y-0.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">add_box</span>
+<code>rover.pasang_prisma("Biru")</code>
+</button>
+<button class="px-space-md py-space-xs rounded-xl bg-surface-container-lowest text-primary font-label-code-sm text-label-code-sm shadow-sm hover:bg-surface-container-high transition-all flex items-center gap-1.5 active:translate-y-0.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">add_box</span>
+<code>else: rover.maju_kencang()</code>
+</button>
+<button class="px-space-md py-space-xs rounded-xl bg-secondary-fixed text-on-secondary-fixed font-label-code-sm text-label-code-sm shadow-sm hover:bg-secondary-fixed-dim transition-all flex items-center gap-1.5 active:translate-y-0.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">keyboard_tab</span>
+<code>Indentasi 4 Spasi</code>
+</button>
+</div>
+</div>
+<!-- Primary Execution Action Bar -->
+<div class="flex flex-col sm:flex-row items-center gap-space-sm pt-space-xs">
+<!-- Big Run Button with Tactile Bottom Bevel -->
+<button class="w-full sm:flex-1 py-3.5 px-space-lg rounded-2xl bg-primary-container text-on-primary font-label-ui text-label-ui font-extrabold flex items-center justify-center gap- space-sm shadow-[0_4px_0_0_#312e81] hover:brightness-110 active:translate-y-1 active:shadow-[0_1px_0_0_#312e81] transition-all cursor-pointer" id="btn-run-code">
+<span class="material-symbols-outlined text-[24px]">play_circle</span>
+<span class="tracking-wide">JALANKAN KODE &amp; UJI SKENARIO (+100 XP)</span>
+</button>
+<!-- Quick Scenario Button -->
+<button class="w-full sm:w-auto py-3.5 px-space-md rounded-2xl bg-surface-container-highest text-primary font-label-ui text-label-ui font-bold hover:bg-surface-container transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm" id="btn-test-single">
+<span class="material-symbols-outlined text-[20px]">troubleshoot</span>
+<span>Uji Cepat (1 Skenario)</span>
+</button>
+<!-- FlipBot Hint Button -->
+<button class="w-full sm:w-auto py-3.5 px-space-md rounded-2xl bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui font-bold hover:bg-secondary-fixed-dim transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm" id="btn-hint">
+<span class="material-symbols-outlined text-[20px] text-secondary">tips_and_updates</span>
+<span>Petunjuk FlipBot</span>
+</button>
+</div>
+</section>
+<!-- RIGHT COLUMN: Visual Simulator, Test Results, & AI Mascot Companion (5 cols) -->
+<section class="xl:col-span-5 flex flex-col gap-space-md w-full">
+<!-- Interactive 2D Simulator Preview Canvas -->
+<div class="rounded-2xl bg-surface-container-lowest p-space-md shadow-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Simulator Labirin Laser</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-low px-2 py-1 rounded-xl text-xs font-label-ui">
+<span class="text-on-surface-variant">Kecepatan:</span>
+<button class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary font-bold">1x</button>
+<button class="px-1.5 py-0.5 rounded text-on-surface-variant hover:bg-surface-container-high">2x</button>
+</div>
+</div>
+<!-- Simulator Graphic Area (Grid Arena) -->
+<div class="relative w-full h-64 rounded-xl bg-inverse-surface overflow-hidden flex flex-col justify-between p-space-md">
+<!-- Simulated Grid Backdrop (SVG Pattern) -->
+<svg class="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="32" id="grid" patternunits="userSpaceOnUse" width="32">
+<path class="text-outline-variant" d="M 32 0 L 0 0 0 32" fill="none" stroke="currentColor" stroke-width="0.8"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid)" height="100%" width="100%"></rect>
+</svg>
+<!-- Laser Emitter Ray Animation -->
+<div class="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex items-center px-6 pointer-events-none">
+<!-- Emitter Cannon -->
+<div class="w-8 h-12 bg-surface-container-high rounded-r-lg shadow-md flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-error text-[20px]">flash_on</span>
+</div>
+<!-- Active Laser Beam (Red wavelength 650nm) -->
+<div class="flex-1 h-3 bg-error shadow-[0_0_16px_#ba1a1a] relative" id="laser-beam">
+<div class="absolute inset-0 bg-on-error/60 animate-pulse"></div>
+</div>
+<!-- FlipRover with Prism Mount -->
+<div class="relative shrink-0 flex items-center" id="rover-avatar">
+<!-- Mounted Prism Ring (Slot) -->
+<div class="w-6 h-10 -mr-2 rounded-lg bg-tertiary-fixed-dim/80 backdrop-blur-sm flex items-center justify-center z-10 shadow-lg">
+<span class="material-symbols-outlined text-tertiary text-[16px]">change_history</span>
+</div>
+<!-- Rover Body -->
+<div class="w-16 h-14 bg-primary-container rounded-2xl flex flex-col items-center justify-center text-on-primary shadow-lg border border-primary-fixed/20">
+<span class="material-symbols-outlined text-[24px]">smart_toy</span>
+<span class="font-label-ui text-[10px] uppercase font-bold tracking-wider">Rover-08</span>
+</div>
+</div>
+</div>
+<!-- Arena HUD Overlay -->
+<div class="relative z-10 flex items-center justify-between text-xs font-label-code-sm text-inverse-on-surface">
+<span class="px-2 py-1 rounded bg-black/40 backdrop-blur flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>Sensor Foton: <strong class="text-tertiary-fixed">AKTIF (Merah 650nm)</strong></span>
+</span>
+<span class="px-2 py-1 rounded bg-black/40 backdrop-blur text-tertiary-fixed">
+                Status: Menunggu Uji
+              </span>
+</div>
+<div class="relative z-10 flex items-center justify-between text-xs font-label-code-sm text-inverse-on-surface">
+<span class="px-2 py-1 rounded bg-black/40 backdrop-blur">Posisi: Sektor [X: 14, Y: 08]</span>
+<span class="px-2 py-1 rounded bg-black/40 backdrop-blur text-secondary-container">Perisai: Terbuka 90°</span>
+</div>
+</div>
+<!-- Sensor Telemetry Summary Pills -->
+<div class="grid grid-cols-3 gap-space-xs pt-1">
+<div class="p-2 rounded-xl bg-surface-container text-center">
+<div class="font-label-ui text-[11px] text-on-surface-variant uppercase">Kondisi 1</div>
+<div class="font-label-code-sm text-label-code-sm font-bold text-error">Laser: TRUE</div>
+</div>
+<div class="p-2 rounded-xl bg-surface-container text-center">
+<div class="font-label-ui text-[11px] text-on-surface-variant uppercase">Kondisi 2</div>
+<div class="font-label-code-sm text-label-code-sm font-bold text-secondary-container">Warna: "Merah"</div>
+</div>
+<div class="p-2 rounded-xl bg-surface-container text-center">
+<div class="font-label-ui text-[11px] text-on-surface-variant uppercase">Aksi Rover</div>
+<div class="font-label-code-sm text-label-code-sm font-bold text-primary">Prisma Merah</div>
+</div>
+</div>
+</div>
+<!-- Automated Test Cases Validation Card -->
+<div class="rounded-2xl bg-surface-container-lowest p-space-md shadow-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">checklist</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Uji Kasus Logika (Unit Tests)</h3>
+</div>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-primary font-label-ui text-label-ui font-bold" id="test-progress-text">
+              0 / 4 Lolos
+            </span>
+</div>
+<!-- Progress Bar Indicator -->
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="w-0 h-full bg-primary transition-all duration-500 rounded-full" id="test-progress-bar"></div>
+</div>
+<!-- Test Case Items List -->
+<div class="space-y-space-xs pt-1">
+<!-- Test Case 1 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between gap-space-sm border border-transparent hover:border-surface-variant transition-all">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-7 h-7 rounded-lg bg-surface-container-highest flex items-center justify-center font-label-code-sm text-label-code-sm font-bold text-on-surface shrink-0">1</span>
+<div class="flex flex-col min-w-0">
+<div class="font-body-sm text-body-sm text-on-surface font-semibold truncate">Laser Merah (True, "Merah")</div>
+<div class="font-label-code-sm text-[12px] text-on-surface-variant truncate">Ekspektasi: Pasang Prisma Merah</div>
+</div>
+</div>
+<span class="px-2 py-1 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-ui text-[11px] font-bold shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">hourglass_top</span>
+                Siap Uji
+              </span>
+</div>
+<!-- Test Case 2 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between gap-space-sm border border-transparent hover:border-surface-variant transition-all">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-7 h-7 rounded-lg bg-surface-container-highest flex items-center justify-center font-label-code-sm text-label-code-sm font-bold text-on-surface shrink-0">2</span>
+<div class="flex flex-col min-w-0">
+<div class="font-body-sm text-body-sm text-on-surface font-semibold truncate">Laser Biru (True, "Biru")</div>
+<div class="font-label-code-sm text-[12px] text-on-surface-variant truncate">Ekspektasi: Pasang Prisma Biru</div>
+</div>
+</div>
+<span class="px-2 py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-ui text-[11px] font-bold shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">pause_circle</span>
+                Menunggu
+              </span>
+</div>
+<!-- Test Case 3 -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between gap-space-sm border border-transparent hover:border-surface-variant transition-all">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-7 h-7 rounded-lg bg-surface-container-highest flex items-center justify-center font-label-code-sm text-label-code-sm font-bold text-on-surface shrink-0">3</span>
+<div class="flex flex-col min-w-0">
+<div class="font-body-sm text-body-sm text-on-surface font-semibold truncate">Lorong Bebas Laser (False)</div>
+<div class="font-label-code-sm text-[12px] text-on-surface-variant truncate">Ekspektasi: Maju Kencang</div>
+</div>
+</div>
+<span class="px-2 py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-ui text-[11px] font-bold shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">pause_circle</span>
+                Menunggu
+              </span>
+</div>
+<!-- Test Case 4 (Edge Case) -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between gap-space-sm border border-transparent hover:border-surface-variant transition-all">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-7 h-7 rounded-lg bg-surface-container-highest flex items-center justify-center font-label-code-sm text-label-code-sm font-bold text-on-surface shrink-0">4</span>
+<div class="flex flex-col min-w-0">
+<div class="font-body-sm text-body-sm text-on-surface font-semibold truncate">Laser Tak Dikenal (True, "Ungu")</div>
+<div class="font-label-code-sm text-[12px] text-on-surface-variant truncate">Ekspektasi: Perisai Darurat (Else dalam)</div>
+</div>
+</div>
+<span class="px-2 py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-ui text-[11px] font-bold shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">pause_circle</span>
+                Menunggu
+              </span>
+</div>
+</div>
+</div>
+<!-- FlipBot AI Pair-Programmer Companion Widget -->
+<div class="rounded-2xl bg-surface-container-low p-space-md shadow-md relative overflow-hidden flex flex-col gap-space-sm">
+<!-- FlipBot Head & Status -->
+<div class="flex items-center gap-space-sm">
+<div class="relative">
+<div class="w-12 h-12 rounded-2xl bg-primary-container flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[28px]">smart_toy</span>
+</div>
+<span class="w-3.5 h-3.5 rounded-full bg-tertiary-fixed border-2 border-surface absolute -bottom-0.5 -right-0.5"></span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">FlipBot</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-ui text-[10px] font-extrabold uppercase">Tutor AI Aktif</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Pendamping Koding Konstruksionis</span>
+</div>
+</div>
+<!-- Speech Balloon Bubble with Accent Border -->
+<div class="relative p-space-md rounded-2xl bg-surface-container-lowest shadow-sm border border-tertiary-fixed/40 space-y-space-xs">
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+<strong class="text-primary font-bold">Bip-bop! Ingat aturan emas indentasi Python:</strong> 
+              Setiap kali kamu membuka pintu <code class="font-label-code-sm text-primary font-bold">if ada_laser == True:</code>, anak kalimat di dalamnya harus menjorok <strong>4 spasi</strong>. Lalu, pemeriksaan warnanya membutuhkan <strong>8 spasi</strong> agar komputermu tidak kebingungan! 🐍💡
+            </p>
+<div class="flex items-center flex-wrap gap-space-xs pt-1">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-ui text-label-ui transition-all">
+                Mengapa 8 Spasi?
+              </button>
+<button class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-ui text-label-ui transition-all">
+                Cek Error Indentasi
+              </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- PEDAGOGICAL INSIGHT & PHILOSOPHY BANNER (Seymour Papert Constructionism) -->
+<section class="w-full px-margin py-space-lg bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md max-w-3xl">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[26px]">psychology</span>
+</div>
+<div class="space-y-1">
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Prinsip Konstruksionis Seymour Papert</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">
+            "Anak-anak belajar paling efektif bukan saat diberi tahu cara berpikir, melainkan ketika mereka membangun dan mengutak-atik model nyata dari pemikiran mereka sendiri melalui kode yang bisa diuji langsung."
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<a class="px-space-md py-space-xs rounded-xl bg-surface-container text-primary hover:bg-surface-container-high font-label-ui text-label-ui transition-colors" href="#">
+          Kamus Kode Python 3
+        </a>
+<a class="px-space-md py-space-xs rounded-xl bg-surface-container text-primary hover:bg-surface-container-high font-label-ui text-label-ui transition-colors" href="#">
+          Pusat Bantuan Mentor
+        </a>
+</div>
+</div>
+</section>
+<!-- MICRO-INTERACTION & SIMULATOR LOGIC SCRIPT -->
+<script>
+    (function initCogniFlipMiniIDE() {
+      const runBtn = document.getElementById('btn-run-code');
+      const testSingleBtn = document.getElementById('btn-test-single');
+      const resetBtn = document.getElementById('btn-reset-code');
+      const toggleIndentBtn = document.getElementById('btn-toggle-indent');
+      const indentGuides = document.getElementById('indent-guides');
+      const testProgressBar = document.getElementById('test-progress-bar');
+      const testProgressText = document.getElementById('test-progress-text');
+      const laserBeam = document.getElementById('laser-beam');
+      const roverAvatar = document.getElementById('rover-avatar');
+
+      let isIndentVisible = true;
+
+      // Toggle visual indent guideline overlays
+      if (toggleIndentBtn && indentGuides) {
+        toggleIndentBtn.addEventListener('click', () => {
+          isIndentVisible = !isIndentVisible;
+          indentGuides.style.opacity = isIndentVisible ? '1' : '0';
+          toggleIndentBtn.classList.toggle('text-tertiary-fixed', isIndentVisible);
+          toggleIndentBtn.classList.toggle('text-outline', !isIndentVisible);
+        });
+      }
+
+      // Simulation trigger (Run All 4 Test Cases)
+      if (runBtn) {
+        runBtn.addEventListener('click', () => {
+          runBtn.disabled = true;
+          runBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[24px] animate-spin">sync</span>
+            <span class="tracking-wide">MENGEKSEKUSI SKENARIO 1-4...</span>
+          `;
+
+          // Animate Rover and laser beam visually
+          if (laserBeam) {
+            laserBeam.classList.remove('bg-error');
+            laserBeam.classList.add('bg-tertiary-fixed');
+          }
+
+          let progress = 0;
+          const interval = setInterval(() => {
+            progress += 1;
+            if (testProgressBar) testProgressBar.style.width = (progress * 25) + '%';
+            if (testProgressText) testProgressText.innerText = progress + ' / 4 Lolos ✓';
+
+            if (progress >= 4) {
+              clearInterval(interval);
+              runBtn.disabled = false;
+              runBtn.className = "w-full sm:flex-1 py-3.5 px-space-lg rounded-2xl bg-tertiary text-on-tertiary font-label-ui text-label-ui font-extrabold flex items-center justify-center gap-space-sm shadow-md transition-all cursor-pointer";
+              runBtn.innerHTML = `
+                <span class="material-symbols-outlined text-[24px] text-tertiary-fixed">celebration</span>
+                <span class="tracking-wide">SEMUA SKENARIO BERHASIL! (+100 XP DITERIMA)</span>
+              `;
+              if (roverAvatar) {
+                roverAvatar.classList.add('translate-x-2');
+              }
+            }
+          }, 450);
+        });
+      }
+
+      // Single Test Case Runner
+      if (testSingleBtn) {
+        testSingleBtn.addEventListener('click', () => {
+          if (testProgressBar) testProgressBar.style.width = '25%';
+          if (testProgressText) testProgressText.innerText = '1 / 4 Lolos (Uji Cepat Selesai)';
+          alert('Uji Cepat Berhasil: Skenario 1 (Laser Merah) mengaktifkan Prisma Merah secara akurat!');
+        });
+      }
+
+      // Reset Code Handler
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (testProgressBar) testProgressBar.style.width = '0%';
+          if (testProgressText) testProgressText.innerText = '0 / 4 Lolos';
+          if (runBtn) {
+            runBtn.className = "w-full sm:flex-1 py-3.5 px-space-lg rounded-2xl bg-primary-container text-on-primary font-label-ui text-label-ui font-extrabold flex items-center justify-center gap-space-sm shadow-[0_4px_0_0_#312e81] hover:brightness-110 active:translate-y-1 transition-all cursor-pointer";
+            runBtn.innerHTML = `
+              <span class="material-symbols-outlined text-[24px]">play_circle</span>
+              <span class="tracking-wide">JALANKAN KODE &amp; UJI SKENARIO (+100 XP)</span>
+            `;
+          }
+          if (laserBeam) {
+            laserBeam.classList.remove('bg-tertiary-fixed');
+            laserBeam.classList.add('bg-error');
+          }
+        });
+      }
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-space-xl mb-space-xl"><div class="space-y-space-sm"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">smart_toy</span></div><span class="font-headline-sm text-headline-sm text-primary font-bold">CogniFlip</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Laboratorium belajar koding interaktif dengan pendamping robot AI FlipBot. Aman, seru, dan ramah anak.</p></div><div class="space-y-space-xs"><h4 class="font-label-ui text-label-ui text-on-surface uppercase tracking-wider">Modul Pembelajaran</h4><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-primary transition-colors" href="#">Pemrograman Dasar</a></li><li><a class="hover:text-primary transition-colors" href="#">Logika Percabangan</a></li><li><a class="hover:text-primary transition-colors" href="#">Loop &amp; Perulangan</a></li><li><a class="hover:text-primary transition-colors" href="#">Proyek Robot AI</a></li></ul></div><div class="space-y-space-xs"><h4 class="font-label-ui text-label-ui text-on-surface uppercase tracking-wider">Zona Eksplorasi</h4><ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-primary transition-colors" href="#">Tantangan Harian</a></li><li><a class="hover:text-primary transition-colors" href="#">Papan Peringkat Koder</a></li><li><a class="hover:text-primary transition-colors" href="#">Galeri Karya Murid</a></li><li><a class="hover:text-primary transition-colors" href="#">Tanya Kak FlipBot</a></li></ul></div><div class="space-y-space-xs"><h4 class="font-label-ui text-label-ui text-on-surface uppercase tracking-wider">Ruang Orang Tua &amp; Guru</h4><p class="font-body-sm text-body-sm text-on-surface-variant">Pantau perkembangan belajar koding anak secara real-time dengan laporan berkala yang mudah dipahami.</p><div class="flex items-center gap-space-xs pt-space-xs"><div class="px-space-md py-space-xs rounded-xl bg-surface-container font-label-ui text-label-ui text-primary font-bold">Portal Wali Murid</div></div></div></div><div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-lg text-center sm:text-left"><p class="font-body-sm text-body-sm text-on-surface-variant">© 2025 CogniFlip Kids Code Lab Indonesia. Hak cipta dilindungi undang-undang.</p><div class="flex items-center gap-space-md"><span class="font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface">Privasi Murid</span><span class="font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface">Pedoman Komunitas</span><span class="font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface">Bantuan Belajar</span></div></div></div></footer></body></html>

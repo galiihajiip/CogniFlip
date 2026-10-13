@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#464554","secondary":"#855300","on-surface":"#131b2e","surface-container":"#eaedff","inverse-primary":"#c3c0ff","on-primary":"#ffffff","tertiary-fixed-dim":"#4cd7f6","tertiary-container":"#005a6a","on-tertiary-container":"#4ad5f4","error-container":"#ffdad6","on-secondary":"#ffffff","surface-container-high":"#e2e7ff","outline-variant":"#c7c4d7","inverse-surface":"#283044","on-tertiary-fixed-variant":"#004e5c","primary-container":"#4338ca","background":"#faf8ff","secondary-fixed":"#ffddb8","outline":"#777586","on-tertiary":"#ffffff","surface-container-highest":"#dae2fd","surface-tint":"#5148d7","primary-fixed-dim":"#c3c0ff","on-tertiary-fixed":"#001f26","surface-variant":"#dae2fd","inverse-on-surface":"#eef0ff","on-error-container":"#93000a","surface-bright":"#faf8ff","on-background":"#131b2e","secondary-container":"#fea619","secondary-fixed-dim":"#ffb95f","tertiary":"#00414d","primary-fixed":"#e3dfff","surface-container-low":"#f2f3ff","on-primary-container":"#c1beff","surface":"#faf8ff","error":"#ba1a1a","on-secondary-fixed-variant":"#653e00","surface-dim":"#d2d9f4","tertiary-fixed":"#acedff","primary":"#2a14b4","surface-container-lowest":"#ffffff","on-secondary-container":"#684000","on-error":"#ffffff","on-primary-fixed-variant":"#372abf","on-secondary-fixed":"#2a1700","on-primary-fixed":"#100069"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"gutter-mobile":"1rem","margin":"2rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.5rem","gutter":"1.5rem","space-xl":"2.5rem","space-xs":"0.25rem","space-sm":"0.5rem"},fontFamily:{"headline-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"label-code-lg":["JetBrains Mono"],"body-lg":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-code-sm":["JetBrains Mono"],"label-ui":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"]},fontSize:{"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"0em",fontWeight:"700"}],"display-hero":["44px",{lineHeight:"52px",letterSpacing:"-0.02em",fontWeight:"800"}],"label-code-lg":["16px",{lineHeight:"24px",fontWeight:"500"}],"body-lg":["18px",{lineHeight:"28px",fontWeight:"500"}],"display-hero-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"800"}],"body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-code-sm":["13px",{lineHeight:"18px",fontWeight:"400"}],"label-ui":["13px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"700"}],"body-sm":["14px",{lineHeight:"20px",fontWeight:"400"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.005em",fontWeight:"700"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4"><div class="flex items-center gap-6"><a class="flex items-center gap-3" data-path="beranda" href="#"><div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-[0_4px_0_0_#1e107d]"><span class="material-symbols-outlined text-2xl">smart_toy</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight leading-none">CogniFlip</span><span class="font-label-ui text-[11px] text-on-surface-variant font-medium tracking-wide">AI Learning &amp; Code Lab</span></div></a></div><nav class="hidden xl:flex items-center gap-1 bg-surface-container-low p-1.5 rounded-xl" data-active-classes="bg-primary-container text-on-primary font-bold shadow-[0_2px_0_0_#312E81]"><a class="px-3.5 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="beranda" href="#">Beranda</a><a class="px-3.5 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="belajar" href="#">Belajar</a><a class="px-3.5 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="mini-ide" href="#">Mini IDE</a><a class="px-3.5 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="lab-kode" href="#">Lab Kode</a><a class="px-3.5 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="misi-debug" href="#">Misi Debug</a><a class="px-3.5 py-2 rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="komunitas" href="#">Komunitas</a></nav><div class="flex items-center gap-4"><div class="flex items-center gap-2 bg-secondary-fixed px-3 py-1.5 rounded-full shadow-[0_2px_0_0_#ffb95f]"><span class="material-symbols-outlined text-on-secondary-fixed text-lg">local_fire_department</span><span class="font-label-code-sm text-label-code-sm text-on-secondary-fixed font-bold">120 XP</span></div><button class="hidden sm:inline-flex items-center justify-center h-10 px-5 rounded-xl bg-primary text-on-primary font-label-ui text-label-ui shadow-[0_3px_0_0_#1e107d] hover:brightness-110 active:translate-y-0.5 active:shadow-[0_1px_0_0_#1e107d] transition-all">Mulai Belajar</button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_0_0_#1e107d]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-background"><div class="flex flex-col w-full">
+<!-- Interactive Top Breadcrumbs & XP Sync Notification -->
+<section class="w-full px-6 lg:px-12 py-4 bg-surface-container-low/60 backdrop-blur-md">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
+<!-- Breadcrumb Hierarchy -->
+<nav aria-label="Jalur Navigasi" class="flex items-center flex-wrap gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<a class="hover:text-primary transition-colors flex items-center gap-1 font-medium" href="#">
+<span class="material-symbols-outlined text-base">home</span>
+<span>Beranda</span>
+</a>
+<span class="material-symbols-outlined text-xs text-outline">chevron_right</span>
+<a class="hover:text-primary transition-colors font-medium" href="#">Belajar</a>
+<span class="material-symbols-outlined text-xs text-outline">chevron_right</span>
+<a class="hover:text-primary transition-colors font-medium" href="#">Alur Logika &amp; Kondisi</a>
+<span class="material-symbols-outlined text-xs text-outline">chevron_right</span>
+<a class="hover:text-primary transition-colors font-medium" href="#">Misi 05: Percabangan Bertingkat</a>
+<span class="material-symbols-outlined text-xs text-outline">chevron_right</span>
+<span class="font-bold text-primary bg-primary-fixed px-2.5 py-0.5 rounded-full text-xs">
+          ST-10A: Misi Berhasil &amp; Pengujian Tuntas
+        </span>
+</nav>
+<!-- XP Balance Synchronization Badge -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 bg-secondary-fixed text-on-secondary-fixed px-3 py-1.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-lg text-secondary-container" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-code-sm text-label-code-sm font-bold">Total XP Akun: 270 XP</span>
+<span class="text-xs bg-surface-container-lowest/80 text-secondary px-1.5 py-0.5 rounded-full font-bold">+150 XP Baru!</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3-Stage Stepper & Overall Progress -->
+<section class="w-full px-6 lg:px-12 py-6 bg-surface">
+<div class="max-w-7xl mx-auto flex flex-col gap-5">
+<!-- Top Status Row -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs">
+            ✓
+          </div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">Status Progres Misi 05</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-label-ui text-label-ui uppercase tracking-wider text-primary font-bold">100% Lengkap &amp; Sempurna</span>
+<div class="w-44 h-3 bg-surface-container-high rounded-full overflow-hidden p-0.5">
+<div class="h-full bg-gradient-to-r from-primary to-secondary-container rounded-full w-full transition-all duration-1000"></div>
+</div>
+</div>
+</div>
+<!-- 3 Stage Stepper Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Stage 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm flex items-start gap-3.5 relative overflow-hidden">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-2xl font-bold" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-xs text-on-surface-variant uppercase font-bold">Tahap 1 • Selesai</span>
+<span class="bg-surface-container text-primary text-[10px] px-1.5 py-0.5 rounded font-bold">96/100</span>
+</div>
+<p class="font-headline-sm text-sm text-on-surface font-bold truncate">Feynman Mastery Logika</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Konsep percabangan teruji runtut</p>
+</div>
+<div class="absolute right-0 top-0 bottom-0 w-1.5 bg-primary"></div>
+</div>
+<!-- Stage 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm flex items-start gap-3.5 relative overflow-hidden">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-2xl font-bold" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-xs text-on-surface-variant uppercase font-bold">Tahap 2 • Selesai</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed text-[10px] px-1.5 py-0.5 rounded font-bold">100% Akurat</span>
+</div>
+<p class="font-headline-sm text-sm text-on-surface font-bold truncate">Prediksi Alur Cabang</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Analisis skenario merah &amp; kuning</p>
+</div>
+<div class="absolute right-0 top-0 bottom-0 w-1.5 bg-primary"></div>
+</div>
+<!-- Stage 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-md flex items-start gap-3.5 relative overflow-hidden ring-2 ring-primary/20">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center flex-shrink-0 shadow-[0_3px_0_0_#1e107d]">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-ui text-xs text-primary uppercase font-bold">Tahap 3 • Lolos Uji</span>
+<span class="bg-secondary text-on-secondary text-[10px] px-1.5 py-0.5 rounded font-bold">+150 XP</span>
+</div>
+<p class="font-headline-sm text-sm text-on-surface font-bold truncate">Mini-IDE: Sensor Tri-Warna</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Eksekusi Python 3.12 Lolos 100%</p>
+</div>
+<div class="absolute right-0 top-0 bottom-0 w-1.5 bg-secondary-container"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Celebration Hero Banner -->
+<section class="w-full px-6 lg:px-12 py-8 bg-gradient-to-br from-surface-container-low via-surface-container to-surface-bright">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<div class="bg-surface-container-lowest p-8 lg:p-10 rounded-xl shadow-lg relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+<!-- Floating Celebratory Glow Circles -->
+<div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-secondary-container/15 blur-3xl pointer-events-none"></div>
+<div class="absolute left-1/3 -bottom-20 w-80 h-80 rounded-full bg-primary/10 blur-3xl pointer-events-none"></div>
+<!-- Text & Narrative -->
+<div class="flex flex-col gap-4 max-w-2xl z-10">
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-on-primary font-label-ui text-xs font-bold shadow-sm">
+<span class="material-symbols-outlined text-sm">emoji_events</span>
+              Misi 05 Tuntas
+            </span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-ui text-xs font-semibold">
+<span class="material-symbols-outlined text-sm text-secondary-container" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+              3/3 Kasus Uji Otomatis Lolos 100%
+            </span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-xs font-bold">
+              Master Percabangan Bertingkat
+            </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight leading-tight">
+            Horeee! Rantai Logika <span class="text-primary underline decoration-secondary-container decoration-4">Elif</span> Sempurna — FlipBot Menaklukkan Persimpangan Metropolis! 🚦🎉🤖
+          </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Kode Python yang kamu tulis berhasil memandu FlipBot melewati 3 siklus sensor lampu lalu lintas kota tanpa celah! Berkat cabang <code class="px-2 py-0.5 bg-surface-container font-label-code-sm text-primary font-bold rounded">elif</code>, robot dapat siaga di lampu kuning dengan sangat tenang dan presisi.
+          </p>
+<!-- Quick Metrics Bar -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+<div class="bg-surface-container-low p-3 rounded-lg flex flex-col">
+<span class="font-label-ui text-[11px] text-on-surface-variant uppercase font-semibold">Unit Test</span>
+<span class="font-label-code-lg text-sm text-primary font-bold">3/3 Lolos (100%)</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg flex flex-col">
+<span class="font-label-ui text-[11px] text-on-surface-variant uppercase font-semibold">Efisiensi Logika</span>
+<span class="font-label-code-lg text-sm text-on-surface font-bold">O(1) Cepat &amp; Hemat</span>
+</div>
+<div class="bg-secondary-fixed p-3 rounded-lg flex flex-col">
+<span class="font-label-ui text-[11px] text-on-secondary-fixed uppercase font-semibold">Total XP Misi 05</span>
+<span class="font-label-code-lg text-sm text-on-secondary-fixed font-bold">+400 XP Total ⭐</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg flex flex-col">
+<span class="font-label-ui text-[11px] text-on-surface-variant uppercase font-semibold">Lencana Baru</span>
+<span class="font-headline-sm text-sm text-secondary font-bold truncate">Insinyur Sinyal 🏅</span>
+</div>
+</div>
+</div>
+<!-- Visual Badge Trophy Artwork -->
+<div class="flex flex-col items-center justify-center p-6 bg-gradient-to-b from-surface-container-low to-surface-container rounded-xl shadow-md min-w-[260px] text-center z-10">
+<div class="relative w-28 h-28 mb-3 flex items-center justify-center">
+<!-- Glowing Ring Behind -->
+<div class="absolute inset-0 rounded-full bg-secondary-container/30 animate-pulse"></div>
+<div class="w-24 h-24 rounded-full bg-primary flex items-center justify-center shadow-[0_6px_0_0_#1e107d]">
+<span class="material-symbols-outlined text-5xl text-on-primary">traffic</span>
+</div>
+<div class="absolute -top-1 -right-1 w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-xl text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+</div>
+<span class="font-headline-sm text-base text-primary font-bold">Sertifikasi Level 5</span>
+<span class="font-body-sm text-xs text-on-surface-variant mt-1">Multi-Condition Mastery</span>
+<div class="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-on-surface bg-surface-container-highest px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-sm text-secondary">verified</span>
+            Terverifikasi Sistem
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main 2-Column Content Layout -->
+<section class="w-full px-6 lg:px-12 py-10 bg-surface">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: Final IDE Code & Execution Logs (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Code Editor Panel Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col">
+<!-- Editor Header Tab -->
+<div class="bg-surface-container-low px-5 py-3.5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-error inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-secondary-container inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim inline-block"></span>
+</div>
+<div class="h-4 w-px bg-outline-variant"></div>
+<span class="font-label-code-sm text-xs font-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary">code</span>
+                navigasi_cerdas.py
+              </span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-code-sm text-[11px] text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Python 3.12</span>
+<span class="font-label-ui text-xs text-on-primary bg-primary px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">done_all</span> Passed All Tests
+              </span>
+</div>
+</div>
+<!-- Code Content Display -->
+<div class="p-5 font-label-code-lg text-sm bg-surface-dim/20 leading-relaxed overflow-x-auto text-on-surface">
+<div class="space-y-1">
+<div class="flex text-on-surface-variant/70 text-xs">
+<span class="w-8 select-none text-right pr-4 text-outline font-label-code-sm">1</span>
+<span># Misi 05: Navigasi Persimpangan 3-Warna (Tuntas!)</span>
+</div>
+<div class="flex">
+<span class="w-8 select-none text-right pr-4 text-outline font-label-code-sm">2</span>
+<span><span class="text-primary font-bold">def</span> <span class="text-tertiary-container font-semibold">navigasi_robot</span>(sensor_warna):</span>
+</div>
+<div class="flex">
+<span class="w-8 select-none text-right pr-4 text-outline font-label-code-sm">3</span>
+<span class="pl-4"><span class="text-primary font-bold">if</span> sensor_warna == <span class="text-secondary font-medium">"merah"</span>:</span>
+</div>
+<div class="flex">
+<span class="w-8 select-none text-right pr-4 text-outline font-label-code-sm">4</span>
+<span class="pl-8"><span class="text-primary font-bold">return</span> <span class="text-secondary font-medium">"rem_berhenti"</span></span>
+</div>
+<!-- Highlighted Solved Branch Line -->
+<div class="flex bg-secondary-fixed/40 -mx-5 px-5 py-1 rounded items-center">
+<span class="w-8 select-none text-right pr-4 text-secondary font-bold font-label-code-sm">5</span>
+<span class="pl-4">
+<span class="text-primary font-bold">elif</span> sensor_warna == <span class="text-secondary font-medium">"kuning"</span>:
+                </span>
+<span class="ml-auto font-label-ui text-[11px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded font-bold shadow-sm">
+                  ✓ CABANG ELIF AKTIF
+                </span>
+</div>
+<div class="flex bg-secondary-fixed/40 -mx-5 px-5 py-1 rounded items-center">
+<span class="w-8 select-none text-right pr-4 text-secondary font-bold font-label-code-sm">6</span>
+<span class="pl-8">
+<span class="text-primary font-bold">return</span> <span class="text-secondary font-medium">"pelan_siaga"</span>
+<span class="text-on-surface-variant/70 italic text-xs pl-3"># Solusi Koder Cilik yang Berhasil!</span>
+</span>
+</div>
+<div class="flex">
+<span class="w-8 select-none text-right pr-4 text-outline font-label-code-sm">7</span>
+<span class="pl-4"><span class="text-primary font-bold">else</span>:</span>
+</div>
+<div class="flex">
+<span class="w-8 select-none text-right pr-4 text-outline font-label-code-sm">8</span>
+<span class="pl-8"><span class="text-primary font-bold">return</span> <span class="text-secondary font-medium">"tancap_maju"</span></span>
+</div>
+</div>
+</div>
+<!-- Bottom Syntax Validation Badge Strip -->
+<div class="bg-surface-container px-5 py-2.5 flex items-center justify-between">
+<span class="font-body-sm text-xs text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary">verified</span>
+              Status AST Analyzer: Sintaks Python Valid &amp; Bebas Dari IndentationError
+            </span>
+<span class="font-label-code-sm text-[11px] text-on-surface-variant">Clean Architecture 100%</span>
+</div>
+</div>
+<!-- Test Suite Results Summary Box -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">fact_check</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-base text-on-surface font-bold">Rincian Hasil Test Suite Otomatis</h3>
+<p class="font-body-sm text-xs text-on-surface-variant">3 kondisi diuji secara independen dengan parameter simulasi</p>
+</div>
+</div>
+<span class="font-label-code-sm text-xs font-bold text-primary bg-primary-fixed px-2.5 py-1 rounded-full">
+              3/3 PASS
+            </span>
+</div>
+<div class="space-y-3">
+<!-- Test 1 -->
+<div class="bg-surface-container-low p-3.5 rounded-lg flex items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">1</span>
+<div class="flex flex-col">
+<span class="font-label-code-sm text-xs font-bold text-on-surface">Uji Lampu Merah</span>
+<span class="font-label-code-sm text-xs text-on-surface-variant">Input: <code class="text-secondary">"merah"</code> → Output: <code class="text-primary">"rem_berhenti"</code></span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-code-sm text-[11px] text-on-surface-variant">0.01s</span>
+<span class="font-label-ui text-xs font-bold text-on-primary bg-primary px-2 py-0.5 rounded">✓ LOLOS</span>
+</div>
+</div>
+<!-- Test 2 (Elif branch) -->
+<div class="bg-secondary-fixed/50 p-3.5 rounded-lg flex items-center justify-between gap-3 shadow-sm">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center text-xs font-bold">2</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-code-sm text-xs font-bold text-on-surface">Uji Lampu Kuning (Tantangan Utama)</span>
+<span class="text-[10px] bg-secondary text-on-secondary px-1.5 py-0.2 rounded font-bold">Cabang Elif</span>
+</div>
+<span class="font-label-code-sm text-xs text-on-surface-variant">Input: <code class="text-secondary">"kuning"</code> → Output: <code class="text-primary">"pelan_siaga"</code></span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-code-sm text-[11px] text-on-secondary-fixed">0.01s</span>
+<span class="font-label-ui text-xs font-bold text-on-secondary bg-secondary px-2 py-0.5 rounded">✓ LOLOS</span>
+</div>
+</div>
+<!-- Test 3 -->
+<div class="bg-surface-container-low p-3.5 rounded-lg flex items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">3</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-code-sm text-xs font-bold text-on-surface">Uji Lampu Hijau</span>
+<span class="text-[10px] bg-surface-container text-on-surface-variant px-1.5 py-0.2 rounded font-medium">Else Fallback</span>
+</div>
+<span class="font-label-code-sm text-xs text-on-surface-variant">Input: <code class="text-secondary">"hijau"</code> → Output: <code class="text-primary">"tancap_maju"</code></span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-code-sm text-[11px] text-on-surface-variant">0.01s</span>
+<span class="font-label-ui text-xs font-bold text-on-primary bg-primary px-2 py-0.5 rounded">✓ LOLOS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Terminal Console Execution Log -->
+<div class="bg-inverse-surface rounded-xl p-5 shadow-lg flex flex-col gap-3 font-label-code-sm text-xs text-inverse-on-surface">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-2 text-outline-variant">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span>CogniFlip PySandbox Terminal Console</span>
+</div>
+<span class="text-[11px] text-tertiary-fixed-dim">Process ID: #7041</span>
+</div>
+<div class="space-y-1 font-label-code-sm">
+<p class="text-on-tertiary-container">&gt; python -m unittest test_persimpangan.py</p>
+<p class="text-outline-variant">... [Suite 1] running test_sensor_merah ... ok</p>
+<p class="text-outline-variant">... [Suite 2] running test_sensor_kuning_elif ... ok (matched pattern: elif 'kuning')</p>
+<p class="text-outline-variant">... [Suite 3] running test_sensor_hijau_fallback ... ok</p>
+<p class="text-tertiary-fixed font-bold pt-1">Ran 3 tests in 0.031s</p>
+<p class="text-secondary-fixed font-bold">OK (status=SUCCESS, assertions=3, failures=0, errors=0)</p>
+<p class="text-inverse-on-surface/80">Exit code: 0. Telemetry data synced to FlipBot Cloud Tutor.</p>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Visual Simulation & Certificate / Rewards (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Visual Simulator Interactive Stage Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md p-6 flex flex-col gap-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">smart_display</span>
+<h3 class="font-headline-sm text-base text-on-surface font-bold">Simulasi Visual Persimpangan</h3>
+</div>
+<span class="font-label-ui text-[11px] bg-secondary-fixed text-on-secondary-fixed px-2.5 py-0.5 rounded-full font-bold">
+              Mulus &amp; Aman
+            </span>
+</div>
+<!-- Dynamic SVG Canvas of Metropolis Intersection -->
+<div class="w-full h-56 bg-surface-container rounded-xl relative overflow-hidden flex items-center justify-center p-4">
+<svg class="w-full h-full" fill="none" viewbox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+<!-- Road Canvas -->
+<rect fill="#283044" height="80" rx="8" width="400" x="0" y="70"></rect>
+<line stroke="#FAF8FF" stroke-linecap="round" stroke-width="4" x1="20" x2="60" y1="110" y2="110"></line>
+<line stroke="#FAF8FF" stroke-linecap="round" stroke-width="4" x1="100" x2="140" y1="110" y2="110"></line>
+<line stroke="#FAF8FF" stroke-linecap="round" stroke-width="4" x1="180" x2="220" y1="110" y2="110"></line>
+<line stroke="#FAF8FF" stroke-linecap="round" stroke-width="4" x1="260" x2="300" y1="110" y2="110"></line>
+<line stroke="#FAF8FF" stroke-linecap="round" stroke-width="4" x1="340" x2="380" y1="110" y2="110"></line>
+<!-- Zebra Cross Stop Line -->
+<rect fill="#FFFFFF" height="80" width="8" x="230" y="70"></rect>
+<!-- Traffic Light Pole -->
+<rect fill="#777586" height="70" rx="2" width="10" x="250" y="20"></rect>
+<rect fill="#131B2E" height="58" rx="6" width="26" x="242" y="15"></rect>
+<!-- Red Light (Off) -->
+<circle cx="255" cy="27" fill="#BA1A1A" fill-opacity="0.25" r="6"></circle>
+<!-- Yellow Light (ACTIVE GLOWING) -->
+<circle cx="255" cy="44" fill="#FEA619" r="7"></circle>
+<circle cx="255" cy="44" opacity="0.8" r="12" stroke="#FEA619" stroke-dasharray="3 3" stroke-width="2"></circle>
+<!-- Green Light (Off) -->
+<circle cx="255" cy="61" fill="#4CD7F6" fill-opacity="0.2" r="6"></circle>
+<!-- FlipBot Vehicle in Center Lane -->
+<g transform="translate(140, 82)">
+<!-- Robot Cart Body -->
+<rect fill="#2A14B4" height="36" rx="10" width="65" x="0" y="10"></rect>
+<rect fill="#FAF8FF" height="20" rx="6" width="40" x="6" y="14"></rect>
+<!-- Robot Eye Screen -->
+<circle cx="20" cy="24" fill="#2A14B4" r="3.5"></circle>
+<circle cx="32" cy="24" fill="#2A14B4" r="3.5"></circle>
+<path d="M 23 29 Q 26 31 29 29" fill="none" stroke="#2A14B4" stroke-linecap="round" stroke-width="2"></path>
+<!-- Wheels -->
+<circle cx="14" cy="46" fill="#131B2E" r="6"></circle>
+<circle cx="51" cy="46" fill="#131B2E" r="6"></circle>
+<circle cx="14" cy="46" fill="#DAE2FD" r="2.5"></circle>
+<circle cx="51" cy="46" fill="#DAE2FD" r="2.5"></circle>
+<!-- Antenna Beacon -->
+<line stroke="#FEA619" stroke-width="2.5" x1="32" x2="32" y1="10" y2="3"></line>
+<circle cx="32" cy="3" fill="#FEA619" r="3"></circle>
+<!-- Thumbs Up Bubble -->
+<circle cx="58" cy="4" fill="#FEA619" r="10"></circle>
+<text fill="#684000" font-size="11" font-weight="bold" x="54" y="8">👍</text>
+</g>
+<!-- Sensor Ray Cones -->
+<path d="M 205 100 L 245 44 L 245 52 Z" fill="#FEA619" fill-opacity="0.25"></path>
+<!-- Status Telemetry Overlay Tag -->
+<rect fill="#FFFFFF" fill-opacity="0.95" height="42" rx="8" width="370" x="15" y="165"></rect>
+<text fill="#131B2E" font-family="Plus Jakarta Sans" font-size="11" font-weight="bold" x="25" y="183">Sensor: Lampu Kuning Terdeteksi</text>
+<text fill="#855300" font-family="JetBrains Mono" font-size="11" x="25" y="198">Respon: Mode Pelan Siaga (Kecepatan: 25 km/h)</text>
+<text fill="#2A14B4" font-family="Plus Jakarta Sans" font-size="16" x="320" y="190">✓ AMAN</text>
+</svg>
+</div>
+<!-- Telemetry Badges Strip -->
+<div class="grid grid-cols-2 gap-3 pt-1">
+<div class="bg-surface-container-low p-2.5 rounded-lg flex flex-col">
+<span class="font-label-ui text-[10px] text-on-surface-variant uppercase font-semibold">Sensor Optik Depan</span>
+<span class="font-label-code-sm text-xs font-bold text-secondary">"kuning" (590 nm)</span>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-lg flex flex-col">
+<span class="font-label-ui text-[10px] text-on-surface-variant uppercase font-semibold">Status Tindakan</span>
+<span class="font-label-code-sm text-xs font-bold text-primary">"pelan_siaga" (Aktif)</span>
+</div>
+</div>
+</div>
+<!-- Reward & Mastery Certificate Box -->
+<div class="bg-gradient-to-br from-surface-container-lowest to-surface-container-low p-6 rounded-xl shadow-lg relative overflow-hidden flex flex-col gap-4 ring-2 ring-secondary-container/40">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-[0_3px_0_0_#9a5a00]">
+<span class="material-symbols-outlined text-2xl">card_membership</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-ui text-[11px] text-secondary font-bold uppercase tracking-wider">Piagam Prestasi Resmi</span>
+<h4 class="font-headline-sm text-sm text-on-surface font-extrabold leading-snug">
+                  Sertifikat Kecakapan Logika: Master If-Elif-Else
+                </h4>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg flex flex-col gap-2">
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant font-medium">Dianugerahkan kepada:</span>
+<span class="font-headline-sm text-xs text-primary font-bold">Koder Cilik Nusantara</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant font-medium">Kompetensi Inti:</span>
+<span class="font-label-code-sm text-xs font-bold text-on-surface">Multi-Way Branching (Python)</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant font-medium">Verifikator AI:</span>
+<span class="text-xs font-bold text-secondary">FlipBot Lab #ID-MISI05-PASS</span>
+</div>
+</div>
+</div>
+<!-- FlipBot Celebration Message Speech Bubble -->
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 text-on-primary shadow-[0_4px_0_0_#1e107d] relative">
+<span class="material-symbols-outlined text-2xl">smart_toy</span>
+<div class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-secondary-container flex items-center justify-center text-[9px] text-on-secondary-container font-bold">
+              ★
+            </div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-md relative flex-1 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-xs text-primary font-bold">Pesan Bangga dari FlipBot</span>
+<span class="text-[10px] text-on-surface-variant">Baru saja</span>
+</div>
+<p class="font-body-sm text-xs text-on-surface leading-relaxed">
+              "Bip-bip-horray! 🌟 Berkat kode yang kamu tulis, aku nggak bingung lagi saat sensor melihat lampu kuning. Aku nggak ngerem mendadak yang bikin kaget kendaraan di belakang, dan nggak tancap gas sembrono. Logika <strong>elif</strong> buatanmu bener-bener keren!"
+            </p>
+<div class="flex items-center gap-2 pt-1">
+<button class="font-label-ui text-[11px] text-primary bg-primary-fixed px-2.5 py-1 rounded hover:bg-surface-container transition-colors">
+                Kirim Tos ke FlipBot ✋
+              </button>
+<button class="font-label-ui text-[11px] text-on-surface-variant bg-surface-container-low px-2 py-1 rounded hover:bg-surface-container transition-colors">
+                Simpan Kenangan 📸
+              </button>
+</div>
+</div>
+</div>
+<!-- Pedagogical Takeaway Box (Feynman Takeaway) -->
+<div class="bg-surface-container-low p-5 rounded-xl flex flex-col gap-2.5">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-lg text-primary">lightbulb</span>
+<h4 class="font-headline-sm text-xs uppercase tracking-wider font-bold">Kenapa Solusimu Hebat?</h4>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+            Siswa menggunakan struktur percabangan yang <em>mutually exclusive</em>. Tidak ada baris yang dieksekusi berlebihan, kode mudah dibaca orang lain (<em>clean code</em>), dan hemat siklus CPU komputer!
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Sticky / Bottom Floating Action Bar for Mission Transitions -->
+<section class="w-full px-6 lg:px-12 py-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
+<!-- Left Quick Auxiliary Actions -->
+<div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+<a class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-label-ui text-xs font-bold shadow-sm hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-base">file_download</span>
+          Lihat Sertifikat Lengkap 📜
+        </a>
+<a class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-label-ui text-xs font-bold shadow-sm hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-base">terminal</span>
+          Uji di Sandbox Bebas 🛠️
+        </a>
+<a class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface font-label-ui text-xs font-semibold transition-colors" href="#">
+<span class="material-symbols-outlined text-base">dashboard</span>
+          Dashboard Siswa 🏠
+        </a>
+</div>
+<!-- Primary High-Impact CTA -->
+<div class="w-full md:w-auto">
+<button class="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-primary text-on-primary font-headline-sm text-sm font-bold shadow-[0_4px_0_0_#1e107d] hover:brightness-110 active:translate-y-0.5 active:shadow-[0_2px_0_0_#1e107d] transition-all">
+<span>Lanjut ke Misi 06: Gerbang Logika AND / OR</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-surface-container-high py-12 mt-12"><div class="max-w-7xl mx-auto px-6 lg:px-12"><div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-surface-container-high"><div class="flex flex-col gap-3 md:col-span-2"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-on-primary"><span class="material-symbols-outlined text-base">smart_toy</span></div><span class="font-headline-sm text-headline-sm text-primary font-bold">CogniFlip Lab</span></div><p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">Laboratorium petualangan komputasi cerdas berbasis kecerdasan artifisial untuk generasi penjelajah kode cilik Indonesia.</p></div><div class="flex flex-col gap-3"><span class="font-label-ui text-label-ui text-on-surface uppercase tracking-wider">Panduan &amp; Pendamping</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="petunjuk-flipbot" href="#">Petunjuk FlipBot</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="panduan-guru-dan-orang-tua" href="#">Panduan Guru &amp; Orang Tua</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="ruang-aman-anak" href="#">Ruang Aman Anak</a></div><div class="flex flex-col gap-3"><span class="font-label-ui text-label-ui text-on-surface uppercase tracking-wider">Ekosistem Lab</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="mini-ide" href="#">Mini IDE Python</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="lab-kode" href="#">Lab Blok &amp; Kode</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="misi-debug" href="#">Arena Misi Debug</a></div></div><div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"><p class="font-body-sm text-body-sm text-on-surface-variant">© 2025 CogniFlip (AI Learning &amp; Code Lab). Hak Cipta Dilindungi.</p><div class="flex items-center gap-6 font-body-sm text-body-sm text-on-surface-variant"><span class="flex items-center gap-1.5 text-secondary font-medium"><span class="material-symbols-outlined text-base text-secondary">verified_user</span>Standar Ramah &amp; Aman Anak</span></div></div></div></footer></body></html>

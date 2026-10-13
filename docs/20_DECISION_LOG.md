@@ -69,5 +69,12 @@ Append decisions chronologically. Record actual options, rationale, impact, stat
 - Decision: in-house accounts stored in the project's PostgreSQL (D-006): a pseudonymous handle and a password hashed with a memory-hard algorithm; server-side sessions in an httpOnly cookie. No email, real name, school, birthdate or location is collected.
 - Consequence: no self-service password recovery (no email). Recovery and its safety implications must be documented honestly.
 
+## D-011 — Stitch "Warm Learning Lab" export is the approved visual source
+- Date: 2026-10-13
+- Status: accepted
+- Approver: participant (Claude Code session, 2026-10-13: provided the Stitch export ZIP and asked for it to be integrated with the existing features and pages)
+- Decision: the 58-screen Google Stitch export and its `DESIGN.md` are the visual source of truth (`.stitch/`). Screens are implemented in the Next.js app against the existing API contracts; claims and features the product cannot support are adapted, not copied (`docs/22` §Adaptations). Supersedes the blocking part of D-009.
+- Consequences: screens without a Stitch design (auth, profile, history, leaderboard, help pages, mission hub) are built from the same design system and are listed as gaps for participant review. The export has no mobile screens; mobile layouts are responsive adaptations.
+
 ## Pending decisions
 Record after actual review: runtime model (after benchmark); realtime provider; production Postgres host; runner/isolation model; STT/TTS provider and retention; community/profile visibility defaults after safety review; exact dependency versions and hosting setup.

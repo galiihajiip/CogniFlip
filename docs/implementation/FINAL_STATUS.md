@@ -10,7 +10,7 @@
 | 1. AI Agent reference docs | **PASS (exist)** | `CLAUDE.md`, `AGENTS.md`, `docs/`, ADR-001…007, decision log D-001…D-010. Provenance of the imported package is disclosed in commit `3bf061c` |
 | 2. Public GitHub repository | **FAIL** | No remote; GitHub CLI login fails. `DEPLOYMENT.md` §1 has the steps |
 | 3. Curated journal (≤ 5 actual prompts) + raw log | **NOT VERIFIED** | The journal is still blank by design. Candidates are listed in `PROMPT_JOURNAL_CANDIDATES.md` for you to choose and copy verbatim. The raw log (this session's transcript) exists locally; **backup, hash and publication are pending** (`raw-log-register.md`). Logs from the documentation-package chat, the prompt playbook and Stitch sessions are not in the repository |
-| 4. Theme and subtheme (Web Education for Kids) | **NOT VERIFIED** | The domain is built for grades 4–6 in Indonesian (lessons, tutor, missions), but there is no learner UI and no published lesson. Judges cannot experience it yet |
+| 4. Theme and subtheme (Web Education for Kids) | **NOT VERIFIED** | Learner UI now exists (Stitch design, D-011): lessons, teach-the-robot flow, missions, Mini IDE, accounts, history; browser-checked locally on 2026-10-13. Still **no published lesson**, so production shows 0 lessons until content review |
 | 5. Free stack choice | **PASS** | Next.js 16 / TypeScript / PostgreSQL / Gemini, recorded in ADR-001, D-006 and D-008 |
 | 6. Deployed website accessible to judges | **FAIL** | Not deployed (no GitHub, Vercel, Postgres host or key). A local production build passes `npm run smoke` 11/11 |
 
@@ -20,8 +20,8 @@
 | Criterion | Evidence that exists | Weak or missing |
 |---|---|---|
 | Vibe Coding Process (25%) | Authentic sequence of 40+ commits with explanatory messages; decision log with participant approvals; documented gates per block; real defects found and fixed with regression tests (UTF-8 500, stale config capture, XP key versioning, unscoped reveal text); a self-reported mistake (`67c5092`) fixed openly in `6e6d8c9` | Curated journal not filled; raw log not backed up or published; the debugging entry must be chosen by you from real defects |
-| Functionality & Theme (25%) | Deterministic rubric scoring; validated AI contracts; tutor state machine; accounts, history, XP, leaderboard; AI code review; Predict and Debug missions verified with CPython; 375 unit and 37 integration tests | **No learner UI**; lessons unpublished; live AI never run (no key); not deployed |
-| UI/UX & Responsiveness (20%) | Placeholder page only | **Blocked** by D-009 (no Stitch exports) |
+| Functionality & Theme (25%) | Deterministic rubric scoring; validated AI contracts; tutor state machine; accounts, history, XP, leaderboard; AI code review; Predict and Debug missions verified with CPython; 397 unit and 37 integration tests; learner UI wired to every API | Lessons unpublished; live AI never run (no key); not deployed |
+| UI/UX & Responsiveness (20%) | Stitch "Warm Learning Lab" screens implemented (`docs/22` mapping); loading/empty/error/retry/unauthorized states; checked at 1280 and 390 px; focus ring, skip link, reduced motion, text-size preference | No Stitch mobile references; non-Stitch pages need participant review; no Lighthouse/contrast audit |
 | Technical Quality (15%) | Strict module boundaries (lint-enforced); runtime schemas everywhere; CI workflow; security headers; secret scans; SEO and robots; migrations with constraints; measured bundle | CI never ran on GitHub; no Lighthouse; per-instance rate limits |
 | Innovation & Creativity (15%) | Explain → assess with evidence-grounded, deterministic scoring; honest capability registry; Predict-before-Run and Debug Robot with real-interpreter-verified answer keys; append-only, idempotent rewards | Value unproven until the live benchmark and UI exist |
 
@@ -29,10 +29,10 @@
 | Blocks | Status |
 |---|---|
 | 00–19 | Done (19 = Stitch gate **FAIL**: no exports) |
-| 20–25 UI | **BLOCKED** (D-009). Backend parts of 23–25 (lesson and session APIs) are done |
+| 20–25 UI | Done on 2026-10-13 after the Stitch export arrived (D-011); see `docs/22` |
 | 26 | Report done: API/domain PASS, UI blocked, live AI not verified |
 | 27–32 | Done (API only; no UI) |
-| 33 editor UI | **BLOCKED** (D-009) |
+| 33 editor UI | Done: `/ide`, AI review only (execution disabled) |
 | 34–37, 39–41 | Done |
 | 38 runtime adapter | **BLOCKED** (no verified isolated sandbox; execution disabled by design) |
 | 42–46, 48, 49 | **BLOCKED** (UI, speech/realtime provider decisions, safety gates); see `PHASE6_STATUS.md` |
@@ -40,14 +40,14 @@
 | 50 | Done (single-agent workflows under a bounded orchestrator) |
 | 51 | **NOT RUN** (needs a key and benchmark) |
 | 52, 53, 55, 56, 57 | Done (57 = runbook and smoke script; **not deployed**) |
-| 54 UX audit | **BLOCKED** (no UI) |
+| 54 UX audit | Partial: browser checks at 1280/390 px; no Lighthouse or full contrast audit yet |
 | 58, 59 | **BLOCKED** (no deployment or credentials) |
 | 60 | This document |
 
 ## 4. Exact remaining blockers (in order)
 1. **GitHub:** run `! gh auth login`, create a **public** repo and push (gate 2); confirm CI passes.
 2. **Content review:** review and publish lessons and missions (`LESSON_REVIEW.md`); otherwise production shows 0 lessons.
-3. **Stitch exports:** the 42 S1 PNGs plus approved `DESIGN.md` (`STITCH_STATUS.md` §7), then BLOCKs 20–26 (UI is 20% of the score and needed for gate 4).
+3. **Stitch:** done (D-011). Review the non-Stitch pages and mobile layouts listed in `docs/22` §Gaps.
 4. **Infrastructure:**
    - Postgres host + `npm run db:migrate`;
    - paid Gemini key in Vercel/`.env.local`, billing budget;

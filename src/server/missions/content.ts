@@ -204,18 +204,18 @@ export const DEBUG_MISSIONS: DebugMission[] = [
       "Identifies that a value must be set before it is used (order matters).",
     language: "python",
     languageVersion: "3",
-    intendedBehavior: "Program ini seharusnya mencetak nama robot: Robi.",
-    intendedOutput: "Robi",
-    buggyCode: 'print(nama)\nnama = "Robi"',
+    intendedBehavior: "Program ini seharusnya mencetak nama robot: FlipBot.",
+    intendedOutput: "FlipBot",
+    buggyCode: 'print(nama)\nnama = "FlipBot"',
     answerKey: {
       bug: "nama is used before it is assigned, so Python raises a NameError; the two lines must be swapped.",
       explanation:
         "Komputer membaca dari atas. Saat print(nama) dijalankan, nama belum diisi. Tukar urutannya: isi nama dulu, baru cetak.",
       acceptedDescriptions: [
         "nama dipakai sebelum diisi.",
-        'Urutannya terbalik, baris nama = "Robi" harus di atas.',
+        'Urutannya terbalik, baris nama = "FlipBot" harus di atas.',
       ],
-      fixedCode: 'nama = "Robi"\nprint(nama)',
+      fixedCode: 'nama = "FlipBot"\nprint(nama)',
     },
     hints: [
       "Saat baris pertama dijalankan, apakah komputer sudah tahu isi nama?",

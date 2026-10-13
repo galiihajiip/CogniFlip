@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CogniFlip — AI Learning &amp; Code Lab</title><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"inverse-on-surface":"#eef0ff","on-secondary-fixed-variant":"#653e00","primary-fixed":"#e3dfff","tertiary-fixed":"#acedff","on-surface-variant":"#464554","primary-container":"#4338ca","on-tertiary":"#ffffff","on-surface":"#131b2e","on-error":"#ffffff","outline":"#777586","secondary-fixed":"#ffddb8","surface-container-low":"#f2f3ff","outline-variant":"#c7c4d7","surface-container-lowest":"#ffffff","primary-fixed-dim":"#c3c0ff","surface-container-highest":"#dae2fd","tertiary-fixed-dim":"#4cd7f6","inverse-primary":"#c3c0ff","secondary-fixed-dim":"#ffb95f","on-primary-fixed-variant":"#372abf","surface-bright":"#faf8ff","on-secondary-container":"#684000","surface-variant":"#dae2fd","surface":"#faf8ff","secondary-container":"#fea619","background":"#faf8ff","surface-tint":"#5148d7","tertiary":"#00414d","on-primary-container":"#c1beff","tertiary-container":"#005a6a","on-tertiary-fixed-variant":"#004e5c","on-secondary":"#ffffff","surface-container":"#eaedff","on-secondary-fixed":"#2a1700","surface-container-high":"#e2e7ff","inverse-surface":"#283044","on-primary-fixed":"#100069","on-background":"#131b2e","on-primary":"#ffffff","error":"#ba1a1a","on-tertiary-container":"#4ad5f4","surface-dim":"#d2d9f4","primary":"#2a14b4","on-error-container":"#93000a","secondary":"#855300","on-tertiary-fixed":"#001f26","error-container":"#ffdad6"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-md":"1rem",margin:"2rem","space-xs":"0.25rem","margin-mobile":"1rem","space-xl":"2.5rem","space-lg":"1.5rem",gutter:"1.5rem","gutter-mobile":"1rem","space-sm":"0.5rem"},fontFamily:{"body-lg":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-ui":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-code-sm":["JetBrains Mono"],"body-md":["Plus Jakarta Sans"],"label-code-lg":["JetBrains Mono"],"headline-lg":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"]},fontSize:{"body-lg":["18px",{lineHeight:"28px",fontWeight:"500"}],"display-hero-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"800"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}],"label-ui":["13px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"700"}],"body-sm":["14px",{lineHeight:"20px",fontWeight:"400"}],"label-code-sm":["13px",{lineHeight:"18px",fontWeight:"400"}],"body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-code-lg":["16px",{lineHeight:"24px",fontWeight:"500"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}],"display-hero":["44px",{lineHeight:"52px",letterSpacing:"-0.02em",fontWeight:"800"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"0em",fontWeight:"700"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.005em",fontWeight:"700"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 w-full max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6"><div class="flex items-center gap-8"><div class="flex items-center gap-3 shrink-0"><img alt="CogniFlip Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W5R35l1oL8idhw5T7I_ZljWdnQ3L1FUxryB-Ot9fI4aRmYWchya0NeTy3ECj-uYtmEEAMIBuWqSYFEt5AAESB9k7R3R-DSoP6oLyMp5Kj_Bsnow2d7X6mYdcGMBgXyAEcMfFD6VANYtyRuJ7yPoDEdQVZjVaG6Q4vtn4BsuWlHqyNOeuXSjatkwb9Vwh0IQ_upZF5jeR1A7sM0WsK6PYr1zmLIAkyzozg9SGq34U_zHvMZcMnQE-C0"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-none tracking-tight">CogniFlip</span><span class="font-label-ui text-label-ui text-on-surface-variant font-medium tracking-normal mt-0.5">AI Learning &amp; Code Lab</span></div></div><nav class="hidden xl:flex items-center gap-2" data-active-classes="bg-surface-container text-primary font-headline-sm"><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all inline-flex items-center gap-2" data-path="beranda" href="#">Beranda</a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all inline-flex items-center gap-2" data-path="belajar" href="#"><span>Belajar</span><span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui">Alur Utama</span></a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all inline-flex items-center gap-2" data-path="mini-ide" href="#"><span>Mini IDE</span><span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-code-sm text-label-code-sm">Lab Kode</span></a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="misi-debug" href="#">Misi Debug</a><a class="px-3 py-2 rounded-xl text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="komunitas" href="#">Komunitas</a></nav></div><div class="flex items-center gap-4 shrink-0"><div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-ui text-label-ui shadow-sm"><span class="material-symbols-outlined text-[18px] text-secondary">bolt</span><span>120 XP</span></div><a class="hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-primary-container text-on-primary font-headline-sm text-label-ui shadow-[0_4px_0_0_#312e81] active:translate-y-0.5 active:shadow-[0_2px_0_0_#312e81] transition-all hover:bg-primary" data-path="belajar" href="#">Mulai Belajar</a><div class="flex items-center gap-2 pl-2"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="material-symbols-outlined text-on-surface-variant text-[20px] cursor-pointer hover:text-on-surface">expand_more</span></div></div></div></header><main class="w-full pt-20 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Workspace Context Bar -->
+<section class="w-full bg-surface-container-low py-4 px-6 lg:px-12">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div class="flex items-center gap-4 flex-wrap">
+<a class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface-container-lowest text-on-surface-variant hover:text-primary font-headline-sm text-body-sm shadow-sm transition-all hover:-translate-y-0.5" href="#" title="Kembali ke Daftar Materi">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Kembali ke Materi Pelajaran</span>
+</a>
+<div class="flex items-center gap-2 bg-surface-container px-3.5 py-1.5 rounded-full">
+<span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary text-on-primary font-headline-sm text-label-ui">1</span>
+<span class="font-headline-sm text-label-ui text-on-surface">Langkah 1 dari 3: Jelaskan Konsep</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-headline-sm text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-tertiary">psychology</span>
+<span>Misi: Ajari FlipBot tentang Pengulangan (Loop)</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-secondary-container animate-pulse"></span>
+<span>Kemajuan tersimpan otomatis</span>
+</div>
+</div>
+</section>
+<!-- Multi-Step Stepper Ribbon -->
+<section class="w-full bg-surface-container-lowest py-3 px-6 lg:px-12 shadow-sm">
+<div class="max-w-7xl mx-auto flex items-center justify-between gap-2 overflow-x-auto">
+<div class="flex items-center gap-3 shrink-0">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-label-ui shadow-sm">
+          1
+        </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-label-ui text-primary">Tahap 1: Jelaskan Konsep</span>
+<span class="font-body-sm text-label-code-sm text-on-surface-variant">Kamu bertindak sebagai guru</span>
+</div>
+</div>
+<div class="h-0.5 flex-1 min-w-[32px] bg-primary"></div>
+<div class="flex items-center gap-3 shrink-0 opacity-60">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-headline-sm text-label-ui">
+          2
+        </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-label-ui text-on-surface">Tahap 2: Prediksi Output</span>
+<span class="font-body-sm text-label-code-sm text-on-surface-variant">Tebak respon FlipBot</span>
+</div>
+</div>
+<div class="h-0.5 flex-1 min-w-[32px] bg-surface-container-highest"></div>
+<div class="flex items-center gap-3 shrink-0 opacity-60">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-headline-sm text-label-ui">
+          3
+        </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-label-ui text-on-surface">Tahap 3: Uji &amp; Buktikan</span>
+<span class="font-body-sm text-label-code-sm text-on-surface-variant">Simulasi kode bersama</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Split Canvas Area -->
+<div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col lg:flex-row gap-8 items-start">
+<!-- LEFT COLUMN: FlipBot Interaction & Student Teaching Area -->
+<div class="w-full lg:w-7/12 flex flex-col gap-6">
+<!-- FlipBot Curious Dialogue Card -->
+<div class="relative bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-md">
+<!-- AI State Floating Pill -->
+<div class="flex items-center justify-between pb-4 gap-4">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed font-headline-sm text-label-ui">
+<span class="inline-flex w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+<span>FlipBot • Robot AI Pembelajar (Sedang Menyimak Gurunya)</span>
+</div>
+<div class="inline-flex items-center gap-1.5 text-secondary font-headline-sm text-label-ui">
+<span class="material-symbols-outlined text-[18px]">school</span>
+<span>Peranmu: Guru FlipBot</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-5 items-start">
+<!-- Robot Mascot Avatar Frame -->
+<div class="relative shrink-0 flex flex-col items-center">
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-surface-container flex items-center justify-center shadow-inner relative overflow-hidden">
+<!-- Visual Robot Avatar -->
+<svg class="w-16 h-16 sm:w-20 sm:h-20" fill="none" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<!-- Antenna -->
+<circle class="animate-pulse" cx="50" cy="14" fill="#fea619" r="5"></circle>
+<path d="M50 19V28" stroke="#312e81" stroke-linecap="round" stroke-width="4"></path>
+<!-- Head -->
+<rect fill="#4338ca" height="44" rx="14" width="56" x="22" y="28"></rect>
+<rect fill="#131b2e" height="32" rx="8" width="44" x="28" y="34"></rect>
+<!-- Eyes: Big, Curious, Inquisitive -->
+<circle cx="40" cy="48" fill="#4cd7f6" r="6"></circle>
+<circle cx="42" cy="46" fill="#ffffff" r="2"></circle>
+<circle cx="60" cy="48" fill="#4cd7f6" r="7"></circle>
+<circle cx="62" cy="45" fill="#ffffff" r="2.5"></circle>
+<!-- Curious slight tilt mouth -->
+<path d="M44 57C48 60 54 60 57 56" stroke="#4cd7f6" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Ears/Bolts -->
+<rect fill="#fea619" height="12" rx="3" width="6" x="16" y="44"></rect>
+<rect fill="#fea619" height="12" rx="3" width="6" x="78" y="44"></rect>
+<!-- Neck & Shoulders -->
+<path d="M38 72H62L68 86H32L38 72Z" fill="#dae2fd"></path>
+</svg>
+</div>
+<div class="mt-2 text-center">
+<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-bold">
+<span class="material-symbols-outlined text-[14px]">sensors</span> Online
+              </span>
+</div>
+</div>
+<!-- Speech Balloon -->
+<div class="relative flex-1 bg-surface-container-low rounded-xl p-5 shadow-sm">
+<div class="font-headline-sm text-body-lg text-primary mb-2 flex items-center gap-2">
+<span>"Halo Guruku! Aku lagi bingung nih..."</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">help</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              Kenapa ya kita butuh <strong>'pengulangan' (loop)</strong> di dalam kode? Bukannya kita bisa ketik perintah yang sama berulang-ulang sampai tangan kita pegal?
+            </p>
+<p class="font-body-md text-body-md text-on-surface mt-2.5 leading-relaxed bg-surface-container-lowest/80 p-3 rounded-lg">
+              Bisa tolong jelaskan dengan bahasamu sendiri, apa sih untungnya kita memakai pengulangan saat menyusun kode komputer?
+            </p>
+</div>
+</div>
+<!-- Supportive Micro-Prompt Advice -->
+<div class="mt-6 flex items-start gap-3 bg-secondary-fixed/50 p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0 mt-0.5">tips_and_updates</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-label-ui text-on-secondary-fixed">Tips Mengajar dari Sekolah Robot:</span>
+<span class="font-body-sm text-body-sm text-on-secondary-fixed-variant mt-0.5">
+              Jelaskan dengan katamu sendiri seperti sedang bercerita ke teman sebangku. Tidak ada jawaban yang salah! FlipBot akan berusaha memahami cara berpikirmu, bukan hafalan kata-kata kaku.
+            </span>
+</div>
+</div>
+</div>
+<!-- Teaching Input Response Container -->
+<div class="bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-md flex flex-col gap-5">
+<div class="flex items-center justify-between flex-wrap gap-2">
+<label class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2" for="student-explanation">
+<span class="material-symbols-outlined text-primary text-[24px]">edit_note</span>
+<span>Tulis Penjelasanmu untuk FlipBot</span>
+</label>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant bg-surface-container-low px-3 py-1 rounded-full" id="word-count">
+            0 kata • Cukup 1-3 kalimat santai
+          </span>
+</div>
+<!-- Student Textarea with focus comfort -->
+<div class="relative">
+<textarea class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md p-4 rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:shadow-[0_0_0_3px_#4338ca] transition-all resize-y placeholder:text-on-surface-variant/60" id="student-explanation" placeholder="Menurutku, pengulangan (loop) itu berguna karena jika kita ingin membuat robot melangkah 100 kali, kita tidak usah mengetik perintah 'maju' sebanyak seratus baris. Kita cukup..." rows="6"></textarea>
+</div>
+<!-- Audio Input Alternative Strip -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface-container-low p-3.5 rounded-xl">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">mic</span>
+<span>Malas mengetik panjang? Tekan mikrofon dan ceritakan suaramu:</span>
+</div>
+<button class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-surface-container-lowest text-primary font-headline-sm text-label-ui shadow-sm hover:bg-surface-container transition-all active:scale-95" id="mic-btn" onclick="toggleMicrophone()" type="button">
+<span class="material-symbols-outlined text-[18px]" id="mic-icon">mic</span>
+<span id="mic-label">Rekam Suara</span>
+</button>
+</div>
+<!-- Primary Action Group -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-2">
+<button class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-surface-container text-on-surface-variant font-headline-sm text-label-ui hover:bg-surface-container-high transition-all active:translate-y-0.5" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+<span>Simpan &amp; Lanjut Nanti</span>
+</button>
+<button class="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full bg-primary-container text-on-primary font-headline-sm text-label-ui shadow-[0_4px_0_0_#312e81] active:translate-y-0.5 active:shadow-[0_2px_0_0_#312e81] transition-all hover:bg-primary" id="submit-explanation-btn" onclick="sendExplanation()" type="button">
+<span class="material-symbols-outlined text-[20px]">send</span>
+<span>Kirim Penjelasan ke Robot</span>
+</button>
+</div>
+<!-- Submission Status Indicator -->
+<div class="hidden p-4 rounded-xl bg-tertiary-container text-on-tertiary font-body-sm text-body-sm flex items-center gap-3" id="status-notification">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span>Hebat! FlipBot sedang membaca penjelasanmu dan bersiap menjawab di Tahap 2...</span>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Lesson Reference, Code Snippet & Pedagogical Clarity -->
+<div class="w-full lg:w-5/12 flex flex-col gap-6">
+<!-- Pinned Lesson Concept Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 md:p-7 shadow-md flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-label-ui uppercase tracking-wider text-secondary">Kartu Referensi Materi</span>
+<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">code_blocks</span> Modul 03
+          </span>
+</div>
+<h3 class="font-headline-md text-headline-sm text-on-surface">
+          Bagaimana Bentuk Pengulangan di Kode Nyata?
+        </h3>
+<p class="font-body-md text-body-sm text-on-surface-variant">
+          Perhatikan potongan kode visual di bawah ini yang kemarin kamu pelajari di laboratorium Mini IDE:
+        </p>
+<!-- Syntax / Visual Script Preview -->
+<div class="bg-[#0f172a] rounded-xl p-4.5 font-label-code-lg text-label-code-sm text-on-primary flex flex-col gap-2.5 shadow-inner">
+<div class="flex items-center justify-between pb-2">
+<span class="text-on-surface-variant text-[11px] font-mono tracking-wider uppercase">Sintaks Blok Logika</span>
+<div class="flex gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim inline-block"></span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-secondary-fixed font-bold">ulang</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high/20 text-tertiary-fixed font-bold">5 kali</span>
+<span class="text-on-primary-container">:</span>
+</div>
+<div class="pl-6 flex items-center gap-2">
+<span class="text-on-tertiary-container">flipbot</span>
+<span class="text-surface-dim">.</span>
+<span class="text-[#34d399] font-semibold">lompat</span>
+<span class="text-surface-variant">()</span>
+</div>
+</div>
+<!-- Socratic Guide Questions -->
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col gap-3">
+<span class="font-headline-sm text-label-ui text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+            Pikirkan 2 Pertanyaan Ini Saat Menjelaskan:
+          </span>
+<ul class="flex flex-col gap-2 text-on-surface font-body-sm text-body-sm">
+<li class="flex items-start gap-2">
+<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-primary-fixed text-primary text-[10px] font-bold mt-0.5">1</span>
+<span>Apa yang terjadi pada tubuh FlipBot jika instruksi di atas dijalankan?</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-primary-fixed text-primary text-[10px] font-bold mt-0.5">2</span>
+<span>Kapan FlipBot tahu bahwa tugas melompatnya sudah harus berhenti?</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Illustration Card: Activity / Visual Context -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-md flex flex-col gap-4">
+<div class="w-full h-44 rounded-xl overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A friendly illustrated scene in warm modern cartoon style showing an Indonesian school boy cheerfully teaching a small blue and orange companion robot. On the digital board in background, simple code blocks repeat with glowing jump arrows. Sunlight enters through an airy classroom lab window. Soft colors with indigo and amber touches." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsx74e2t0UzjIrD1QFue-ZdrfUSI_nI5igzHYN9nYVlGggMZ5tNloNTza9TYUAgWRgiZ1caIE1WAaKnfCmBWEox2rQOW5MbyGdQQKVm6swwyyKnEnpiIZaYxjnS82iAGdu_QEGpfP2baxpZ4-QQrBJVLq6qqAeqbjxVwo_AE5kIBO1zi5kYd1akQUULmeT1apW4XtDlHPnXlahYfLlW756VzebQN5N9BpqWuS2I9l8ovUBwLSj3A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-4">
+<span class="text-on-primary font-headline-sm text-label-ui drop-shadow-sm">
+              Makin sering mengajari orang lain, ingatan logikamu makin kuat!
+            </span>
+</div>
+</div>
+<!-- Real AI Transparency & Safety Accordion/Note -->
+<div class="p-4 rounded-xl bg-surface-container flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-container text-[20px] shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-label-ui text-on-surface">Catatan Kejujuran AI CogniFlip:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+              FlipBot mengevaluasi idemu dengan <em>rubrik pemahaman konsep terbuka</em>, bukan mencocokkan kata kunci seperti mesin pencari. Tuliskan saja apa yang ada di pikiranmu!
+            </p>
+</div>
+</div>
+</div>
+<!-- Interactive Progress Quick Stats -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[22px]">star</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-label-ui text-on-surface">Hadiah Misi Kali Ini</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">+40 XP &amp; Lencana 'Guru Muda'</span>
+</div>
+</div>
+<span class="font-label-code-sm text-label-code-sm font-bold text-primary px-3 py-1 bg-surface-container rounded-lg">
+          Misi 03/12
+        </span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple word count and mic toggle interactions for child comfort
+  const studentTextarea = document.getElementById('student-explanation');
+  const wordCountSpan = document.getElementById('word-count');
+  const micBtn = document.getElementById('mic-btn');
+  const micIcon = document.getElementById('mic-icon');
+  const micLabel = document.getElementById('mic-label');
+  const statusNotification = document.getElementById('status-notification');
+
+  let isRecording = false;
+
+  if (studentTextarea) {
+    studentTextarea.addEventListener('input', function() {
+      const text = this.value.trim();
+      const words = text ? text.split(/\s+/).length : 0;
+      if (words === 0) {
+        wordCountSpan.textContent = '0 kata • Cukup 1-3 kalimat santai';
+      } else if (words < 10) {
+        wordCountSpan.textContent = words + ' kata • Bagus, teruskan!';
+      } else {
+        wordCountSpan.textContent = words + ' kata • Penjelasan yang mantap!';
+      }
+    });
+  }
+
+  function toggleMicrophone() {
+    isRecording = !isRecording;
+    if (isRecording) {
+      micBtn.classList.remove('bg-surface-container-lowest', 'text-primary');
+      micBtn.classList.add('bg-error', 'text-on-error');
+      micIcon.textContent = 'graphic_eq';
+      micLabel.textContent = 'Mendengarkan... (Klik selesai)';
+      // Simulate speech speech input append
+      setTimeout(() => {
+        if (isRecording && studentTextarea) {
+          if (!studentTextarea.value.trim()) {
+            studentTextarea.value = "Pengulangan itu seperti menyuruh FlipBot menyikat gigi sampai bersih tanpa harus bilang sikat lagi setiap detik!";
+            studentTextarea.dispatchEvent(new Event('input'));
+          }
+        }
+      }, 1500);
+    } else {
+      micBtn.classList.remove('bg-error', 'text-on-error');
+      micBtn.classList.add('bg-surface-container-lowest', 'text-primary');
+      micIcon.textContent = 'mic';
+      micLabel.textContent = 'Rekam Suara';
+    }
+  }
+
+  function sendExplanation() {
+    const val = studentTextarea.value.trim();
+    if (!val) {
+      alert("Ayo tulis atau ucapkan sedikit penjelasanmu agar FlipBot mengerti!");
+      studentTextarea.focus();
+      return;
+    }
+    statusNotification.classList.remove('hidden');
+    document.getElementById('submit-explanation-btn').disabled = true;
+    document.getElementById('submit-explanation-btn').classList.add('opacity-75');
+  }
+</script></main><footer class="w-full bg-surface-container-lowest mt-16 shadow-[0_-1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-12 flex flex-col md:flex-row items-center justify-between gap-6"><div class="flex items-center gap-3"><img alt="CogniFlip Logo" class="h-6 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W5R35l1oL8idhw5T7I_ZljWdnQ3L1FUxryB-Ot9fI4aRmYWchya0NeTy3ECj-uYtmEEAMIBuWqSYFEt5AAESB9k7R3R-DSoP6oLyMp5Kj_Bsnow2d7X6mYdcGMBgXyAEcMfFD6VANYtyRuJ7yPoDEdQVZjVaG6Q4vtn4BsuWlHqyNOeuXSjatkwb9Vwh0IQ_upZF5jeR1A7sM0WsK6PYr1zmLIAkyzozg9SGq34U_zHvMZcMnQE-C0"/><span class="font-label-ui text-label-ui text-on-surface-variant">© 2025 CogniFlip. Ruang Eksplorasi &amp; Kreasi Kode Anak Bangsa.</span></div><div class="flex items-center gap-6"><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary transition-colors" data-path="bantuan-flipbot" href="#">Petunjuk FlipBot</a><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary transition-colors" data-path="panduan-guru" href="#">Panduan Guru &amp; Orang Tua</a><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-primary transition-colors" data-path="privasi-anak" href="#">Ruang Aman Anak</a></div></div></footer></body></html>
