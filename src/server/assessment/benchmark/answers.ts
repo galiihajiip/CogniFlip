@@ -1,3 +1,5 @@
+import "server-only";
+
 /**
  * Synthetic learner answers with expected assessment labels.
  *

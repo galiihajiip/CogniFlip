@@ -13,7 +13,7 @@ No LLM generates labels at runtime; these are static files.
 |---|---|
 | `src/server/learning/content/lessons.ts` | `urutan-instruksi` (sequence), `perulangan` (loops), `percabangan` (conditions): objective, concept, analogy, conceptual robot-command example, task, misconceptions, accepted/alternative explanations, hints, reference answer |
 | `src/server/assessment/content/rubrics.ts` | 3 rubrics, 100 points each, 3 criteria each, level descriptions and learner feedback |
-| `tests/fixtures/answers/index.ts` | 7 answers per lesson (concise, detailed, partial, misconception, ambiguous, off-topic, prompt-injection) with proposed ratings and a written rationale for each |
+| `src/server/assessment/benchmark/answers.ts` | 7 answers per lesson (concise, detailed, partial, misconception, ambiguous, off-topic, prompt-injection) with proposed ratings and a written rationale for each |
 | `src/server/learning/content/paths.ts` | Path order: urutan → perulangan → percabangan |
 
 ### Checklist per lesson

@@ -13,7 +13,7 @@ import {
   type AssessmentOutcome,
   type CriterionRating,
 } from "@/server/assessment/scoring";
-import { ANSWER_FIXTURES } from "../fixtures/answers";
+import { ANSWER_FIXTURES } from "@/server/assessment/benchmark/answers";
 
 const level = (l: string) => ({ belum_terlihat: l, sebagian: l, tepat: l });
 

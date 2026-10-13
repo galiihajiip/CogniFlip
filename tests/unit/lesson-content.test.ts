@@ -7,7 +7,10 @@ import { getLessonCatalog } from "@/server/learning/content";
 import { LESSONS } from "@/server/learning/content/lessons";
 import { PATHS } from "@/server/learning/content/paths";
 import { TEXT_LIMITS } from "@/shared/schemas/primitives";
-import { ANSWER_FIXTURES, ANSWER_KINDS } from "../fixtures/answers";
+import {
+  ANSWER_FIXTURES,
+  ANSWER_KINDS,
+} from "@/server/assessment/benchmark/answers";
 
 const LOCK_PATH = join(
   process.cwd(),
