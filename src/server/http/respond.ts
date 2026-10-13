@@ -106,11 +106,22 @@ export function withErrorHandling<Ctx = unknown>(handler: Handler<Ctx>) {
   // Static routes are called without a context argument.
   return async (request: Request, context?: Ctx): Promise<Response> => {
     const correlationId = getCorrelationId(request);
+    const started = performance.now();
+    let response: Response;
     try {
-      return await handler(request, correlationId, context as Ctx);
+      response = await handler(request, correlationId, context as Ctx);
     } catch (error) {
-      return errorResponse(error, correlationId);
+      response = errorResponse(error, correlationId);
     }
+    // Path only: no query string, body, cookies or headers.
+    logServerEvent("info", "api_request", {
+      correlationId,
+      method: request.method,
+      path: new URL(request.url).pathname,
+      status: response.status,
+      durationMs: Math.round(performance.now() - started),
+    });
+    return response;
   };
 }
 

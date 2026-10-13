@@ -19,7 +19,12 @@ export const integrationStatusSchema = z.discriminatedUnion("available", [
   }),
   z.strictObject({
     available: z.literal(false),
-    reason: z.enum(["not_configured", "not_implemented", "unreachable"]),
+    reason: z.enum([
+      "not_configured",
+      "not_implemented",
+      "unreachable",
+      "disabled",
+    ]),
   }),
 ]);
 export type IntegrationStatus = z.infer<typeof integrationStatusSchema>;

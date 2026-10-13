@@ -53,6 +53,8 @@ const schema = z.object({
   LLM_PROVIDER: z.enum(["gemini"]).optional(),
   /** Deterministic mock AI for local development and tests; refused in production. */
   AI_MOCK_MODE: z.enum(["true", "false"]).optional(),
+  /** Kill switch: no AI calls at all (cost or incident control). */
+  AI_DISABLED: z.enum(["true", "false"]).optional(),
   /** Show unreviewed draft lessons for local testing; refused in production. */
   ALLOW_DRAFT_CONTENT: z.enum(["true", "false"]).optional(),
   LLM_API_KEY: nonEmpty.optional(),

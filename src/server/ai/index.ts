@@ -16,6 +16,7 @@ const cache = globalThis as typeof globalThis & {
  * configured, otherwise null (callers return PROVIDER_UNAVAILABLE).
  */
 export function createAiProvider(env: ServerEnv): AiProvider | null {
+  if (env.AI_DISABLED === "true") return null;
   if (env.AI_MOCK_MODE === "true" && env.NODE_ENV !== "production")
     return createDevMockProvider();
   if (isIntegrationConfigured(env, "ai") && env.LLM_PROVIDER === "gemini")
@@ -26,6 +27,7 @@ export function createAiProvider(env: ServerEnv): AiProvider | null {
 /** Gateway dependencies shared across requests in one server process. */
 export function getGatewayDeps(env: ServerEnv): GatewayDeps {
   const key = [
+    env.AI_DISABLED,
     env.AI_MOCK_MODE,
     env.LLM_PROVIDER,
     env.LLM_MODEL,

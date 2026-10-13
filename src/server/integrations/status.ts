@@ -27,6 +27,8 @@ export function getIntegrationStatus(
   name: IntegrationName,
   implemented: Record<IntegrationName, boolean> = IMPLEMENTED_INTEGRATIONS,
 ): IntegrationStatus {
+  if (name === "ai" && env.AI_DISABLED === "true")
+    return { available: false, reason: "disabled" };
   // The labelled dev mock counts as available, but is reported as mock.
   if (
     name === "ai" &&
