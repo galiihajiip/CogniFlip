@@ -29,6 +29,12 @@ export const ERROR_DEFINITIONS: Record<ErrorCode, ErrorDefinition> = {
     retryable: false,
     message: "Kamu perlu masuk dulu untuk melanjutkan.",
   },
+  INVALID_CREDENTIALS: {
+    status: 401,
+    retryable: false,
+    // Neutral: never says whether the handle exists.
+    message: "Nama pengguna atau kata sandi belum cocok. Coba lagi.",
+  },
   FORBIDDEN: {
     status: 403,
     retryable: false,
