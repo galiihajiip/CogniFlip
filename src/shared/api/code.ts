@@ -82,3 +82,29 @@ export const CODE_LIMITS = {
   maxLines: 500,
   maxFindings: 20,
 } as const;
+
+const capabilityViewSchema = z.strictObject({
+  available: z.boolean(),
+  tool: z.string().optional(),
+  version: z.string().optional(),
+});
+
+export const capabilityMatrixResponseSchema = z.strictObject({
+  registryVersion: z.string(),
+  languages: z.array(
+    z.strictObject({
+      id: z.string(),
+      label: z.string(),
+      supportLevel: z.enum([
+        "AI_REVIEW_ONLY",
+        "STATIC_ANALYSIS",
+        "COMPILE_VERIFIED",
+        "RUNTIME_VERIFIED",
+      ]),
+      canAnalyzeWithAi: z.boolean(),
+      capabilities: z.record(z.string(), capabilityViewSchema),
+      limitations: z.array(z.string()),
+    }),
+  ),
+  correlationId: z.string(),
+});
