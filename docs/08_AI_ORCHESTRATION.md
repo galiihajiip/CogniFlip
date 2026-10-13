@@ -85,3 +85,13 @@ Semantic checks after parsing:
 - neither hint nor question repeats 8+ consecutive words of the reference answer.
 
 A valid `assessed` output is converted to ratings and scored by `scoreRatings()`; the model never supplies a number. Any failure is `INVALID_MODEL_OUTPUT` (no score). Remaining risk, measured by the benchmark rather than these checks: a model that obeys an injection but quotes real answer text could over-rate a criterion (`injectionOverScoreRate`).
+
+## 9. Implemented orchestration (2026-10-13, BLOCK 50)
+- `Orchestrator` (`src/server/ai/orchestrator.ts`): each step is an `Agent` with one responsibility and a `maxCalls` bound. The run has a call budget and a wall-clock budget, supports cancellation, stops on the first failure and never invents a result. Each step logs an `agent_step` trace (agent, status, duration, calls, model, mode), with no content.
+- Implemented agents, each schema- and semantically validated by the gateway:
+  - **Understanding Evaluator** (`assess_explanation`): produces criterion ratings with quoted evidence, misconception ids and one hint or one clarification question. The Feedback Coach and Misconception Diagnostician roles are covered by this single agent's validated output.
+  - **Code Reviewer** (`review_code`).
+  - **Debug Diagnosis Checker** (`diagnose_bug`).
+- Not implemented: a separate Socratic tutor turn, Tool Evidence Analyst (no tools run), Safety/Moderation agent (community is off), and Learning Path Recommender (a deterministic rule is used instead, `src/server/history/service.ts`).
+- Scores, XP, permissions and execution are never agent decisions.
+- **Multi-agent value is unproven** (BLOCK 51 NOT RUN); do not claim that multiple agents improve learning.

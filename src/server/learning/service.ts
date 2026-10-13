@@ -1,6 +1,11 @@
 import "server-only";
 import { getRubric } from "@/server/assessment/content";
-import { evaluateExplanation } from "@/server/ai/gateway";
+import {
+  MAX_ATTEMPTS,
+  evaluateExplanation,
+  type EvaluationResult,
+} from "@/server/ai/gateway";
+import { Orchestrator } from "@/server/ai/orchestrator";
 import { getGatewayDeps } from "@/server/ai";
 import {
   getServerEnv,
@@ -73,8 +78,7 @@ export function getTutor(env: ServerEnv) {
     const engine = new TutorSessionEngine({
       store,
       // Read configuration at call time, not when the engine was created.
-      evaluate: (input) =>
-        evaluateExplanation(getGatewayDeps(getServerEnv()), input),
+      evaluate: (input) => evaluateViaOrchestrator(getServerEnv(), input),
       resolve: (session) => {
         const lesson = catalog.getVersion(
           session.lesson.id,
@@ -123,4 +127,47 @@ export async function requesterForCreate(request: Request, env: ServerEnv) {
 export async function requesterOwnerHash(request: Request, env: ServerEnv) {
   const user = await getCurrentUser(request, env);
   return user ? userOwnerHash(user.id) : existingGuestHash(request);
+}
+
+/**
+ * The tutor's `assess_explanation` workflow: one agent (the Understanding
+ * Evaluator) under the orchestrator's call and wall-clock budget (BLOCK 50).
+ */
+export async function evaluateViaOrchestrator(
+  env: ServerEnv,
+  input: Parameters<typeof evaluateExplanation>[1],
+): Promise<EvaluationResult> {
+  const orchestrator = new Orchestrator("assess_explanation", {
+    maxCalls: MAX_ATTEMPTS,
+    maxWallMs: env.AI_TIMEOUT_SECONDS * 1000 * MAX_ATTEMPTS + 2_000,
+  });
+  let result: EvaluationResult | undefined;
+  const step = await orchestrator.step(
+    {
+      name: "understanding_evaluator",
+      responsibility:
+        "Rate each rubric criterion with evidence from the answer.",
+      maxCalls: MAX_ATTEMPTS,
+      run: async (_input, signal) => {
+        result = await evaluateExplanation(getGatewayDeps(env), {
+          ...input,
+          signal,
+        });
+        return result.ok
+          ? {
+              ok: true,
+              value: result,
+              mode: result.mode,
+              model: result.model,
+              attempts: result.attempts,
+            }
+          : result;
+      },
+    },
+    input,
+  );
+  if (result && step.ok) return result;
+  if (result && !result.ok) return result;
+  // Budget exhausted or cancelled before a result: no score, retryable.
+  return { ok: false, code: "PROVIDER_TIMEOUT", retryable: true, attempts: 0 };
 }
