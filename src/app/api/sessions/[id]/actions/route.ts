@@ -1,9 +1,13 @@
 import { getServerEnv } from "@/server/config/env";
-import { assertSameOrigin, existingGuestHash } from "@/server/http/guest";
+import { assertSameOrigin } from "@/server/http/guest";
 import { parseInput, readJsonBody } from "@/server/http/request";
 import { contractResponse, withErrorHandling } from "@/server/http/respond";
 import { resolveSessionContent } from "@/server/learning/session-content";
-import { getOwnedSession, getTutor } from "@/server/learning/service";
+import {
+  getOwnedSession,
+  getTutor,
+  requesterOwnerHash,
+} from "@/server/learning/service";
 import { toLearnerView } from "@/server/learning/session/view";
 import {
   sessionActionRequestSchema,
@@ -30,7 +34,7 @@ export const POST = withErrorHandling<Ctx>(
       await readJsonBody(request),
     );
     // Ownership first: a non-owner learns nothing about the session.
-    await getOwnedSession(env, id, existingGuestHash(request));
+    await getOwnedSession(env, id, await requesterOwnerHash(request, env));
     const { engine } = getTutor(env);
 
     const session =

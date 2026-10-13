@@ -2,7 +2,7 @@ import { getRubric } from "@/server/assessment/content";
 import { getServerEnv } from "@/server/config/env";
 import { FixedWindowLimiter } from "@/server/ai/rate-limit";
 import { AppError } from "@/server/http/errors";
-import { assertSameOrigin, clientIp, guestIdentity } from "@/server/http/guest";
+import { assertSameOrigin, clientIp } from "@/server/http/guest";
 import { parseInput, readJsonBody } from "@/server/http/request";
 import {
   contractResponse,
@@ -10,7 +10,11 @@ import {
   withErrorHandling,
 } from "@/server/http/respond";
 import { getLessonCatalog } from "@/server/learning/content";
-import { getLearnerLesson, getTutor } from "@/server/learning/service";
+import {
+  getLearnerLesson,
+  getTutor,
+  requesterForCreate,
+} from "@/server/learning/service";
 import { toLearnerView } from "@/server/learning/session/view";
 import {
   createSessionRequestSchema,
@@ -40,12 +44,13 @@ export const POST = withErrorHandling(async (request, correlationId) => {
   const rubric = getRubric(lesson.rubric.rubricId, lesson.rubric.version);
   if (!rubric) throw new AppError("INTERNAL_ERROR", "lesson rubric missing");
 
-  const identity = guestIdentity(request, env);
+  const identity = await requesterForCreate(request, env);
   const session = await getTutor(env).engine.start(
     lesson,
     rubric,
     getLessonCatalog().contentHash(lesson),
     identity.keyHash,
+    identity.userId,
   );
   return withCookie(
     contractResponse(

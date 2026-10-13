@@ -75,6 +75,7 @@ export class TutorSessionEngine {
     rubric: Rubric,
     contentHash: string,
     ownerKeyHash: string,
+    ownerUserId?: string,
   ): Promise<TutorSession> {
     if (
       lesson.rubric.rubricId !== rubric.id ||
@@ -88,6 +89,7 @@ export class TutorSessionEngine {
     const session: TutorSession = {
       id: this.newId(),
       ownerKeyHash,
+      ...(ownerUserId ? { ownerUserId } : {}),
       lesson: { id: lesson.id, version: lesson.version, contentHash },
       rubric: { id: rubric.id, version: rubric.version },
       state: "lesson_chosen",

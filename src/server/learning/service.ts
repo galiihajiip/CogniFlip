@@ -2,7 +2,15 @@ import "server-only";
 import { getRubric } from "@/server/assessment/content";
 import { evaluateExplanation } from "@/server/ai/gateway";
 import { getGatewayDeps } from "@/server/ai";
-import { getServerEnv, type ServerEnv } from "@/server/config/env";
+import {
+  getServerEnv,
+  isIntegrationConfigured,
+  type ServerEnv,
+} from "@/server/config/env";
+import { getCurrentUser } from "@/server/auth";
+import { getPool } from "@/server/db/client";
+import { existingGuestHash, guestIdentity, hashKey } from "@/server/http/guest";
+import { PostgresSessionStore } from "@/server/learning/session/pg-store";
 import { AppError } from "@/server/http/errors";
 import { getLessonCatalog } from "@/server/learning/content";
 import { LESSONS } from "@/server/learning/content/lessons";
@@ -50,14 +58,17 @@ const globalForTutor = globalThis as typeof globalThis & {
 };
 
 /**
- * Tutor engine bound to the configured AI gateway. Sessions are kept in
- * process memory until the PostgreSQL store lands (BLOCK 29): they are lost
- * on restart and are not shared between serverless instances.
+ * Tutor engine bound to the configured AI gateway. Sessions are stored in
+ * PostgreSQL when the database is configured; otherwise in process memory
+ * (lost on restart, not shared between serverless instances).
  */
 export function getTutor(env: ServerEnv) {
-  const key = `${env.AI_MAX_CALLS_PER_SESSION}`;
+  const persistent = isIntegrationConfigured(env, "database");
+  const key = `${env.AI_MAX_CALLS_PER_SESSION}|${persistent}`;
   if (globalForTutor.cogniflipTutor?.key !== key) {
-    const store = new InMemorySessionStore();
+    const store: SessionStore = persistent
+      ? new PostgresSessionStore(getPool())
+      : new InMemorySessionStore();
     const catalog = getLessonCatalog();
     const engine = new TutorSessionEngine({
       store,
@@ -95,4 +106,21 @@ export async function getOwnedSession(
   if (!session || session.ownerKeyHash !== ownerKeyHash)
     throw new AppError("NOT_FOUND", "session not found");
   return session;
+}
+
+/** Owner key for a signed-in user; distinct from any guest key. */
+export const userOwnerHash = (userId: string) => hashKey(`user:${userId}`);
+
+/** Who is creating a session: the signed-in user, or a (new) guest. */
+export async function requesterForCreate(request: Request, env: ServerEnv) {
+  const user = await getCurrentUser(request, env);
+  if (user) return { keyHash: userOwnerHash(user.id), userId: user.id };
+  const guest = guestIdentity(request, env);
+  return { keyHash: guest.keyHash, setCookie: guest.setCookie };
+}
+
+/** Owner key for reads/writes; never creates a new identity. */
+export async function requesterOwnerHash(request: Request, env: ServerEnv) {
+  const user = await getCurrentUser(request, env);
+  return user ? userOwnerHash(user.id) : existingGuestHash(request);
 }

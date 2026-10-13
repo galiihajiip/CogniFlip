@@ -4,9 +4,18 @@ Decision: `D-006` in `docs/20_DECISION_LOG.md`. The application uses PostgreSQL 
 
 ## Current state
 
-- No product tables exist yet. `db/migrations/` is intentionally empty; tables arrive with the features that need them (roadmap R2/R6), one small migration at a time.
-- The only table the tooling creates is `schema_migrations` (version, name, checksum, applied_at).
-- Production database host: **not chosen yet** (pending decision).
+| Migration | Tables |
+|---|---|
+| `20261013001541_create_users_and_auth_sessions` | `users` (handle, scrypt hash, role), `auth_sessions` (token hash, expiry, revocation) |
+| `20261013001900_create_profiles` | `profiles` (preset avatar, leaderboard opt-in default false, preferences) |
+| `20261013002118_create_tutor_sessions_and_attempts` | `tutor_sessions` (owner user **or** guest hash, pinned lesson/rubric versions, state, version), `tutor_attempts` (every attempt; score only when assessed, enforced by CHECK constraints; unique idempotency key per session) |
+
+The tooling also creates `schema_migrations`. The production database host is **not chosen yet**.
+
+### Retention
+- Deleting an account cascades its login sessions, profile and tutor sessions/attempts.
+- Guest tutor sessions not updated for 30 days are removed by `deleteStaleGuestSessions()` (`src/server/learning/session/pg-store.ts`). Scheduling it is a deployment task (`docs/17`) and is **not scheduled yet**.
+- Voice recordings are never stored.
 
 ## Local database (Docker)
 

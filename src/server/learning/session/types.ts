@@ -63,6 +63,8 @@ export interface TutorSession {
    * Only the owner may read or change the session.
    */
   ownerKeyHash: string;
+  /** Set when a signed-in user owns the session (history follows the account). */
+  ownerUserId?: string;
   /** Content captured when the session starts; never changes afterwards. */
   lesson: { id: string; version: number; contentHash: string };
   rubric: { id: string; version: number };
