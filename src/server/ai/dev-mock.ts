@@ -14,6 +14,8 @@ import type { StructuredRequest } from "@/server/ai/provider";
  */
 export function createDevMockProvider(): MockAiProvider {
   return new MockAiProvider((request: StructuredRequest) => {
+    if (request.purpose === "code_review")
+      return mockCodeReview(request.untrustedInput);
     const lessonId = request.purpose.split(":")[1] ?? "";
     const rubric = getRubric(lessonId, 1);
     const answer = request.untrustedInput;
@@ -56,4 +58,29 @@ export function createDevMockProvider(): MockAiProvider {
       }),
     };
   });
+}
+
+/** One clearly labelled info finding on the first non-empty line. */
+function mockCodeReview(code: string) {
+  const lines = code.split("\n");
+  const index = lines.findIndex((l) => l.trim() !== "");
+  const line = lines[index]?.trim() ?? "";
+  const findings =
+    index < 0
+      ? []
+      : [
+          {
+            id: "mock-1",
+            category: "readability",
+            severity: "info",
+            title: "[Mode uji] Contoh temuan",
+            explanation:
+              "[Mode uji] Ini temuan contoh dari mock, bukan analisis AI sungguhan.",
+            evidence: line.slice(0, 300),
+            range: { startLine: index + 1, endLine: index + 1 },
+            confidence: "low",
+            remediation: "[Mode uji] Tidak ada tindakan yang diperlukan.",
+          },
+        ];
+  return { kind: "text" as const, text: JSON.stringify({ findings }) };
 }

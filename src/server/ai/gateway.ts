@@ -80,6 +80,134 @@ const RETRY_PROVIDER_ERRORS = new Set<ProviderErrorCode>([
 const defaultSleep = (ms: number) =>
   new Promise<void>((r) => setTimeout(r, ms));
 
+export type StructuredOutcome<T> =
+  | {
+      ok: true;
+      value: T;
+      mode: "live" | "mock";
+      model: string;
+      attempts: number;
+    }
+  | {
+      ok: false;
+      code: GatewayErrorCode;
+      retryable: boolean;
+      retryAfterSeconds?: number;
+      attempts: number;
+    };
+
+/**
+ * Shared call path for every structured AI task: availability check, local
+ * rate limit, bounded attempts (retry only rate limits, outages and invalid
+ * output), output validation, and content-free `ai_call` logs.
+ */
+export async function runStructured<T>(
+  deps: GatewayDeps,
+  task: {
+    purpose: string;
+    /** Extra non-content log fields (e.g. lessonId, promptVersion). */
+    logFields: Record<string, string | number>;
+    instructions: string;
+    untrustedInput: string;
+    responseJsonSchema: Record<string, unknown>;
+    maxOutputTokens: number;
+    rateLimitKey: string;
+    signal?: AbortSignal;
+    validate: (
+      text: string,
+    ) =>
+      | { ok: true; value: T; outcome: string }
+      | { ok: false; problems: string[] };
+  },
+): Promise<StructuredOutcome<T>> {
+  const purpose = task.purpose.split(":")[0];
+  if (!deps.provider) {
+    logServerEvent("warn", "ai_call", { purpose, outcome: "not_configured" });
+    return {
+      ok: false,
+      code: "PROVIDER_UNAVAILABLE",
+      retryable: false,
+      attempts: 0,
+    };
+  }
+  const limit = deps.limiter.check(task.rateLimitKey);
+  if (!limit.allowed) {
+    logServerEvent("warn", "ai_call", {
+      purpose,
+      outcome: "rate_limited_local",
+    });
+    return {
+      ok: false,
+      code: "RATE_LIMITED",
+      retryable: true,
+      retryAfterSeconds: limit.retryAfterSeconds,
+      attempts: 0,
+    };
+  }
+
+  const provider = deps.provider;
+  const sleep = deps.sleep ?? defaultSleep;
+  let last: { code: GatewayErrorCode; retryable: boolean } = {
+    code: "PROVIDER_UNAVAILABLE",
+    retryable: true,
+  };
+
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    const result = await provider.generateStructured({
+      purpose: task.purpose,
+      instructions: task.instructions,
+      untrustedInput: task.untrustedInput,
+      responseJsonSchema: task.responseJsonSchema,
+      maxOutputTokens: task.maxOutputTokens,
+      timeoutMs: deps.timeoutMs,
+      signal: task.signal,
+    });
+    const base = {
+      purpose,
+      provider: provider.name,
+      mode: provider.mode,
+      ...task.logFields,
+      attempt,
+      latencyMs: result.latencyMs,
+    };
+
+    if (!result.ok) {
+      logServerEvent("warn", "ai_call", { ...base, outcome: result.error });
+      last = {
+        code: PROVIDER_TO_CODE[result.error],
+        retryable: result.retryable,
+      };
+      if (attempt < MAX_ATTEMPTS && RETRY_PROVIDER_ERRORS.has(result.error)) {
+        await sleep(250 * 2 ** (attempt - 1));
+        continue;
+      }
+      return { ok: false, ...last, attempts: attempt };
+    }
+
+    const validated = task.validate(result.text);
+    logServerEvent(validated.ok ? "info" : "warn", "ai_call", {
+      ...base,
+      model: result.model,
+      outcome: validated.ok ? validated.outcome : "invalid_output",
+      // Problem descriptions name fields and rules only, never content.
+      problems: validated.ok ? undefined : validated.problems.slice(0, 5),
+      inputTokens: result.usage.inputTokens,
+      outputTokens: result.usage.outputTokens,
+      outputBytes: Math.min(result.text.length, OUTPUT_LIMITS.rawBytes + 1),
+    });
+    if (validated.ok)
+      return {
+        ok: true,
+        value: validated.value,
+        mode: provider.mode,
+        model: result.model,
+        attempts: attempt,
+      };
+    last = { code: "INVALID_MODEL_OUTPUT", retryable: true };
+  }
+  return { ok: false, ...last, attempts: MAX_ATTEMPTS };
+}
+
 export async function evaluateExplanation(
   deps: GatewayDeps,
   input: {
@@ -100,103 +228,34 @@ export async function evaluateExplanation(
       attempts: 0,
     };
 
-  if (!deps.provider) {
-    logServerEvent("warn", "ai_call", {
-      purpose: "evaluate",
-      outcome: "not_configured",
-    });
-    return {
-      ok: false,
-      code: "PROVIDER_UNAVAILABLE",
-      retryable: false,
-      attempts: 0,
-    };
-  }
-
-  const limit = deps.limiter.check(input.rateLimitKey);
-  if (!limit.allowed) {
-    logServerEvent("warn", "ai_call", {
-      purpose: "evaluate",
-      outcome: "rate_limited_local",
-    });
-    return {
-      ok: false,
-      code: "RATE_LIMITED",
-      retryable: true,
-      retryAfterSeconds: limit.retryAfterSeconds,
-      attempts: 0,
-    };
-  }
-
-  const provider = deps.provider;
-  const sleep = deps.sleep ?? defaultSleep;
-  const instructions = buildEvaluatorInstructions(input.lesson, input.rubric);
-  let last: { code: GatewayErrorCode; retryable: boolean } = {
-    code: "PROVIDER_UNAVAILABLE",
-    retryable: true,
-  };
-
-  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-    const result = await provider.generateStructured({
-      purpose: `evaluate:${input.lesson.id}`,
-      instructions,
-      untrustedInput: answer.data,
-      responseJsonSchema: assessmentOutputJsonSchema,
-      maxOutputTokens: MAX_OUTPUT_TOKENS,
-      timeoutMs: deps.timeoutMs,
-      signal: input.signal,
-    });
-
-    const base = {
-      purpose: "evaluate",
-      provider: provider.name,
-      mode: provider.mode,
+  const outcome = await runStructured(deps, {
+    purpose: `evaluate:${input.lesson.id}`,
+    logFields: {
       promptVersion: EVALUATOR_PROMPT_VERSION,
       lessonId: input.lesson.id,
-      attempt,
-      latencyMs: result.latencyMs,
-    };
-
-    if (!result.ok) {
-      logServerEvent("warn", "ai_call", { ...base, outcome: result.error });
-      last = {
-        code: PROVIDER_TO_CODE[result.error],
-        retryable: result.retryable,
-      };
-      if (attempt < MAX_ATTEMPTS && RETRY_PROVIDER_ERRORS.has(result.error)) {
-        await sleep(250 * 2 ** (attempt - 1));
-        continue;
-      }
-      return { ok: false, ...last, attempts: attempt };
-    }
-
-    const validated = validateAssessmentOutput(result.text, {
-      rubric: input.rubric,
-      lesson: input.lesson,
-      answer: answer.data,
-    });
-    logServerEvent(validated.ok ? "info" : "warn", "ai_call", {
-      ...base,
-      model: result.model,
-      outcome: validated.ok ? validated.outcome.status : "invalid_output",
-      // Problem descriptions name criteria and rules only, never answer text.
-      problems: validated.ok ? undefined : validated.problems.slice(0, 5),
-      inputTokens: result.usage.inputTokens,
-      outputTokens: result.usage.outputTokens,
-      outputBytes: Math.min(result.text.length, OUTPUT_LIMITS.rawBytes + 1),
-    });
-
-    if (validated.ok) {
-      return {
-        ok: true,
-        assessment: validated,
-        mode: provider.mode,
-        model: result.model,
-        promptVersion: EVALUATOR_PROMPT_VERSION,
-        attempts: attempt,
-      };
-    }
-    last = { code: "INVALID_MODEL_OUTPUT", retryable: true };
-  }
-  return { ok: false, ...last, attempts: MAX_ATTEMPTS };
+    },
+    instructions: buildEvaluatorInstructions(input.lesson, input.rubric),
+    untrustedInput: answer.data,
+    responseJsonSchema: assessmentOutputJsonSchema,
+    maxOutputTokens: MAX_OUTPUT_TOKENS,
+    rateLimitKey: input.rateLimitKey,
+    signal: input.signal,
+    validate: (text) => {
+      const v = validateAssessmentOutput(text, {
+        rubric: input.rubric,
+        lesson: input.lesson,
+        answer: answer.data,
+      });
+      return v.ok ? { ok: true, value: v, outcome: v.outcome.status } : v;
+    },
+  });
+  if (!outcome.ok) return outcome;
+  return {
+    ok: true,
+    assessment: outcome.value,
+    mode: outcome.mode,
+    model: outcome.model,
+    promptVersion: EVALUATOR_PROMPT_VERSION,
+    attempts: outcome.attempts,
+  };
 }

@@ -108,3 +108,62 @@ export const capabilityMatrixResponseSchema = z.strictObject({
   ),
   correlationId: z.string(),
 });
+
+/** POST /api/code/review */
+export const codeReviewRequestSchema = z.strictObject({
+  language: z.string().trim().min(1).max(40),
+  code: z
+    .string()
+    .min(1)
+    .refine((c) => c.trim().length > 0, { message: "empty" })
+    .refine(
+      (c) => new TextEncoder().encode(c).byteLength <= CODE_LIMITS.maxBytes,
+      {
+        message: "too_large",
+      },
+    )
+    .refine((c) => c.split("\n").length <= CODE_LIMITS.maxLines, {
+      message: "too_many_lines",
+    }),
+  goal: z.string().trim().max(300).optional(),
+  framework: z.string().trim().max(60).optional(),
+  versions: z.string().trim().max(60).optional(),
+  context: z.string().trim().max(500).optional(),
+});
+
+export const QUALITY_DIMENSIONS = [
+  "correctness",
+  "readability",
+  "maintainability",
+  "performance",
+  "security",
+] as const;
+
+export const codeReviewResponseSchema = z.strictObject({
+  language: z.strictObject({
+    id: z.string(),
+    label: z.string(),
+    supportLevel: z.enum([
+      "AI_REVIEW_ONLY",
+      "STATIC_ANALYSIS",
+      "COMPILE_VERIFIED",
+      "RUNTIME_VERIFIED",
+    ]),
+  }),
+  findings: z.array(findingSchema),
+  quality: z.strictObject({
+    kind: z.literal("code_quality"),
+    version: z.string(),
+    basis: z.string(),
+    dimensions: z.array(
+      z.strictObject({
+        dimension: z.enum(QUALITY_DIMENSIONS),
+        score: z.number().int().min(0).max(100),
+        findings: z.number().int(),
+      }),
+    ),
+  }),
+  limitations: z.array(z.string()),
+  mockMode: z.boolean(),
+  correlationId: z.string(),
+});
