@@ -62,3 +62,26 @@ Learner text, source-code comments, README files, uploaded projects and communit
 
 ## 7. Logging and evaluation
 Log trace ID, role, schema version, provider/model, duration, outcome, retry count, and usage where available. Do not log hidden chain-of-thought or full child content by default. Maintain reviewed test examples for correct paraphrases, concise answers, misconceptions, missing evidence, contradictions, off-topic input, prompt injection, malformed output, timeouts, and provider failure. Label expected results before provider comparison; track false-pass and false-fail rates.
+
+## 8. Implemented evaluator contract (2026-10-13, BLOCK 16)
+Source of truth: `src/server/assessment/ai-contract.ts` (`assessmentOutputSchema`, `validateAssessmentOutput`). Every object is strict, so unknown fields such as `score`, `xp`, `role`, `weights` or tool calls make the output invalid.
+
+```
+{ status: "assessed",
+  criteria: [ { criterionKey, rating: belum_terlihat|sebagian|tepat,
+                evidence: { kind: "quote", text ≤300, start?, end? } | { kind: "inference", text ≤300 } | { kind: "none" },
+                rationale ≤400, uncertainty: low|medium|high } ] (1–8),
+  misconceptionIds: [ ≤8 ],
+  hint ≤300 }
+| { status: "needs_clarification", targetCriterion, reason ≤300, question ≤200 }
+```
+Raw output limit is 16 KiB. Output must be plain JSON; text, markdown fences or extra fields are rejected.
+
+Semantic checks after parsing:
+- every rubric criterion is judged exactly once; no unknown criterion;
+- `sebagian`/`tepat` require a `quote` found in the learner's answer, with offsets (if given) in bounds and matching the quote. An inference or missing evidence never earns credit;
+- misconception ids exist in the lesson catalogue;
+- a clarification targets a known criterion and contains exactly one question;
+- neither hint nor question repeats 8+ consecutive words of the reference answer.
+
+A valid `assessed` output is converted to ratings and scored by `scoreRatings()`; the model never supplies a number. Any failure is `INVALID_MODEL_OUTPUT` (no score). Remaining risk, measured by the benchmark rather than these checks: a model that obeys an injection but quotes real answer text could over-rate a criterion (`injectionOverScoreRate`).
