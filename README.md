@@ -6,6 +6,30 @@
 **Blueprint prepared:** 12 October 2026.  
 **Status:** Product/engineering documentation plus an initial application scaffold (no product features implemented yet).
 
+## Current state (2026-10-13)
+
+**Not yet deployed and no learner screens yet.** The server side is built and tested. The UI waits for approved Google Stitch designs (decision D-009). Full audit: `docs/implementation/FINAL_STATUS.md`.
+
+| Area | Status |
+|---|---|
+| Lessons (urutan, perulangan, percabangan) with rubrics | Built; **AI-drafted, awaiting human review** (`docs/implementation/LESSON_REVIEW.md`), so production lists none yet |
+| Reverse Tutor (explain → clarify → assess → revise) | API + engine; deterministic scoring; strict AI output validation |
+| AI provider | Google Gemini via adapter (D-008, **under-18 terms risk recorded**); live calls **not verified** (no key) |
+| Accounts (handle + password, no email), profile, history, progress | API, PostgreSQL |
+| XP, achievements, opt-in leaderboard | API, append-only ledger |
+| Mini IDE AI code review, capability matrix | API (every language `AI_REVIEW_ONLY`); **code execution disabled** |
+| Predict-before-Run, Debug Robot | API; answer keys verified with CPython |
+| Voice, multiplayer, community | **Not available** (blocked by safety gates / decisions) |
+| Tests | 375 unit, 37 integration (PostgreSQL), smoke 11/11 on a local production build |
+
+Run locally:
+```bash
+npm ci && npm run db:up
+cp .env.example .env.local   # then set DATABASE_URL, AI_MOCK_MODE=true, ALLOW_DRAFT_CONTENT=true for local testing
+npm run db:migrate && npm run dev
+```
+Deploying: `docs/implementation/DEPLOYMENT.md`.
+
 ## What is in this archive?
 
 This archive contains product requirements, persistent agent rules, UX/design system, architecture, data/API contracts, AI orchestration, universal code intelligence, child safety, security, testing, M-ONE rubric traceability, Vibe Coding evidence procedures, deployment guidance, and a fine-grained roadmap.

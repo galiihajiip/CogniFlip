@@ -21,9 +21,9 @@ Compact governance register derived from `CLAUDE.md`, `AGENTS.md`, `README.md`, 
 | ID | Rule | Source | Status | Evidence / next action |
 |---|---|---|---|---|
 | G-05 | Public GitHub repository, kept public through judging. | `docs/14` §1 gate 2; `CLAUDE.md` §2 | FAIL | No Git repository and no remote yet. GitHub CLI authentication currently fails and must be fixed by the participant. |
-| G-06 | Truthful history: no faked timestamps, history rewrite, force-push or artificial commit splitting. | `docs/14` §4; `docs/15` §5 | N/A YET | No commits yet. Never use `--force`, `commit --amend` on pushed commits, or date overrides. |
+| G-06 | Truthful history: no faked timestamps, history rewrite, force-push or artificial commit splitting. | `docs/14` §4; `docs/15` §5 | PASS (2026-10-13) | No commits yet. Never use `--force`, `commit --amend` on pushed commits, or date overrides. |
 | G-07 | Small, meaningful, descriptive commits linked to roadmap IDs and decisions. | `docs/14` §2 (Technical Quality); `docs/15` §5 | N/A YET | Check every commit. |
-| G-08 | No secrets committed; `.env*` ignored except `.env.example`. | `CLAUDE.md` §6; `docs/17` | NOT VERIFIED | `.gitignore` contains `.env`, `.env.*`, `!.env.example`. Verify with `git check-ignore` after `git init`. No `.env` file exists today. |
+| G-08 | No secrets committed; `.env*` ignored except `.env.example`. | `CLAUDE.md` §6; `docs/17` | PASS (2026-10-13: history scan 0 hits) | `.gitignore` contains `.env`, `.env.*`, `!.env.example`. Verify with `git check-ignore` after `git init`. No `.env` file exists today. |
 
 ## 3. Vibe Coding evidence
 
@@ -55,7 +55,7 @@ Compact governance register derived from `CLAUDE.md`, `AGENTS.md`, `README.md`, 
 |---|---|---|---|---|
 | G-23 | Deployed website accessible to judges. | `docs/14` §1 gate 6 | FAIL | Not built or deployed yet. |
 | G-24 | A feature is done only with explicit acceptance criteria, relevant states, validated data, real test results, a responsive/accessibility check and a commit. A screen or a build alone is not proof. | `CLAUDE.md` §4; `docs/13` | N/A YET | Apply per roadmap slice. |
-| G-25 | UI follows the approved Stitch design; no invented final design. | `CLAUDE.md` §8; `docs/22` | FAIL (blocking UI) | `docs/22` says Design `NOT STARTED`, approval `NO`; `.stitch/references/` is empty. Backend/domain work may proceed. |
+| G-25 | UI follows the approved Stitch design; no invented final design. | `CLAUDE.md` §8; `docs/22` | FAIL (blocking UI; D-009: no screens built) | `docs/22` says Design `NOT STARTED`, approval `NO`; `.stitch/references/` is empty. Backend/domain work may proceed. |
 | G-26 | Unbuilt or unverified scope is marked incomplete, never claimed. | `docs/16` "Competition timebox"; `docs/20` D-002 | N/A YET | Decide the submission subset and record it in `docs/20`. |
 | G-27 | Submit before 15 Oct 2026 15:30 WIB (the 21:00 WIB close is not the deadline); verify organizer updates only from authenticated sources. | `docs/14` §5 | NOT VERIFIED | Deadline taken from the transcription. Record any organizer update with its source and time. |
 | G-28 | Evidence index per scoring criterion: artifact path, actual time, what it shows, how to reproduce. | `docs/14` §6 | N/A YET | Build it alongside the work. |
