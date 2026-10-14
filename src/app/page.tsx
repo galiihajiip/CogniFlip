@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Icon } from "@/app/_components/icon";
 import { HeroPredict } from "@/app/_components/landing/hero-predict";
+import { HeroVideo } from "@/app/_components/landing/hero-video";
 
 // Stitch "Beranda (Landing Page)". Claims are limited to what the product
 // actually does (docs/22 §Adaptations): no user counts, no code runner.
@@ -83,6 +84,11 @@ export default function Home() {
     <>
       {/* SECTION 1: HERO */}
       <section className="relative w-full overflow-hidden px-4 py-12 sm:px-6 lg:px-12 lg:py-20">
+        {/* Decorative background video, faded so the text stays readable. */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.22]">
+          <HeroVideo />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-surface via-surface/85 to-surface/20" />
         <div className="pointer-events-none absolute -right-20 -top-24 h-96 w-96 rounded-full bg-secondary-fixed/40 blur-3xl" />
         <div className="pointer-events-none absolute -left-24 top-1/2 h-80 w-80 rounded-full bg-primary-fixed/30 blur-3xl" />
         <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">

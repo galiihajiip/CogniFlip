@@ -117,6 +117,8 @@ Content in the exports that the product cannot truthfully show was changed (guar
 7. Lesson/mission prerequisites are shown as "Disarankan setelah …" instead of locks, because the server does not enforce lesson order.
 8. The mascot name in draft content was changed from "Robi" to "FlipBot" to match the design.
 
+9. **Addition (participant request, 2026-10-14):** the landing hero has a decorative background video (Mixkit item 99786, Mixkit Stock Video Free License; record in `public/media/LICENSES.md`). It is self-hosted (1.45 MB), muted, hidden from assistive technology, shown at 22% opacity under a left-to-right surface gradient so the hero text keeps its contrast, played at 0.6× with a cross-fade between two copies so the loop has no jump, and replaced by a still poster for reduced motion (system or the learner's "Kurangi animasi"), screens under 768 px and data-saver mode.
+
 ## Gaps (need a design decision before further UI work)
 - No mobile references: mobile layouts are responsive reflows checked at 390 px.
 - No designs for auth, profile/privacy, history, leaderboard, help/guide/privacy pages, the mission hub, completion and 404; these use the design system and should be reviewed by the participant.
