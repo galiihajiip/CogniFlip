@@ -76,5 +76,14 @@ Append decisions chronologically. Record actual options, rationale, impact, stat
 - Decision: the 58-screen Google Stitch export and its `DESIGN.md` are the visual source of truth (`.stitch/`). Screens are implemented in the Next.js app against the existing API contracts; claims and features the product cannot support are adapted, not copied (`docs/22` §Adaptations). Supersedes the blocking part of D-009.
 - Consequences: screens without a Stitch design (auth, profile, history, leaderboard, help pages, mission hub) are built from the same design system and are listed as gaps for participant review. The export has no mobile screens; mobile layouts are responsive adaptations.
 
+## D-012 — Run learner Python in the browser (Pyodide in an isolated Web Worker)
+- Date: 2026-10-14
+- Status: accepted
+- Approver: participant (Claude Code session, 2026-10-14: asked why the Mini IDE could not run code, was shown three options — in-browser Pyodide, a hosted sandbox service, a self-hosted container — with trade-offs, and approved the in-browser option)
+- Decision: Python code in the Mini IDE runs client-side with Pyodide 0.29.5 (CPython compiled to WebAssembly, MPL-2.0) inside a dedicated module worker. The server never executes learner code; `/api/code/run` stays disabled. Pyodide is self-hosted (copied from `node_modules` at dev/build time), not loaded from a CDN.
+- Isolation layers: (1) the worker script is served with its own CSP (`default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self'`), so the browser refuses connections and scripts from any other origin; (2) after Python loads, network and code-loading globals (`fetch`, `XMLHttpRequest`, `WebSocket`, `importScripts`, `Worker`, …) are removed from the worker scope and its prototypes; (3) the `js`/`pyodide_js` bridge modules are detached; (4) the page terminates the worker after 5 s; (5) output is capped at 20,000 characters and stdin at 2,000; every run starts with fresh globals.
+- Accepted residual risks: memory is bounded only by the browser's WebAssembly limits (a run that allocates heavily is still stopped by the 5 s timeout); same-origin GET requests via `import()` remain possible under `connect-src`/`script-src 'self'` but cannot read responses or change data; only Python is supported; first load downloads about 12 MB.
+- Consequences: ADR-003 is updated (the "never in the app process" rule is kept). Mission answer keys still come from reviewed fixtures.
+
 ## Pending decisions
 Record after actual review: runtime model (after benchmark); realtime provider; production Postgres host; runner/isolation model; STT/TTS provider and retention; community/profile visibility defaults after safety review; exact dependency versions and hosting setup.

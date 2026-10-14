@@ -54,7 +54,9 @@ export default function PrivacyPage() {
             <p>
               Teks jawaban dikirim ke penyedia AI untuk dinilai, tanpa nama
               pengguna atau identitas akun. Jangan menulis data pribadi di
-              jawaban.
+              jawaban. Kode yang kamu <em>jalankan</em> di Mini IDE tetap di
+              browsermu dan tidak dikirim ke server; kode baru dikirim ke AI
+              kalau kamu menekan “Minta Saran FlipBot”.
             </p>
           ),
         },

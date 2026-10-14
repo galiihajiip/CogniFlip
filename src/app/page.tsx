@@ -78,8 +78,8 @@ const FEATURES = [
     icon: "terminal",
     tone: "bg-inverse-surface text-inverse-on-surface",
     kicker: "Mini IDE",
-    title: "Saran Kode dari AI",
-    body: "Tulis kodemu dan minta saran. Setiap saran diberi label “saran AI”: kodenya belum dijalankan atau dikompilasi.",
+    title: "Jalankan & Minta Saran",
+    body: "Tulis Python dan jalankan langsung di browsermu, tanpa server dan tanpa internet. Saran FlipBot diberi label “saran AI”.",
   },
 ] as const;
 

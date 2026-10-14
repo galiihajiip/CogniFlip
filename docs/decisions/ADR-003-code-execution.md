@@ -14,3 +14,6 @@ Language coverage can expand gradually. Some ecosystems remain generic-AI-only u
 
 ## Provider acceptance criteria
 Document isolation model, runtimes/images, resource limits, network policy, secret separation, cancellation, retention, rate limits, price/quotas and test evidence. Do not pick a runner merely because its API is convenient.
+
+## Update 2026-10-14 (D-012)
+Python now runs **in the learner's browser**, not on the server: Pyodide 0.29.5 in a dedicated Web Worker with its own CSP, network globals removed, the JavaScript bridge detached, a 5 s termination timeout and an output cap. This satisfies "never in the primary web application process": the server receives no code to run, and `/api/code/run` stays disabled. Evidence: `tests/unit/python-core.test.ts` (real Pyodide), `tests/unit/python-runner.test.ts` (timeout and message validation), and the browser check recorded in `docs/implementation/EXECUTION_THREAT_MODEL.md`. Other languages remain AI-review only.

@@ -6,7 +6,7 @@ import { capabilityMatrix } from "@/server/code/capabilities";
 export const metadata: Metadata = {
   title: "Mini IDE",
   description:
-    "Tulis kode dan minta saran dari FlipBot. Saran AI, kodenya tidak dijalankan.",
+    "Tulis kode Python, jalankan di browsermu, dan minta saran dari FlipBot.",
 };
 
 /** Mini IDE (ST-10 editor layout), AI review only: execution is disabled by design. */

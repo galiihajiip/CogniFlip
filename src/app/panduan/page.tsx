@@ -60,9 +60,10 @@ export default function GuidePage() {
           title: "Mini IDE",
           body: (
             <p>
-              Mini IDE hanya memberi saran AI. Kode anak tidak dijalankan atau
-              dikompilasi karena belum ada ruang eksekusi terisolasi yang sudah
-              diuji.
+              Kode Python dijalankan di browser anak (Pyodide) di dalam worker
+              terpisah: tidak dikirim ke server, tidak bisa mengakses internet,
+              dan dihentikan setelah 5 detik. Bahasa lain hanya mendapat saran
+              AI, yang bisa keliru.
             </p>
           ),
         },

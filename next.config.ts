@@ -27,6 +27,20 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // Learner code runs in this worker (D-012). Its own CSP lets it load
+        // only same-site scripts, WebAssembly and data, and blocks every
+        // connection to other servers. Listed after the global rule so this
+        // CSP is the one sent for the worker.
+        source: "/runner/:path*",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value:
+              "default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+          },
+        ],
+      },
     ];
   },
   turbopack: {

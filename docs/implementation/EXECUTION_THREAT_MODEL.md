@@ -53,3 +53,17 @@ Application secrets (AI key, database URL), the production database, other users
 - choose and provision a runner (for example a microVM- or gVisor-based managed sandbox) with its own credentials;
 - record the decision in `docs/20`;
 - then implement one Python adapter and run the evidence list above.
+
+## Update 2026-10-14: in-browser Python runner (D-012)
+Execution was enabled for **Python only, in the browser**: `public/runner/python-worker.mjs` (module worker) and `public/runner/python-core.mjs`, driven by `src/app/_lib/python-runner.ts`. The server-side contract above is unchanged and stays disabled.
+
+| Threat | Control | Evidence (2026-10-14) |
+|---|---|---|
+| Endless loop / CPU exhaustion | Page terminates the worker after 5 s; next run loads a fresh worker | Browser: `while True: pass` stopped after 5.35 s with partial output kept; unit test with fake worker |
+| Output flood | 20,000-character cap inside the stdout/stderr writer | Unit test (real Pyodide) and browser: `while True: print(...)` stopped in 55 ms |
+| Network / exfiltration | Worker CSP (`default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self'`); network globals deleted from scope and prototypes; `js`/`pyodide_js` detached | Browser (Chromium headless shell): `import js` → ModuleNotFoundError; in-worker `typeof fetch/XMLHttpRequest/WebSocket/importScripts/Worker/EventSource/indexedDB` all `undefined`, including `WorkerGlobalScope.prototype.fetch`; `import('https://example.com/…')` failed with Playwright `requestfailed: csp` and no response; zero requests to other origins during the run suite |
+| Access to secrets / server | Code never leaves the browser for execution; the worker holds no cookies-bearing API access (`fetch`/XHR removed) | Same browser checks; `/api/code/run` still returns 422 (smoke test) |
+| State leaking between runs | Fresh `globals` dict per run | Unit test: a variable from run 1 is undefined in run 2 |
+| Memory exhaustion | Browser WebAssembly limits only; timeout as backstop | NOT VERIFIED beyond the timeout (accepted risk, D-012) |
+
+Not verified: Firefox and Safari behaviour (only Chromium was tested); slow-network first load (about 12 MB).

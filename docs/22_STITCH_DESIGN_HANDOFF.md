@@ -101,7 +101,7 @@ Reference files are in `.stitch/references/<name>.webp` and `.stitch/exports/<na
 | `st_09_prediksi_output_simulasi_interaktif` | `/misi/[id]` (predict) | `POST /api/missions/[id]/attempts` `predict` | IMPLEMENTED (adapted, see below) |
 | `st_09a_hasil_verifikasi_prediksi_refleksi_simulasi` | same route, after `predict` | `predict`, `reflect` | IMPLEMENTED (adapted) |
 | `st_10b_state_bug_tertabrak_lumpur…` | `/misi/[id]` (debug) | `diagnose` | IMPLEMENTED (adapted) |
-| `st_10_tantangan_modifikasi_kode_live_coding_di_mini_ide` | `/ide` | `POST /api/code/review` | IMPLEMENTED as AI review only |
+| `st_10_tantangan_modifikasi_kode_live_coding_di_mini_ide` | `/ide` | in-browser Python runner (D-012), `POST /api/code/review` | IMPLEMENTED: "Jalankan" runs Python in the browser; AI review for all languages |
 | `st_10a_…_selesai` (5 variants) | — | — | NOT USED: they show passing test runs that require code execution, which is disabled |
 | `misi_04`…`misi_08` (teach, respon, hasil, simulation variants) and per-mission `st_09`/`st_09a`/`st_10`/`st_10b` variants | — | — | Used as style references only: the content (if/elif/and/or/not/nested-if missions) does not exist yet |
 | (no Stitch screen) `/misi` hub, `/masuk`, `/daftar`, `/profil`, `/perjalanan`, `/peringkat`, `/petunjuk`, `/panduan`, `/privasi`, 404 | — | auth, profile, history, rewards, leaderboard | ADAPTED from the design system (cards, chips, tactile buttons) |
@@ -109,7 +109,7 @@ Reference files are in `.stitch/references/<name>.webp` and `.stitch/exports/<na
 ## Adaptations (intentional differences from the exports)
 Content in the exports that the product cannot truthfully show was changed (guarded by `tests/unit/ui-copy.test.ts`):
 1. Removed "14.200+ penjelajah", "1.420 anak Indonesia…", "Teruji Secara Pedagogis", "dirancang bersama pakar pedagogi", fake accuracy/XP figures and "© 2025" (now 2026).
-2. "Uji Nyata / Real Code Runner", "Python 3.11", the simulator arenas, "Jalankan Simulasi" and automatic test results imply code execution. Execution is disabled (ADR-003), so step 3 became **Cocokkan** (compare with an answer key verified with CPython when the content was written), the Mini IDE "Jalankan" button is shown disabled with the reason, and output is labelled as coming from a reviewed fixture.
+2. "Uji Nyata / Real Code Runner", "Python 3.11", the simulator arenas, "Jalankan Simulasi" and automatic test results imply code execution. Execution is disabled (ADR-003), so step 3 became **Cocokkan** (compare with an answer key verified with CPython when the content was written), mission output is labelled as coming from a reviewed fixture, and the Mini IDE "Jalankan" button runs Python in the learner's browser only (D-012; other languages show the reason it is unavailable).
 3. Voice ("Rekam Suara") is shown as unavailable (no STT provider). Komunitas is not in the navigation (disabled until its safety gate passes).
 4. A wrong prediction shows FlipBot's hint first; the correct output is revealed only on request (bounded hint before the answer, `CLAUDE.md` §5).
 5. Score widgets show only the deterministic total, per-criterion points and level labels from the API. The exports' "Pemahaman FlipBot 75% (+20%)" meter, per-criterion analysis notes and evidence quotes are not shown because the learner-facing contract does not include them.

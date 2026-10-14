@@ -247,7 +247,7 @@ export default function LearnPage() {
               icon="terminal"
               tone="bg-primary-fixed text-primary"
               title="Coba Mini IDE"
-              body="Tulis kodemu sendiri dan minta saran dari FlipBot. Saran AI, kodenya tidak dijalankan."
+              body="Tulis kode Python, jalankan di browsermu, lalu minta saran dari FlipBot."
               cta="Buka Lab Kode"
             />
             <Explore

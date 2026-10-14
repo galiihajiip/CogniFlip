@@ -41,7 +41,8 @@ export default function MissionsPage() {
           </p>
           <p className="flex items-start gap-2">
             <Icon name="info" size={18} className="text-primary" />
-            Kodenya tidak dijalankan di sini; menjalankan kode belum tersedia.
+            Di misi, tebakanmu dicocokkan dengan kunci jawaban. Mau mencoba
+            sendiri? Jalankan kodenya di Mini IDE.
           </p>
         </div>
       </section>

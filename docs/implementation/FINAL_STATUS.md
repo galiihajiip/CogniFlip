@@ -32,9 +32,9 @@
 | 20–25 UI | Done on 2026-10-13 after the Stitch export arrived (D-011); see `docs/22` |
 | 26 | Report done: API/domain PASS, UI blocked, live AI not verified |
 | 27–32 | Done (API only; no UI) |
-| 33 editor UI | Done: `/ide`, AI review only (execution disabled) |
+| 33 editor UI | Done: `/ide` with in-browser Python runner (D-012) and AI review |
 | 34–37, 39–41 | Done |
-| 38 runtime adapter | **BLOCKED** (no verified isolated sandbox; execution disabled by design) |
+| 38 runtime adapter | Python: done in the browser (Pyodide worker, D-012, evidence in `EXECUTION_THREAT_MODEL.md`). Server-side execution stays disabled; other languages AI-review only |
 | 42–46, 48, 49 | **BLOCKED** (UI, speech/realtime provider decisions, safety gates); see `PHASE6_STATUS.md` |
 | 47 | Done as design only (community OFF) |
 | 50 | Done (single-agent workflows under a bounded orchestrator) |

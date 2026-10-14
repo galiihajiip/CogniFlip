@@ -1,11 +1,16 @@
 "use client";
 
-import { useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { z } from "zod";
 import { FlipBotAvatar } from "@/app/_components/flipbot";
 import { Icon } from "@/app/_components/icon";
 import { Chip } from "@/app/_components/states";
 import { apiFetch, failureMessage } from "@/app/_lib/api";
+import {
+  PythonRunner,
+  RUNNER_LIMITS,
+  type RunResult,
+} from "@/app/_lib/python-runner";
 import { CODE_LIMITS, codeReviewResponseSchema } from "@/shared/api/code";
 
 type Review = z.infer<typeof codeReviewResponseSchema>;
@@ -46,9 +51,14 @@ const DIMENSION = {
   security: "Keamanan",
 } as const;
 
+type ConsoleLine = { kind: "system" | "stdout" | "stderr"; text: string };
+type RunError = Extract<RunResult, { status: "error" }>["error"];
+
+const MAX_OUTPUT_CHARS = 20_000;
+
 /**
- * Mini IDE: the editor and console from ST-10, wired to AI code review.
- * "Jalankan" stays disabled because no isolated runner exists (ADR-003).
+ * Mini IDE: the editor and console from ST-10. Python runs in the learner's
+ * browser in an isolated worker (D-012); every language can get AI review.
  */
 export function MiniIde({ languages }: { languages: Language[] }) {
   const usable = languages.filter((l) => l.canAnalyzeWithAi);
@@ -58,11 +68,74 @@ export function MiniIde({ languages }: { languages: Language[] }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [review, setReview] = useState<Review | null>(null);
-  const [console_, setConsole] = useState<string[]>([
-    "$ mini-ide siap.",
-    "Menjalankan kode belum tersedia di CogniFlip.",
-    "Tekan “Minta Saran FlipBot” untuk tinjauan AI.",
+  const [stdin, setStdin] = useState("");
+  const [running, setRunning] = useState(false);
+  const [runError, setRunError] = useState<RunError | null>(null);
+  const [pyVersion, setPyVersion] = useState<string | null>(null);
+  const [console_, setConsole] = useState<ConsoleLine[]>([
+    { kind: "system", text: "$ mini-ide siap." },
+    {
+      kind: "system",
+      text: "Tekan “Jalankan” untuk menjalankan Python di browsermu, atau “Minta Saran FlipBot”.",
+    },
   ]);
+  const runnerRef = useRef<PythonRunner | null>(null);
+  const canRun = lang === "python";
+  const say = (text: string) =>
+    setConsole((c) => [...c, { kind: "system", text }]);
+
+  useEffect(() => () => runnerRef.current?.reset(), []);
+
+  async function runCode() {
+    if (!canRun || !code.trim() || tooBig || running) return;
+    runnerRef.current ??= new PythonRunner();
+    const runner = runnerRef.current;
+    setRunning(true);
+    setRunError(null);
+    setConsole([{ kind: "system", text: "$ python main.py" }]);
+    if (!runner.version)
+      say(
+        "Menyiapkan Python di browsermu (sekitar 12 MB, hanya pertama kali)…",
+      );
+    const result = await runner.run(code, stdin, (stream, text) =>
+      setConsole((c) => {
+        const last = c[c.length - 1];
+        // Append to the current output line so streamed chunks stay readable.
+        if (last && last.kind === stream)
+          return [...c.slice(0, -1), { kind: stream, text: last.text + text }];
+        return [...c, { kind: stream, text }];
+      }),
+    );
+    setRunning(false);
+    setPyVersion(runner.version);
+    if (result.status === "unavailable") {
+      say(
+        "Python belum bisa dimuat di browser ini. Coba muat ulang halaman atau pakai browser lain.",
+      );
+      return;
+    }
+    const seconds =
+      result.durationMs < 1000
+        ? `${result.durationMs} ms`
+        : `${(result.durationMs / 1000).toFixed(1)} detik`;
+    if (result.status === "ok") say(`Program selesai (${seconds}).`);
+    if (result.status === "error") {
+      setRunError(result.error);
+      say(
+        result.error.line
+          ? `Program berhenti karena error di baris ${result.error.line}.`
+          : "Program berhenti karena error.",
+      );
+    }
+    if (result.status === "timeout")
+      say(
+        `Program dihentikan setelah ${RUNNER_LIMITS.timeoutMs / 1000} detik. Mungkin ada perulangan yang tidak pernah berhenti?`,
+      );
+    if (result.status === "output_limit")
+      say(
+        `Output terlalu panjang, dihentikan setelah ${MAX_OUTPUT_CHARS.toLocaleString("id-ID")} karakter.`,
+      );
+  }
   const gutterRef = useRef<HTMLDivElement>(null);
   const editorId = useId();
   const language = languages.find((l) => l.id === lang);
@@ -78,11 +151,8 @@ export function MiniIde({ languages }: { languages: Language[] }) {
     if (!code.trim() || tooBig || busy) return;
     setBusy(true);
     setError(null);
-    setConsole((c) => [
-      ...c,
-      `$ minta-saran --bahasa ${lang}`,
-      "FlipBot sedang membaca kodemu…",
-    ]);
+    say(`$ minta-saran --bahasa ${lang}`);
+    say("FlipBot sedang membaca kodemu…");
     const r = await apiFetch("/api/code/review", codeReviewResponseSchema, {
       method: "POST",
       body: {
@@ -94,14 +164,13 @@ export function MiniIde({ languages }: { languages: Language[] }) {
     setBusy(false);
     if (!r.ok) {
       setError(failureMessage(r));
-      setConsole((c) => [...c, "Tinjauan gagal. Kodemu tetap aman di editor."]);
+      say("Tinjauan gagal. Kodemu tetap aman di editor.");
       return;
     }
     setReview(r.data);
-    setConsole((c) => [
-      ...c,
-      `Selesai: ${r.data.findings.length} saran${r.data.mockMode ? " (mode uji)" : ""}. Kode tidak dijalankan.`,
-    ]);
+    say(
+      `Selesai: ${r.data.findings.length} saran${r.data.mockMode ? " (mode uji)" : ""}. Saran AI tidak menjalankan kodemu.`,
+    );
   }
 
   return (
@@ -112,15 +181,16 @@ export function MiniIde({ languages }: { languages: Language[] }) {
             <span className="chip bg-secondary-container text-on-secondary-fixed">
               LAB KODE • MINI IDE
             </span>
-            <Chip icon="info">Saran AI, kode tidak dijalankan</Chip>
+            <Chip icon="play_arrow">Python jalan di browsermu</Chip>
+            <Chip icon="auto_awesome">Saran AI untuk semua bahasa</Chip>
           </div>
           <h1 className="text-headline-lg-mobile text-on-surface sm:text-headline-lg">
-            Tulis Kodemu, Minta Saran FlipBot
+            Tulis Kodemu, Jalankan, Minta Saran FlipBot
           </h1>
           <p className="max-w-2xl text-body-md text-on-surface-variant">
-            Ketik atau ubah kode di editor, lalu minta FlipBot memberi saran.
-            Setiap saran diberi label “saran AI” karena belum diperiksa oleh
-            compiler atau dijalankan.
+            Ketik atau ubah kode, tekan “Jalankan” untuk melihat hasilnya, lalu
+            minta FlipBot memberi saran. Saran diberi label “saran AI” karena
+            tidak diperiksa oleh compiler.
           </p>
         </div>
         <aside className="card flex items-start gap-4 p-5 lg:col-span-4">
@@ -130,8 +200,8 @@ export function MiniIde({ languages }: { languages: Language[] }) {
               FlipBot Sahabatmu
             </p>
             <p className="text-body-sm text-on-surface-variant">
-              “Aku bisa membaca kodemu dan memberi saran. Tapi aku belum bisa
-              menjalankannya, ya!”
+              “Jalankan kodemu untuk melihat hasilnya. Kalau bingung, minta
+              saranku!”
             </p>
           </div>
         </aside>
@@ -239,10 +309,21 @@ export function MiniIde({ languages }: { languages: Language[] }) {
               <div
                 role="log"
                 aria-live="polite"
-                className="max-h-32 overflow-auto font-mono text-label-code-sm leading-6 text-console-text"
+                className="max-h-64 overflow-auto whitespace-pre-wrap break-words font-mono text-label-code-sm leading-6"
               >
                 {console_.map((l, i) => (
-                  <div key={i}>{l}</div>
+                  <div
+                    key={i}
+                    className={
+                      l.kind === "system"
+                        ? "text-surface-container-high"
+                        : l.kind === "stderr"
+                          ? "text-danger"
+                          : "text-console-text"
+                    }
+                  >
+                    {l.text}
+                  </div>
                 ))}
               </div>
             </div>
@@ -282,35 +363,57 @@ export function MiniIde({ languages }: { languages: Language[] }) {
               className="field mt-2 text-body-md"
               placeholder="Contoh: mencetak angka 1 sampai 5"
             />
+            {canRun ? (
+              <>
+                <label
+                  htmlFor={`${editorId}-stdin`}
+                  className="mt-4 block text-body-sm font-semibold text-on-surface"
+                >
+                  Jawaban untuk <code className="font-mono">input()</code> (satu
+                  per baris)
+                </label>
+                <textarea
+                  id={`${editorId}-stdin`}
+                  value={stdin}
+                  onChange={(e) => setStdin(e.target.value)}
+                  maxLength={2000}
+                  rows={3}
+                  className="field mt-2 font-mono text-label-code-lg"
+                  placeholder="FlipBot"
+                />
+              </>
+            ) : null}
           </details>
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               className="btn-primary flex-1"
+              onClick={runCode}
+              disabled={!canRun || running || tooBig || !code.trim()}
+              aria-describedby={`${editorId}-run`}
+            >
+              <Icon name={running ? "hourglass_top" : "play_arrow"} />
+              {running ? "Menjalankan…" : "Jalankan"}
+            </button>
+            <button
+              type="button"
+              className="btn-secondary"
               onClick={requestReview}
               disabled={busy || tooBig || !code.trim()}
             >
               <Icon name={busy ? "hourglass_top" : "auto_awesome"} />
               {busy ? "FlipBot membaca…" : "Minta Saran FlipBot"}
             </button>
-            <button
-              type="button"
-              className="btn-secondary"
-              disabled
-              aria-describedby={`${editorId}-run`}
-            >
-              <Icon name="play_arrow" />
-              Jalankan
-            </button>
           </div>
           <p
             id={`${editorId}-run`}
             className="flex items-start gap-2 text-body-sm text-on-surface-variant"
           >
-            <Icon name="lock" size={18} />
-            Menjalankan kode belum tersedia: CogniFlip belum punya ruang aman
-            (sandbox) yang sudah diuji untuk menjalankan kode anak.
+            <Icon name="shield" size={18} />
+            {canRun
+              ? `Python dijalankan di browsermu${pyVersion ? ` (Pyodide ${pyVersion})` : " (Pyodide)"}, bukan di server, dan tidak bisa mengakses internet. Batas: ${RUNNER_LIMITS.timeoutMs / 1000} detik dan ${MAX_OUTPUT_CHARS.toLocaleString("id-ID")} karakter output.`
+              : "Menjalankan kode baru tersedia untuk Python. Untuk bahasa ini, kamu bisa meminta saran AI."}
           </p>
         </section>
 
@@ -324,6 +427,7 @@ export function MiniIde({ languages }: { languages: Language[] }) {
               <p className="text-body-md text-on-surface">{error}</p>
             </div>
           ) : null}
+          {runError ? <RunErrorPanel error={runError} /> : null}
           {!review && !error ? (
             <div className="card space-y-3 p-6">
               <h2 className="flex items-center gap-2 text-headline-sm text-on-surface">
@@ -339,8 +443,14 @@ export function MiniIde({ languages }: { languages: Language[] }) {
           {language ? (
             <div className="rounded-3xl bg-surface-container-low p-6">
               <h2 className="text-headline-sm text-on-surface">
-                Yang bisa dilakukan untuk {language.label}
+                Batas saran AI untuk {language.label}
               </h2>
+              <p className="mt-1 text-body-sm text-on-surface-variant">
+                Berlaku untuk “Minta Saran FlipBot”.
+                {canRun
+                  ? " Tombol “Jalankan” memakai Python sungguhan di browsermu."
+                  : ""}
+              </p>
               <ul className="mt-2 space-y-1.5 text-body-sm text-on-surface">
                 {language.limitations.map((l) => (
                   <li key={l} className="flex gap-2">
@@ -455,5 +565,34 @@ function ReviewPanel({ review }: { review: Review }) {
         </p>
       </div>
     </>
+  );
+}
+
+function RunErrorPanel({ error }: { error: RunError }) {
+  return (
+    <div role="alert" className="card space-y-3 border-error-container p-6">
+      <h2 className="flex items-center gap-2 text-headline-sm text-on-surface">
+        <Icon name="bug_report" className="text-error" />
+        {error.line ? `Ada error di baris ${error.line}` : "Ada error"}
+      </h2>
+      <p className="text-body-md text-on-surface">
+        <span className="font-mono font-semibold">{error.type}</span>
+        {error.message ? `: ${error.message}` : ""}
+      </p>
+      <p className="text-body-sm text-on-surface-variant">
+        Ini pesan asli dari Python. Baca baris yang disebut, lalu coba perbaiki.
+        Kalau bingung, tekan “Minta Saran FlipBot”.
+      </p>
+      {error.traceback ? (
+        <details>
+          <summary className="cursor-pointer text-body-sm font-semibold text-primary">
+            Lihat pesan lengkap
+          </summary>
+          <pre className="mt-2 overflow-x-auto rounded-lg bg-console p-3 font-mono text-label-code-sm text-danger">
+            {error.traceback}
+          </pre>
+        </details>
+      ) : null}
+    </div>
   );
 }
