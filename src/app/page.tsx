@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { Icon } from "@/app/_components/icon";
 import { HeroPredict } from "@/app/_components/landing/hero-predict";
-import { getServerEnv } from "@/server/config/env";
-import { getIntegrationStatus } from "@/server/integrations/status";
-
-// Read configuration at request time, not at build time.
-export const dynamic = "force-dynamic";
 
 // Stitch "Beranda (Landing Page)". Claims are limited to what the product
 // actually does (docs/22 §Adaptations): no user counts, no code runner.
@@ -84,8 +79,6 @@ const FEATURES = [
 ] as const;
 
 export default function Home() {
-  const ai = getIntegrationStatus(getServerEnv(), "ai");
-
   return (
     <>
       {/* SECTION 1: HERO */}
@@ -126,30 +119,6 @@ export default function Home() {
                 Coba Mini IDE
               </Link>
             </div>
-            <ul className="flex flex-wrap gap-2 pt-2 text-body-sm text-on-surface-variant">
-              <li className="chip bg-surface-container-lowest font-semibold shadow-sm">
-                <Icon name="shield" size={16} className="text-primary" />
-                Tanpa email, cukup nama samaran
-              </li>
-              <li
-                className="chip bg-surface-container-lowest font-semibold shadow-sm"
-                data-testid="ai-status"
-              >
-                <Icon
-                  name={ai.available ? "check_circle" : "cloud_off"}
-                  size={16}
-                  className={
-                    ai.available ? "text-success" : "text-on-surface-variant"
-                  }
-                />
-                Teman AI:{" "}
-                {ai.available
-                  ? ai.mode === "mock"
-                    ? "mode uji"
-                    : "tersedia"
-                  : "belum tersedia"}
-              </li>
-            </ul>
           </div>
           <div className="lg:col-span-6">
             <HeroPredict />
