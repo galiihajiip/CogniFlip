@@ -6,7 +6,7 @@ Use Google Stitch to design CogniFlip's complete UI/UX. This folder is the local
 
 - `DESIGN.md`: finalized design tokens and rationale in the open DESIGN.md format supported by Stitch.
 - `references/`: approved screen screenshots/reference captures, grouped or named by route and viewport.
-- `exports/`: optional Stitch HTML/code exports retained for reference and visual comparison. These do not replace the application architecture or demonstrate backend functionality.
+- `exports/`: optional Stitch HTML/code exports. Not kept in this submission (reviewed, then removed; see `docs/22`).
 - `../docs/22_STITCH_DESIGN_HANDOFF.md`: the screen inventory, approval status, route mapping, interactions, and missing states.
 
 ## Working rules

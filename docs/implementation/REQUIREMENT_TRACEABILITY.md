@@ -89,7 +89,7 @@ Recommendations only. None of these are recorded as decisions until the particip
 | Q11 | **No written deletion/retention policy** although `02` §B, `06` §7 and `10` §7 require one before persistent history ships. | Those sections reference a "documented policy" that does not exist. | Write the policy at R5.8, before F12 is enabled. Guest-only build stores no learner history server-side beyond what is needed. | Security/privacy: F12 must not ship without it. |
 | Q12 | **Hosting function time limits vs AI chains.** Evaluator → Feedback Coach in sequence may approach serverless time limits. | `05` §3, §8; `17`. | Keep the S1 chain to two model calls; check the hosting plan's maximum function duration at R0.6/R3.5; stream or split if needed. | Deadline/reliability risk on the deployed demo. |
 | Q13 | **Where the evidence index lives** is unspecified. | `docs/14` §6. | `docs/implementation/EVIDENCE_INDEX.md`, created at the first evidence-producing slice. | Process score (25%). Negligible cost. |
-| Q14 | **File inventory is stale.** | `docs/FILE_INVENTORY.md` omits `.stitch/README.md`, the `.gitkeep` files and `docs/implementation/`. | Update it in the repository-setup slice. | Documentation accuracy only. |
+| Q14 | **File inventory is stale.** *(Resolved 2026-10-15: the inventory was removed; the README and `docs/00_DOCUMENT_MAP.md` describe the repository.)* | `docs/FILE_INVENTORY.md` omits `.stitch/README.md`, the `.gitkeep` files and `docs/implementation/`. | Update it in the repository-setup slice. | Documentation accuracy only. |
 
 ## Recommended implementation order (deadline: 15 Oct 2026 15:30 WIB)
 

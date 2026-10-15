@@ -221,7 +221,7 @@ The design system uses deliberate, child-friendly rounding that maintains geomet
 
 ## CogniFlip implementation notes (added in the repository)
 
-- **Status:** approved visual source of truth (D-011, 2026-10-13). Everything above this section is the participant's Google Stitch export (`warm_learning_lab/DESIGN.md`), copied unchanged; the same file is kept as `exports/warm_learning_lab_DESIGN.md`.
+- **Status:** approved visual source of truth (D-011, 2026-10-13). Everything above this section is the participant's Google Stitch export (`warm_learning_lab/DESIGN.md`), copied unchanged.
 - **Where the tokens live in code:** `src/app/globals.css` (`@theme`). Colour, typography and spacing names match the Stitch Tailwind config, so `bg-surface-container-low`, `text-headline-md`, etc. mean the same as in the exports.
 - **Radius:** the exports use Tailwind's default `rounded-2xl` (1rem) and `rounded-3xl` (1.5rem) for cards. The app keeps Tailwind's default radius scale, which reproduces the exported screens.
 - **Fonts and icons:** Plus Jakarta Sans, JetBrains Mono and a Material Symbols subset are self-hosted (`src/app/_fonts/`, licences in `LICENSES.md`). No Google Fonts, Tailwind CDN or `lh3.googleusercontent.com` requests at runtime.

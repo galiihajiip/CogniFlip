@@ -80,10 +80,10 @@ Priority codes identify design and build sequencing, not permission to remove an
 - Desktop/mobile reviewed: desktop references only. **The export contains no mobile screens**; mobile layouts are responsive adaptations of the desktop designs (see Gaps).
 - Accessibility/contrast review: implementation-level checks only (focus ring, labels, text + icon status, reduced motion, 390 px reflow). A full contrast audit is `NOT VERIFIED`.
 - Last reviewed by participant: 2026-10-13 (export hand-over)
-- Stored in the repo: `.stitch/DESIGN.md` (approved tokens + implementation notes), `.stitch/references/*.webp` (all 58 screenshots, converted from PNG to WebP quality 80 at the original pixel size to keep the repository small), `.stitch/exports/*.html` (unchanged HTML exports; they load the Tailwind CDN and Google-hosted images and are references only).
+- Stored in the repo: `.stitch/DESIGN.md` (approved tokens + implementation notes) and `.stitch/references/*.webp` (all 58 screenshots, converted from PNG to WebP quality 80 at the original pixel size). The raw Stitch HTML exports were reviewed during implementation and removed from the submission on 2026-10-15: they load the Tailwind CDN and Google-hosted images and contain placeholder marketing claims the product does not make (see Adaptations).
 
 ## Screen-to-implementation mapping
-Reference files are in `.stitch/references/<name>.webp` and `.stitch/exports/<name>.html`.
+Reference screenshots are in `.stitch/references/<name>.webp`.
 
 | Stitch screen (reference name) | App route | Data / API | Status |
 |---|---|---|---|
