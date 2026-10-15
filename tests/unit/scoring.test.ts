@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { CURRICULUM_RUBRICS } from "@/server/learning/content/curriculum";
 import { allRubrics, getRubric } from "@/server/assessment/content";
 import {
   rubricSchema,
@@ -89,7 +90,8 @@ describe("rubric schema", () => {
   });
 
   it("validates every rubric in the content", () => {
-    expect(allRubrics()).toHaveLength(3);
+    // 3 robot-command rubrics + one per curriculum lesson (D-015).
+    expect(allRubrics()).toHaveLength(3 + CURRICULUM_RUBRICS.length);
   });
 });
 

@@ -121,6 +121,8 @@ Content in the exports that the product cannot truthfully show was changed (guar
 
 10. **Logo replaced (participant request, 2026-10-15):** the participant-supplied logo (`assets/brand/cogniflip-logo-original.png`) replaces the Stitch logo in the header and footer; the favicon set is the robot head cut from it (provenance and regeneration steps in `assets/brand/README.md`).
 
+11. **Learning tracks (D-015):** `/belajar` groups 52 lessons into 8 tracks with jump chips and level labels, and lesson pages show the verified output and a "Coba di Mini IDE" link. Built from the existing dashboard and lesson-card styles; the Stitch export has no multi-track design.
+
 ## Gaps (need a design decision before further UI work)
 - No mobile references: mobile layouts are responsive reflows checked at 390 px.
 - No designs for auth, profile/privacy, history, leaderboard, help/guide/privacy pages, the mission hub, completion and 404; these use the design system and should be reviewed by the participant.

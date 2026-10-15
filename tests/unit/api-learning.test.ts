@@ -68,11 +68,14 @@ describe("lesson API", () => {
     const { lessons } = await (
       await listLessons(new Request(`${BASE}/api/lessons`))
     ).json();
-    expect(lessons.map((l: { id: string }) => l.id)).toEqual([
+    // Robot-command basics first, then the language tracks (D-015).
+    expect(lessons.map((l: { id: string }) => l.id).slice(0, 4)).toEqual([
       "urutan-instruksi",
       "perulangan",
       "percabangan",
+      "py-print",
     ]);
+    expect(lessons.length).toBeGreaterThan(40);
     expect(lessons.every((l: { draft: boolean }) => l.draft)).toBe(true);
   });
 

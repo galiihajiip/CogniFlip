@@ -153,6 +153,46 @@ export const TOPIC_LABEL: Record<string, string> = {
   sequence: "Urutan",
   loops: "Perulangan",
   conditions: "Percabangan",
+  events: "Event",
+  variables: "Variabel",
+  debugging: "Debugging",
+  output: "Menampilkan",
+  "data-types": "Tipe Data",
+  strings: "Teks",
+  operators: "Operator",
+  collections: "Kumpulan Data",
+  functions: "Fungsi",
+  objects: "Objek",
+  errors: "Error",
+  "web-structure": "Struktur Web",
+  "web-content": "Isi Web",
+  forms: "Formulir",
+  styling: "Gaya",
+  layout: "Tata Letak",
+  responsive: "Responsif",
+  queries: "Query",
+  filtering: "Menyaring",
+  aggregation: "Merangkum",
+  joins: "Menggabungkan",
+  dom: "DOM",
+  modules: "Modul",
+};
+
+export const LEVEL_NAME: Record<number, string> = {
+  1: "Dasar",
+  2: "Menengah",
+  3: "Lanjutan",
+};
+
+/** File name and label for a lesson's code example. */
+export const LANGUAGE_FILE: Record<string, { file: string; label: string }> = {
+  python: { file: "contoh.py", label: "Python" },
+  javascript: { file: "contoh.js", label: "JavaScript" },
+  html: { file: "index.html", label: "HTML" },
+  css: { file: "gaya.css", label: "CSS" },
+  sql: { file: "query.sql", label: "SQL" },
+  java: { file: "Main.java", label: "Java" },
+  cpp: { file: "main.cpp", label: "C++" },
 };
 
 export function topicLabel(topic: string): string {

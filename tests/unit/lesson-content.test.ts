@@ -18,6 +18,9 @@ const LOCK_PATH = join(
 );
 const LEVELS = ["belum_terlihat", "sebagian", "tepat"];
 
+const BASE_IDS = ["urutan-instruksi", "perulangan", "percabangan"];
+const BASE = LESSONS.filter((l) => BASE_IDS.includes(l.id));
+
 describe("lesson content", () => {
   it("builds a valid catalog from the real content", () => {
     expect(() => getLessonCatalog()).not.toThrow();
@@ -32,8 +35,8 @@ describe("lesson content", () => {
     expect(JSON.parse(readFileSync(LOCK_PATH, "utf8"))).toEqual(expected);
   });
 
-  it("covers sequence, loops and conditions with one lesson each", () => {
-    expect(LESSONS.map((l) => l.topic).sort()).toEqual([
+  it("starts with one robot-command lesson each for sequence, loops and conditions", () => {
+    expect(BASE.map((l) => l.topic).sort()).toEqual([
       "conditions",
       "loops",
       "sequence",
@@ -79,7 +82,9 @@ describe("answer fixtures", () => {
   it("has unique ids and every answer kind for every lesson", () => {
     const ids = ANSWER_FIXTURES.map((f) => f.id);
     expect(new Set(ids).size).toBe(ids.length);
-    for (const lesson of LESSONS) {
+    // Benchmark fixtures cover the robot-command lessons (the curriculum
+    // lessons are covered by tests/unit/curriculum.test.ts).
+    for (const lesson of BASE) {
       const kinds = ANSWER_FIXTURES.filter((f) => f.lessonId === lesson.id)
         .map((f) => f.kind)
         .sort();

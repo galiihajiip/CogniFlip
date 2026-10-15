@@ -1,4 +1,5 @@
 import "server-only";
+import { CURRICULUM_RUBRICS } from "@/server/learning/content/curriculum";
 import type { RubricInput } from "@/server/assessment/rubric-schema";
 
 /**
@@ -17,7 +18,7 @@ const AI_DRAFT_REVIEW = {
     "Weights and level descriptions need participant review before the rubric is published.",
 } as const;
 
-export const RUBRICS: RubricInput[] = [
+const BASE_RUBRICS: RubricInput[] = [
   {
     id: "urutan-instruksi",
     version: 1,
@@ -259,3 +260,5 @@ export const RUBRICS: RubricInput[] = [
     review: AI_DRAFT_REVIEW,
   },
 ];
+
+export const RUBRICS: RubricInput[] = [...BASE_RUBRICS, ...CURRICULUM_RUBRICS];

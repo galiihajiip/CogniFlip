@@ -62,3 +62,4 @@ benchmark/reports/
 
 # Pyodide runtime, copied from node_modules at dev/build time
 /public/pyodide/
+/public/sqljs/

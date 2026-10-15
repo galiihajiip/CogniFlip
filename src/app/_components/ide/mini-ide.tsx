@@ -11,6 +11,7 @@ import {
   RUNNER_LIMITS,
   type RunResult,
 } from "@/app/_lib/python-runner";
+import { buildPreview, RUNTIMES, STARTER } from "@/app/_lib/runtimes";
 import { CODE_LIMITS, codeReviewResponseSchema } from "@/shared/api/code";
 
 type Review = z.infer<typeof codeReviewResponseSchema>;
@@ -20,13 +21,6 @@ type Language = {
   supportLevel: string;
   canAnalyzeWithAi: boolean;
   limitations: string[];
-};
-
-const STARTER: Record<string, string> = {
-  python:
-    '# Misi: FlipBot melompat 4 kali\nlompatan = 0\nfor i in range(4):\n    print("Lompat ke-", i + 1)\n    lompatan = lompatan + 1\nprint("Total lompatan:", lompatan)\n',
-  javascript:
-    '// Misi: FlipBot melompat 4 kali\nlet lompatan = 0;\nfor (let i = 0; i < 4; i++) {\n  console.log("Lompat ke-", i + 1);\n  lompatan++;\n}\nconsole.log("Total lompatan:", lompatan);\n',
 };
 
 const SEVERITY = {
@@ -56,14 +50,25 @@ type RunError = Extract<RunResult, { status: "error" }>["error"];
 
 const MAX_OUTPUT_CHARS = 20_000;
 
+const OTHER = "lainnya";
+
 /**
- * Mini IDE: the editor and console from ST-10. Python runs in the learner's
- * browser in an isolated worker (D-012); every language can get AI review.
+ * Mini IDE: the editor and console from ST-10. Python, JavaScript and SQL run
+ * in isolated browser workers, HTML/CSS in a locked preview frame (D-012,
+ * D-015); every language, including any typed under "Lainnya", gets AI review.
  */
-export function MiniIde({ languages }: { languages: Language[] }) {
+export function MiniIde({
+  languages,
+  initial,
+}: {
+  languages: Language[];
+  initial?: { language: string; code: string; title: string };
+}) {
   const usable = languages.filter((l) => l.canAnalyzeWithAi);
-  const [lang, setLang] = useState(usable[0]?.id ?? "python");
-  const [code, setCode] = useState(STARTER[lang] ?? "");
+  const [lang, setLang] = useState(initial?.language ?? "python");
+  const [code, setCode] = useState(initial?.code ?? STARTER[lang] ?? "");
+  const [otherName, setOtherName] = useState("");
+  const [preview, setPreview] = useState<string | null>(null);
   const [goal, setGoal] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -76,27 +81,41 @@ export function MiniIde({ languages }: { languages: Language[] }) {
     { kind: "system", text: "$ mini-ide siap." },
     {
       kind: "system",
-      text: "Tekan “Jalankan” untuk menjalankan Python di browsermu, atau “Minta Saran FlipBot”.",
+      text: initial
+        ? `Contoh dari pelajaran “${initial.title}” sudah dimuat. Tekan “Jalankan”.`
+        : "Tekan “Jalankan” untuk menjalankan kodemu di browser, atau “Minta Saran FlipBot”.",
     },
   ]);
-  const runnerRef = useRef<PythonRunner | null>(null);
-  const canRun = lang === "python";
+  const runners = useRef(new Map<string, PythonRunner>());
+  const runtime = RUNTIMES[lang];
+  const canRun = runtime !== undefined;
   const say = (text: string) =>
     setConsole((c) => [...c, { kind: "system", text }]);
 
-  useEffect(() => () => runnerRef.current?.reset(), []);
+  useEffect(() => {
+    const all = runners.current;
+    return () => all.forEach((r) => r.reset());
+  }, []);
 
   async function runCode() {
-    if (!canRun || !code.trim() || tooBig || running) return;
-    runnerRef.current ??= new PythonRunner();
-    const runner = runnerRef.current;
-    setRunning(true);
+    if (!runtime || !code.trim() || tooBig || running) return;
     setRunError(null);
-    setConsole([{ kind: "system", text: "$ python main.py" }]);
-    if (!runner.version)
-      say(
-        "Menyiapkan Python di browsermu (sekitar 12 MB, hanya pertama kali)…",
-      );
+    if (runtime.kind === "preview") {
+      setPreview(buildPreview(lang as "html" | "css", code));
+      setConsole([
+        { kind: "system", text: `$ buka pratinjau ${runtime.label}` },
+        { kind: "system", text: "Pratinjau diperbarui di panel samping." },
+      ]);
+      return;
+    }
+    let runner = runners.current.get(lang);
+    if (!runner) {
+      runner = new PythonRunner(runtime.create);
+      runners.current.set(lang, runner);
+    }
+    setRunning(true);
+    setConsole([{ kind: "system", text: `$ ${runtime.command}` }]);
+    if (!runner.version && runtime.loading) say(runtime.loading);
     const result = await runner.run(code, stdin, (stream, text) =>
       setConsole((c) => {
         const last = c[c.length - 1];
@@ -110,7 +129,7 @@ export function MiniIde({ languages }: { languages: Language[] }) {
     setPyVersion(runner.version);
     if (result.status === "unavailable") {
       say(
-        "Python belum bisa dimuat di browser ini. Coba muat ulang halaman atau pakai browser lain.",
+        `${runtime.label} belum bisa dimuat di browser ini. Coba muat ulang halaman atau pakai browser lain.`,
       );
       return;
     }
@@ -156,7 +175,7 @@ export function MiniIde({ languages }: { languages: Language[] }) {
     const r = await apiFetch("/api/code/review", codeReviewResponseSchema, {
       method: "POST",
       body: {
-        language: lang,
+        language: lang === OTHER ? otherName.trim() || "Lainnya" : lang,
         code,
         ...(goal.trim() ? { goal: goal.trim() } : {}),
       },
@@ -181,7 +200,9 @@ export function MiniIde({ languages }: { languages: Language[] }) {
             <span className="chip bg-secondary-container text-on-secondary-fixed">
               LAB KODE • MINI IDE
             </span>
-            <Chip icon="play_arrow">Python jalan di browsermu</Chip>
+            <Chip icon="play_arrow">
+              Jalankan Python, JavaScript, SQL, HTML, CSS
+            </Chip>
             <Chip icon="auto_awesome">Saran AI untuk semua bahasa</Chip>
           </div>
           <h1 className="text-headline-lg-mobile text-on-surface sm:text-headline-lg">
@@ -223,19 +244,43 @@ export function MiniIde({ languages }: { languages: Language[] }) {
                   value={lang}
                   onChange={(e) => {
                     const next = e.target.value;
-                    if (code === (STARTER[lang] ?? ""))
+                    if (
+                      code === (STARTER[lang] ?? "") ||
+                      code === initial?.code
+                    )
                       setCode(STARTER[next] ?? "");
                     setLang(next);
                     setReview(null);
+                    setPreview(null);
+                    setRunError(null);
                   }}
                   className="ml-2 min-h-9 rounded-lg bg-white/10 px-2 font-mono text-label-code-sm text-inverse-on-surface"
                 >
                   {usable.map((l) => (
                     <option key={l.id} value={l.id} className="text-on-surface">
                       {l.label}
+                      {RUNTIMES[l.id] ? " ▶" : ""}
                     </option>
                   ))}
+                  <option value={OTHER} className="text-on-surface">
+                    Lainnya…
+                  </option>
                 </select>
+                {lang === OTHER ? (
+                  <>
+                    <label htmlFor={`${editorId}-other`} className="sr-only">
+                      Nama bahasa
+                    </label>
+                    <input
+                      id={`${editorId}-other`}
+                      value={otherName}
+                      onChange={(e) => setOtherName(e.target.value)}
+                      maxLength={40}
+                      placeholder="nama bahasa, mis. Scratch"
+                      className="min-h-9 w-40 rounded-lg bg-white/10 px-2 font-mono text-label-code-sm text-inverse-on-surface placeholder:text-outline"
+                    />
+                  </>
+                ) : null}
               </div>
               <button
                 type="button"
@@ -363,7 +408,7 @@ export function MiniIde({ languages }: { languages: Language[] }) {
               className="field mt-2 text-body-md"
               placeholder="Contoh: mencetak angka 1 sampai 5"
             />
-            {canRun ? (
+            {lang === "python" ? (
               <>
                 <label
                   htmlFor={`${editorId}-stdin`}
@@ -411,9 +456,9 @@ export function MiniIde({ languages }: { languages: Language[] }) {
             className="flex items-start gap-2 text-body-sm text-on-surface-variant"
           >
             <Icon name="shield" size={18} />
-            {canRun
-              ? `Python dijalankan di browsermu${pyVersion ? ` (Pyodide ${pyVersion})` : " (Pyodide)"}, bukan di server, dan tidak bisa mengakses internet. Batas: ${RUNNER_LIMITS.timeoutMs / 1000} detik dan ${MAX_OUTPUT_CHARS.toLocaleString("id-ID")} karakter output.`
-              : "Menjalankan kode baru tersedia untuk Python. Untuk bahasa ini, kamu bisa meminta saran AI."}
+            {runtime
+              ? `${runtime.note}${runtime.kind === "worker" ? ` Batas: ${RUNNER_LIMITS.timeoutMs / 1000} detik dan ${MAX_OUTPUT_CHARS.toLocaleString("id-ID")} karakter output.${pyVersion && lang === "python" ? ` (Pyodide ${pyVersion})` : ""}` : ""}`
+              : "Bahasa ini belum bisa dijalankan dengan aman di browser (butuh compiler di server). Kamu tetap bisa meminta saran AI, dan contoh kode di pelajaran sudah dicek dengan compiler sungguhan."}
           </p>
         </section>
 
@@ -428,6 +473,21 @@ export function MiniIde({ languages }: { languages: Language[] }) {
             </div>
           ) : null}
           {runError ? <RunErrorPanel error={runError} /> : null}
+          {preview ? (
+            <div className="card space-y-3 p-4">
+              <h2 className="flex items-center gap-2 px-2 text-headline-sm text-on-surface">
+                <Icon name="visibility" className="text-primary" />
+                Pratinjau {runtime?.label}
+              </h2>
+              <iframe
+                title={`Pratinjau ${runtime?.label ?? ""}`}
+                sandbox="allow-scripts"
+                srcDoc={preview}
+                referrerPolicy="no-referrer"
+                className="h-80 w-full rounded-2xl border-[1.5px] border-outline-variant bg-white"
+              />
+            </div>
+          ) : null}
           {!review && !error ? (
             <div className="card space-y-3 p-6">
               <h2 className="flex items-center gap-2 text-headline-sm text-on-surface">
@@ -448,7 +508,7 @@ export function MiniIde({ languages }: { languages: Language[] }) {
               <p className="mt-1 text-body-sm text-on-surface-variant">
                 Berlaku untuk “Minta Saran FlipBot”.
                 {canRun
-                  ? " Tombol “Jalankan” memakai Python sungguhan di browsermu."
+                  ? ` Tombol “Jalankan” memakai ${runtime?.label} sungguhan di browsermu.`
                   : ""}
               </p>
               <ul className="mt-2 space-y-1.5 text-body-sm text-on-surface">

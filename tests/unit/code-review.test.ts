@@ -152,10 +152,10 @@ describe("reviewCode", () => {
     const { deps: d } = deps([
       { kind: "text", text: JSON.stringify({ findings: [] }) },
     ]);
-    const r = await review(d, "Haskell", 'main = putStrLn "halo"');
+    const r = await review(d, "Scratch", "when flag clicked say [halo]");
     expect(r.ok && r.value.language).toEqual({
       id: "other",
-      label: "Haskell",
+      label: "Scratch",
       supportLevel: "AI_REVIEW_ONLY",
     });
     expect(r.ok && r.value.limitations.join(" ")).toMatch(

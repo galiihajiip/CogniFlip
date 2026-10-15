@@ -100,5 +100,13 @@ Append decisions chronologically. Record actual options, rationale, impact, stat
 - Never locked: the demo handle is exempt from the per-handle login lockout (5 per 15 min); its AI, mission-attempt and code-review rate limits are counted per client IP instead of per account, so visitors sharing it do not exhaust each other's quota. The per-IP login limit still applies.
 - Protected: `demo` is a reserved handle (nobody can register it), and the account cannot be deleted (403). Its history, XP and leaderboard entry are shared by everyone who uses it; the login card and profile say so and ask users not to write personal data.
 
+## D-015 — Multi-language curriculum and more in-browser runtimes
+- Date: 2026-10-15
+- Status: accepted
+- Approver: participant (request: complete lesson modules from absolute basics to advanced, referenced from W3Schools, not only Python, usable by the demo account, and a Mini IDE that supports every language)
+- Decision: 52 lessons in 8 tracks: Dasar Berpikir Komputasi (3, existing), Python (13), JavaScript (10), HTML (5), CSS (5), SQL (6), Java (5), C++ (5), each with a rubric (3 criteria), misconceptions, bounded hints and a reference explanation, generated from compact specs (`src/server/learning/content/curriculum/`). Topic order follows the W3Schools tutorials as a reference only; all text is original Indonesian for grade 4–6 learners. Every runnable example output is verified in `tests/unit/curriculum.test.ts` by running it with CPython, Node, the sqlite3 CLI, javac/java 21 and g++ (C++17). All lessons are AI-drafted `draft` content (shown with a label per D-013) and need teacher review.
+- Mini IDE: runs Python (Pyodide), JavaScript (isolated worker, CSP `connect-src 'none'`), SQL (sql.js 1.14.2, MIT, SQLite in WebAssembly) and HTML/CSS (sandboxed `allow-scripts` iframe with a `default-src 'none'` CSP), all in the learner's browser. Java, C++, Go, Rust, PHP and other compiled/server languages are **not executed** (no verified sandbox); they get AI review, and the "Lainnya" option lets learners name any other language for AI review.
+- Limits stated honestly: AI review needs the production Gemini key; the dev mock scores only benchmark fixtures, so new lessons get clarification questions locally.
+
 ## Pending decisions
 Record after actual review: runtime model (after benchmark); realtime provider; production Postgres host; runner/isolation model; STT/TTS provider and retention; community/profile visibility defaults after safety review; exact dependency versions and hosting setup.

@@ -1,4 +1,5 @@
 import "server-only";
+import { CURRICULUM_LESSONS } from "@/server/learning/content/curriculum";
 import type { LessonVersion } from "@/server/learning/lesson-schema";
 
 /**
@@ -18,7 +19,7 @@ const AI_DRAFT_REVIEW = {
     "Drafted by the AI coding assistant. Needs participant review of wording, age fit, rubric and answer key before publishing.",
 } as const;
 
-export const LESSONS: LessonVersion[] = [
+const BASE_LESSONS: LessonVersion[] = [
   {
     id: "urutan-instruksi",
     version: 1,
@@ -265,4 +266,10 @@ export const LESSONS: LessonVersion[] = [
       "Percabangan membuat program memeriksa sebuah kondisi, misalnya 'apakah ada tembok di depan?'. Jawabannya benar atau salah. Jika benar, program menjalankan satu tindakan (belok kanan); jika salah, program menjalankan tindakan lain (maju). Hanya satu cabang yang dijalankan setiap kali kondisi diperiksa.",
     review: AI_DRAFT_REVIEW,
   },
+];
+
+/** Robot-command basics followed by the multi-language curriculum (D-015). */
+export const LESSONS: LessonVersion[] = [
+  ...BASE_LESSONS,
+  ...CURRICULUM_LESSONS,
 ];

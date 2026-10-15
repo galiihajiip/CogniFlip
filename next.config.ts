@@ -41,6 +41,18 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // Learner JavaScript worker (D-015): may evaluate code, but can load
+        // nothing and connect nowhere.
+        source: "/runner-js/:path*",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value:
+              "default-src 'none'; script-src 'self' 'unsafe-eval'; connect-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+          },
+        ],
+      },
     ];
   },
   turbopack: {

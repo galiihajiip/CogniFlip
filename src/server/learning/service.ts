@@ -25,6 +25,7 @@ import { PostgresSessionStore } from "@/server/learning/session/pg-store";
 import { AppError } from "@/server/http/errors";
 import { getLessonCatalog } from "@/server/learning/content";
 import { LESSONS } from "@/server/learning/content/lessons";
+import { PATHS } from "@/server/learning/content/paths";
 import type { LessonVersion } from "@/server/learning/lesson-schema";
 import { TutorSessionEngine } from "@/server/learning/session/engine";
 import {
@@ -52,6 +53,21 @@ export function listLearnerLessons(env: ServerEnv): LessonVersion[] {
     .map((l) => catalog.getVersion(l.id, l.version)!)
     .filter(Boolean);
   return [...published, ...drafts];
+}
+
+/** Learning tracks with the lessons this learner may open, in path order. */
+export function listLearnerTracks(env: ServerEnv) {
+  const visible = new Map(listLearnerLessons(env).map((l) => [l.id, l]));
+  return PATHS.filter((p) => p.status === "published" || allowDrafts(env))
+    .map((path) => ({
+      id: path.id,
+      title: path.title,
+      description: path.description ?? "",
+      lessons: path.lessons
+        .map((id) => visible.get(id))
+        .filter((l): l is LessonVersion => l !== undefined),
+    }))
+    .filter((track) => track.lessons.length > 0);
 }
 
 export function getLearnerLesson(env: ServerEnv, id: string): LessonVersion {

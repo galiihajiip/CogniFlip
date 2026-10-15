@@ -8,10 +8,13 @@ import {
   RecommendedLesson,
 } from "@/app/_components/learn-progress";
 import { EmptyBlock, PageFrame } from "@/app/_components/states";
-import { topicLabel } from "@/app/_lib/view";
+import { LANGUAGE_FILE, LEVEL_NAME, topicLabel } from "@/app/_lib/view";
 import { getServerEnv } from "@/server/config/env";
 import { toLessonDetail } from "@/server/learning/dto";
-import { listLearnerLessons } from "@/server/learning/service";
+import {
+  listLearnerLessons,
+  listLearnerTracks,
+} from "@/server/learning/service";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -47,8 +50,12 @@ const HOW = [
 ] as const;
 
 export default function LearnPage() {
-  const lessons = listLearnerLessons(getServerEnv()).map(toLessonDetail);
-  const titleById = new Map(lessons.map((l) => [l.id, l.title]));
+  const env = getServerEnv();
+  const lessons = listLearnerLessons(env).map(toLessonDetail);
+  const tracks = listLearnerTracks(env).map((t) => ({
+    ...t,
+    lessons: t.lessons.map(toLessonDetail),
+  }));
 
   return (
     <ProgressProvider>
@@ -146,80 +153,119 @@ export default function LearnPage() {
           </ol>
         </section>
 
-        {/* Learning path */}
-        {lessons.length > 0 ? (
-          <section aria-labelledby="jalur" className="space-y-6">
+        {/* Learning tracks (D-015) */}
+        {tracks.length > 0 ? (
+          <section aria-labelledby="jalur" className="space-y-8">
             <div className="flex flex-col justify-between gap-2 md:flex-row md:items-end">
               <div>
                 <p className="text-label-ui uppercase text-primary">
                   Alur petualangan
                 </p>
                 <h2 id="jalur" className="text-headline-md text-on-surface">
-                  Jalur Belajar Pemula
+                  Pilih Jalur Belajarmu
                 </h2>
+                <p className="text-body-sm text-on-surface-variant">
+                  Dari dasar sekali sampai lanjutan. Urutan topik mengikuti
+                  tutorial W3Schools, dijelaskan ulang untuk anak.
+                </p>
               </div>
               <p className="text-body-sm text-on-surface-variant">
-                {lessons.length} pelajaran • untuk kelas 4–6 SD
+                {tracks.length} jalur • {lessons.length} pelajaran
               </p>
             </div>
-            <ol className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {lessons.map((lesson, index) => (
-                <li key={lesson.id} className="card flex flex-col gap-4 p-6">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="chip bg-secondary-fixed text-on-secondary-fixed">
-                      <Icon name="play_arrow" size={16} />
-                      {topicLabel(lesson.topic)}
-                    </span>
-                    <span className="font-mono text-label-code-sm text-on-surface-variant">
-                      Misi {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="text-headline-sm text-on-surface">
-                    {lesson.title}
-                  </h3>
-                  <p className="text-body-sm text-on-surface-variant">
-                    {lesson.summary}
-                  </p>
-                  {lesson.example.kind === "conceptual" ? (
-                    <pre className="whitespace-pre-wrap rounded-xl bg-surface-container-low p-3 font-mono text-label-code-sm text-primary">
-                      {lesson.example.content
-                        .split("\n")
-                        .slice(0, 4)
-                        .join("\n")}
-                    </pre>
-                  ) : (
-                    <pre className="overflow-x-auto rounded-xl bg-surface-container-low p-3 font-mono text-label-code-sm text-primary">
-                      {lesson.example.content}
-                    </pre>
-                  )}
-                  <div className="flex flex-wrap gap-2">
-                    <LessonProgressBadge lessonId={lesson.id} />
-                    {lesson.prerequisites.length > 0 ? (
-                      <span className="chip bg-surface-container text-on-surface-variant">
-                        <Icon name="route" size={16} />
-                        Disarankan setelah{" "}
-                        {lesson.prerequisites
-                          .map((p) => titleById.get(p) ?? p)
-                          .join(", ")}
-                      </span>
-                    ) : null}
-                    {lesson.draft ? (
-                      <span className="chip bg-error-container text-on-error-container">
-                        <Icon name="warning" size={16} />
-                        Draf, belum diperiksa guru
-                      </span>
-                    ) : null}
-                  </div>
-                  <Link
-                    href={`/belajar/${lesson.id}`}
-                    className="btn-primary mt-auto !min-h-12 text-body-md"
-                  >
-                    Buka Misi Ini
-                    <Icon name="arrow_forward" />
-                  </Link>
-                </li>
+            <nav aria-label="Lompat ke jalur" className="flex flex-wrap gap-2">
+              {tracks.map((t) => (
+                <a
+                  key={t.id}
+                  href={`#${t.id}`}
+                  className="chip min-h-10 bg-surface-container-lowest text-primary shadow-sm hover:bg-surface-container"
+                >
+                  {t.title}
+                  <span className="font-mono font-normal text-on-surface-variant">
+                    {t.lessons.length}
+                  </span>
+                </a>
               ))}
-            </ol>
+            </nav>
+            {tracks.map((track) => (
+              <section
+                key={track.id}
+                id={track.id}
+                aria-labelledby={`${track.id}-judul`}
+                className="scroll-mt-28 space-y-4"
+              >
+                <div className="flex flex-col gap-1 border-b border-surface-container pb-3 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <h3
+                      id={`${track.id}-judul`}
+                      className="text-headline-sm text-on-surface"
+                    >
+                      {track.title}
+                    </h3>
+                    <p className="text-body-sm text-on-surface-variant">
+                      {track.description}
+                    </p>
+                  </div>
+                  <span className="text-label-ui text-on-surface-variant">
+                    {track.lessons.length} pelajaran
+                  </span>
+                </div>
+                <ol className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {track.lessons.map((lesson, index) => (
+                    <li
+                      key={lesson.id}
+                      className="card flex flex-col gap-4 p-6"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <span className="chip bg-secondary-fixed text-on-secondary-fixed">
+                          <Icon name="play_arrow" size={16} />
+                          {topicLabel(lesson.topic)}
+                        </span>
+                        <span className="font-mono text-label-code-sm text-on-surface-variant">
+                          {String(index + 1).padStart(2, "0")} •{" "}
+                          {LEVEL_NAME[lesson.difficulty]}
+                        </span>
+                      </div>
+                      <h4 className="text-headline-sm text-on-surface">
+                        {lesson.title}
+                      </h4>
+                      <p className="text-body-sm text-on-surface-variant">
+                        {lesson.summary}
+                      </p>
+                      <pre className="overflow-x-auto whitespace-pre rounded-xl bg-surface-container-low p-3 font-mono text-label-code-sm text-primary">
+                        {lesson.example.content
+                          .split("\n")
+                          .slice(0, 4)
+                          .join("\n")}
+                      </pre>
+                      <div className="flex flex-wrap gap-2">
+                        <LessonProgressBadge lessonId={lesson.id} />
+                        {lesson.example.kind === "code" ? (
+                          <span className="chip bg-surface-container text-on-surface-variant">
+                            <Icon name="code" size={16} />
+                            {LANGUAGE_FILE[lesson.example.language]?.label ??
+                              lesson.example.language}
+                          </span>
+                        ) : null}
+                        {lesson.draft ? (
+                          <span className="chip bg-error-container text-on-error-container">
+                            <Icon name="warning" size={16} />
+                            Draf
+                          </span>
+                        ) : null}
+                      </div>
+                      <Link
+                        href={`/belajar/${lesson.id}`}
+                        className="btn-primary mt-auto !min-h-12 text-body-md"
+                      >
+                        Buka Misi Ini
+                        <Icon name="arrow_forward" />
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            ))}
           </section>
         ) : null}
 

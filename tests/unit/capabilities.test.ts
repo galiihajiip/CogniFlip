@@ -78,8 +78,8 @@ describe("capability registry", () => {
     expect(resolveLanguage("PY").id).toBe("python");
     expect(resolveLanguage(".ts").id).toBe("typescript");
     expect(resolveLanguage("golang").id).toBe("go");
-    const unknown = resolveLanguage("Haskell");
-    expect(unknown).toMatchObject({ id: "other", label: "Haskell" });
+    const unknown = resolveLanguage("Scratch");
+    expect(unknown).toMatchObject({ id: "other", label: "Scratch" });
     expect(supportLevel(unknown)).toBe("AI_REVIEW_ONLY");
   });
 });

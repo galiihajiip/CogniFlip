@@ -6,7 +6,7 @@ import { CodeBlock } from "@/app/_components/code-block";
 import { FlipBotAvatar } from "@/app/_components/flipbot";
 import { Icon } from "@/app/_components/icon";
 import { Chip, PageFrame } from "@/app/_components/states";
-import { topicLabel } from "@/app/_lib/view";
+import { LANGUAGE_FILE, LEVEL_NAME, topicLabel } from "@/app/_lib/view";
 import { getServerEnv } from "@/server/config/env";
 import { toLessonDetail } from "@/server/learning/dto";
 import { listLearnerLessons } from "@/server/learning/service";
@@ -75,7 +75,9 @@ export default async function LessonIntroPage({ params }: Props) {
           </p>
           <div className="flex flex-wrap gap-2">
             <Chip icon="timer">Sekitar 10 menit</Chip>
-            <Chip icon="school">Tingkat {lesson.difficulty}: Pemula</Chip>
+            <Chip icon="school">
+              Tingkat {LEVEL_NAME[lesson.difficulty] ?? lesson.difficulty}
+            </Chip>
           </div>
         </section>
         <aside className="flex flex-col items-center gap-3 rounded-3xl bg-surface-container-low p-6 text-center lg:col-span-4">
@@ -137,11 +139,32 @@ export default async function LessonIntroPage({ params }: Props) {
             Taman Contoh FlipBot
           </h2>
           {lesson.example.kind === "code" ? (
-            <CodeBlock
-              code={lesson.example.content}
-              filename={`contoh.${lesson.example.language === "python" ? "py" : "txt"}`}
-              language={`${lesson.example.language} ${lesson.example.languageVersion}`}
-            />
+            <>
+              <CodeBlock
+                code={lesson.example.content}
+                filename={
+                  LANGUAGE_FILE[lesson.example.language]?.file ?? "contoh.txt"
+                }
+                language={`${LANGUAGE_FILE[lesson.example.language]?.label ?? lesson.example.language} ${lesson.example.languageVersion}`}
+              />
+              {lesson.example.expectedOutput ? (
+                <div className="rounded-2xl bg-console p-4">
+                  <p className="mb-1 font-mono text-label-code-sm text-surface-container-high">
+                    Hasil (sudah dicek dengan menjalankan kodenya)
+                  </p>
+                  <pre className="overflow-x-auto whitespace-pre font-mono text-label-code-lg text-console-text">
+                    {lesson.example.expectedOutput}
+                  </pre>
+                </div>
+              ) : null}
+              <Link
+                href={`/ide?contoh=${lesson.id}`}
+                className="btn-secondary w-fit"
+              >
+                <Icon name="terminal" />
+                Coba di Mini IDE
+              </Link>
+            </>
           ) : (
             <pre className="whitespace-pre-wrap rounded-2xl bg-inverse-surface p-5 font-mono text-label-code-lg leading-7 text-inverse-on-surface">
               {lesson.example.content}

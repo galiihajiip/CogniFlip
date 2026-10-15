@@ -58,7 +58,7 @@ export interface AdapterRecord {
 export const ADAPTERS: AdapterRecord[] = [];
 
 const NO_ADAPTER = "Belum ada adapter yang teruji untuk bahasa ini.";
-const NO_EDITOR = "Editor kode belum tersedia (menunggu desain Stitch).";
+const NO_EDITOR = "Pewarnaan sintaks belum tersedia di Mini IDE.";
 
 function aiOnly(
   id: string,
@@ -111,6 +111,22 @@ export const LANGUAGES: LanguageEntry[] = [
   aiOnly("html", "HTML", [], [".html", ".htm"]),
   aiOnly("css", "CSS", [], [".css"]),
   aiOnly("sql", "SQL", [], [".sql"]),
+  aiOnly("swift", "Swift", [], [".swift"]),
+  aiOnly("dart", "Dart", ["flutter"], [".dart"]),
+  aiOnly("scala", "Scala", [], [".scala"]),
+  aiOnly("lua", "Lua", [], [".lua"]),
+  aiOnly("r", "R", [], [".r"]),
+  aiOnly("bash", "Bash", ["shell", "sh", "zsh"], [".sh"]),
+  aiOnly("powershell", "PowerShell", ["ps1"], [".ps1"]),
+  aiOnly("perl", "Perl", ["pl"], [".pl"]),
+  aiOnly("haskell", "Haskell", ["hs"], [".hs"]),
+  aiOnly("elixir", "Elixir", ["ex"], [".ex", ".exs"]),
+  aiOnly("matlab", "MATLAB", ["octave"], [".m"]),
+  aiOnly("julia", "Julia", ["jl"], [".jl"]),
+  aiOnly("visual-basic", "Visual Basic", ["vb", "vbnet"], [".vb"]),
+  aiOnly("assembly", "Assembly", ["asm"], [".asm", ".s"]),
+  aiOnly("json", "JSON", [], [".json"]),
+  aiOnly("yaml", "YAML", ["yml"], [".yaml", ".yml"]),
 ];
 
 /** Any language not in the list: still reviewable by AI, with its own label. */

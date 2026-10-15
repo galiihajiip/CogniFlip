@@ -34,7 +34,7 @@
 | 27–32 | Done (API only; no UI) |
 | 33 editor UI | Done: `/ide` with in-browser Python runner (D-012) and AI review |
 | 34–37, 39–41 | Done |
-| 38 runtime adapter | Python: done in the browser (Pyodide worker, D-012, evidence in `EXECUTION_THREAT_MODEL.md`). Server-side execution stays disabled; other languages AI-review only |
+| 38 runtime adapter | Python, JavaScript, SQL, HTML/CSS: done in the browser (D-012, D-015); Python (Pyodide worker, D-012, evidence in `EXECUTION_THREAT_MODEL.md`). Server-side execution stays disabled; other languages AI-review only |
 | 42–46, 48, 49 | **BLOCKED** (UI, speech/realtime provider decisions, safety gates); see `PHASE6_STATUS.md` |
 | 47 | Done as design only (community OFF) |
 | 50 | Done (single-agent workflows under a bounded orchestrator) |

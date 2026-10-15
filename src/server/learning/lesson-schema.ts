@@ -17,6 +17,38 @@ export const LESSON_TOPICS = [
   "conditions",
   "variables",
   "debugging",
+  // Multi-language curriculum (D-015).
+  "output",
+  "data-types",
+  "strings",
+  "operators",
+  "collections",
+  "functions",
+  "objects",
+  "errors",
+  "web-structure",
+  "web-content",
+  "forms",
+  "styling",
+  "layout",
+  "responsive",
+  "queries",
+  "filtering",
+  "aggregation",
+  "joins",
+  "dom",
+  "modules",
+] as const;
+
+/** Languages a lesson's code example may use; outputs are verified in tests. */
+export const EXAMPLE_LANGUAGES = [
+  "python",
+  "javascript",
+  "html",
+  "css",
+  "sql",
+  "java",
+  "cpp",
 ] as const;
 
 export const LESSON_STATUSES = ["draft", "published", "archived"] as const;
@@ -41,10 +73,11 @@ const exampleSchema = z.discriminatedUnion("kind", [
   // Executable source code with a reviewed expected output.
   z.strictObject({
     kind: z.literal("code"),
-    language: z.enum(["python"]),
-    languageVersion: z.string().regex(/^\d+\.\d+$/),
+    language: z.enum(EXAMPLE_LANGUAGES),
+    languageVersion: z.string().regex(/^[\w.+-]{1,20}$/),
     content: text(1_200),
-    expectedOutput: z.string().max(400),
+    /** Exact program output (empty for HTML/CSS, which render instead). */
+    expectedOutput: z.string().max(600),
     explanation: text(600),
   }),
 ]);
@@ -138,6 +171,8 @@ export const learningPathSchema = z.strictObject({
   /** A draft path may list draft lessons; a published path only published ones. */
   status: z.enum(["draft", "published"]),
   title: text(80),
+  /** One sentence shown on the learning page. */
+  description: text(300).optional(),
   locale: localeSchema,
   /** Ordered lesson ids; the learner sees them in this order. */
   lessons: z.array(lessonIdSchema).min(1).max(30),

@@ -67,3 +67,12 @@ Execution was enabled for **Python only, in the browser**: `public/runner/python
 | Memory exhaustion | Browser WebAssembly limits only; timeout as backstop | NOT VERIFIED beyond the timeout (accepted risk, D-012) |
 
 Not verified: Firefox and Safari behaviour (only Chromium was tested); slow-network first load (about 12 MB).
+
+## Update 2026-10-15: JavaScript, SQL and HTML/CSS in the browser (D-015)
+| Runtime | Isolation | Evidence (2026-10-15, Chromium headless, local dev) |
+|---|---|---|
+| JavaScript (`public/runner-js/js-worker.mjs`) | Module worker; CSP `default-src 'none'; script-src 'self' 'unsafe-eval'; connect-src 'none'`; network/code-loading globals removed before learner code; 5 s termination; 20,000-char output cap | `while (true) {}` stopped; `typeof fetch/XMLHttpRequest/WebSocket` = `undefined`; `import("https://example.com/x.js")` → Playwright `requestfailed: csp`, no response |
+| SQL (`public/runner/sql-worker.js`) | Classic worker under the `/runner/` CSP; sql.js 1.14.2 self-hosted; fresh in-memory database per run; globals removed after load; output cap | SQL lesson example ran and printed the joined rows |
+| HTML/CSS (sandboxed iframe) | `sandbox="allow-scripts"` (opaque origin: no cookies, no access to the app); CSP meta first in the document (`default-src 'none'`, inline style/script only, `img-src data:`); `tests/unit/runtimes.test.ts` checks the CSP precedes learner markup and CSS cannot close its style tag | Inline script handled a click inside the preview |
+
+Residual risk: a link clicked inside the HTML preview can navigate that frame (sites that forbid framing will refuse). Not verified: Firefox/Safari.
