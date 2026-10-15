@@ -93,16 +93,6 @@ export default function Home() {
         <div className="pointer-events-none absolute -left-24 top-1/2 h-80 w-80 rounded-full bg-primary-fixed/30 blur-3xl" />
         <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col gap-6 lg:col-span-6">
-            <div className="inline-flex w-fit flex-wrap items-center gap-2.5 rounded-full bg-surface-container px-4 py-1.5 shadow-sm">
-              <span className="h-2.5 w-2.5 rounded-full bg-secondary motion-safe:animate-pulse" />
-              <span className="text-label-ui uppercase text-primary">
-                Flip the Way You Learn
-              </span>
-              <span className="text-label-ui text-on-surface-variant">•</span>
-              <span className="text-label-ui text-on-surface-variant">
-                Metode Reverse-Tutoring
-              </span>
-            </div>
             <h1 className="text-balance text-display-hero-mobile text-on-surface sm:text-display-hero">
               Jangan Cuma Dapat Jawaban. <br className="hidden sm:inline" />
               <span className="text-primary-container">Pahami Alasannya.</span>
