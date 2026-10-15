@@ -8,7 +8,7 @@
   - each answer-key fix produces the intended output.
 
   Result on 2026-10-13 with Python 3.14.6: 7/7 pass. These are our own fixed snippets, never learner code.
-- **Review status:** AI-drafted, **not human-reviewed**. Missions stay `draft` and are listed only with `ALLOW_DRAFT_CONTENT=true` outside production (`LESSON_REVIEW.md`).
+- **Review status:** AI-drafted, **not human-reviewed**. Missions stay `draft`; drafts are listed by default, labelled, unless `ALLOW_DRAFT_CONTENT=false` (D-013, `LESSON_REVIEW.md`).
 
 ## Behaviour
 - Learners see the code (and for debugging, the intended behaviour and output). They **never** see the expected output, answer key, fix or hints in advance.

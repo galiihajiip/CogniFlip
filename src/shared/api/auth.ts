@@ -13,6 +13,8 @@ const RESERVED = new Set([
   "cogniflip",
   "robi",
   "flipbot",
+  // Reserved for the public demo account (D-014); created by the server.
+  "demo",
   "guru",
   "system",
   "support",

@@ -195,12 +195,6 @@ export function parseServerEnv(source: EnvSource): ServerEnv {
         "must set sslmode=require, verify-ca or verify-full in production",
     });
   }
-  if (isProduction && input.ALLOW_DRAFT_CONTENT === "true") {
-    problems.push({
-      variable: "ALLOW_DRAFT_CONTENT",
-      problem: "must not be enabled in production",
-    });
-  }
   if (isProduction && input.AI_MOCK_MODE === "true") {
     problems.push({
       variable: "AI_MOCK_MODE",

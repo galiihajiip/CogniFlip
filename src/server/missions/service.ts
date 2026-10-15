@@ -133,8 +133,7 @@ export function normalizeOutput(text: string): string {
 }
 
 export function listMissions(env: ServerEnv): Mission[] {
-  const drafts =
-    env.ALLOW_DRAFT_CONTENT === "true" && env.NODE_ENV !== "production";
+  const drafts = env.ALLOW_DRAFT_CONTENT !== "false"; // D-013
   return MISSIONS.filter((m) => m.status === "published" || drafts);
 }
 
@@ -250,7 +249,7 @@ export class MissionService {
   }
 
   async diagnose(
-    owner: { keyHash: string; userId?: string },
+    owner: { keyHash: string; userId?: string; rateKey?: string },
     mission: DebugMission,
     text: string,
     key: string,
@@ -265,7 +264,7 @@ export class MissionService {
         this.gateway(),
         mission,
         text,
-        owner.keyHash,
+        owner.rateKey ?? owner.keyHash,
       );
       if (!result.ok)
         // Infrastructure failure is never recorded as a wrong diagnosis.

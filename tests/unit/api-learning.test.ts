@@ -58,8 +58,8 @@ afterEach(() => {
 });
 
 describe("lesson API", () => {
-  it("lists only published lessons unless drafts are explicitly enabled", async () => {
-    vi.stubEnv("ALLOW_DRAFT_CONTENT", "");
+  it("hides drafts only when ALLOW_DRAFT_CONTENT=false (D-013)", async () => {
+    vi.stubEnv("ALLOW_DRAFT_CONTENT", "false");
     expect(
       (await (await listLessons(new Request(`${BASE}/api/lessons`))).json())
         .lessons,
@@ -102,7 +102,7 @@ describe("lesson API", () => {
         )
       ).status,
     ).toBe(404);
-    vi.stubEnv("ALLOW_DRAFT_CONTENT", "");
+    vi.stubEnv("ALLOW_DRAFT_CONTENT", "false");
     expect(
       (
         await lessonDetail(

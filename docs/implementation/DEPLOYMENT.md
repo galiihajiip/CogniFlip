@@ -44,7 +44,7 @@ CI (`.github/workflows/ci.yml`) then runs for the first time; check both jobs pa
    | `LLM_MODEL` | `gemini-3.8-flash` (until the benchmark decides) |
    | optional | `AI_MAX_REQUESTS_PER_MINUTE`, `AI_MAX_CALLS_PER_SESSION`, `AI_TIMEOUT_SECONDS`, `AI_DISABLED` |
 
-   **Never set** `AI_MOCK_MODE` or `ALLOW_DRAFT_CONTENT` in production; the app refuses to start if you do.
+   **Never set** `AI_MOCK_MODE` in production; the app refuses to start if you do. Draft lessons and missions are shown by default (D-013); set `ALLOW_DRAFT_CONTENT=false` to hide them. The public demo account (`demo` / `FlipBot-Juara-2026`, D-014) is created automatically on its first login; no seeding step is needed.
 3. Firewall: add one WAF rate-limit rule on `/api/` (Hobby allows 1), e.g. 60 requests/min per IP.
 4. Google Cloud: set a billing budget and alerts for the Gemini key's project.
 5. Deploy. Wait for Vercel to report success and give the URL. Only then record the URL and deployment id here.

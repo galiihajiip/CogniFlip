@@ -10,6 +10,7 @@ import {
 } from "@/server/auth/service";
 import { AppError } from "@/server/http/errors";
 import { handleSchema, passwordSchema } from "@/shared/api/auth";
+import { DEMO_ACCOUNT, isDemoHandle } from "@/shared/api/demo";
 
 const generous = (): AuthLimiters => ({
   loginPerHandle: new FixedWindowLimiter(100, 60_000),
@@ -168,5 +169,60 @@ describe("AuthService", () => {
     expect(await service.currentUser(undefined)).toBeUndefined();
     expect(await service.currentUser("short")).toBeUndefined();
     expect(await service.currentUser("x".repeat(43))).toBeUndefined();
+  });
+});
+
+describe("public demo account (D-014)", () => {
+  const { handle, password } = DEMO_ACCOUNT;
+
+  it("is created on the first correct demo login and is a plain learner", async () => {
+    const { repo, service } = setup();
+    expect(await repo.findUserByHandle(handle)).toBeUndefined();
+    const session = await service.login(handle, password, "1.1.1.1");
+    expect(session.user).toMatchObject({ handle, role: "learner" });
+    // Second login reuses the same account.
+    const again = await service.login(handle, password, "2.2.2.2");
+    expect(again.user.id).toBe(session.user.id);
+  });
+
+  it("is not created by a wrong demo password", async () => {
+    const { repo, service } = setup();
+    expect(await code(service.login(handle, "salah-sandi-1", "1.1.1.1"))).toBe(
+      "INVALID_CREDENTIALS",
+    );
+    expect(await repo.findUserByHandle(handle)).toBeUndefined();
+  });
+
+  it("is never locked by the per-handle limit, while other handles still are", async () => {
+    const { service } = setup({
+      ...generous(),
+      loginPerHandle: new FixedWindowLimiter(2, 60_000),
+    });
+    for (let i = 0; i < 6; i++)
+      await service.login(handle, password, `10.0.0.${i}`);
+    await service.register("anak_lain", "pelangi-biru-77", "9.9.9.9");
+    await service.login("anak_lain", "pelangi-biru-77", "9.9.9.1");
+    await service.login("anak_lain", "pelangi-biru-77", "9.9.9.2");
+    expect(
+      await code(service.login("anak_lain", "pelangi-biru-77", "9.9.9.3")),
+    ).toBe("RATE_LIMITED");
+  });
+
+  it("keeps the per-IP limit for the demo account", async () => {
+    const { service } = setup({
+      ...generous(),
+      loginPerIp: new FixedWindowLimiter(2, 60_000),
+    });
+    await service.login(handle, password, "5.5.5.5");
+    await service.login(handle, password, "5.5.5.5");
+    expect(await code(service.login(handle, password, "5.5.5.5"))).toBe(
+      "RATE_LIMITED",
+    );
+  });
+
+  it("cannot be registered by anyone else", () => {
+    expect(handleSchema.safeParse(handle).success).toBe(false);
+    expect(isDemoHandle(" Demo ")).toBe(true);
+    expect(isDemoHandle("demo2")).toBe(false);
   });
 });

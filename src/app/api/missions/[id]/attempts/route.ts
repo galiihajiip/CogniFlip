@@ -8,7 +8,10 @@ import {
   withCookie,
   withErrorHandling,
 } from "@/server/http/respond";
-import { requesterForCreate } from "@/server/learning/service";
+import {
+  requesterForCreate,
+  requesterRateKey,
+} from "@/server/learning/service";
 import { getMissionService } from "@/server/missions";
 import { getMission } from "@/server/missions/service";
 import { syncRewardsQuietly } from "@/server/rewards";
@@ -39,8 +42,12 @@ export const POST = withErrorHandling<Ctx>(
       missionAttemptRequestSchema,
       await readJsonBody(request),
     );
-    const owner = await requesterForCreate(request, env);
-    const limit = attemptLimiter.check(owner.keyHash);
+    const identity = await requesterForCreate(request, env);
+    const owner = {
+      ...identity,
+      rateKey: await requesterRateKey(request, env, identity.keyHash),
+    };
+    const limit = attemptLimiter.check(owner.rateKey);
     if (!limit.allowed)
       throw new AppError("RATE_LIMITED", "too many mission attempts", {
         details: { retryAfterSeconds: limit.retryAfterSeconds },

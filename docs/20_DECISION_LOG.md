@@ -85,5 +85,20 @@ Append decisions chronologically. Record actual options, rationale, impact, stat
 - Accepted residual risks: memory is bounded only by the browser's WebAssembly limits (a run that allocates heavily is still stopped by the 5 s timeout); same-origin GET requests via `import()` remain possible under `connect-src`/`script-src 'self'` but cannot read responses or change data; only Python is supported; first load downloads about 12 MB.
 - Consequences: ADR-003 is updated (the "never in the app process" rule is kept). Mission answer keys still come from reviewed fixtures.
 
+## D-013 — Draft lessons and missions are visible to every visitor
+- Date: 2026-10-15
+- Status: accepted
+- Approver: participant (Claude Code session, 2026-10-15: asked whether drafts should be visible in production to the demo account only, to every visitor, or to nobody until published; chose "every visitor")
+- Decision: unreviewed AI-drafted lessons and missions are listed in every environment, including production, unless `ALLOW_DRAFT_CONTENT=false`. They keep the visible "Draf, belum diperiksa guru" label. The production start-up check that refused `ALLOW_DRAFT_CONTENT=true` is removed.
+- Risk accepted: children may see content no teacher has reviewed. Mitigations: draft labels on every card and page; the guide page states the review status; publishing reviewed content is still the intended path (`LESSON_REVIEW.md`).
+
+## D-014 — Public demo account
+- Date: 2026-10-15
+- Status: accepted
+- Approver: participant (request: a hard-coded demo account with an auto-fill button that can use every feature without being locked)
+- Decision: handle `demo`, password `FlipBot-Juara-2026` (public by design, shown on `/masuk` with an "Isi Otomatis Akun Demo" button; `src/shared/api/demo.ts`). The account is created by the server on the first correct demo login (no deploy-time seed) and is a plain `learner` (no moderator/admin rights).
+- Never locked: the demo handle is exempt from the per-handle login lockout (5 per 15 min); its AI, mission-attempt and code-review rate limits are counted per client IP instead of per account, so visitors sharing it do not exhaust each other's quota. The per-IP login limit still applies.
+- Protected: `demo` is a reserved handle (nobody can register it), and the account cannot be deleted (403). Its history, XP and leaderboard entry are shared by everyone who uses it; the login card and profile say so and ask users not to write personal data.
+
 ## Pending decisions
 Record after actual review: runtime model (after benchmark); realtime provider; production Postgres host; runner/isolation model; STT/TTS provider and retention; community/profile visibility defaults after safety review; exact dependency versions and hosting setup.

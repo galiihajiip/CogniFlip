@@ -1,4 +1,5 @@
 import "server-only";
+import { isDemoHandle } from "@/shared/api/demo";
 import type pg from "pg";
 import { verifyPassword } from "@/server/auth/password";
 import type { UserRecord } from "@/server/auth/repository";
@@ -109,6 +110,9 @@ export class ProfileService {
    * sessions and the profile (and learning history once BLOCK 29 adds it).
    */
   async deleteAccount(user: UserRecord, password: string) {
+    // The shared demo account must stay available for every visitor (D-014).
+    if (isDemoHandle(user.handle))
+      throw new AppError("FORBIDDEN", "the demo account cannot be deleted");
     const { rows } = await this.pool.query<{ password_hash: string }>(
       `select password_hash from users where id = $1`,
       [user.id],

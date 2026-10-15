@@ -14,7 +14,13 @@ import {
 } from "@/server/config/env";
 import { getCurrentUser } from "@/server/auth";
 import { getPool } from "@/server/db/client";
-import { existingGuestHash, guestIdentity, hashKey } from "@/server/http/guest";
+import {
+  clientIp,
+  existingGuestHash,
+  guestIdentity,
+  hashKey,
+} from "@/server/http/guest";
+import { isDemoHandle } from "@/shared/api/demo";
 import { PostgresSessionStore } from "@/server/learning/session/pg-store";
 import { AppError } from "@/server/http/errors";
 import { getLessonCatalog } from "@/server/learning/content";
@@ -30,11 +36,11 @@ import type { TutorSession } from "@/server/learning/session/types";
 /**
  * Application service for lessons and tutor sessions (used by route
  * handlers). Content access: published lessons only, plus unreviewed drafts
- * when ALLOW_DRAFT_CONTENT=true outside production.
+ * unreviewed drafts unless ALLOW_DRAFT_CONTENT=false (D-013: drafts are
+ * shown to every visitor, labelled "Draf", until they are reviewed).
  */
 
-const allowDrafts = (env: ServerEnv) =>
-  env.ALLOW_DRAFT_CONTENT === "true" && env.NODE_ENV !== "production";
+const allowDrafts = (env: ServerEnv) => env.ALLOW_DRAFT_CONTENT !== "false";
 
 /** Lessons a learner may open, in learning-path order when a path exists. */
 export function listLearnerLessons(env: ServerEnv): LessonVersion[] {
@@ -121,6 +127,23 @@ export async function requesterForCreate(request: Request, env: ServerEnv) {
   if (user) return { keyHash: userOwnerHash(user.id), userId: user.id };
   const guest = guestIdentity(request, env);
   return { keyHash: guest.keyHash, setCookie: guest.setCookie };
+}
+
+/**
+ * Rate-limit bucket for a request: normally the owner. The shared demo
+ * account is bucketed per client IP instead, so visitors using it at the
+ * same time do not use up each other's quota (D-014). Ownership of data is
+ * unchanged.
+ */
+export async function requesterRateKey(
+  request: Request,
+  env: ServerEnv,
+  ownerKeyHash: string,
+): Promise<string> {
+  const user = await getCurrentUser(request, env);
+  return user && isDemoHandle(user.handle)
+    ? hashKey(`demo-rate:${clientIp(request)}`)
+    : ownerKeyHash;
 }
 
 /** Owner key for reads/writes; never creates a new identity. */

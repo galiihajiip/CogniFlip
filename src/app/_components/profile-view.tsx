@@ -9,6 +9,7 @@ import { SignInNeeded } from "@/app/_components/sign-in-needed";
 import { ErrorBlock, LoadingBlock } from "@/app/_components/states";
 import { apiFetch, failureMessage, type ApiFailure } from "@/app/_lib/api";
 import { AVATAR_ICON, AVATAR_LABEL } from "@/app/_lib/view";
+import { isDemoHandle } from "@/shared/api/demo";
 import { AVATAR_KEYS, ownProfileResponseSchema } from "@/shared/api/profile";
 
 type Profile = z.infer<typeof ownProfileResponseSchema>["profile"];
@@ -194,13 +195,24 @@ export function ProfileView() {
         </a>
       </section>
 
-      <DeleteAccount
-        onDeleted={async () => {
-          await account.refresh();
-          router.push("/");
-          router.refresh();
-        }}
-      />
+      {isDemoHandle(profile.handle) ? (
+        <section className="card space-y-2 p-6">
+          <h2 className="text-headline-sm text-on-surface">Akun Demo</h2>
+          <p className="text-body-md text-on-surface-variant">
+            Ini akun demo yang dipakai bersama, jadi tidak bisa dihapus. Riwayat
+            dan XP-nya juga terlihat oleh pemakai demo lainnya. Buat akunmu
+            sendiri kalau ingin menyimpan perjalanan belajarmu.
+          </p>
+        </section>
+      ) : (
+        <DeleteAccount
+          onDeleted={async () => {
+            await account.refresh();
+            router.push("/");
+            router.refresh();
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import "server-only";
+import { DEMO_ACCOUNT, isDemoHandle } from "@/shared/api/demo";
 import { createHash, randomBytes } from "node:crypto";
 import { FixedWindowLimiter } from "@/server/ai/rate-limit";
 import {
@@ -77,7 +78,11 @@ export class AuthService {
 
   async login(handle: string, password: string, ip: string) {
     limited(this.limiters.loginPerIp.check(ip));
-    limited(this.limiters.loginPerHandle.check(handle));
+    const demo = isDemoHandle(handle);
+    // The demo password is public and shared by many visitors, so the
+    // per-handle lockout would only lock everyone out (D-014).
+    if (!demo) limited(this.limiters.loginPerHandle.check(handle));
+    if (demo && password === DEMO_ACCOUNT.password) await this.ensureDemoUser();
     const user = await this.repo.findUserByHandle(handle);
     // Same work whether or not the account exists.
     const ok = await verifyPassword(
@@ -91,6 +96,16 @@ export class AuthService {
       handle: user.handle,
       role: user.role,
     });
+  }
+
+  /** Creates the public demo account on first use (no deploy-time seeding). */
+  private async ensureDemoUser() {
+    if (await this.repo.findUserByHandle(DEMO_ACCOUNT.handle)) return;
+    // "handle_taken" means a concurrent request created it first.
+    await this.repo.createUser(
+      DEMO_ACCOUNT.handle,
+      await hashPassword(DEMO_ACCOUNT.password),
+    );
   }
 
   /** The signed-in user for a cookie token, refreshing long-lived sessions. */

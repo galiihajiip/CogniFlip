@@ -8,6 +8,7 @@ import {
   getOwnedSession,
   getTutor,
   requesterOwnerHash,
+  requesterRateKey,
 } from "@/server/learning/service";
 import { toLearnerView } from "@/server/learning/session/view";
 import {
@@ -35,12 +36,16 @@ export const POST = withErrorHandling<Ctx>(
       await readJsonBody(request),
     );
     // Ownership first: a non-owner learns nothing about the session.
-    await getOwnedSession(env, id, await requesterOwnerHash(request, env));
+    const owner = await requesterOwnerHash(request, env);
+    await getOwnedSession(env, id, owner);
     const { engine } = getTutor(env);
 
     const session =
       action.type === "submit"
-        ? await engine.submit(id, action)
+        ? await engine.submit(id, {
+            ...action,
+            rateLimitKey: await requesterRateKey(request, env, owner!),
+          })
         : action.type === "view_concept"
           ? await engine.viewConcept(id, action.expectedVersion)
           : action.type === "begin"

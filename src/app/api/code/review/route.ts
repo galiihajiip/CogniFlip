@@ -5,7 +5,10 @@ import { AppError } from "@/server/http/errors";
 import { assertSameOrigin, clientIp } from "@/server/http/guest";
 import { parseInput, readJsonBody } from "@/server/http/request";
 import { contractResponse, withErrorHandling } from "@/server/http/respond";
-import { requesterOwnerHash } from "@/server/learning/service";
+import {
+  requesterOwnerHash,
+  requesterRateKey,
+} from "@/server/learning/service";
 import {
   codeReviewRequestSchema,
   codeReviewResponseSchema,
@@ -25,8 +28,10 @@ export const POST = withErrorHandling(async (request, correlationId) => {
     codeReviewRequestSchema,
     await readJsonBody(request, 24 * 1024),
   );
-  const owner =
-    (await requesterOwnerHash(request, env)) ?? `ip:${clientIp(request)}`;
+  const ownerHash = await requesterOwnerHash(request, env);
+  const owner = ownerHash
+    ? await requesterRateKey(request, env, ownerHash)
+    : `ip:${clientIp(request)}`;
   const result = await reviewCode(getGatewayDeps(env), {
     ...input,
     rateLimitKey: owner,

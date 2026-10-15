@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { useAccount } from "@/app/_components/account";
 import { FlipBotAvatar } from "@/app/_components/flipbot";
 import { Icon } from "@/app/_components/icon";
 import { apiFetch, failureMessage } from "@/app/_lib/api";
+import { DEMO_ACCOUNT } from "@/shared/api/demo";
 import {
   handleSchema,
   meResponseSchema,
@@ -49,6 +50,17 @@ export function AuthForm({ mode }: { mode: "masuk" | "daftar" }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const register = mode === "daftar";
+  const submitRef = useRef<HTMLButtonElement>(null);
+  const [filled, setFilled] = useState(false);
+
+  function fillDemo() {
+    setHandle(DEMO_ACCOUNT.handle);
+    setPassword(DEMO_ACCOUNT.password);
+    setError(null);
+    setTouched(false);
+    setFilled(true);
+    submitRef.current?.focus();
+  }
 
   const hErr = register
     ? handleProblem(handle)
@@ -131,6 +143,45 @@ export function AuthForm({ mode }: { mode: "masuk" | "daftar" }) {
               : "Masuk dengan nama pengguna dan kata sandimu."}
           </p>
         </div>
+        {!register ? (
+          <div className="space-y-3 rounded-2xl border-[1.5px] border-bubble-border bg-tertiary-fixed/30 p-4">
+            <div className="flex items-center gap-2">
+              <Icon name="rocket_launch" className="text-primary" />
+              <h2 className="text-body-md font-bold text-on-surface">
+                Akun Demo
+              </h2>
+            </div>
+            <p className="text-body-sm text-on-surface-variant">
+              Mau langsung mencoba semua fitur? Pakai akun demo ini. Akun ini
+              dipakai bersama, jadi jangan tulis data pribadi.
+            </p>
+            <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-body-sm">
+              <dt className="text-on-surface-variant">Nama pengguna</dt>
+              <dd className="font-mono font-semibold text-on-surface">
+                {DEMO_ACCOUNT.handle}
+              </dd>
+              <dt className="text-on-surface-variant">Kata sandi</dt>
+              <dd className="font-mono font-semibold text-on-surface">
+                {DEMO_ACCOUNT.password}
+              </dd>
+            </dl>
+            <button
+              type="button"
+              onClick={fillDemo}
+              className="btn-secondary w-full bg-surface-container-lowest"
+            >
+              <Icon name="edit_note" />
+              Isi Otomatis Akun Demo
+            </button>
+            <p
+              role="status"
+              aria-live="polite"
+              className="text-body-sm text-primary"
+            >
+              {filled ? "Terisi! Tekan “Masuk” untuk melanjutkan." : ""}
+            </p>
+          </div>
+        ) : null}
         <Field
           id={`${id}-h`}
           label="Nama pengguna"
@@ -217,7 +268,12 @@ export function AuthForm({ mode }: { mode: "masuk" | "daftar" }) {
             baik-baik, ya.
           </p>
         ) : null}
-        <button type="submit" className="btn-primary w-full" disabled={busy}>
+        <button
+          ref={submitRef}
+          type="submit"
+          className="btn-primary w-full"
+          disabled={busy}
+        >
           <Icon
             name={busy ? "hourglass_top" : register ? "rocket_launch" : "login"}
           />

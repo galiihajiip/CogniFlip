@@ -216,7 +216,8 @@ describe("missions API", () => {
       { params: Promise.resolve({ id }) },
     );
 
-  it("hides draft missions unless enabled, and lists without answers", async () => {
+  it("hides draft missions only when disabled (D-013), and lists without answers", async () => {
+    vi.stubEnv("ALLOW_DRAFT_CONTENT", "false");
     expect(
       (await (await listMissions(new Request("http://t/"))).json()).missions,
     ).toEqual([]);

@@ -10,7 +10,7 @@
 | 1. AI Agent reference docs | **PASS (exist)** | `CLAUDE.md`, `AGENTS.md`, `docs/`, ADR-001…007, decision log D-001…D-010. Provenance of the imported package is disclosed in commit `3bf061c` |
 | 2. Public GitHub repository | **FAIL** | No remote; GitHub CLI login fails. `DEPLOYMENT.md` §1 has the steps |
 | 3. Curated journal (≤ 5 actual prompts) + raw log | **NOT VERIFIED** | The journal is still blank by design. Candidates are listed in `PROMPT_JOURNAL_CANDIDATES.md` for you to choose and copy verbatim. The raw log (this session's transcript) exists locally; **backup, hash and publication are pending** (`raw-log-register.md`). Logs from the documentation-package chat, the prompt playbook and Stitch sessions are not in the repository |
-| 4. Theme and subtheme (Web Education for Kids) | **NOT VERIFIED** | Learner UI now exists (Stitch design, D-011): lessons, teach-the-robot flow, missions, Mini IDE, accounts, history; browser-checked locally on 2026-10-13. Still **no published lesson**, so production shows 0 lessons until content review |
+| 4. Theme and subtheme (Web Education for Kids) | **NOT VERIFIED** | Learner UI now exists (Stitch design, D-011): lessons, teach-the-robot flow, missions, Mini IDE, accounts, history; browser-checked locally on 2026-10-13. No lesson is published yet, but drafts are shown with a "Draf" label in every environment (D-013); judges can use the public demo account `demo` (D-014) |
 | 5. Free stack choice | **PASS** | Next.js 16 / TypeScript / PostgreSQL / Gemini, recorded in ADR-001, D-006 and D-008 |
 | 6. Deployed website accessible to judges | **FAIL** | Not deployed (no GitHub, Vercel, Postgres host or key). A local production build passes `npm run smoke` 11/11 |
 

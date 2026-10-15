@@ -19,6 +19,8 @@ import {
 import { GET as publicProfile } from "@/app/api/profiles/[handle]/route";
 import { DELETE as deleteAccount } from "@/app/api/account/route";
 import { GET as exportData } from "@/app/api/account/export/route";
+import { POST as login } from "@/app/api/auth/login/route";
+import { DEMO_ACCOUNT } from "@/shared/api/demo";
 
 const adminUrl = process.env.TEST_DATABASE_URL;
 if (!adminUrl)
@@ -210,5 +212,38 @@ describe("profiles with two users", () => {
     expect(
       (await (await me(req("GET", "/api/auth/me", e))).json()).user,
     ).toBeNull();
+  });
+});
+
+describe("public demo account (D-014)", () => {
+  it("is created on first login, cannot be registered or deleted, and stays a learner", async () => {
+    const taken = await register(
+      req("POST", "/api/auth/register", undefined, {
+        handle: DEMO_ACCOUNT.handle,
+        password: "pelangi-biru-77",
+      }),
+    );
+    expect(taken.status).toBe(400);
+
+    const signIn = await login(
+      req("POST", "/api/auth/login", undefined, DEMO_ACCOUNT),
+    );
+    expect(signIn.status).toBe(200);
+    const cookie = signIn.headers.get("set-cookie")!.split(";")[0]!;
+    const who = await (await me(req("GET", "/api/auth/me", cookie))).json();
+    expect(who.user).toEqual({ handle: DEMO_ACCOUNT.handle, role: "learner" });
+
+    const del = await deleteAccount(
+      req("DELETE", "/api/account", cookie, {
+        password: DEMO_ACCOUNT.password,
+        confirm: "HAPUS",
+      }),
+    );
+    expect(del.status).toBe(403);
+    expect(
+      await sql(testUrl, "select 1 from users where handle = $1", [
+        DEMO_ACCOUNT.handle,
+      ]),
+    ).toHaveLength(1);
   });
 });

@@ -146,7 +146,13 @@ export class TutorSessionEngine {
 
   async submit(
     id: string,
-    input: { expectedVersion: number; answer: string; idempotencyKey: string },
+    input: {
+      expectedVersion: number;
+      answer: string;
+      idempotencyKey: string;
+      /** AI rate-limit bucket; defaults to the session owner. */
+      rateLimitKey?: string;
+    },
   ): Promise<TutorSession> {
     const key = idempotencyKeySchema.safeParse(input.idempotencyKey);
     if (!key.success)
@@ -228,7 +234,7 @@ export class TutorSessionEngine {
       lesson: content.lesson,
       rubric: content.rubric,
       answer: evaluatedText,
-      rateLimitKey: session.ownerKeyHash,
+      rateLimitKey: input.rateLimitKey ?? session.ownerKeyHash,
     });
     return this.applyEvaluation(session, attempt.number, evaluation);
   }
