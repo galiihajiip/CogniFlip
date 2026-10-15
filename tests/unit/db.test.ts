@@ -161,6 +161,16 @@ describe("database TLS rule", () => {
     },
   );
 
+  it("allows a private container-network host without TLS (D-017)", () => {
+    expect(() =>
+      parseServerEnv({
+        NODE_ENV: "production",
+        APP_BASE_URL: "https://cogniflip.example",
+        DATABASE_URL: "postgresql://app:pw@cogniflip-db:5432/app",
+      }),
+    ).not.toThrow();
+  });
+
   it("rejects sslmode=disable or prefer for a remote host in production", () => {
     for (const mode of ["disable", "prefer"]) {
       expect(() =>

@@ -9,6 +9,26 @@
 
 Nothing below has been performed against a real host. A local production build passed the smoke test (see end).
 
+
+## Dokploy (competition server, D-017) — use this
+
+1. **Database** (Dokploy → your project → *Create Service* → *Database* → **PostgreSQL**): name it e.g. `cogniflip-db`, set a strong password, deploy it. Copy the **internal** connection URL (host is the service name, no dot), e.g. `postgresql://postgres:<password>@cogniflip-db-xxxx:5432/postgres`. Do not expose it publicly.
+2. **Application** (`app-peserta-18`) → *General* → Provider **GitHub** (public repo, branch `main`) → *Build Type* **Dockerfile** (path `Dockerfile`). If GitHub is not ready, *Drop* (upload a zip of the repo without `node_modules`, `.next`, `.env.local`) also works.
+3. *Environment*:
+   ```
+   APP_BASE_URL=https://<the domain from the Domains tab>
+   DATABASE_URL=<internal URL from step 1>
+   LLM_PROVIDER=gemini
+   LLM_API_KEY=<your Gemini key>
+   LLM_MODEL=gemini-3.7-flash
+   LLM_FALLBACK_MODELS=gemini-3.5-flash-lite,gemini-3.8-flash
+   AI_TIMEOUT_SECONDS=60
+   ```
+   `APP_BASE_URL` must be exactly the public HTTPS origin (the app refuses cross-origin writes otherwise). Never set `AI_MOCK_MODE`.
+4. *Domains*: add the domain, container port **3000**, HTTPS on.
+5. *Deploy*. The container log should show `applied N migration(s)` (first time) or `nothing to apply`, then Next.js `Ready`.
+6. Verify from your laptop: `npm run smoke -- https://<domain>` (12 checks), then sign in with the demo account in a browser.
+
 ## 0. Before deploying (blocking)
 1. **Publish the content.** Production shows only reviewed, published lessons and missions. All of them are drafts today, so `/api/lessons` returns **0 lessons**. Follow `LESSON_REVIEW.md` (review, set `published`, `UPDATE_CONTENT_LOCK=1 npm run test`, commit).
 2. **Stitch UI.** There are no learner screens yet (D-009). Without them, judges get a placeholder page and APIs only.

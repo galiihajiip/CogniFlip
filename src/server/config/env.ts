@@ -149,6 +149,10 @@ function hasRequiredTls(databaseUrl: string): boolean {
   try {
     const url = new URL(databaseUrl);
     if (LOOPBACK_HOSTS.has(url.hostname)) return true;
+    // A single-label host (e.g. "cogniflip-db") is a service name on a
+    // private container network such as Dokploy/Docker, never the public
+    // internet; TLS is required for every other host (D-017).
+    if (/^[a-z0-9-]+$/i.test(url.hostname)) return true;
     const mode = url.searchParams.get("sslmode");
     return mode === "require" || mode === "verify-ca" || mode === "verify-full";
   } catch {
