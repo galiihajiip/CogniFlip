@@ -9,9 +9,9 @@ export function SiteFooter() {
           <Image
             src="/brand/cogniflip-logo.png"
             alt="CogniFlip"
-            width={100}
-            height={24}
-            className="h-6 w-auto"
+            width={685}
+            height={200}
+            className="h-8 w-auto"
           />
           <span className="text-label-ui font-medium text-on-surface-variant">
             © 2026 CogniFlip. Ruang Eksplorasi &amp; Kreasi Kode Anak Bangsa.

@@ -82,10 +82,10 @@ export function SiteHeader() {
             <Image
               src="/brand/cogniflip-logo.png"
               alt=""
-              width={167}
-              height={40}
+              width={685}
+              height={200}
               priority
-              className="h-9 w-auto"
+              className="h-11 w-auto"
             />
           </Link>
           <nav
