@@ -61,11 +61,6 @@ export default async function LessonIntroPage({ params }: Props) {
             <Chip tone="secondary" icon="route">
               Topik: {topicLabel(lesson.topic)}
             </Chip>
-            {lesson.draft ? (
-              <Chip tone="error" icon="warning">
-                Draf, belum diperiksa guru
-              </Chip>
-            ) : null}
           </div>
           <h1 className="text-display-hero-mobile text-on-surface sm:text-display-hero">
             {lesson.title}

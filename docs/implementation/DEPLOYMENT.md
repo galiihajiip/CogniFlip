@@ -41,7 +41,9 @@ CI (`.github/workflows/ci.yml`) then runs for the first time; check both jobs pa
    | `DATABASE_URL` | production Postgres with `sslmode=require` |
    | `LLM_PROVIDER` | `gemini` |
    | `LLM_API_KEY` | your **paid-tier** Gemini key (see D-008 risk) |
-   | `LLM_MODEL` | `gemini-3.8-flash` (until the benchmark decides) |
+   | `LLM_MODEL` | `gemini-3.7-flash` |
+   | `LLM_FALLBACK_MODELS` | `gemini-3.5-flash-lite,gemini-3.8-flash` (tried when a model is overloaded, rate limited or too slow) |
+   | `AI_TIMEOUT_SECONDS` | `60` (shared across the fallback models) |
    | optional | `AI_MAX_REQUESTS_PER_MINUTE`, `AI_MAX_CALLS_PER_SESSION`, `AI_TIMEOUT_SECONDS`, `AI_DISABLED` |
 
    **Never set** `AI_MOCK_MODE` in production; the app refuses to start if you do. Draft lessons and missions are shown by default (D-013); set `ALLOW_DRAFT_CONTENT=false` to hide them. The public demo account (`demo` / `FlipBot-Juara-2026`, D-014) is created automatically on its first login; no seeding step is needed.

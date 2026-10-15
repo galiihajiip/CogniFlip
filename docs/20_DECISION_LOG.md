@@ -108,5 +108,13 @@ Append decisions chronologically. Record actual options, rationale, impact, stat
 - Mini IDE: runs Python (Pyodide), JavaScript (isolated worker, CSP `connect-src 'none'`), SQL (sql.js 1.14.2, MIT, SQLite in WebAssembly) and HTML/CSS (sandboxed `allow-scripts` iframe with a `default-src 'none'` CSP), all in the learner's browser. Java, C++, Go, Rust, PHP and other compiled/server languages are **not executed** (no verified sandbox); they get AI review, and the "Lainnya" option lets learners name any other language for AI review.
 - Limits stated honestly: AI review needs the production Gemini key; the dev mock scores only benchmark fixtures, so new lessons get clarification questions locally.
 
+## D-016 — No draft labels; live Gemini models with fallback
+- Date: 2026-10-15
+- Status: accepted
+- Approver: participant (asked to remove every "Draf" label and supplied the Gemini key)
+- Decision: the "Draf, belum diperiksa guru" chips are removed from lesson and mission pages (supersedes the label mitigation in D-013). The parents' and teachers' guide (`/panduan`) still states that lessons, rubrics and missions were drafted with AI help and are not teacher-reviewed. The API keeps its `draft` field.
+- AI: Gemini models observed on 2026-10-15 were intermittently overloaded (503) or slow (>30 s). The app now tries `LLM_MODEL` then `LLM_FALLBACK_MODELS`, moving on only on overload, rate limit or timeout, with the time budget shared (`AI_TIMEOUT_SECONDS=60`), and requests use thinking level LOW. `maxItems` is no longer sent in Gemini response schemas (the live API rejected the code-review schema with 400). Live checks the same day: explanation assessment (py-for 100/100, js-array 100/100, perulangan partial 35/100 with a guiding question, sql-where clarification question), code review (one correct finding on line 1) and bug diagnosis (correct), all with `mockMode: false`.
+- Security note: the key was pasted into the chat transcript; it is stored only in the git-ignored `.env.local`. It must be rotated and removed from any published log.
+
 ## Pending decisions
 Record after actual review: runtime model (after benchmark); realtime provider; production Postgres host; runner/isolation model; STT/TTS provider and retention; community/profile visibility defaults after safety review; exact dependency versions and hosting setup.

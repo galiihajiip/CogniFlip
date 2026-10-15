@@ -101,11 +101,6 @@ export function DebugMission({
             <Chip tone="primary" icon="refresh">
               Coba ulang sepuasnya tanpa potongan XP
             </Chip>
-            {mission.draft ? (
-              <Chip tone="error" icon="warning">
-                Draf, belum diperiksa guru
-              </Chip>
-            ) : null}
           </div>
           <h1 className="text-headline-lg-mobile text-on-surface sm:text-headline-lg">
             {solved

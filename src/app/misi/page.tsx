@@ -63,7 +63,6 @@ export default function MissionsPage() {
             id: m.id,
             title: m.title,
             topic: m.topic,
-            draft: m.draft,
             preview: m.code,
             meta: "Tebak output",
           }))}
@@ -80,7 +79,6 @@ export default function MissionsPage() {
             id: m.id,
             title: m.title,
             topic: m.topic,
-            draft: m.draft,
             preview: m.code,
             meta: `Tingkat ${m.difficulty}`,
           }))}
@@ -108,7 +106,6 @@ function MissionGroup({
     id: string;
     title: string;
     topic: string;
-    draft: boolean;
     preview: string;
     meta: string;
   }>;
@@ -139,11 +136,6 @@ function MissionGroup({
             <pre className="overflow-x-auto rounded-xl bg-inverse-surface p-3 font-mono text-label-code-sm leading-6 text-inverse-on-surface">
               {m.preview}
             </pre>
-            {m.draft ? (
-              <Chip tone="error" icon="warning">
-                Draf, belum diperiksa guru
-              </Chip>
-            ) : null}
             <Link
               href={`/misi/${m.id}`}
               className="btn-primary mt-auto !min-h-12 text-body-md"

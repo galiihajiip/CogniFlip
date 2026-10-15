@@ -8,7 +8,7 @@ import "server-only";
  *
  * This converts a zod-generated schema to that subset: `const` becomes a
  * one-value `enum`; unsupported keywords (minLength, maxLength, pattern,
- * $schema, …) are dropped. Dropped constraints are still enforced because
+ * maxItems, $schema, …) are dropped. Dropped constraints are still enforced because
  * every response is re-validated with the original zod schema.
  */
 const SUPPORTED = new Set([
@@ -24,7 +24,9 @@ const SUPPORTED = new Set([
   "items",
   "prefixItems",
   "minItems",
-  "maxItems",
+  // maxItems is documented but rejected with 400 INVALID_ARGUMENT by the
+  // live API for the code-review schema (verified 2026-10-15); the zod
+  // re-validation still enforces it.
   "minimum",
   "maximum",
   "anyOf",

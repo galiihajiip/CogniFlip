@@ -3,6 +3,7 @@ import {
   ApiError,
   FinishReason,
   GoogleGenAI,
+  ThinkingLevel,
   type GenerateContentParameters,
   type GenerateContentResponse,
 } from "@google/genai";
@@ -90,6 +91,9 @@ export class GeminiProvider implements AiProvider {
           maxOutputTokens: request.maxOutputTokens,
           temperature: 0,
           candidateCount: 1,
+          // Rubric rating needs little deliberation; deep thinking made
+          // requests exceed the 30 s budget on Gemini 3.x (2026-10-15).
+          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
           abortSignal: controller.signal,
           // Retries are owned by the gateway so they stay bounded in one place.
           httpOptions: {

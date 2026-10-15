@@ -31,9 +31,9 @@ export default function GuidePage() {
           title: "Status konten",
           body: (
             <p>
-              Pelajaran, rubrik, dan misi masih berupa draf yang disusun dengan
-              bantuan AI dan belum diperiksa guru. Draf diberi label jelas di
-              setiap halaman.
+              Pelajaran, rubrik, dan misi disusun dengan bantuan AI dan belum
+              diperiksa guru. Contoh kode sudah dicek dengan menjalankannya,
+              tetapi penjelasannya sebaiknya tetap didampingi orang dewasa.
             </p>
           ),
         },

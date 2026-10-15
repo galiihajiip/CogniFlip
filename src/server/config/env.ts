@@ -62,6 +62,11 @@ const schema = z.object({
     .string()
     .regex(/^[a-z0-9][a-z0-9.-]*$/)
     .optional(),
+  /** Comma-separated backup models tried when LLM_MODEL is overloaded. */
+  LLM_FALLBACK_MODELS: z
+    .string()
+    .regex(/^[a-z0-9][a-z0-9.-]*(,[a-z0-9][a-z0-9.-]*)*$/)
+    .optional(),
 
   DATABASE_URL: postgresUrl.optional(),
   DATABASE_POOL_MAX: limit(5, 20),

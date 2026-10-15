@@ -119,11 +119,6 @@ export function PredictMission({
             kodenya baris demi baris, lalu tulis apa yang akan tercetak di
             layar.
           </p>
-          {mission.draft ? (
-            <Chip tone="error" icon="warning">
-              Draf, belum diperiksa guru
-            </Chip>
-          ) : null}
         </section>
         <aside className="flex flex-col justify-between gap-4 rounded-3xl bg-surface-container-low p-6 lg:col-span-4">
           <div className="flex items-start gap-3">

@@ -247,12 +247,6 @@ export default function LearnPage() {
                               lesson.example.language}
                           </span>
                         ) : null}
-                        {lesson.draft ? (
-                          <span className="chip bg-error-container text-on-error-container">
-                            <Icon name="warning" size={16} />
-                            Draf
-                          </span>
-                        ) : null}
                       </div>
                       <Link
                         href={`/belajar/${lesson.id}`}
